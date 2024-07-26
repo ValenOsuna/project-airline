@@ -11,6 +11,12 @@ def pela():
 def titi():
     return "Su amigo el negro"
 
+@app.route("/Valen")
+def vale():
+    return {"Nombre" : "Andres",
+            "Apellido" : "Colazo",
+            "DNI" : 42328132}
+
 
 if __name__ == 'main':
     app.run(debug=True)
