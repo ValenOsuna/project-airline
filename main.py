@@ -25,6 +25,20 @@ def submit():
     else:
         return respuesta
 
+@app.route("/GetTiti", methods = ["GET"])
+def Getiti():
+    if request.methods == "GET":
+        return {"Apodo": 
+                "Titi"}
+
+@app.route("/PostTiti", methods = ["POST"])
+def Postiti():
+    if request.method == "POST":
+        print(request.get_json().get("Apodo"))
+        return request.data
+    else:
+        {"msg": "method not allowed"}
+
 
 if __name__ == "__main__":
     app.run(debug=True)
