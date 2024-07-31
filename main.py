@@ -1,6 +1,15 @@
 from flask import Flask, request
+from flask import jsonify
 
 app = Flask(__name__)
+
+
+@app.route('/muestranos', methods=['POST'])
+def respuesta():
+    algo = request.get_json()
+    print("JSON recibido:", algo)
+    nombre = algo.get('nombre', 'no lo encuentro creo?')
+    return jsonify({'nombre': nombre})
 
 
 @app.route("/")
