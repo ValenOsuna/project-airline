@@ -1,6 +1,17 @@
+from sqlalchemy import Column , Integer , String , Float , ForeignKey
+from sqlalchemy.orm import relationship
+
 class Vuelo():
-    def __init__(self, Nro , Destino , Origen , HorarioDespegue , HorarioEmbarque):
-        self.Nro = Nro
+    __tablename__ = "Estudiantes"
+
+    Numero = Column("Numero", Integer , autoincrement= True , unique= True , primary_key= True)
+    Destino = Column("Destino" , String )
+    Origen = Column ("Origen" , String)
+    HorarioDespegue = Column ("HorarioDespegue" , String)
+    HorarioEmbarque = Column ("HorarioEmbarque" , String)
+
+    def __init__(self, Numero , Destino , Origen , HorarioDespegue , HorarioEmbarque):
+        self.Numero = Numero
         self.Destino = Destino
         self.Origen = Origen
         self.HorarioDespegue = HorarioDespegue
