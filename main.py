@@ -17,6 +17,16 @@ def vale():
             "Apellido" : "Colazo",
             "DNI" : 42328132}
 
+@app.route("/submit" , methods = ['POST']) 
+def submit():
+    respuesta = request.get_json()
+    if "Nombre" in respuesta:
+        return respuesta["Nombre"]
+    else:
+        return respuesta
+
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+    request
