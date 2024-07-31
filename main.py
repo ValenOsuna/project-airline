@@ -36,7 +36,7 @@ def submit():
 
 @app.route("/GetTiti", methods = ["GET"])
 def Getiti():
-    if request.methods == "GET":
+    if request.method == "GET":
         return {"Apodo": 
                 "Titi"}
 
