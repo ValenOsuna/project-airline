@@ -1,15 +1,26 @@
+from sqlalchemy import Column, String, Integer, Float
+from sqlalchemy.orm import relationship
+
+
 class Boletos():
     __tablename__ = 'boletos'
 
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    precio = Column("precio", Float)
+    gate = Column("gate", String)
+    aerolinea = Column("aerolinea", String)
+    terminal = Column("terminal", Integer)
+    asiento = Column("asiento", Integer)
+
     def __init__(self,
-                 Precio=0,
-                 Gate=0,
-                 Aerolinea="",
-                 Terminal=0,
-                 Asiento=0
+                 precio=0,
+                 gate="",
+                 aerolinea="",
+                 terminal=0,
+                 asiento=0
                  ):
-        self.Precio = Precio
-        self.Gate = Gate
-        self.Aerolinea = Aerolinea
-        self.Terminal = Terminal
-        self.Asiento = Asiento
+        self.precio = precio
+        self.Gate = gate
+        self.Aerolinea = aerolinea
+        self.Terminal = terminal
+        self.Asiento = asiento
