@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String, Integer, Float , ForeignKey
 from sqlalchemy.orm import relationship
+from db import Base , Cursor
 
-
-class Boletos():
+class Boletos(Base):
     __tablename__ = 'boletos'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -20,10 +20,12 @@ class Boletos():
                  gate="",
                  aerolinea="",
                  terminal=0,
-                 asiento=0
+                 asiento=0,
+                 Vuelo = ""
                  ):
         self.precio = precio
         self.Gate = gate
         self.Aerolinea = aerolinea
         self.Terminal = terminal
         self.Asiento = asiento
+        self.Vuelo = Vuelo
