@@ -1,7 +1,8 @@
 from sqlalchemy import Column , Integer , String 
 from sqlalchemy.orm import relationship
+from db import Base, Cursor
 
-class Vuelo():
+class Vuelo(Base):
     __tablename__ = "Vuelo"
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)

@@ -1,5 +1,7 @@
 from flask import Flask, request
 from flask import jsonify
+from db import Base , DB_ENGINE
+from Core import Aerolinea, Vuelo, Boletos
 
 app = Flask(__name__)
 
@@ -48,6 +50,7 @@ def Postiti():
     else:
         {"msg": "method not allowed"}
 
+Base.metadata.create_all(DB_ENGINE)
 
 if __name__ == "__main__":
     app.run(debug=True)
