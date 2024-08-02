@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Float
+from sqlalchemy import Column, String, Integer, Float , ForeignKey
 from sqlalchemy.orm import relationship
 
 
@@ -11,6 +11,9 @@ class Boletos():
     aerolinea = Column("aerolinea", String)
     terminal = Column("terminal", Integer)
     asiento = Column("asiento", Integer)
+    Vuelo = Column("Vuelo" , Integer , ForeignKey("Vuelo.ID"))
+    VueloDetalle = relationship("Vuelo", back_populates= "Boleto" , cascade="all, delete")
+
 
     def __init__(self,
                  precio=0,
