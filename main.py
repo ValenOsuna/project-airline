@@ -1,12 +1,12 @@
 from flask import Flask, request
 from flask import jsonify
 from db import Base , DB_ENGINE
-from Controller import CargarVuelo , QueryVuelo , UpdateVuelo , DeleteVuelo
+from Controller import query_boletos, cear_boletos, borrar_boleto, actualizar_boletos
 
-
-QueryVuelo()
-UpdateVuelo()
-DeleteVuelo() 
+Base.metadata.create_all(DB_ENGINE)
+query_boletos(int(input("Ingrese el ID: ")))
+actualizar_boletos()
+borrar_boleto()
 
 app = Flask(__name__)
 
