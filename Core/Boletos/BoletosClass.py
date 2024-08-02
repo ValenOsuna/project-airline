@@ -11,7 +11,7 @@ class Boletos():
     aerolinea = Column("aerolinea", String)
     terminal = Column("terminal", Integer)
     asiento = Column("asiento", Integer)
-    Vuelo = Column("Vuelo" , Integer , ForeignKey("Vuelo.ID"))
+    Vuelo = Column("Vuelo" , Integer , ForeignKey("Vuelo.id"))
     VueloDetalle = relationship("Vuelo", back_populates= "Boleto" , cascade="all, delete")
 
 
