@@ -10,7 +10,7 @@ class Aerolinea(Base):
     nombre = Column("nombre", String)
     sigla = Column("sigla", String)
     lista_vuelos = Column("lista_vuelos", Integer , ForeignKey("Vuelo.id"))
-    VueloDetalle = relationship("vuelo", back_populates="Aerolinea", cascade="all, delete")
+    VueloDetalle = relationship("Vuelo", back_populates="Aerolinea", cascade="all, delete")
     
     def __init__(self,
                  nombre="",

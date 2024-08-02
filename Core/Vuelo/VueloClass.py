@@ -10,14 +10,29 @@ class Vuelo(Base):
     Origen = Column ("origen" , String)
     HorarioDespegue = Column ("horario_despegue" , String)
     HorarioEmbarque = Column ("horario_embarque" , String)
-    Boleto = relationship("boleto", back_populates= "vuelo_detalle" , cascade="all, delete")
-    Aerolinea = relationship("aerolineas", back_populates="vuelo_detalle")
+    Boleto = relationship("Boletos", back_populates= "VueloDetalle" , cascade="all, delete")
+    Aerolinea = relationship("Aerolinea", back_populates="VueloDetalle")
 
 
-    def __init__(self, ID , Destino , Origen , HorarioDespegue , HorarioEmbarque):
-        self.ID = ID
+    def __init__(self, Destino  = None ,
+                 Origen  = None,
+                 HorarioDespegue = None,
+                   HorarioEmbarque = None):
+        
         self.Destino = Destino
         self.Origen = Origen
         self.HorarioDespegue = HorarioDespegue
         self.HorarioEmbarque = HorarioEmbarque
+
+    def Cargar(self):
+        self.Destino = input("Destino: ")
+        self.Origen = input("Origen: ")
+        self.HorarioDespegue = input("Horario despegue: ")
+        self.HorarioEmbarque = input("Horario embarque: ")
+        
+
+    def save(self):
+        Cursor.add(self)
+        Cursor.commit()
+        Cursor.flush()
 

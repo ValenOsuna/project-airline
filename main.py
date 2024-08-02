@@ -1,7 +1,12 @@
 from flask import Flask, request
 from flask import jsonify
 from db import Base , DB_ENGINE
-from Core import Aerolinea, Vuelo, Boletos
+from Controller import CargarVuelo , QueryVuelo , UpdateVuelo , DeleteVuelo
+
+
+QueryVuelo()
+UpdateVuelo()
+DeleteVuelo() 
 
 app = Flask(__name__)
 
@@ -13,7 +18,7 @@ def respuesta():
     nombre = algo.get('nombre', 'no lo encuentro creo?')
     return jsonify({'nombre': nombre})
 
-
+"""
 @app.route("/")
 def pela():
     return "Hola que haces"
@@ -55,4 +60,4 @@ Base.metadata.create_all(DB_ENGINE)
 if __name__ == "__main__":
     app.run(debug=True)
 
-    request
+    request"""
