@@ -24,11 +24,11 @@ class Vuelo(Base):
         self.HorarioDespegue = HorarioDespegue
         self.HorarioEmbarque = HorarioEmbarque
 
-    def Cargar(self):
-        self.Destino = input("Destino: ")
-        self.Origen = input("Origen: ")
-        self.HorarioDespegue = input("Horario despegue: ")
-        self.HorarioEmbarque = input("Horario embarque: ")
+    def Cargar(self, Data):
+        self.Destino = Data["Destino"]
+        self.Origen = Data["Origen"]
+        self.HorarioDespegue = Data["HorarioDespegue"]
+        self.HorarioEmbarque = Data["HorarioEmbarque"]
         
 
     def save(self):

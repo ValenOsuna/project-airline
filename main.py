@@ -2,13 +2,43 @@ from flask import Flask, request
 from flask import jsonify
 from db import Base , DB_ENGINE
 from Controller import query_boletos, cear_boletos, borrar_boleto, actualizar_boletos
+from Controller import CargarVuelo , QueryVuelo , DeleteVuelo , UpdateVuelo , MostrarVuelo
 
 Base.metadata.create_all(DB_ENGINE)
-query_boletos(int(input("Ingrese el ID: ")))
-actualizar_boletos()
-borrar_boleto()
 
 app = Flask(__name__)
+
+#CRUD VUELO
+@app.route("/createVuelo", methods=['POST'])
+def CreateVuelo():
+    try:
+        Data = request.get_json()
+        CargarVuelo(Data)
+
+        return {"msg" : "Vuelo cargado exitosamente "}
+    
+    except:
+        return {"msg": "No se ha podido cargar el vuelo ",
+                "AtributosObjeto" : "Destino , Origen , HorarioDespegue , HorarioEmbarque"}
+    
+@app.route("/buscarVuelo", methods=['POST'])
+def BuscarVuelo():
+    Data = request.get_json().get("id")
+    return MostrarVuelo(QueryVuelo(Data))
+
+@app.route("/actualizarVuelo", methods=['POST'])
+def ActualizarVuelo():
+    data = request.get_json()
+    id = request.get_json().get("id")
+    return UpdateVuelo(id , data)
+
+@app.route("/borrarVuelo", methods=['POST'])
+def BorrarVuelo():
+    Data = request.get_json().get("id")
+    return DeleteVuelo(Data)
+
+#####
+
 
 
 @app.route('/muestranos', methods=['POST'])
@@ -18,7 +48,7 @@ def respuesta():
     nombre = algo.get('nombre', 'no lo encuentro creo?')
     return jsonify({'nombre': nombre})
 
-"""
+
 @app.route("/")
 def pela():
     return "Hola que haces"
@@ -55,9 +85,6 @@ def Postiti():
     else:
         {"msg": "method not allowed"}
 
-Base.metadata.create_all(DB_ENGINE)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-    request"""
