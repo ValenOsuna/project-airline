@@ -3,6 +3,7 @@ from flask import jsonify
 from db import Base , DB_ENGINE
 from Controller import query_boletos, cear_boletos, borrar_boleto, actualizar_boletos
 from Controller import CargarVuelo , QueryVuelo , DeleteVuelo , UpdateVuelo , MostrarVuelo
+from Controller import borrar_aerolinea, buscar_aerolinea, Modificar_aerolinea, crear_datos_aerolinea
 
 Base.metadata.create_all(DB_ENGINE)
 
@@ -39,7 +40,36 @@ def BorrarVuelo():
 
 #####
 
+#CRUD Aerolineas 
+@app.route("/creador aerolinea", methods=['POST'])
+def crear_datos_aerolinea():
+    try:
+        Data = request.get_json()  #le deje la misma variable de arriba, por que no estaba seguro si podia modificar
+        crear_datos_aerolinea(Data)
 
+        return {"msg" : "datos de aerolinea cargados "}
+    
+    except:
+        return {"msg": "No se encuentran datos de aerolinea "}
+
+@app.route("/buscar_Aerolinea", methods=['POST'])
+def buscar_aerolinea():
+    Data = request.get_json().get("id") # lo deje igual por que no estoy seguro si le pongo otro nombre que pasa :)
+    return MostrarVuelo(buscar_aerolinea(Data))
+
+@app.route("/borrar_Aerolinea", methods=['POST'])
+def borrar_aerolinea():
+    Data = request.get_json().get("id")
+    return borrar_aerolinea(Data)
+
+@app.route("/actualizar_aerolinea", methods=['POST'])
+def Modificar_aerolinea():
+    data = request.get_json()
+    id = request.get_json().get("id")
+    return Modificar_aerolinea(id , data)
+#este es el que menos claro me quedo 
+
+##
 
 @app.route('/muestranos', methods=['POST'])
 def respuesta():
