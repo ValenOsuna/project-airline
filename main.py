@@ -42,7 +42,7 @@ def BorrarVuelo():
 
 #CRUD Aerolineas 
 @app.route("/creador aerolinea", methods=['POST'])
-def crear_datos_aerolinea():
+def create_aerolinea():
     try:
         Data = request.get_json()  #le deje la misma variable de arriba, por que no estaba seguro si podia modificar
         crear_datos_aerolinea(Data)
@@ -53,17 +53,17 @@ def crear_datos_aerolinea():
         return {"msg": "No se encuentran datos de aerolinea "}
 
 @app.route("/buscar_Aerolinea", methods=['POST'])
-def buscar_aerolinea():
+def query_aerolinea():
     Data = request.get_json().get("id") # lo deje igual por que no estoy seguro si le pongo otro nombre que pasa :)
     return MostrarVuelo(buscar_aerolinea(Data))
 
 @app.route("/borrar_Aerolinea", methods=['POST'])
-def borrar_aerolinea():
+def delete_aerolinea():
     Data = request.get_json().get("id")
     return borrar_aerolinea(Data)
 
 @app.route("/actualizar_aerolinea", methods=['POST'])
-def Modificar_aerolinea():
+def actualizacion_aerolinea():
     data = request.get_json()
     id = request.get_json().get("id")
     return Modificar_aerolinea(id , data)
