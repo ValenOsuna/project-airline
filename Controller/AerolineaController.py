@@ -2,13 +2,13 @@ from Core import Aerolinea
 from pprint import pprint
 from db import Cursor 
 
-def crear_datos_aerolinea():
+def crear_datos_aerolinea(Data):
     Aerolineas = Aerolinea()
-    Aerolineas.Cargar()
+    Aerolineas.Cargar(Data)
     Aerolineas.save()
     pprint(vars(Aerolineas))
 
-def buscar_aerolinea(id):
+def buscar_aerolinea(id, Data):
     try:
         response = Cursor.query(Aerolinea).where(Aerolinea.id == id)
         pprint(vars(response[0]))
