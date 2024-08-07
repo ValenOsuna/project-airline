@@ -1,14 +1,14 @@
 from flask import Flask, request
 from flask import jsonify
 from db import Base , DB_ENGINE
-from Controller import query_boletos, cear_boletos, borrar_boleto, actualizar_boletos
+from Controller import query_boletos, crear_boletos, borrar_boletos, actualizar_boletos, descomprimir_obj
 from Controller import CargarVuelo , QueryVuelo , DeleteVuelo , UpdateVuelo , MostrarVuelo
 from Controller import borrar_aerolinea, buscar_aerolinea, Modificar_aerolinea, crear_datos_aerolinea
 
 Base.metadata.create_all(DB_ENGINE)
 
 app = Flask(__name__)
-
+"""
 #CRUD VUELO
 @app.route("/createVuelo", methods=['POST'])
 def CreateVuelo():
@@ -68,7 +68,35 @@ def Modificar_aerolinea():
     id = request.get_json().get("id")
     return Modificar_aerolinea(id , data)
 #este es el que menos claro me quedo 
+"""
 
+# CRUD DE BOLETOS
+
+@app.route("/cargar_boletos", methods=["POST"])
+def creamos_boletos():
+    response = request.get_json()
+    crear_boletos(response)
+    return response
+
+@app.route("/consultar-boletos", methods=["POST"])
+def consultar_boletos():
+    response = request.get_json().get("id")
+    return descomprimir_obj(query_boletos(response))
+
+@app.route("/actualizacion-de-boletos", methods=["POST"])
+def update_boletos():
+    dato = request.get_json()
+    id = request.get_json().get("id")
+    actualizar_boletos(id, dato)
+    return ("El boleto se ha modificado con exito")
+
+@app.route("/eliminacion-de-boletos", methods=["POST"])
+def delete_boletos():
+    response = request.get_json().get("id")
+    borrar_boletos(response)
+    return ("El boleto ha sido cancelado exitosamente")
+
+"""
 ##
 
 @app.route('/muestranos', methods=['POST'])
@@ -114,7 +142,7 @@ def Postiti():
         return request.data
     else:
         {"msg": "method not allowed"}
-
+"""
 
 if __name__ == "__main__":
     app.run(debug=True)
