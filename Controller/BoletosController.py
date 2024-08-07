@@ -9,23 +9,27 @@ def query_boletos(id):
     return boleto[0]
 
 
-def cear_boletos():
+def descomprimir_obj(Boleto):
+    return vars(Boleto)
+
+
+def crear_boletos(response):
     boleto = Boletos()
-    boleto.cargar_boleto()
+    boleto.cargar_boleto(response)
     boleto.save()
 
 
-def actualizar_boletos():
-    boleto = query_boletos(int(input("Ingrese el ID a modificar: ")))
-    boleto.gate = input("Ingrese el gate de destino: ")
-    boleto.aerolinea = input("Ingrese la aerolinea de destino: ")
-    boleto.terminal = int(input("Ingrese su terminal: "))
-    boleto.asiento = int(input("Ingrese su nro de asiento: "))
-    boleto.precio = float(input("Ingrese el precio del boleto:$ "))
+def actualizar_boletos(id, response):
+    boleto = query_boletos(id)
+    boleto.gate = response["gate"]
+    boleto.aerolinea = response["aerolinea"]
+    boleto.terminal = response["terminal"]
+    boleto.asiento = response["asiento"]
+    boleto.precio = response["precio"]
     boleto.save()
 
 
-def borrar_boleto():
-    boleto = query_boletos(int(input("Ingrese el id: ")))
+def borrar_boletos(id):
+    boleto = query_boletos(id)
     Cursor.delete(boleto)
     Cursor.commit()
