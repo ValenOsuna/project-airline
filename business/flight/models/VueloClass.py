@@ -10,6 +10,7 @@ class Vuelo(Base):
     Origen = Column ("origen" , String)
     HorarioDespegue = Column ("horario_despegue" , String)
     HorarioEmbarque = Column ("horario_embarque" , String)
+
     Boleto = relationship("Boletos", back_populates= "VueloDetalle" , cascade="all, delete")
     Aerolinea = relationship("Aerolinea", back_populates="VueloDetalle")
 

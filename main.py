@@ -1,49 +1,23 @@
 from flask import Flask, request
 from flask import jsonify
 from db import Base , DB_ENGINE
-"""from Controller import query_boletos, crear_boletos, borrar_boletos, actualizar_boletos, descomprimir_obj
-from Controller import CargarVuelo , QueryVuelo , DeleteVuelo , UpdateVuelo , MostrarVuelo
-from Controller import borrar_aerolinea, buscar_aerolinea, Modificar_aerolinea, crear_datos_aerolinea"""
-from business import airline
+
+from business import airline , flight
+from business.flight.models import VueloClass
+from business.airline.models import AeroliniaClass
+from business.ticket.models import BoletosClass
 
 
 
 Base.metadata.create_all(DB_ENGINE)
 
 app = Flask(__name__)
-"""
-#CRUD VUELO
-@app.route("/createVuelo", methods=['POST'])
-def CreateVuelo():
-    try:
-        Data = request.get_json()
-        CargarVuelo(Data)
 
-        return {"msg" : "Vuelo cargado exitosamente "}
-    
-    except:
-        return {"msg": "No se ha podido cargar el vuelo ",
-                "AtributosObjeto" : "Destino , Origen , HorarioDespegue , HorarioEmbarque"}
-    
-@app.route("/buscarVuelo", methods=['POST'])
-def BuscarVuelo():
-    Data = request.get_json().get("id")
-    return MostrarVuelo(QueryVuelo(Data))
-
-@app.route("/actualizarVuelo", methods=['POST'])
-def ActualizarVuelo():
-    data = request.get_json()
-    id = request.get_json().get("id")
-    return UpdateVuelo(id , data)
-
-@app.route("/borrarVuelo", methods=['POST'])
-def BorrarVuelo():
-    Data = request.get_json().get("id")
-    return DeleteVuelo(Data)
 
 #####
 
 #CRUD Aerolineas 
+"""
 @app.route("/creador aerolinea", methods=['POST'])
 def create_aerolinea():
     try:
@@ -99,7 +73,6 @@ def delete_boletos():
     borrar_boletos(response)
     return ("El boleto ha sido cancelado exitosamente")
 
-"""
 ##
 
 @app.route('/muestranos', methods=['POST'])
@@ -148,13 +121,10 @@ def Postiti():
 """
 
 app.register_blueprint(airline,url_prefix="/airline")
+app.register_blueprint(flight,url_prefix="/flight")
 
 if __name__ == "__main__":
     app.run(debug=True)
 
 
 
-"""
-localhost:8000/airline/create
-
-"""
