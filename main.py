@@ -1,9 +1,12 @@
 from flask import Flask, request
 from flask import jsonify
 from db import Base , DB_ENGINE
-from Controller import query_boletos, crear_boletos, borrar_boletos, actualizar_boletos, descomprimir_obj
+"""from Controller import query_boletos, crear_boletos, borrar_boletos, actualizar_boletos, descomprimir_obj
 from Controller import CargarVuelo , QueryVuelo , DeleteVuelo , UpdateVuelo , MostrarVuelo
-from Controller import borrar_aerolinea, buscar_aerolinea, Modificar_aerolinea, crear_datos_aerolinea
+from Controller import borrar_aerolinea, buscar_aerolinea, Modificar_aerolinea, crear_datos_aerolinea"""
+from business import airline
+
+
 
 Base.metadata.create_all(DB_ENGINE)
 
@@ -68,9 +71,9 @@ def actualizacion_aerolinea():
     id = request.get_json().get("id")
     return Modificar_aerolinea(id , data)
 #este es el que menos claro me quedo 
-"""
 
 # CRUD DE BOLETOS
+
 
 @app.route("/cargar_boletos", methods=["POST"])
 def creamos_boletos():
@@ -144,5 +147,14 @@ def Postiti():
         {"msg": "method not allowed"}
 """
 
+app.register_blueprint(airline,url_prefix="/airline")
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+"""
+localhost:8000/airline/create
+
+"""

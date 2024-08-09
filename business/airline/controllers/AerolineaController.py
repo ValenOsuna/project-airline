@@ -1,4 +1,4 @@
-from Core import Aerolinea
+from ..models.AeroliniaClass import Aerolinea
 from pprint import pprint
 from db import Cursor 
 

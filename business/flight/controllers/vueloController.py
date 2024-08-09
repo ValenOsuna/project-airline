@@ -1,4 +1,4 @@
-from Core import Vuelo
+from ..models.VueloClass import Vuelo
 from db import Cursor
 
 def CargarVuelo(Data):
