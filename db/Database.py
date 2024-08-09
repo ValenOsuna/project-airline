@@ -8,5 +8,3 @@ DB_ENGINE.connect()
 Cursor = sessionmaker(bind = DB_ENGINE)
 Cursor = Cursor()
 
-
-Base.metadata.create_all(DB_ENGINE)
