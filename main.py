@@ -14,40 +14,9 @@ Base.metadata.create_all(DB_ENGINE)
 app = Flask(__name__)
 
 
-#####
-
-#CRUD Aerolineas 
-"""
-@app.route("/creador aerolinea", methods=['POST'])
-def create_aerolinea():
-    try:
-        Data = request.get_json()  #le deje la misma variable de arriba, por que no estaba seguro si podia modificar
-        crear_datos_aerolinea(Data)
-
-        return {"msg" : "datos de aerolinea cargados "}
-    
-    except:
-        return {"msg": "No se encuentran datos de aerolinea "}
-
-@app.route("/buscar_Aerolinea", methods=['POST'])
-def query_aerolinea():
-    Data = request.get_json().get("id") # lo deje igual por que no estoy seguro si le pongo otro nombre que pasa :)
-    return MostrarVuelo(buscar_aerolinea(Data))
-
-@app.route("/borrar_Aerolinea", methods=['POST'])
-def delete_aerolinea():
-    Data = request.get_json().get("id")
-    return borrar_aerolinea(Data)
-
-@app.route("/actualizar_aerolinea", methods=['POST'])
-def actualizacion_aerolinea():
-    data = request.get_json()
-    id = request.get_json().get("id")
-    return Modificar_aerolinea(id , data)
-#este es el que menos claro me quedo 
 
 # CRUD DE BOLETOS
-
+'''
 
 @app.route("/cargar_boletos", methods=["POST"])
 def creamos_boletos():
@@ -119,7 +88,7 @@ def Postiti():
     else:
         {"msg": "method not allowed"}
 """
-
+'''
 app.register_blueprint(airline,url_prefix="/airline")
 app.register_blueprint(flight,url_prefix="/flight")
 
