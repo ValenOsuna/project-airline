@@ -23,9 +23,9 @@ class Aerolinea(Base):
 
 
     def Cargar(self, Data):
-        self.nombre = Data(input("nombre: "))
-        self.sigla = Data(input("sigla: "))
-        self.lista_vuelos = input("lista de vuelos: ")
+        self.nombre = Data["nombre"]
+        self.sigla = Data["sigla"]
+        self.lista_vuelos = Data["lista_vuelos"]
         
 
     def save(self):
