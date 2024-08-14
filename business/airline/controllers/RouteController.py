@@ -33,4 +33,4 @@ def delete_aerolinea():
 def actualizacion_aerolinea():
     data = request.get_json()
     id = request.get_json().get("id")
-    return Modificar_aerolinea(id , data)
+    return Modificar_aerolinea(**data)

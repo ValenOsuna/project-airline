@@ -17,12 +17,16 @@ def buscar_aerolinea(id):
         print("Aerolinea no se encuentra cargado o no esta disponible, Verifique base de datos")
 
 
-def Modificar_aerolinea(id, data):
-    aerolinea = buscar_aerolinea(id)
-    if aerolinea !=None:
-        aerolinea.nombre = data["nombre"]
-        aerolinea.sigla = data["sigla"]
-        aerolinea.lista_vuelos = data["lista_vuelos"]
+def Modificar_aerolinea(**data):
+    id = data["id"]
+    aerolinea = buscar_aerolinea(data["id"])
+    if type(aerolinea) != dict:
+        if "nombre" in data:
+            aerolinea.nombre = data["nombre"]
+        if "sigla" in data:    
+            aerolinea.sigla = data["sigla"]
+        if "lista_vuelos" in data:
+            aerolinea.lista_vuelos = data["lista_vuelos"]
         aerolinea.save()
         return "la base de datos de aerolineas ha sido actualizada"
     else:
