@@ -4,10 +4,10 @@ from pprint import pprint
 
 
 def search_boletos(id):
+    boleto = Cursor.query(Boletos).where(Boletos.id == id)
     if boleto != None:
-        boleto = Cursor.query(Boletos).where(Boletos.id == id)
-        pprint(vars(boleto[0]))
-        return boleto[0]
+            pprint(vars(boleto[0]))
+            return boleto[0]
     else:
         return "El boleto no se encontro paper"
 
@@ -32,8 +32,8 @@ def create_boletos(response):
 
 
 def update_boletos(id, response):
+    boleto = search_boletos(id)
     if boleto != None:
-        boleto = search_boletos(id)
         boleto.gate = response["gate"]
         boleto.aerolinea = response["aerolinea"]
         boleto.terminal = response["terminal"]
@@ -45,8 +45,8 @@ def update_boletos(id, response):
 
 
 def delete_boletos(id):
+    boleto = search_boletos(id)
     if boleto != None:
-        boleto = search_boletos(id)
         Cursor.delete(boleto)
         Cursor.commit()
     else:
