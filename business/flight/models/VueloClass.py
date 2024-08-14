@@ -5,11 +5,12 @@ from db import Base, Cursor
 class Vuelo(Base):
     __tablename__ = "Vuelo"
 
-    id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
-    Destino = Column("destino" , String )
-    Origen = Column ("origen" , String)
-    HorarioDespegue = Column ("horario_despegue" , String)
-    HorarioEmbarque = Column ("horario_embarque" , String)
+    id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
+    Destino = Column("destination", String)
+    Origen = Column("origin", String)
+    HorarioDespegue = Column("departure_time", String)
+    HorarioEmbarque = Column("boarding_time", String)
+
 
     Boleto = relationship("Boletos", back_populates= "VueloDetalle" , cascade="all, delete")
     Aerolinea = relationship("Aerolinea", back_populates="VueloDetalle")
@@ -18,7 +19,7 @@ class Vuelo(Base):
     def __init__(self, Destino  = None ,
                  Origen  = None,
                  HorarioDespegue = None,
-                   HorarioEmbarque = None):
+                 HorarioEmbarque = None):
         
         self.Destino = Destino
         self.Origen = Origen
@@ -26,10 +27,10 @@ class Vuelo(Base):
         self.HorarioEmbarque = HorarioEmbarque
 
     def Cargar(self, Data):
-        self.Destino = Data["Destino"]
-        self.Origen = Data["Origen"]
-        self.HorarioDespegue = Data["HorarioDespegue"]
-        self.HorarioEmbarque = Data["HorarioEmbarque"]
+        self.Destino = Data["destination"]
+        self.Origen = Data["origin"]
+        self.HorarioDespegue = Data["departure_time"]
+        self.HorarioEmbarque = Data["boarding_time"]
         
 
     def save(self):
