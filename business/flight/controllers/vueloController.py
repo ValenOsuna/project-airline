@@ -23,6 +23,7 @@ def updateFlight(**Data):
         if "HorarioDespegue" in Data:
             vuelo.HorarioDespegue = Data["HorarioDespegue"]
         if "HorarioEmbarque" in Data:
+            
             vuelo.HorarioEmbarque = Data["HorarioEmbarque"]
         vuelo.save()
 
