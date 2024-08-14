@@ -31,14 +31,19 @@ def create_boletos(response):
     pprint(vars(boleto))
 
 
-def update_boletos(id, response):
-    boleto = search_boletos(id)
-    if boleto != None:
-        boleto.gate = response["gate"]
-        boleto.aerolinea = response["aerolinea"]
-        boleto.terminal = response["terminal"]
-        boleto.asiento = response["asiento"]
-        boleto.precio = response["precio"]
+def update_boletos(**kargs):
+    boleto = search_boletos(kargs["id"])
+    if boleto != dict:
+        if "gate" in kargs:
+            boleto.gate = kargs["gate"]
+        if "aerolinea" in kargs:
+            boleto.aerolinea = kargs["aerolinea"]
+        if "terminal" in kargs:
+            boleto.terminal = kargs["terminal"]
+        if "asiento" in kargs:
+            boleto.asiento = kargs["asiento"]
+        if "precio" in kargs:
+            boleto.precio = kargs["precio"]
         boleto.save()
     else:
         return "Boleto que desea actualizar no se encuentra..."
