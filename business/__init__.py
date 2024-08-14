@@ -5,3 +5,7 @@ from .ticket.controllers.BoletosController import create_boletos, delete_boletos
 from .airline.controllers.RouteController import airline
 from .flight.controllers.RouteController import flight
 from .ticket.controllers.RouteController import ticket
+
+from .flight.models.VueloClass import Vuelo
+from .airline.models.AeroliniaClass import Aerolinea
+from .ticket.models.BoletosClass import Boletos
