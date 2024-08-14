@@ -10,21 +10,25 @@ def createFlight(Data):
     
     except:
         return {"msg": "No se ha podido cargar el vuelo ",
-                "AtributosObjeto" : "Destino , Origen , HorarioDespegue , HorarioEmbarque"}
+                "AtributosObjeto" : "destination , origin , departure_time , boarding_time"}
 
 def updateFlight(**Data):
     id = Data["id"]
     vuelo = searchFlight(Data["id"])
     if type(vuelo) != dict:
-        if "Destino" in Data:
-            vuelo.Destino = Data["Destino"]
-        if  "Origen" in Data: 
-            vuelo.Origen = Data["Origen"]
-        if "HorarioDespegue" in Data:
-            vuelo.HorarioDespegue = Data["HorarioDespegue"]
-        if "HorarioEmbarque" in Data:
-            
-            vuelo.HorarioEmbarque = Data["HorarioEmbarque"]
+
+        if "destination" in Data:
+            vuelo.Destino = Data["destination"]
+
+        if  "origin" in Data: 
+            vuelo.Origen = Data["origin"]
+
+        if "departure_time" in Data:
+            vuelo.HorarioDespegue = Data["departure_time"]
+
+        if "boarding_time" in Data:
+            vuelo.HorarioEmbarque = Data["boarding_time"]
+
         vuelo.save()
 
         return {"msg" : "Vuelo actualizado correctamente"}
@@ -55,9 +59,9 @@ def deleteFlight(id):
 def readFlight(id):
     vuelo = searchFlight(id)
     if type(vuelo) != dict:
-        return {"Origen": f"{vuelo.Origen}", 
-                "Destino": f"{vuelo.Destino}",
-                "Horario embarque": f"{vuelo.HorarioEmbarque}",
-                "Horario despegue": f"{vuelo.HorarioDespegue}"}
+        return {"origin": f"{vuelo.Origen}", 
+                "destination": f"{vuelo.Destino}",
+                "departure time": f"{vuelo.HorarioEmbarque}",
+                "boarding time": f"{vuelo.HorarioDespegue}"}
     else:
          return vuelo
