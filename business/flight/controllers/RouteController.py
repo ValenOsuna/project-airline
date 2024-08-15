@@ -12,8 +12,8 @@ def Create():
     
 @flight.route("/search", methods=['POST'])
 def Buscar():
-    Data = request.get_json().get("id")
-    return readFlight(Data)
+    id = request.get_json().get("id")
+    return readFlight(id)
 
 
 @flight.route("/update", methods=['PUT' , 'PATCH'])
@@ -24,5 +24,5 @@ def Actualizar():
 
 @flight.route("/delete", methods=['DELETE'])
 def Borrar():
-    Data = request.get_json().get("id")
-    return deleteFlight(Data)
+    id = request.get_json().get("id")
+    return deleteFlight(id)

@@ -10,38 +10,48 @@ def createFlight(Data):
     
     except:
         return {"msg": "No se ha podido cargar el vuelo ",
-                "AtributosObjeto" : "destination , origin , departure_time , boarding_time"}
+                "AtributosObjeto" : "destination , origin , takeoff_time , boarding_time"}
 
 def updateFlight(**Data):
-    id = Data["id"]
-    vuelo = searchFlight(Data["id"])
-    if type(vuelo) != dict:
 
-        if "destination" in Data:
-            vuelo.Destino = Data["destination"]
+    if len(Data) == 1 and "id" in Data:
+        return {"msg":f"No se han enviado datos para modificar el id: '{Data["id"]}' "}
+    
+    id = Data.get("id")
+    vuelo = searchFlight(id)
 
-        if  "origin" in Data: 
-            vuelo.Origen = Data["origin"]
+    if type(vuelo) == dict:
+         return vuelo 
 
-        if "departure_time" in Data:
-            vuelo.HorarioDespegue = Data["departure_time"]
+    if "destination" in Data:
+        vuelo.Destino = Data["destination"]
 
-        if "boarding_time" in Data:
-            vuelo.HorarioEmbarque = Data["boarding_time"]
+    if  "origin" in Data: 
+        vuelo.Origen = Data["origin"]
 
-        vuelo.save()
+    if "takeoff_time" in Data:
+        vuelo.HorarioDespegue = Data["takeoff_time"]
 
-        return {"msg" : "Vuelo actualizado correctamente"}
-    else: 
-         return vuelo      
+    if "boarding_time" in Data:
+        vuelo.HorarioEmbarque = Data["boarding_time"]
+
+    vuelo.save()
+
+    return {"msg" : "Vuelo actualizado correctamente"}
+        
+                 
 
 def searchFlight(id):
+    if id is None:
+        return {"msg" : "Error : No se ha enviado 'id' " , 
+                "keyError" : "id"}
+
     try:
         VueloBuscado = (Cursor.query(Vuelo).where(Vuelo.id == id))[0]
         return VueloBuscado
         
     except:
-        return {"msg" : "Vuelo no encontrado"}
+        return {"msg" : "Vuelo no encontrado" , "keyError" : "id"}
     
 
 def deleteFlight(id):
@@ -61,7 +71,7 @@ def readFlight(id):
     if type(vuelo) != dict:
         return {"origin": f"{vuelo.Origen}", 
                 "destination": f"{vuelo.Destino}",
-                "departure time": f"{vuelo.HorarioEmbarque}",
-                "boarding time": f"{vuelo.HorarioDespegue}"}
+                "boarding time": f"{vuelo.HorarioEmbarque}",
+                "takeoff time": f"{vuelo.HorarioDespegue}"}
     else:
          return vuelo
