@@ -9,8 +9,8 @@ class Aerolinea(Base):
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
     nombre = Column("name", String)
     sigla = Column("acronym", String)
-    lista_vuelos = Column("flight_list", Integer , ForeignKey("Vuelo.id"))
-    VueloDetalle = relationship("Vuelo", back_populates="Aerolinea", cascade="all, delete")
+    lista_vuelos = Column("flight_list", Integer , ForeignKey("Flight.id"))
+    VueloDetalle = relationship("Flight", back_populates="Aerolinea", cascade="all, delete")
     
     def __init__(self,
                  nombre="",

@@ -2,35 +2,36 @@ from sqlalchemy import Column , Integer , String
 from sqlalchemy.orm import relationship
 from db import Base, Cursor
 
-class Vuelo(Base):
-    __tablename__ = "Vuelo"
+class Flight(Base):
+    __tablename__ = "Flight"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
-    Destino = Column("destination", String)
-    Origen = Column("origin", String)
-    HorarioDespegue = Column("takeoff_time", String)
-    HorarioEmbarque = Column("boarding_time", String)
+    destination = Column("destination", String)
+    origin = Column("origin", String)
+    takeoff_time = Column("takeoff_time", String)
+    boarding_time = Column("boarding_time", String)
 
 
-    Boleto = relationship("Boleto", back_populates= "VueloDetalle" , cascade="all, delete")
+    Boleto = relationship("Ticket", back_populates= "VueloDetalle" , cascade="all, delete")
     Aerolinea = relationship("Aerolinea", back_populates="VueloDetalle")
 
 
-    def __init__(self, Destino  = None ,
-                 Origen  = None,
-                 HorarioDespegue = None,
-                 HorarioEmbarque = None):
+    def __init__(self, 
+                 destination  = None ,
+                 origin  = None,
+                 takeoff_time = None,
+                 boarding_time = None):
         
-        self.Destino = Destino
-        self.Origen = Origen
-        self.HorarioDespegue = HorarioDespegue
-        self.HorarioEmbarque = HorarioEmbarque
+        self.destination = destination
+        self.origin = origin
+        self.takeoff_time = takeoff_time
+        self.boarding_time = boarding_time
 
     def Cargar(self, Data):
-        self.Destino = Data["destination"]
-        self.Origen = Data["origin"]
-        self.HorarioDespegue = Data["takeoff_time"]
-        self.HorarioEmbarque = Data["boarding_time"]
+        self.destination = Data["destination"]
+        self.origin = Data["origin"]
+        self.takeoff_time = Data["takeoff_time"]
+        self.boarding_time = Data["boarding_time"]
         
 
     def save(self):
