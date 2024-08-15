@@ -6,7 +6,7 @@ ticket = Blueprint("ticket", __name__)
 
 
 @ticket.route("/create_ticket", methods=["POST"])
-def create_ticket():
+def ticket_create():
     response = request.get_json()
     create_ticket(response)
     return response

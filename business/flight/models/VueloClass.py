@@ -12,7 +12,7 @@ class Vuelo(Base):
     HorarioEmbarque = Column("boarding_time", String)
 
 
-    Boleto = relationship("Boletos", back_populates= "VueloDetalle" , cascade="all, delete")
+    Boleto = relationship("Boleto", back_populates= "VueloDetalle" , cascade="all, delete")
     Aerolinea = relationship("Aerolinea", back_populates="VueloDetalle")
 
 

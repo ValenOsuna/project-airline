@@ -27,7 +27,7 @@ def decompress_obj(Ticket):
 
 def create_ticket(response):
     ticket = Ticket()
-    ticket.cargar_ticket(response)
+    ticket.ticket_create(response)
     ticket.save()
     pprint(vars(ticket))
 

@@ -31,7 +31,7 @@ class Ticket(Base):
         self.seat = seat
         self.group = group
 
-    def cargar_boleto(self, response):
+    def ticket_create(self, response):
         self.gate = response["gate"]
         self.airline = response["aerolinea"]
         self.terminal = response["terminal"]
