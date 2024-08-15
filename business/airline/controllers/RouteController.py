@@ -17,19 +17,19 @@ def createAirline():
         return {"msg": "No se encuentran datos de aerolinea "}
 
 
-@airline.route("/buscar", methods=['POST'])
+@airline.route("/search", methods=['POST'])
 def query_aerolinea():
     Data = request.get_json().get("id") 
     return descomprimir_obj(buscar_aerolinea(Data))
 
 
-@airline.route("/borrar", methods=['POST'])
+@airline.route("/delete", methods=['POST'])
 def delete_aerolinea():
     Data = request.get_json().get("id")
     return borrar_aerolinea(Data)
 
 
-@airline.route("/actualizar", methods=['POST'])
+@airline.route("/update", methods=['POST'])
 def actualizacion_aerolinea():
     data = request.get_json()
     id = request.get_json().get("id")
