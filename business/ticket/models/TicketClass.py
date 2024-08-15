@@ -3,37 +3,41 @@ from sqlalchemy.orm import relationship
 from db import Base, Cursor
 
 
-class Boletos(Base):
-    __tablename__ = 'boletos'
+class Ticket(Base):
+    __tablename__ = 'ticket'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    precio = Column("precio", Float)
+    price = Column("price", Float)
     gate = Column("gate", String)
-    aerolinea = Column("aerolinea", String)
+    airline = Column("airline", String)
     terminal = Column("terminal", Integer)
-    asiento = Column("asiento", Integer)
+    seat = Column("seat", Integer)
+    group = Column("group", Integer)
     Vuelo = Column("Vuelo", Integer , ForeignKey("Vuelo.id"))
     VueloDetalle = relationship("Vuelo", back_populates= "Boleto" , cascade="all, delete")
 
     def __init__(self,
-                 precio=0,
+                 price=0,
                  gate="",
-                 aerolinea="",
+                 airline="",
                  terminal=0,
-                 asiento=0
+                 seat=0,
+                 group=0
                  ):
-        self.precio = precio
-        self.Gate = gate
-        self.Aerolinea = aerolinea
-        self.Terminal = terminal
-        self.Asiento = asiento
+        self.price = price
+        self.gate = gate
+        self.airline = airline
+        self.terminal = terminal
+        self.seat = seat
+        self.group = group
 
     def cargar_boleto(self, response):
         self.gate = response["gate"]
-        self.aerolinea = response["aerolinea"]
+        self.airline = response["aerolinea"]
         self.terminal = response["terminal"]
-        self.asiento = response["asiento"]
-        self.precio = response["precio"]
+        self.seat = response["asiento"]
+        self.price = response["precio"]
+        self.group = response["group"]
 
     def save(self):
         Cursor.add(self)
