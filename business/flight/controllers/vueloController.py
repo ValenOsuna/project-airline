@@ -15,7 +15,8 @@ def createFlight(Data):
 def updateFlight(**Data):
 
     if len(Data) == 1 and "id" in Data:
-        return {"msg":f"No se han enviado datos para modificar el id: '{Data["id"]}' "}
+        id = Data["id"]
+        return {"msg": f"No se han enviado datos para modificar el id: '{id}'"}
     
     id = Data.get("id")
     vuelo = searchFlight(id)
