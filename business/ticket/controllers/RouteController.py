@@ -1,33 +1,32 @@
 from flask import Blueprint, request
-from .BoletosController import create_boletos, update_boletos, search_boletos, delete_boletos, descomprimir_obj
+from .TicketController import create_ticket, update_ticket, search_ticket, delete_ticket, decompress_obj
 
 
 ticket = Blueprint("ticket", __name__)
 
 
 @ticket.route("/create_ticket", methods=["POST"])
-def creamos_boletos():
+def create_ticket():
     response = request.get_json()
-    create_boletos(response)
+    create_ticket(response)
     return response
 
 
-@ticket.route("/ticket-delete", methods=["POST"])
-def borrar_boletos():
+@ticket.route("/delete-ticket", methods=["DELETE"])
+def delete_ticket():
     response = request.get_json().get("id")
-    delete_boletos(response)
-    return ("El boleto ha sido cancelado exitosamente")
+    delete_ticket(response)
+    return ("The ticket has been successfully canceled")
 
 
-@ticket.route("/ticket-update", methods=["POST"])
-def ajustar_boletos():
-    kargs = request.get_json()
-    update_boletos(**kargs)
-    return ("El boleto se ha modificado con exito")
-
+@ticket.route("/update-teticket", methods=["POST"]) # methods PUT O PACH
+def adjust_tickets():
+    kwargs = request.get_json()
+    update_ticket(**kwargs)
+    return ("The ticket has been modified successfully")
 
 
 @ticket.route("/search-ticket", methods=["POST"])
-def consultar_boletos():
+def consult_tickets():
     response = request.get_json().get("id")
-    return descomprimir_obj(search_boletos(response))
+    return decompress_obj(search_ticket(response))
