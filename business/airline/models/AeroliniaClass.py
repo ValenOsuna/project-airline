@@ -7,9 +7,9 @@ class Aerolinea(Base):
     __tablename__= "Aerolineas"
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
-    nombre = Column("nombre", String)
-    sigla = Column("sigla", String)
-    lista_vuelos = Column("lista_vuelos", Integer , ForeignKey("Vuelo.id"))
+    nombre = Column("name", String)
+    sigla = Column("acronym", String)
+    lista_vuelos = Column("flight_list", Integer , ForeignKey("Vuelo.id"))
     VueloDetalle = relationship("Vuelo", back_populates="Aerolinea", cascade="all, delete")
     
     def __init__(self,
@@ -23,9 +23,9 @@ class Aerolinea(Base):
 
 
     def Cargar(self, Data):
-        self.nombre = Data["nombre"]
-        self.sigla = Data["sigla"]
-        self.lista_vuelos = Data["lista_vuelos"]
+        self.nombre = Data["name"]
+        self.sigla = Data["acronym"]
+        self.lista_vuelos = Data["flight_list"]
         
 
     def save(self):
