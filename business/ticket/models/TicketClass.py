@@ -13,8 +13,8 @@ class Ticket(Base):
     terminal = Column("terminal", Integer)
     seat = Column("seat", Integer)
     group = Column("group", Integer)
-    Vuelo = Column("Vuelo", Integer , ForeignKey("Vuelo.id"))
-    VueloDetalle = relationship("Vuelo", back_populates= "Boleto" , cascade="all, delete")
+    Vuelo = Column("Flight", Integer , ForeignKey("Flight.id"))
+    VueloDetalle = relationship("Flight", back_populates= "Boleto" , cascade="all, delete")
 
     def __init__(self,
                  price=0,

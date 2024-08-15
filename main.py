@@ -3,7 +3,7 @@ from flask import jsonify
 from db import Base , DB_ENGINE
 
 from business import airline , flight, ticket
-from business import Vuelo, Aerolinea, Ticket
+from business import Flight, Aerolinea, Ticket
 
 
 

@@ -1,9 +1,9 @@
-from ..models.VueloClass import Vuelo
+from ..models.VueloClass import Flight
 from db import Cursor
 
 def createFlight(Data):
     try: 
-        vuelo = Vuelo()
+        vuelo = Flight()
         vuelo.Cargar(Data)
         vuelo.save()
         return {"msg" : "Vuelo cargado exitosamente "}
@@ -25,16 +25,16 @@ def updateFlight(**Data):
          return vuelo 
 
     if "destination" in Data:
-        vuelo.Destino = Data["destination"]
+        vuelo.destination = Data["destination"]
 
     if  "origin" in Data: 
-        vuelo.Origen = Data["origin"]
+        vuelo.origin = Data["origin"]
 
     if "takeoff_time" in Data:
-        vuelo.HorarioDespegue = Data["takeoff_time"]
+        vuelo.takeoff_time = Data["takeoff_time"]
 
     if "boarding_time" in Data:
-        vuelo.HorarioEmbarque = Data["boarding_time"]
+        vuelo.boarding_time = Data["boarding_time"]
 
     vuelo.save()
 
@@ -48,7 +48,7 @@ def searchFlight(id):
                 "keyError" : "id"}
 
     try:
-        VueloBuscado = (Cursor.query(Vuelo).where(Vuelo.id == id))[0]
+        VueloBuscado = (Cursor.query(Flight).where(Flight.id == id))[0]
         return VueloBuscado
         
     except:
@@ -70,9 +70,9 @@ def deleteFlight(id):
 def readFlight(id):
     vuelo = searchFlight(id)
     if type(vuelo) != dict:
-        return {"origin": f"{vuelo.Origen}", 
-                "destination": f"{vuelo.Destino}",
-                "boarding time": f"{vuelo.HorarioEmbarque}",
-                "takeoff time": f"{vuelo.HorarioDespegue}"}
+        return {"origin": f"{vuelo.origin}", 
+                "destination": f"{vuelo.destination}",
+                "boarding time": f"{vuelo.boarding_time}",
+                "takeoff time": f"{vuelo.takeoff_time}"}
     else:
          return vuelo

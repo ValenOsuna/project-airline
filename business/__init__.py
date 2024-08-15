@@ -6,6 +6,6 @@ from .airline.controllers.RouteController import airline
 from .flight.controllers.RouteController import flight
 from .ticket.controllers.RouteController import ticket
 
-from .flight.models.VueloClass import Vuelo
+from .flight.models.VueloClass import Flight
 from .airline.models.AeroliniaClass import Aerolinea
 from .ticket.models.TicketClass import Ticket
