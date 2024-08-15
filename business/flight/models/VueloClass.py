@@ -8,7 +8,7 @@ class Vuelo(Base):
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     Destino = Column("destination", String)
     Origen = Column("origin", String)
-    HorarioDespegue = Column("departure_time", String)
+    HorarioDespegue = Column("takeoff_time", String)
     HorarioEmbarque = Column("boarding_time", String)
 
 
@@ -29,7 +29,7 @@ class Vuelo(Base):
     def Cargar(self, Data):
         self.Destino = Data["destination"]
         self.Origen = Data["origin"]
-        self.HorarioDespegue = Data["departure_time"]
+        self.HorarioDespegue = Data["takeoff_time"]
         self.HorarioEmbarque = Data["boarding_time"]
         
 
