@@ -12,21 +12,21 @@ def ticket_create():
     return response
 
 
-@ticket.route("/delete-ticket", methods=["DELETE"])
-def delete_ticket():
+@ticket.route("/delete_ticket", methods=["DELETE"])
+def ticket_delete():
     response = request.get_json().get("id")
     delete_ticket(response)
     return ("The ticket has been successfully canceled")
 
 
-@ticket.route("/update-teticket", methods=["POST"]) # methods PUT O PACH
+@ticket.route("/update_ticket", methods=["POST"]) # methods PUT O PACH
 def adjust_tickets():
     kwargs = request.get_json()
     update_ticket(**kwargs)
     return ("The ticket has been modified successfully")
 
 
-@ticket.route("/search-ticket", methods=["POST"])
+@ticket.route("/search_ticket", methods=["POST"])
 def consult_tickets():
     response = request.get_json().get("id")
     return decompress_obj(search_ticket(response))

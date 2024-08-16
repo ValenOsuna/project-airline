@@ -33,10 +33,10 @@ class Ticket(Base):
 
     def ticket_create(self, response):
         self.gate = response["gate"]
-        self.airline = response["aerolinea"]
+        self.airline = response["airline"]
         self.terminal = response["terminal"]
-        self.seat = response["asiento"]
-        self.price = response["precio"]
+        self.seat = response["seat"]
+        self.price = response["price"]
         self.group = response["group"]
 
     def save(self):
