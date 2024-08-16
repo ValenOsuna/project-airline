@@ -5,24 +5,24 @@ flight = Blueprint("flight",__name__)
 
 
 @flight.route("/create", methods=['POST'])
-def Create():
+def create():
         Data = request.get_json()
         return createFlight(Data)     
     
     
 @flight.route("/search", methods=['POST'])
-def Buscar():
+def search():
     id = request.get_json().get("id")
     return readFlight(id)
 
 
 @flight.route("/update", methods=['PUT' , 'PATCH'])
-def Actualizar():
+def update():
     Data = request.get_json()
     return updateFlight(**Data)
 
 
 @flight.route("/delete", methods=['DELETE'])
-def Borrar():
+def delete():
     id = request.get_json().get("id")
     return deleteFlight(id)
