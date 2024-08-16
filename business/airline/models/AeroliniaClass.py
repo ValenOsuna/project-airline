@@ -3,29 +3,29 @@ from sqlalchemy.orm import relationship
 from db import Base , Cursor
 
 
-class Aerolinea(Base):
-    __tablename__= "Aerolineas"
+class Airlines(Base):
+    __tablename__= "Airlines"
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
-    nombre = Column("name", String)
-    sigla = Column("acronym", String)
-    lista_vuelos = Column("flight_list", Integer , ForeignKey("Flight.id"))
+    name = Column("name", String)
+    acronym = Column("acronym", String)
+    flight_list = Column("flight_list", Integer , ForeignKey("Flight.id"))
     VueloDetalle = relationship("Flight", back_populates="Aerolinea", cascade="all, delete")
     
     def __init__(self,
-                 nombre="",
-                 sigla="",
-                 lista_vuelos=""):
+                 name="",
+                 acronym="",
+                 flight_list=""):
         
-        self.nombre=nombre
-        self.sigla=sigla
-        self.lista_vuelos=lista_vuelos
+        self.name=name
+        self.acronym=acronym
+        self.flight_list=flight_list
 
 
     def Cargar(self, Data):
-        self.nombre = Data["name"]
-        self.sigla = Data["acronym"]
-        self.lista_vuelos = Data["flight_list"]
+        self.name = Data["name"]
+        self.acronym = Data["acronym"]
+        self.flight_list = Data["flight_list"]
         
 
     def save(self):

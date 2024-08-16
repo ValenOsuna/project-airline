@@ -1,15 +1,15 @@
 from flask import Blueprint, request
 #from business import crear_datos_aerolinea
-from .AerolineaController import crear_datos_aerolinea, Modificar_aerolinea, borrar_aerolinea,buscar_aerolinea,descomprimir_obj
+from .AerolineaController import create, delete, search, update, descomprimir_obj
 
-airline = Blueprint("airline",__name__)
+airline = Blueprint("airlines",__name__)
 
 
 @airline.route("/create", methods=['POST'])
 def createAirline():
     try:
         Data = request.get_json()  
-        crear_datos_aerolinea(Data)
+        create(Data)
 
         return {"msg" : "datos de aerolinea cargados "}
     
@@ -18,19 +18,19 @@ def createAirline():
 
 
 @airline.route("/search", methods=['POST'])
-def query_aerolinea():
+def search_aerolinea():
     Data = request.get_json().get("id") 
-    return descomprimir_obj(buscar_aerolinea(Data))
+    return descomprimir_obj(search(Data))
 
 
 @airline.route("/delete", methods=['POST'])
 def delete_aerolinea():
     Data = request.get_json().get("id")
-    return borrar_aerolinea(Data)
+    return delete(Data)
 
 
 @airline.route("/update", methods=['POST'])
-def actualizacion_aerolinea():
+def update_airlines():
     data = request.get_json()
     id = request.get_json().get("id")
-    return Modificar_aerolinea(**data)
+    return update(**data)
