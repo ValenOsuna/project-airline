@@ -3,12 +3,12 @@ from sqlalchemy.orm import relationship
 from db import Base, Cursor
 
 class Flight(Base):
-    __tablename__ = "Flight"
+    __tablename__ = "Flights"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     destination = Column("destination", String)
     origin = Column("origin", String)
-    takeoff_time = Column("takeoff_time", String)
+    departure_time = Column("departure_time", String)
     boarding_time = Column("boarding_time", String)
 
 
@@ -19,18 +19,18 @@ class Flight(Base):
     def __init__(self, 
                  destination  = None ,
                  origin  = None,
-                 takeoff_time = None,
+                 departure_time = None,
                  boarding_time = None):
         
         self.destination = destination
         self.origin = origin
-        self.takeoff_time = takeoff_time
+        self.departure_time = departure_time
         self.boarding_time = boarding_time
 
     def Cargar(self, Data):
         self.destination = Data["destination"]
         self.origin = Data["origin"]
-        self.takeoff_time = Data["takeoff_time"]
+        self.departure_time = Data["departure_time"]
         self.boarding_time = Data["boarding_time"]
         
 

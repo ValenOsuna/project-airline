@@ -3,14 +3,14 @@ from db import Cursor
 
 def createFlight(Data):
     try: 
-        vuelo = Flight()
-        vuelo.Cargar(Data)
-        vuelo.save()
+        flight = Flight()
+        flight.Cargar(Data)
+        flight.save()
         return {"msg" : "Vuelo cargado exitosamente "}
     
     except:
         return {"msg": "No se ha podido cargar el vuelo ",
-                "AtributosObjeto" : "destination , origin , takeoff_time , boarding_time"}
+                "AtributosObjeto" : "destination , origin , departure_time , boarding_time"}
 
 def updateFlight(**Data):
 
@@ -19,24 +19,24 @@ def updateFlight(**Data):
         return {"msg": f"No se han enviado datos para modificar el id: '{id}'"}
     
     id = Data.get("id")
-    vuelo = searchFlight(id)
+    flight = searchFlight(id)
 
-    if type(vuelo) == dict:
-         return vuelo 
+    if type(flight) == dict:
+         return flight 
 
     if "destination" in Data:
-        vuelo.destination = Data["destination"]
+        flight.destination = Data["destination"]
 
     if  "origin" in Data: 
-        vuelo.origin = Data["origin"]
+        flight.origin = Data["origin"]
 
-    if "takeoff_time" in Data:
-        vuelo.takeoff_time = Data["takeoff_time"]
+    if "departure_time" in Data:
+        flight.departure_time = Data["departure_time"]
 
     if "boarding_time" in Data:
-        vuelo.boarding_time = Data["boarding_time"]
+        flight.boarding_time = Data["boarding_time"]
 
-    vuelo.save()
+    flight.save()
 
     return {"msg" : "Vuelo actualizado correctamente"}
         
@@ -48,31 +48,31 @@ def searchFlight(id):
                 "keyError" : "id"}
 
     try:
-        VueloBuscado = (Cursor.query(Flight).where(Flight.id == id))[0]
-        return VueloBuscado
+        flight = (Cursor.query(Flight).where(Flight.id == id))[0]
+        return flight
         
     except:
         return {"msg" : "Vuelo no encontrado" , "keyError" : "id"}
     
 
 def deleteFlight(id):
-    vuelo = searchFlight(id)
-    if type(vuelo) != dict:
-        Cursor.delete(vuelo)
+    flight = searchFlight(id)
+    if type(flight) != dict:
+        Cursor.delete(flight)
         Cursor.commit()
         Cursor.flush()
 
         return {"msg" : "Vuelo borrado con exito"}
     
     else: 
-         return vuelo
+         return flight
 
 def readFlight(id):
-    vuelo = searchFlight(id)
-    if type(vuelo) != dict:
-        return {"origin": f"{vuelo.origin}", 
-                "destination": f"{vuelo.destination}",
-                "boarding time": f"{vuelo.boarding_time}",
-                "takeoff time": f"{vuelo.takeoff_time}"}
+    flight = searchFlight(id)
+    if type(flight) != dict:
+        return {"origin": f"{flight.origin}", 
+                "destination": f"{flight.destination}",
+                "boarding time": f"{flight.boarding_time}",
+                "departure time": f"{flight.departure_time}"}
     else:
-         return vuelo
+         return flight
