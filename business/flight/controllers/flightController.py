@@ -1,9 +1,9 @@
-from ..models.VueloClass import Flight
+from ..models.flightClass import Flights
 from db import Cursor
 
 def createFlight(Data):
     try: 
-        flight = Flight()
+        flight = Flights()
         flight.Cargar(Data)
         flight.save()
         return {"msg" : "Vuelo cargado exitosamente "}
@@ -48,7 +48,7 @@ def searchFlight(id):
                 "keyError" : "id"}
 
     try:
-        flight = (Cursor.query(Flight).where(Flight.id == id))[0]
+        flight = (Cursor.query(Flights).where(Flights.id == id))[0]
         return flight
         
     except:

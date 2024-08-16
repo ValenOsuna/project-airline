@@ -1,6 +1,5 @@
 from flask import Blueprint, request
-#from business import crear_datos_aerolinea
-from .AerolineaController import create, delete, search, update, descomprimir_obj
+from .airlineController import create, delete, search, update, descomprimir_obj
 
 airline = Blueprint("airlines",__name__)
 

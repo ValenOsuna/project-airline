@@ -1,4 +1,4 @@
-from .vueloController import createFlight, deleteFlight, updateFlight, readFlight
+from .flightController import createFlight, deleteFlight, updateFlight, readFlight
 from flask import Blueprint , request
 
 flight = Blueprint("flight",__name__)

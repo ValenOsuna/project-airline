@@ -2,7 +2,7 @@ from sqlalchemy import Column , Integer , String
 from sqlalchemy.orm import relationship
 from db import Base, Cursor
 
-class Flight(Base):
+class Flights(Base):
     __tablename__ = "Flights"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
@@ -12,8 +12,8 @@ class Flight(Base):
     boarding_time = Column("boarding_time", String)
 
 
-    Boleto = relationship("Ticket", back_populates= "VueloDetalle" , cascade="all, delete")
-    Aerolinea = relationship("Aerolinea", back_populates="VueloDetalle")
+    ticketDetail = relationship("Ticket", back_populates= "flightDetail" , cascade="all, delete")
+    airlineDetail = relationship("Airlines", back_populates="flightDetail")
 
 
     def __init__(self, 
