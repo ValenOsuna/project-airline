@@ -7,6 +7,7 @@ from business import Flight, Airlines, Ticket
 
 
 
+
 Base.metadata.create_all(DB_ENGINE)
 
 app = Flask(__name__)
