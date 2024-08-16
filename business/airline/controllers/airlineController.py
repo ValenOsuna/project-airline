@@ -1,12 +1,12 @@
-from ..models.AeroliniaClass import Airlines
+from ..models.airlineClass import Airlines
 from pprint import pprint
 from db import Cursor 
 
 def create(Data):
-    Aerolineas = Airlines()
-    Aerolineas.Cargar(Data)
-    Aerolineas.save()
-    pprint(vars(Aerolineas))
+    airline = Airlines()
+    airline.Cargar(Data)
+    airline.save()
+    pprint(vars(airline))
 
 def search(id):
     try:
@@ -19,23 +19,23 @@ def search(id):
 
 def update(**data):
     id = data["id"]
-    aerolinea = search(data["id"])
-    if type(aerolinea) != dict:
+    airline = search(data["id"])
+    if type(airline) != dict:
         if "name" in data:
-            aerolinea.name = data["name"]
-        if "acroym" in data:    
-            aerolinea.acroym = data["acroym"]
+            airline.name = data["name"]
+        if "acronym" in data:    
+            airline.acronym = data["acronym"]
         if "flight_list" in data:
-            aerolinea.flight_list = data["flight_list"]
-        aerolinea.save()
+            airline.flight_list = data["flight_list"]
+        airline.save()
         return "la base de datos de aerolineas ha sido actualizada"
     else:
         return "datos inexistentes"
 
 def delete(id):
-    aerolinea = search(id)
-    if aerolinea !=None:
-        Cursor.delete(aerolinea)
+    airline = search(id)
+    if airline !=None:
+        Cursor.delete(airline)
         Cursor.commit()
         return "borrado exitoso"
     else:
@@ -43,9 +43,9 @@ def delete(id):
 
 def descomprimir_obj(Airlines):
     if Airlines !=None:
-        Empresa = {"name": f"{Airlines.name}",
-        "sigla": f"{Airlines.acroym}",
-        "lista vuelos":f"{Airlines.flight_list}"}
-        return Empresa
+        airline_data = {"name": f"{Airlines.name}",
+                        "acronym": f"{Airlines.acronym}",
+                        "flight List":f"{Airlines.flight_list}"}
+        return airline_data
     else:
         return "Dato inexistente"
