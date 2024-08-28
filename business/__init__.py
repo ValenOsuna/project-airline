@@ -1,6 +1,6 @@
 from .airline.controllers.airlineController import create, search, delete, descomprimir_obj, update
 from .flight.controllers.flightController import createFlight , updateFlight , deleteFlight , readFlight
-from .ticket.controllers.TicketController import create_ticket, delete_ticket, search_ticket, update_ticket
+from .ticket.controllers.TicketController import create, search_by_id, update, delete
 
 from .airline.controllers.RouteController import airline
 from .flight.controllers.RouteController import flight

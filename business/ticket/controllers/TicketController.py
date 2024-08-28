@@ -3,15 +3,6 @@ from ..models.TicketClass import Ticket
 from pprint import pprint
 
 
-def search_ticket(id):
-    boleto = Session.query(Ticket).where(Ticket.id == id)
-    if boleto != None:
-            pprint(vars(boleto[0]))
-            return boleto[0]
-    else:
-        return "The ticket was not found paper"
-
-
 def decompress_obj(Ticket):
     if Ticket != None:
         fac = {"price": f"{Ticket.price}",
@@ -25,37 +16,48 @@ def decompress_obj(Ticket):
         return "It can fail, said Tusan."
 
 
-def create_ticket(response):
+def search_by_id(id):
+    session = Session()
+    try:
+        user = session.query(Ticket).filter_by(id=id).first()
+        session.close()
+        return user
+    except:
+        return "The ID entered does not correspond to a sold ticket. He's going to want to scam another bye, bye..."
+
+
+def update(**kwargs):
+    session = Session()
+    try:
+        id = kwargs["id"]
+        user = session.query(Ticket).filter_by(id=id).first()
+        if user:
+            for key, value, in kwargs.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+            session.commit()
+            session.refresh(user)
+        session.close()
+        return "Update successful paper"
+
+    except:
+        return "The desired ticket was modified. Next time please don't change the destination at the last minute..."
+
+
+def delete(self):
+    session = Session()
+    try:
+        user = session.query(Ticket).filter_by(id=self.id).first()
+        if user:
+            session.delete(user)
+            session.commit()
+            session.close
+            return user
+    except:
+        return "The ticket has been successfully canceled. Many for choosing our company and will not return again."
+
+
+def create(Data):
     ticket = Ticket()
-    ticket.ticket_create(response)
-    ticket.save()
+    ticket.ticket_create(Data)
     pprint(vars(ticket))
-
-
-def update_ticket(**kwargs):
-    ticket = search_ticket(kwargs["id"])
-    if ticket != dict:
-        if "gate" in kwargs:
-            ticket.gate = kwargs["gate"]
-        if "airline" in kwargs:
-            ticket.airline = kwargs["airline"]
-        if "terminal" in kwargs:
-            ticket.terminal = kwargs["terminal"]
-        if "seat" in kwargs:
-            ticket.seat = kwargs["seat"]
-        if "price" in kwargs:
-            ticket.price = kwargs["price"]
-        if "group" in kwargs:
-            ticket.group = kwargs["group"]
-        ticket.save()
-    else:
-        return "Ticket you want to update is not found..."
-
-
-def delete_ticket(id):
-    ticket = search_ticket(id)
-    if ticket != None:
-        Session.delete(ticket)
-        Session.commit()
-    else:
-        return "The ticket you want to delete cannot be found"
