@@ -1,14 +1,11 @@
 from flask import Flask, request
 from flask import jsonify
-from db import Base , DB_ENGINE
+from db import Base , ENGINE
 
 from business import airline , flight, ticket
 from business import Flights, Airlines, Ticket
 
 
-
-
-Base.metadata.create_all(DB_ENGINE)
 
 app = Flask(__name__)
 
