@@ -21,7 +21,7 @@ def updateFlight(**kwargs):
         return jsonify({"msg": f"No se han enviado datos para modificar el id: '{id}'"}),400
     
     id = kwargs.get("id")
-    flight = session.query(Flights).filter_by(id=flight.id).first()
+    flight = session.query(Flights).filter_by(id=Flights.id).first()
 
     if not flight:
         return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
@@ -31,7 +31,8 @@ def updateFlight(**kwargs):
         if hasattr(flight, key):
             setattr(flight, key, value)
 
-    flight.save()
+    session.add(flight)
+    session.commit()
     session.close()
 
     return jsonify({"msg" : "Vuelo actualizado correctamente"}),200
@@ -47,7 +48,7 @@ def search_by_id(id):
 
 def deleteFlight(id):
     session = Session()
-    flight = session.query(Flights).filter_by(id=flight.id).first()
+    flight = session.query(Flights).filter_by(id=Flights.id).first()
     if not flight:
         return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
     
@@ -59,7 +60,7 @@ def deleteFlight(id):
 
 def readFlight(id):
     session = Session()
-    flight = session.query(Flights).filter_by(id=flight.id).first()
+    flight = session.query(Flights).filter_by(id=Flights.id).first()
     if not flight:
         return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
     session.close()

@@ -4,12 +4,12 @@ from db import Base , Session
 
 
 class Airlines(Base):
-    __tablename__= "Airlines"
+    __tablename__= "airlines"
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
     name = Column("name", String, nullable=False)
     acronym = Column("acronym", String, nullable=False)
-    flight_list = Column("flight_list", Integer , ForeignKey("Flights.id"))
+    flight_list = Column("flight_list", Integer , ForeignKey("flights.id"))
 
     flightDetail = relationship("Flights", back_populates="airlineDetail", cascade="all, delete")
     

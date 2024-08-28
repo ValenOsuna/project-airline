@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from db import Base, Session
 
 class Flights(Base):
-    __tablename__ = "Flights"
+    __tablename__ = "flights"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     destination = Column("destination", String)
