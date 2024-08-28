@@ -1,22 +1,22 @@
 from .flightController import createFlight, deleteFlight, updateFlight, readFlight
-from flask import Blueprint , request
+from flask import Blueprint, request
 
-flight = Blueprint("flight",__name__)
+flight = Blueprint("flight", __name__)
 
 
 @flight.route("/create", methods=['POST'])
 def create():
-        Data = request.get_json()
-        return createFlight(Data)     
-    
-    
+    Data = request.get_json()
+    return createFlight(Data)
+
+
 @flight.route("/search", methods=['POST'])
 def search():
     id = request.get_json().get("id")
     return readFlight(id)
 
 
-@flight.route("/update", methods=['PUT' , 'PATCH'])
+@flight.route("/update", methods=['PUT', 'PATCH'])
 def update():
     Data = request.get_json()
     return updateFlight(**Data)

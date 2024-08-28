@@ -1,12 +1,14 @@
 from ..models.airlineClass import Airlines
 from pprint import pprint
-from db import Cursor 
+from db import Cursor
+
 
 def create(Data):
     airline = Airlines()
     airline.Cargar(Data)
     airline.save()
     pprint(vars(airline))
+
 
 def search(id):
     try:
@@ -23,7 +25,7 @@ def update(**data):
     if type(airline) != dict:
         if "name" in data:
             airline.name = data["name"]
-        if "acronym" in data:    
+        if "acronym" in data:   
             airline.acronym = data["acronym"]
         if "flight_list" in data:
             airline.flight_list = data["flight_list"]
@@ -32,20 +34,22 @@ def update(**data):
     else:
         return "datos inexistentes"
 
+
 def delete(id):
     airline = search(id)
-    if airline !=None:
+    if airline != None:
         Cursor.delete(airline)
         Cursor.commit()
         return "borrado exitoso"
     else:
         return "datos inexistentes"
 
+
 def descomprimir_obj(Airlines):
-    if Airlines !=None:
+    if Airlines != None:
         airline_data = {"name": f"{Airlines.name}",
                         "acronym": f"{Airlines.acronym}",
-                        "flight List":f"{Airlines.flight_list}"}
+                        "flight List": f"{Airlines.flight_list}"}
         return airline_data
     else:
         return "Dato inexistente"

@@ -1,6 +1,6 @@
-from sqlalchemy import Column, String, Integer, Float , ForeignKey
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from db import Base, Cursor
+from db import Base, Session
 
 
 class Ticket(Base):
@@ -14,8 +14,8 @@ class Ticket(Base):
     seat = Column("seat", Integer)
     group = Column("group", Integer)
 
-    flight = Column("Flights", Integer , ForeignKey("Flights.id"))
-    flightDetail = relationship("Flights", back_populates= "ticketDetail" , cascade="all, delete")
+    flight = Column("Flights", Integer, ForeignKey("Flights.id"))
+    flightDetail = relationship("Flights", back_populates="ticketDetail", cascade="all, delete")
 
     def __init__(self,
                  price=0,
@@ -33,6 +33,10 @@ class Ticket(Base):
         self.group = group
 
     def ticket_create(self, response):
+        session = Session()
+        session.add(self)
+        session.commit()
+        session.close()
         self.gate = response["gate"]
         self.airline = response["airline"]
         self.terminal = response["terminal"]
@@ -40,7 +44,30 @@ class Ticket(Base):
         self.price = response["price"]
         self.group = response["group"]
 
-    def save(self):
-        Cursor.add(self)
-        Cursor.commit()
-        Cursor.flush()
+    @staticmethod
+    def search_by_id(id):
+        session = Session()
+        user = session.query(Ticket).filter_by(id=id).first()
+        session.close()
+        return user
+
+    def update(self, **kwargs):
+        session = Session()
+        user = session.query(Ticket).filter_by(id=self.id).first()
+        if user:
+            for key, value, in kwargs.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+            session.commit()
+            session.refresh()
+        session.close()
+        return user
+
+    def delete(self):
+        session = Session()
+        user = session.query(Ticket).filter_by(id=self.id).first()
+        if user:
+            session.deleter(user)
+            session.commit()
+        session.close
+        return user
