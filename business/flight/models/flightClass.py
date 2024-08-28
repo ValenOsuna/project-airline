@@ -1,6 +1,6 @@
 from sqlalchemy import Column , Integer , String 
 from sqlalchemy.orm import relationship
-from db import Base, Cursor
+from db import Base, Session
 
 class Flights(Base):
     __tablename__ = "Flights"
@@ -35,7 +35,9 @@ class Flights(Base):
         
 
     def save(self):
-        Cursor.add(self)
-        Cursor.commit()
-        Cursor.flush()
+        session = Session()
+        session.add(self)
+        session.commit()
+        session.close()
+
 

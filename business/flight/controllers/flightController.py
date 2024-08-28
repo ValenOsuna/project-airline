@@ -1,6 +1,6 @@
 from ..models.flightClass import Flights
 from flask import jsonify
-from db import Cursor
+from db import Session
 
 def createFlight(Data):
     try: 
@@ -13,70 +13,59 @@ def createFlight(Data):
         return jsonify({"msg": "No se ha podido cargar el vuelo ",
                 "AtributosObjeto" : "destination , origin , departure_time , boarding_time"}), 400
 
-def updateFlight(**Data):
+def updateFlight(**kwargs):
+    session = Session()
 
-    if len(Data) == 1 and "id" in Data:
-        id = Data["id"]
+    if len(kwargs) == 1 and "id" in kwargs:
+        id = kwargs["id"]
         return jsonify({"msg": f"No se han enviado datos para modificar el id: '{id}'"}),400
     
-    id = Data.get("id")
-    flight = searchFlight(id)
+    id = kwargs.get("id")
+    flight = session.query(Flights).filter_by(id=flight.id).first()
 
-    if type(flight) != Flights:
-        return flight 
+    if not flight:
+        return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
 
-    if "destination" in Data:
-        flight.destination = Data["destination"]
-
-    if  "origin" in Data: 
-        flight.origin = Data["origin"]
-
-    if "departure_time" in Data:
-        flight.departure_time = Data["departure_time"]
-
-    if "boarding_time" in Data:
-        flight.boarding_time = Data["boarding_time"]
+    
+    for key, value in kwargs.items():
+        if hasattr(flight, key):
+            setattr(flight, key, value)
 
     flight.save()
+    session.close()
 
     return jsonify({"msg" : "Vuelo actualizado correctamente"}),200
         
                  
-
-def searchFlight(id):
-    if id is None:
-        return jsonify({"msg" : "Error : No se ha enviado 'id' " , 
-                "keyError" : "id"}), 400
-
-    try:
-        flight = (Cursor.query(Flights).where(Flights.id == id))[0]
-        return flight
-        
-    except:
-        return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}),404
+             
+def search_by_id(id):
+        session = Session()
+        user = session.query(Flights).filter_by(id=id).first()
+        session.close()
+        return user
     
 
 def deleteFlight(id):
-    flight = searchFlight(id)
-    if type(flight) != Flights:
-        return flight
+    session = Session()
+    flight = session.query(Flights).filter_by(id=flight.id).first()
+    if not flight:
+        return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
     
-    Cursor.delete(flight)
-    Cursor.commit()
-    Cursor.flush()
-
+    session.delete(flight)
+    session.commit()
+    session.close()
     return jsonify({"msg" : "Vuelo borrado con exito"}),200
-    
-    
+
 
 def readFlight(id):
-    flight = searchFlight(id)
-    if type(flight) != Flights:
-        return flight
+    session = Session()
+    flight = session.query(Flights).filter_by(id=flight.id).first()
+    if not flight:
+        return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
+    session.close()
 
     return jsonify({"origin": f"{flight.origin}", 
             "destination": f"{flight.destination}",
             "boarding time": f"{flight.boarding_time}",
             "departure time": f"{flight.departure_time}"}), 200
-    
-         
+

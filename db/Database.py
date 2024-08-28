@@ -1,14 +1,17 @@
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker 
-
-
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 Base = declarative_base()
-DB_ENGINE = create_engine("sqlite:///C:\\project-airline\\db\\database_aerolinea.sqlite")
-DB_ENGINE.connect()
-Cursor = sessionmaker(bind = DB_ENGINE)
-Cursor = Cursor()
 
+DATABASE_URL = "mysql+pymysql://root:46251275@localhost/airline"
+ENGINE = create_engine(DATABASE_URL)
 
+try:
+    connection = ENGINE.connect()
+    print("Exito")
+    Session = sessionmaker(bind=ENGINE)
+
+except:
+    print("error de conexion")
+    raise
 
