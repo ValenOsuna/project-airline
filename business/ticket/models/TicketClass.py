@@ -4,7 +4,7 @@ from db import Base, Session
 
 
 class Ticket(Base):
-    __tablename__ = 'ticket'
+    __tablename__ = 'tickets'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     price = Column("price", Float)
@@ -14,7 +14,7 @@ class Ticket(Base):
     seat = Column("seat", Integer)
     group = Column("group", Integer)
 
-    flight = Column("Flights", Integer, ForeignKey("Flights.id"))
+    flight = Column("flights", Integer, ForeignKey("flights.id"))
     flightDetail = relationship("Flights", back_populates="ticketDetail", cascade="all, delete")
 
     def __init__(self,

@@ -1,6 +1,6 @@
 from ..models.airlineClass import Airlines
 from pprint import pprint
-from db import Cursor
+from db import Session
 
 
 def create(Data):
@@ -12,7 +12,7 @@ def create(Data):
 
 def search(id):
     try:
-        Data = Cursor.query(Airlines).where(Airlines.id == id)
+        Data = Session.query(Airlines).where(Airlines.id == id)
         pprint(vars(Data[0]))
         return Data[0]
     except:
@@ -38,8 +38,8 @@ def update(**data):
 def delete(id):
     airline = search(id)
     if airline != None:
-        Cursor.delete(airline)
-        Cursor.commit()
+        Session.delete(airline)
+        Session.commit()
         return "borrado exitoso"
     else:
         return "datos inexistentes"

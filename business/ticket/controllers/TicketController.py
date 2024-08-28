@@ -1,10 +1,10 @@
-from db import Cursor
+from db import Session
 from ..models.TicketClass import Ticket
 from pprint import pprint
 
 
 def search_ticket(id):
-    boleto = Cursor.query(Ticket).where(Ticket.id == id)
+    boleto = Session.query(Ticket).where(Ticket.id == id)
     if boleto != None:
             pprint(vars(boleto[0]))
             return boleto[0]
@@ -55,7 +55,7 @@ def update_ticket(**kwargs):
 def delete_ticket(id):
     ticket = search_ticket(id)
     if ticket != None:
-        Cursor.delete(ticket)
-        Cursor.commit()
+        Session.delete(ticket)
+        Session.commit()
     else:
         return "The ticket you want to delete cannot be found"
