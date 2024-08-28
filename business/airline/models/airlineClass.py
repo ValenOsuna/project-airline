@@ -18,40 +18,14 @@ class Airlines(Base):
         self.acronym=acronym
         self.flight_list=flight_list
 
-    @staticmethod
-    def search_by_id(id):
-        session = Session()
-        user = session.query(Airlines).filter_by(id=id).frist()
-        session.close()
-        return user
-
     def create(self, Data):
+        self.name = Data["name"]
+        self.acronym = Data["acronym"]
+        self.flight_list = Data["flight_list"]
         session = Session()
         session.add(self)
         session.commit()
         session.close()
-        self.name = Data["name"]
-        self.acronym = Data["acronym"]
-        self.flight_list = Data["flight_list"]
         
-    def update(self, **kwargs):
-        session = Session()
-        user = session.query(Airlines).filter_by(id=self.id).first()
-        if user:
-            for key, value in kwargs.items():
-                if hasattr(user, key):
-                    setattr(user, key, value)
-            session.commit()
-            session.refresh(user)
-        session.close()
-        return user
     
-    def delete(self):
-        session = Session()
-        user = session.query(Airlines).filter_by(id=self.id).first()
-        if user:
-            session.delete(user)
-            session.commit()
-        session.close()
-        return user
 
