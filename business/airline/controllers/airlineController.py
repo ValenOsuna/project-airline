@@ -5,10 +5,15 @@ from db import Session
 
 def create(Data):
     airline = Airlines()
-    airline.Cargar(Data)
-    airline.save()
+    airline.create(Data)
     pprint(vars(airline))
 
+@staticmethod
+def search_by_id(id):
+    session = Session()
+    user = session.query(Airlines).filter_by(id=id).first()
+    session.close()
+    return user
 
 def search(id):
     try:
@@ -18,6 +23,21 @@ def search(id):
     except:
         print("Aerolinea no se encuentra cargado o no esta disponible, Verifique base de datos")
 
+def update_data(**kwargs):
+    session = Session()
+    try:
+        id = kwargs["id"]
+        user = session.query(Airlines).filter_by(id=id).first()
+        if user:
+            for key, value in kwargs.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+            session.commit()
+            session.refresh(user)
+        session.close()
+        return "la base de datos de aerolineas ha sido actualizada"
+    except:
+            return "datos inexistentes"
 
 def update(**data):
     id = data["id"]
@@ -34,7 +54,18 @@ def update(**data):
     else:
         return "datos inexistentes"
 
-
+def delete_data(self):
+    session = Session()
+    try:
+        user = session.query(Airlines).filter_by(id=self.id).first()
+        if user:
+            session.delete(user)
+            session.commit()
+            session.close()
+            return user
+    except:
+        return "Delete"
+    
 def delete(id):
     airline = search(id)
     if airline != None:
