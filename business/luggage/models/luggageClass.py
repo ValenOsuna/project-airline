@@ -10,6 +10,8 @@ class Luggages(Base):
     weight = Column("weigth", Integer, nullable=False)
     type_flight = Column("type_flight", Integer, nullable=False)
 
+    pasengerDetail = relationship("Pasenger", back_populates="luggageDetail")
+
     def __init__(self, type="", weight="", type_flight=""):
         self.type=type
         self.weight=weight

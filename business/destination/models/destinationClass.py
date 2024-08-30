@@ -2,13 +2,15 @@ from sqlalchemy import Column , Integer , String ,ForeignKey , Boolean
 from sqlalchemy.orm import relationship 
 from db import Base, Session
 
-class destination(Base):
+class Destination(Base):
     __tablename__ = "destinations"
 
     id = Column("id" , autoincrement=True , unique= True , primary_key= True)
     name = Column("name", String )
     requiered_visa = Column("requiered_visa", Boolean)
     airports = Column("airport", Integer , ForeignKey("airports.id"))
+
+    airportDetail = relationship("Airport" , back_populates= "destinationDetail", cascade="all, delete")
 
 
     def __init__(self , 

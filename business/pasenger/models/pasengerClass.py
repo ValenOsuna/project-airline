@@ -3,14 +3,18 @@ from sqlalchemy.orm import relationship
 from db import Base , Session
 
 
-class Pasengers(Base):
+class Pasenger(Base):
     __tablename__ = "pasengers"
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)  
     number_pasaport = Column("number_pasaport", Integer , nullable = False)
     day_pasaport = Column("day_pasaport", Integer , nullable = False)
     nationality = Column("acronym", String, nullable=False)
-    country_emision = Column("country_emision". String, nullable = False)
+    country_emision = Column("country_emision", String, nullable = False)
+    luggage = Column("luggageClass", Integer , ForeignKey("luggages.id"))
+
+    saleDetail = relationship("Sale" , back_populates= "pasengerDetail" , cascade="all, delete")
+    luggageDetail = relationship("Luggage", back_populates= "pasengerDetail" , cascade= "all, delete")
 
     def __init__(self, number_pasaport="", day_pasaport="", nationality="", country_emision=""):
         self.number_pasaport=number_pasaport
