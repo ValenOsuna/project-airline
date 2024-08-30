@@ -9,9 +9,14 @@ class Sale(Base):
     id = Column("id" , Integer, autoincrement = True , unique = True , primary_key=True)
     issue_date = Column("issue_date" , String , nullable = False)
     reservation_number = Column("reservation_number" , Integer, unique = True)
-    passenger_data = Column("passenger_data" , Integer , ForeignKey("passengers.id"))
     pay_method = Column("pay_method" , Boolean , nullable = False)
     accumulated_miles = Column("accumulated_miles", Integer)
+
+    pasenger_data = Column("pasenger_data" , Integer , ForeignKey("pasengers.id"))
+    ticket_data = Column("ticker_data" , Integer , ForeignKey("tickets.id"))
+
+    pasengerDetail = relationship("Pasenger" , back_populates= "saleDetail")
+    ticketDetail = relationship("Ticket" , back_populates="saleDetail" , cascade= "all, delete")
 
 
     def __init__(self,

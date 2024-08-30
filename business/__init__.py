@@ -9,3 +9,9 @@ from .ticket.controllers.RouteController import ticket
 from .flight.models.flightClass import Flights
 from .airline.models.airlineClass import Airlines
 from .ticket.models.TicketClass import Ticket
+from .airport.models.airportClass import Airport
+from .destination.models.destinationClass import Destination
+from .luggage.models.luggageClass import Luggages
+from .pasenger.models.pasengerClass import Pasenger
+from .plane.models.planeClass import Plane
+from .sale.models.saleClass import Sale

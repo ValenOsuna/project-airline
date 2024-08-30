@@ -16,6 +16,7 @@ class Ticket(Base):
 
     flight = Column("flights", Integer, ForeignKey("flights.id"))
     flightDetail = relationship("Flights", back_populates="ticketDetail", cascade="all, delete")
+    saleDetail = relationship("Sale" , back_populates= "ticketDetail")
 
     def __init__(self,
                  price=0,

@@ -1,4 +1,6 @@
 from sqlalchemy import Column, String, Integer
+from sqlalchemy.orm import relationship 
+
 from db import Base, Session
 
 
@@ -9,6 +11,8 @@ class Airport(Base):
     city = Column("city", String)
     country = Column("country", String)
     acronym = Column("acrony,", String)
+
+    destinationDetail = relationship("Destination" , back_populates= "airportDetail")
 
     def __init__(self,
                  city="",
