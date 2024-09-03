@@ -23,7 +23,7 @@ def search_by_id(id):
         session.close()
         return user
     except:
-        return "The ID entered does not correspond to a sold ticket. He's going to want to scam another bye, bye..."
+        return "The ID entered does not correspond to a current airport. I'm going to want to scam another bye, bye..."
 
 
 def update(**kwargs):
