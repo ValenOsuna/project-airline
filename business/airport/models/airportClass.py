@@ -1,6 +1,5 @@
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship 
-
 from db import Base, Session
 
 
@@ -10,7 +9,7 @@ class Airport(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     city = Column("city", String)
     country = Column("country", String)
-    acronym = Column("acrony,", String)
+    acronym = Column("acronym,", String)
 
     destinationDetail = relationship("Destination" , back_populates= "airportDetail")
 
@@ -23,10 +22,16 @@ class Airport(Base):
         self.country = country
         self.acronym = acronym
 
-    def create(self, Data):
+    def createAirport(self, Data):
         self.city = Data["city"]
         self.acronym = Data["acronym"]
         self.country = Data["country"]
+        session = Session()
+        session.add(self)
+        session.commit()
+        session.close()
+
+    def save(self):
         session = Session()
         session.add(self)
         session.commit()

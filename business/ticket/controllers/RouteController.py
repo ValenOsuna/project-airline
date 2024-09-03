@@ -10,10 +10,10 @@ def ticket_create():
     try:
         response = request.get_json()
         create(response)
-        return {"msg": "Exito"}
-    
+        return {"msg": "The ticket has been created correctly"}
+
     except:
-        return {"error"}
+        return {"The ticket has irregularities, please verify the details"}
 
 
 @ticket.route("/delete_ticket", methods=["DELETE"])

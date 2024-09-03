@@ -16,9 +16,15 @@ class Plane(Base):
         self.model = model
         self.ability = ability
 
-    def create(self, Data):
+    def createPlane(self, Data):
         self.model = Data["model"]
         self.ability = Data["ability"]
+        session = Session()
+        session.add(self)
+        session.commit()
+        session.close()
+
+    def save(self):
         session = Session()
         session.add(self)
         session.commit()
