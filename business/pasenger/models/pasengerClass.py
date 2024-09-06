@@ -11,10 +11,10 @@ class Pasenger(Base):
     day_pasaport = Column("day_pasaport", Integer , nullable = False)
     nationality = Column("acronym", String, nullable=False)
     country_emision = Column("country_emision", String, nullable = False)
-    luggage = Column("luggageClass", Integer , ForeignKey("luggages.id"))
+    luggage = Column("Luggages", Integer , ForeignKey("luggages.id"))
 
     saleDetail = relationship("Sale" , back_populates= "pasengerDetail" , cascade="all, delete")
-    luggageDetail = relationship("Luggage", back_populates= "pasengerDetail" , cascade= "all, delete")
+    luggageDetail = relationship("Luggages", back_populates= "pasengerDetail" , cascade= "all, delete")
 
     def __init__(self, number_pasaport="", day_pasaport="", nationality="", country_emision=""):
         self.number_pasaport=number_pasaport
