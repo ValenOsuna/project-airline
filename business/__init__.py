@@ -3,6 +3,8 @@ from .flight.controllers.flightController import createFlight , updateFlight , d
 from .ticket.controllers.TicketController import create, search_by_id, update, delete
 from .luggage.controllers.luggageController import create, search_by_id, update, delete
 from .pasenger.controllers.pasengerController import create, search_by_id, update, delete
+from .airport.controllers.airportController import create, search_by_id, update, delete, decompress_obj
+from .plane.controllers.planeControllers import create, search_by_id, update, delete, decompress_obj
 
 from .airline.controllers.RouteController import airline
 from .flight.controllers.RouteController import flight
@@ -11,6 +13,8 @@ from .destination.controllers.routeController import destination
 from .sale.controllers.routeController import sale
 from .luggage.controllers.RouteController import luggage
 from .pasenger.controllers.RouteController import pasenger
+from .airport.controllers.routeairpotContoller import airport
+from .plane.controllers.routeplaneController import plane
 
 from .flight.models.flightClass import Flights
 from .airline.models.airlineClass import Airlines

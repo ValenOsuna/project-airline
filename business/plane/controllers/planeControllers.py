@@ -8,29 +8,25 @@ def create(Data):
         plane = Plane()
         plane.createPlane(Data)
         pprint(vars(plane))
-        return {"msg": "Successful airport selection"}
+        return "vamoo lo lograste"
     except:
-        return {"msg": "The plane is not in operation"}
+        return "no se pudo"
 
 
 def decompress_obj(plane):
-    if plane != None:
-        plane_data = {"model": f"{plane.model}",
-                       "ability": f"{plane.ability}"
-                       }
-        return plane_data
-    else:
-        return "It can fail, said Tusan."
+    pprint(plane)
+    plane_data = {"model": f"{plane.model}",
+                  "ability": f"{plane.ability}"
+                  }
+    return plane_data
 
 
 def search_by_id(id):
     session = Session()
-    try:
-        plane = session.query(Plane).filter_by(id=id).first()
-        session.close()
-        return plane
-    except:
-        return {"msg": "The id entered is not found, please verify"}
+    plane = session.query(Plane).filter_by(id=id).first()
+    session.close()
+    pprint(vars(plane))
+    return plane
 
 
 def update(**kwargs):
@@ -51,13 +47,13 @@ def update(**kwargs):
 
 
 
-def delete(self):
+def delete(id):
     session = Session()
     try:
-        plane = session.query(Plane).filter_by(id=self.id).first()
+        plane = session.query(Plane).filter_by(id=id).first()
         if plane:
             session.delete(plane)
             session.commit()
             return plane
     except:
-        return{"msg": "The selected aircraft was successfully eliminated"}
+        return {"msg": "Fallo"}

@@ -13,7 +13,7 @@ def decompress_obj(Ticket):
                "group": f"{Ticket.group}"}
         return fac
     else:
-        return "It can fail, said Tusan."
+        return {"msg": "It can fail, said Tusan."}
 
 
 def search_by_id(id):
@@ -23,7 +23,7 @@ def search_by_id(id):
         session.close()
         return user
     except:
-        return "The ID entered does not correspond to a current airport. I'm going to want to scam another bye, bye..."
+        return {"msg": "The ID entered does not correspond to a current airport. I'm going to want to scam another bye, bye"}
 
 
 def update(**kwargs):
@@ -38,10 +38,10 @@ def update(**kwargs):
             session.commit()
             session.refresh(user)
         session.close()
-        return "Update successful paper"
+        return {"msg": "Update successful paper"}
 
     except:
-        return "The desired ticket was modified. Next time please don't change the destination at the last minute..."
+        return {"msg": "The desired ticket was modified. Next time please don't change the destination at the last minute..."}
 
 
 def delete(self):
@@ -54,7 +54,7 @@ def delete(self):
             session.close
             return user
     except:
-        return "The ticket has been successfully canceled. Many for choosing our company and will not return again."
+        return {"msg": "The ticket has been successfully canceled. Many for choosing our company and will not return again."}
 
 
 def create(Data):
