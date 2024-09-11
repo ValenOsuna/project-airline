@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .planeControllers import create, update, search_by_id, delete, decompress_obj
+from .planeControllers import create, update, search_plane_by_id, delete, decompress_obj
 
 
 plane = Blueprint("plane", __name__)
@@ -25,7 +25,7 @@ def query_plane():
 @plane.route("/plane-search", methods=["POST"])
 def search_plane():
     response = request.get_json().get("id")
-    return decompress_obj(search_by_id(response))
+    return decompress_obj(search_plane_by_id(response))
 
 
 @plane.route("/plane_delete", methods=["DELETE"])

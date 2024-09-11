@@ -7,8 +7,7 @@ def create(Data):
     pasenger.create(Data)
     pprint(vars(pasenger))
 
-@staticmethod
-def search_by_id(id):
+def search_pasenger_by_id(id):
     session = Session()
     user = session.query(Pasenger).filter_by(id=id).first()
     session.close()
@@ -47,7 +46,8 @@ def descomprimir(Pasenger):
         Pasenger_info = {"number_pasaport": f"{Pasenger.number_pasaport}",
                         "day_pasaport": f"{Pasenger.day_pasaport}",
                         "nationality": f"{Pasenger.nationality}",
-                        "country_emision": f"{Pasenger.country_emision}"}
+                        "country_emision": f"{Pasenger.country_emision}",
+                        "accumulated_miles" : f"{Pasenger.accumulated_miles}"}
         return Pasenger_info
     else:
         return "Dato inexistente"

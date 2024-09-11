@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .pasengerController import create, delete, search_by_id, update, descomprimir
+from .pasengerController import create, delete, search_pasenger_by_id, update, descomprimir
 
 pasenger = Blueprint("pasenger", __name__)
 
@@ -17,7 +17,7 @@ def create_data():
 @pasenger.route("/search", methods=["POST"])
 def search_data():
     Data = request.get_json().get("id")
-    return descomprimir(search_by_id(Data))
+    return descomprimir(search_pasenger_by_id(Data))
 
 @pasenger.route("/delete", methods=["POST"])
 def delete_data():

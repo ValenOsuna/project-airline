@@ -14,18 +14,17 @@ def create(Data):
 
 
 def decompress_obj(plane):
-    pprint(plane)
     plane_data = {"model": f"{plane.model}",
-                  "ability": f"{plane.ability}"
+                  "capacity": f"{plane.capacity}",
+                  "fare" : f"{plane.fare}"
                   }
     return plane_data
 
 
-def search_by_id(id):
+def search_plane_by_id(id):
     session = Session()
     plane = session.query(Plane).filter_by(id=id).first()
     session.close()
-    pprint(vars(plane))
     return plane
 
 
@@ -54,6 +53,6 @@ def delete(id):
         if plane:
             session.delete(plane)
             session.commit()
-            return plane
+            session.close()
     except:
         return {"msg": "Fallo"}

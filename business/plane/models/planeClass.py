@@ -8,18 +8,24 @@ class Plane(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     model = Column("model", Integer, nullable=False)
-    ability = Column("ability", String, nullable=False)
+    capacity = Column("capacity", Integer, nullable=False)
+    fare = Column("fare" , Integer , nullable = False)
+
+    saleDetail = relationship("Sale" , back_populates="planeDetail" , cascade="all, delete")
 
     def __init__(self,
                  model=0,
-                 ability=""
+                 capacity="",
+                 fare = ""
                  ):
         self.model = model
-        self.ability = ability
+        self.capacity = capacity
+        self.fare = fare
 
     def createPlane(self, Data):
         self.model = Data["model"]
-        self.ability = Data["ability"]
+        self.capacity = Data["capacity"]
+        self.fare = Data["fare"]
         session = Session()
         session.add(self)
         session.commit()
