@@ -45,7 +45,6 @@ def update(**kwargs):
         return {"msg": "The desired aircraft has been modified. Thank you very much, please come back soon"}
 
 
-
 def delete(id):
     session = Session()
     try:
