@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Integer
-from sqlalchemy.orm import relationship 
+from sqlalchemy.orm import relationship
 from db import Base, Session
 
 
@@ -7,11 +7,11 @@ class Airport(Base):
     __tablename__ = 'airports'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    city = Column("city", String)
-    country = Column("country", String)
-    acronym = Column("acronym,", String)
+    city = Column("city", String, nullable=False)
+    country = Column("country", String, nullable=False)
+    acronym = Column("acronym,", String, nullable=False)
 
-    destinationDetail = relationship("Destination" , back_populates= "airportDetail")
+    destinationDetail = relationship("Destination", back_populates="airportDetail")
 
     def __init__(self,
                  city="",

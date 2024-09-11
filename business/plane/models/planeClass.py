@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer
+from sqlalchemy.orm import relationship
 from db import Base, Session
 
 
@@ -6,8 +7,8 @@ class Plane(Base):
     __tablename__ = 'planes'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    model = Column("model", Integer)
-    ability = Column("ability", String)
+    model = Column("model", Integer, nullable=False)
+    ability = Column("ability", String, nullable=False)
 
     def __init__(self,
                  model=0,
