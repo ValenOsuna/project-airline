@@ -16,7 +16,7 @@ def decompress_obj(Ticket):
         return {"msg": "It can fail, said Tusan."}
 
 
-def search_by_id(id):
+def search_ticket_by_id(id):
     session = Session()
     try:
         user = session.query(Ticket).filter_by(id=id).first()

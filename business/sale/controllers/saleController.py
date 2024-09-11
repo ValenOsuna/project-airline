@@ -1,23 +1,34 @@
 from ..models.saleClass import Sale
 from flask import jsonify
 from db import Session
+from business import search_plane_by_id , search_pasenger_by_id,  search_ticket_by_id
 
 
 def  createSale(data):
     try:
+        dataUpdate = dataUpdater(data)
+        
+
         sale = Sale()
-        sale.createSale(data)
+        sale.createSale(dataUpdate)
         sale.save()
         return jsonify({"msg" : "sale created successfully"})
+    
+    except ValueError as exception:
+        return jsonify ({"msg" : "destination could not be loaded" ,"keyError" : str(exception)})
     
     except:
         return jsonify ({"msg" : "destination could not be loaded" , 
                         "DestinationAttributes": {
                                                 "issue_date": "--",
                                                 "reservation_number": "--",
-                                                "passenger_data": "--",
+                                                "pasenger_data": "--",
                                                 "pay_method": "--",
-                                                "accumulated_miles": "--"}}) , 400
+                                                "accumulated_miles": "--",
+                                                "fare" : "--",
+                                                "pasenger_data": "--",
+                                                "ticket_data": "--",
+                                                "plane_data": "--"}}) , 400
     
 def updateSale(**kwargs):
     session = Session()
@@ -63,9 +74,12 @@ def readSale(id):
 
     return jsonify({"issue_date": sale.issue_date,
                     "reservation_number": sale.reservation_number,
-                    "passenger_data": sale.pasenger_data,
+                    "pasenger_data": sale.pasenger_data,
                     "pay_method": sale.pay_method,
-                    "accumulated_miles": sale.accumulated_miles}), 200
+                    "accumulated_miles": sale.accumulated_miles,
+                    "fare": sale.fare,
+                    "ticket_data": sale.ticket_data,
+                    "plane_data": sale.plane_data}), 200
 
 
              
@@ -74,4 +88,34 @@ def search_by_id(id):
         sale = session.query(Sale).filter_by(id = id).first()
         session.close()
         return sale
+
+def dataUpdater(data):
+    session = Session()
+    ticket = search_ticket_by_id(data["ticket_data"])
+    pasenger = search_pasenger_by_id(data["pasenger_data"])
+    plane = search_plane_by_id(data["plane_data"])
+
+    if ticket is None :
+        raise ValueError("Ticket_data")
+    if pasenger is None:
+        raise ValueError("pasenger_data")
+    if plane is None:
+        raise ValueError("plane_data")
     
+    if plane.capacity > 0:
+        plane.capacity -= 1
+    else:  
+        raise ValueError("The plane is full")
+
+    data["accumulated_miles"] = (ticket.price * 0.1) + pasenger.accumulated_miles
+    pasenger.accumulated_miles = data["accumulated_miles"]
+
+    data["ticket_data"] = ticket.id
+    data["plane_data"] = plane.id
+    data["pasenger_data"] = pasenger.id
+    
+    session.add(plane)
+    session.add(pasenger)
+    session.commit()
+    session.close()
+    return data
