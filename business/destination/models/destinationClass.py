@@ -5,10 +5,10 @@ from db import Base, Session
 class Destination(Base):
     __tablename__ = "destinations"
 
-    id = Column("id" , autoincrement=True , unique= True , primary_key= True)
+    id = Column("id" ,Integer, autoincrement=True , unique= True , primary_key= True)
     name = Column("name", String )
     requiered_visa = Column("requiered_visa", Boolean)
-    airports = Column("airport", Integer , ForeignKey("airports.id"))
+    airport = Column("airport", Integer , ForeignKey("airports.id"))
 
     airportDetail = relationship("Airport" , back_populates= "destinationDetail", cascade="all, delete")
 
@@ -16,16 +16,16 @@ class Destination(Base):
     def __init__(self , 
                 name = None,
                 requiered_visa = None,
-                airports = None):
+                airport = None):
         
         self.name = name
         self.requiered_visa = requiered_visa
-        self.airports = airports
+        self.airport = airport
 
     def createDestination(self , data):
         self.name = data["name"]
         self.requiered_visa = data["requiered_visa"]
-        self.airports = data["airports"]
+        self.airport = data["airport"]
 
     
     def save(self):

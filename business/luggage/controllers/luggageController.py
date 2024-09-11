@@ -30,10 +30,10 @@ def update(**kwargs):
     except:
         return "Error"
     
-def delete(self):
+def delete(id):
     session = Session()
     try:
-        user = session.query(Luggages).filter_by(id=self.id).first()
+        user = session.query(Luggages).filter_by(id=id).first()
         if user:
             session.delete(user)
             session.commit()

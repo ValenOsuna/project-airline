@@ -9,7 +9,7 @@ class Airport(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     city = Column("city", String, nullable=False)
     country = Column("country", String, nullable=False)
-    acronym = Column("acronym,", String, nullable=False)
+    acronym = Column("acronym", String, nullable=False)
 
     destinationDetail = relationship("Destination", back_populates="airportDetail")
 
