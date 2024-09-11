@@ -6,7 +6,7 @@ pasenger = Blueprint("pasenger", __name__)
 @pasenger.route("/create", methods=["POST"])
 def create_data():
     try:
-        Data = request.get_jason()
+        Data = request.get_json()
         create(Data)
 
         return "Exito"
