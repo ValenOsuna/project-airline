@@ -12,7 +12,7 @@ def create(Data):
 
 def decompress_obj(airport):
     airpot_data = {"city": f"{airport.city}",
-                   "country": f"{airport.coutry}",
+                   "country": f"{airport.country}",
                    "acronym": f"{airport.acronym}"
                    }
     return airpot_data
@@ -43,13 +43,11 @@ def update(**kwargs):
         return {"msg": "The desired airport has been modified. Thank you very much, come back soon"}
 
 
-def delete(self):
+def delete(id):
     session = Session()
-    try:
-        airport = session.query(Airport).filter_by(id=self.id).first()
-        if airport:
-            session.delete(airport)
-            session.commit()
-            return airport
-    except:
-        return {"msg": "The chosen airport was successfully deleted"}
+    airport = session.query(Airport).filter_by(id=id).first()
+    if airport:
+        session.delete(airport)
+        session.commit()
+        return airport
+
