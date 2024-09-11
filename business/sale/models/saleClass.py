@@ -13,7 +13,7 @@ class Sale(Base):
     accumulated_miles = Column("accumulated_miles", Integer)
 
     pasenger_data = Column("pasenger_data" , Integer , ForeignKey("pasengers.id"))
-    ticket_data = Column("ticker_data" , Integer , ForeignKey("tickets.id"))
+    ticket_data = Column("ticket_data" , Integer , ForeignKey("tickets.id"))
 
     pasengerDetail = relationship("Pasenger" , back_populates= "saleDetail")
     ticketDetail = relationship("Ticket" , back_populates="saleDetail" , cascade= "all, delete")

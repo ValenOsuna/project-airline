@@ -7,7 +7,7 @@ class Luggages(Base):
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
     type = Column("type", Integer, nullable =False)
-    weight = Column("weigth", Integer, nullable=False)
+    weight = Column("weight", Integer, nullable=False)
     type_flight = Column("type_flight", Integer, nullable=False)
 
     pasengerDetail = relationship("Pasenger", back_populates="luggageDetail")
