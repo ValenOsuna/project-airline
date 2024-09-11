@@ -22,20 +22,20 @@ class Sale(Base):
     def __init__(self,
                 issue_date = None ,
                 reservation_number  = None , 
-                passenger_data  = None, 
+                pasenger_data  = None, 
                 pay_method  = None, 
                 accumulated_miles  = None):
         
         self.issue_date = issue_date
         self.reservation_number = reservation_number
-        self.passenger_data = passenger_data
+        self.pasenger_data = pasenger_data
         self.pay_method = pay_method
         self.accumulated_miles = accumulated_miles
 
     def createSale(self,data):
         self.issue_date = data["issue_date"]
         self.reservation_number = data["reservation_number"]
-        self.passenger_data = data["passenger_data"]
+        self.passenger_data = data["pasenger_data"]
         self.pay_method = data["pay_method"]
         self.accumulated_miles = data["accumulated_miles"]
 
@@ -44,7 +44,3 @@ class Sale(Base):
         session.add(self)
         session.commit()
         session.close()
-
-
-
-

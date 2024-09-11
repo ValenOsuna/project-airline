@@ -46,7 +46,12 @@ def deleteSale(id):
     session = Session()
     sale = search_by_id(id)
     if not sale:
-        return jsonify({"msg" : "Sale not found" , "keyError" : "id"}), 404 
+        return jsonify({"msg" : "Sale not found" , "keyError" : "id"}), 404
+    
+    session.delete(sale)
+    session.commit()
+    session.close()
+    return jsonify({"msg" : "Sale deleted successfully" }), 200
 
 
 def readSale(id):
@@ -58,15 +63,15 @@ def readSale(id):
 
     return jsonify({"issue_date": sale.issue_date,
                     "reservation_number": sale.reservation_number,
-                    "passenger_data": sale.passenger_data,
+                    "passenger_data": sale.pasenger_data,
                     "pay_method": sale.pay_method,
                     "accumulated_miles": sale.accumulated_miles}), 200
 
 
              
-def search_by_id(id) -> Sale:
+def search_by_id(id):
         session = Session()
-        sale = session.query(Sale).filter_by(id).first()
+        sale = session.query(Sale).filter_by(id = id).first()
         session.close()
         return sale
     
