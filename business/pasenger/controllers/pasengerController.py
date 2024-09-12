@@ -1,6 +1,7 @@
 from ..models.pasengerClass import Pasenger
 from pprint import pprint
 from db import Session
+from datetime import datetime
 
 def create(Data):
     pasenger = Pasenger()
@@ -51,3 +52,12 @@ def descomprimir(Pasenger):
         return Pasenger_info
     else:
         return "Dato inexistente"
+    
+@staticmethod
+def validacion_passport(fecha_vencimiento_str):
+    try:
+        fecha_vencimiento = datetime.strptime(fecha_vencimiento_str, "Y-M-D")
+        fecha_actual = datetime.now()
+        return fecha_actual <= fecha_vencimiento
+    except:
+        "passport not valid"

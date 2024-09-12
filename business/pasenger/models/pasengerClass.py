@@ -2,13 +2,12 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from db import Base , Session
 
-
 class Pasenger(Base):
     __tablename__ = "pasengers"
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)  
-    number_pasaport = Column("number_pasaport", Integer , nullable = False)
-    day_pasaport = Column("day_pasaport", Integer , nullable = False)
+    number_pasaport = Column("number_pasaport", Integer , unique= True, nullable = False)
+    day_pasaport = Column("day_pasaport", String , nullable = False)
     nationality = Column("nationality", String, nullable=False)
     country_emision = Column("country_emision", String, nullable = False)
     accumulated_miles = Column("accumulated_miles", Integer)
@@ -34,4 +33,5 @@ class Pasenger(Base):
         session.add(self)
         session.commit()
         session.close()
+
 

@@ -2,7 +2,7 @@ from .airline.controllers.airlineController import create, search, delete, desco
 from .flight.controllers.flightController import createFlight , updateFlight , deleteFlight , readFlight
 from .ticket.controllers.TicketController import create, search_ticket_by_id, update, delete
 from .luggage.controllers.luggageController import create, search_by_id, update, delete
-from .pasenger.controllers.pasengerController import create, search_pasenger_by_id, update, delete
+from .pasenger.controllers.pasengerController import create, search_pasenger_by_id, update, delete, validacion_passport
 from .airport.controllers.airportController import create, search_by_id, update, delete, decompress_obj
 from .plane.controllers.planeControllers import create, search_plane_by_id, update, delete, decompress_obj 
 
