@@ -16,8 +16,31 @@ def create(Data):
 def decompress_obj(plane):
     plane_data = {"model": f"{plane.model}",
                   "capacity": f"{plane.capacity}",
-                  "fare" : f"{plane.fare}"
+                  "fare": f"{plane.fare}"
                   }
+    return plane_data
+
+
+def plane_data(plane, fare_type):
+    if fare_type in plane.fare_types:
+        fare = f"{plane.fare}"
+        if fare_type == "economy":
+            luggage = "personal item"
+        elif fare_type == "premium":
+            luggage = "carry-on"
+        elif fare_type == "business":
+            luggage = "checked"
+        else:
+            luggage = "luggage type not available"
+    else:
+        fare = "Fare type not available"
+        luggage = "luggage type not available"
+    plane_data = {"model": f"{plane.model}",
+                  "capacity": f"{plane.capacity}",
+                  "fare": fare,
+                  "luggage": luggage
+                  }
+    # print(plane_data)
     return plane_data
 
 
