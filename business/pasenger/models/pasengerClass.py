@@ -14,7 +14,6 @@ class Pasenger(Base):
     luggage = Column("luggage", Integer , ForeignKey("luggages.id"))
 
     saleDetail = relationship("Sale" , back_populates= "pasengerDetail" , cascade="all, delete")
-    luggageDetail = relationship("Luggages", back_populates= "pasengerDetail" , cascade= "all, delete")
 
     def __init__(self, number_pasaport="", day_pasaport="", nationality="", country_emision="", accumulated_miles= 0):
         self.number_pasaport=number_pasaport

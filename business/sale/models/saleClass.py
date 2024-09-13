@@ -12,14 +12,16 @@ class Sale(Base):
     pay_method = Column("pay_method" , Boolean , nullable = False)
     accumulated_miles = Column("accumulated_miles", Integer)
     fare = Column("fare", Integer, nullable=False)
-    flight = Column("flight", Integer, ForeignKey("flights.id"))
 
+    flight = Column("flight", Integer, ForeignKey("flights.id"))
+    luggage = Column("luggage" , Integer , ForeignKey("luggages.id"))
     pasenger_data = Column("pasenger_data", Integer, ForeignKey("pasengers.id"))
     ticket_data = Column("ticket_data", Integer, ForeignKey("tickets.id"))
 
     flightDetail = relationship("Flight", back_populates="saleDetail")
     pasengerDetail = relationship("Pasenger", back_populates="saleDetail")
     ticketDetail = relationship("Ticket", back_populates="saleDetail", cascade="all, delete")
+    luggageDetail = relationship("Luggages" , back_populates="saleDetail")
 
 
     def __init__(self,
@@ -30,7 +32,8 @@ class Sale(Base):
                 accumulated_miles  = None,
                 fare = None,
                 flight = None,
-                ticket_data = None
+                ticket_data = None,
+                luggage = None
                 ):
         
         self.issue_date = issue_date
@@ -41,6 +44,7 @@ class Sale(Base):
         self.fare = fare
         self.flight = flight
         self.ticket_data = ticket_data
+        self.luggage = luggage
 
     def createSale(self, data):
         self.issue_date = data["issue_date"]
@@ -51,6 +55,7 @@ class Sale(Base):
         self.fare = data["fare"]
         self.flight = data["flight"]
         self.ticket_data = data["ticket_data"]
+        self.luggage = data["luggage"]
 
     def save(self):
         session = Session()

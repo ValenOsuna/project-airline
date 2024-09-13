@@ -11,7 +11,7 @@ class Airlines(Base):
     acronym = Column("acronym", String, nullable=False)
     flight_list = Column("flight_list", Integer , ForeignKey("flights.id"))
 
-    flightDetail = relationship("Flights", back_populates="airlineDetail", cascade="all, delete")
+    flightDetail = relationship("Flight", back_populates="airlineDetail", cascade="all, delete")
     
     def __init__(self, name="", acronym="", flight_list=""):    
         self.name=name

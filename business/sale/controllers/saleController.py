@@ -1,7 +1,7 @@
 from ..models.saleClass import Sale
 from flask import jsonify
 from db import Session
-from business import search_plane_by_id , search_pasenger_by_id,  search_ticket_by_id, plane_data, search_flight_by_id, validation_passport
+from business import search_plane_by_id , search_pasenger_by_id, search_luggage_by_id,  search_ticket_by_id, plane_data, search_flight_by_id, validation_passport
 
 
 def  createSale(data):
@@ -28,7 +28,8 @@ def  createSale(data):
                                                 "fare" : "--",
                                                 "pasenger_data": "--",
                                                 "ticket_data": "--",
-                                                "plane_data": "--"}}) , 400
+                                                "flight": "--",
+                                                "luggage": "--"}}) , 400
     
 def updateSale(**kwargs):
     session = Session()
@@ -79,7 +80,8 @@ def readSale(id):
                     "accumulated_miles": sale.accumulated_miles,
                     "fare": sale.fare,
                     "ticket_data": sale.ticket_data,
-                    "plane_data": sale.plane_data}), 200
+                    "flight" : sale.flight,
+                    "luggage" : sale.luggage}), 200
 
 
              
@@ -94,20 +96,28 @@ def dataUpdater(data):
     flight = search_flight_by_id(data["flight"])
     ticket = search_ticket_by_id(data["ticket_data"])
     pasenger = search_pasenger_by_id(data["pasenger_data"])
-    plane = search_plane_by_id(flight.plane)
+    luggage = search_luggage_by_id(data["luggage"])
+  
 
+    if luggage is None:
+        raise ValueError("luggage")
     if ticket is None :
         raise ValueError("Ticket_data")
     if flight is None :
         raise ValueError("flight")
-    if pasenger is None or validation_passport(pasenger["day_pasaport"]) == False:
+    if pasenger is None:
         raise ValueError("pasenger_data")
+    if validation_passport(pasenger.day_pasaport) == False:
+        raise ValueError("Expired passport")
+    
+    plane = search_plane_by_id(flight.plane)
+
     if plane.capacity > 0:
         plane.capacity -= 1
     else:  
         raise ValueError("The plane is full")
 
-    data_luggage = plane_data(plane, data["fare"])
+    data_luggage = plane_data(plane, data["fare"], luggage.type)
     if data_luggage is None:
         raise ValueError("Fare not allowed for this plane")
 
@@ -115,8 +125,10 @@ def dataUpdater(data):
     pasenger.accumulated_miles = data["accumulated_miles"]
 
     data["ticket_data"] = ticket.id
+    data["luggage"] = luggage.id
     data["flight"] = flight.id
     data["pasenger_data"] = pasenger.id
+    
     session.add(plane)
     session.add(pasenger)
     session.commit()

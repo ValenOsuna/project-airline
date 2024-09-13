@@ -1,10 +1,10 @@
-from ..models.flightClass import Flights
+from ..models.flightClass import Flight
 from flask import jsonify
 from db import Session
 
 def createFlight(Data):
     try: 
-        flight = Flights()
+        flight = Flight()
         flight.Cargar(Data)
         flight.save()
         return jsonify({"msg" : "Vuelo cargado exitosamente "}), 201
@@ -21,7 +21,7 @@ def updateFlight(**kwargs):
         return jsonify({"msg": f"No se han enviado datos para modificar el id: '{id}'"}),400
     
     id = kwargs.get("id")
-    flight = session.query(Flights).filter_by(id=Flights.id).first()
+    flight = session.query(Flight).filter_by(id=Flight.id).first()
 
     if not flight:
         return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
@@ -41,14 +41,14 @@ def updateFlight(**kwargs):
              
 def search_flight_by_id(id):
         session = Session()
-        user = session.query(Flights).filter_by(id=id).first()
+        user = session.query(Flight).filter_by(id=id).first()
         session.close()
         return user
     
 
 def deleteFlight(id):
     session = Session()
-    flight = session.query(Flights).filter_by(id=Flights.id).first()
+    flight = session.query(Flight).filter_by(id=Flight.id).first()
     if not flight:
         return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
     
@@ -60,7 +60,7 @@ def deleteFlight(id):
 
 def readFlight(id):
     session = Session()
-    flight = session.query(Flights).filter_by(id=Flights.id).first()
+    flight = session.query(Flight).filter_by(id=Flight.id).first()
     if not flight:
         return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
     session.close()

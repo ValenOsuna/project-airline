@@ -15,7 +15,7 @@ class Ticket(Base):
     group = Column("group", Integer)
 
     flight = Column("flights", Integer, ForeignKey("flights.id"))
-    flightDetail = relationship("Flights", back_populates="ticketDetail", cascade="all, delete")
+    flightDetail = relationship("Flight", back_populates="ticketDetail", cascade="all, delete")
     saleDetail = relationship("Sale" , back_populates= "ticketDetail")
 
     def __init__(self,

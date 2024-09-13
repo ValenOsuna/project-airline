@@ -6,11 +6,11 @@ class Luggages(Base):
     __tablename__= "luggages"
 
     id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
-    type = Column("type", Integer, nullable =False)
+    type = Column("type", String, nullable =False)
     weight = Column("weight", Integer, nullable=False)
     type_flight = Column("type_flight", Integer, nullable=False)
 
-    pasengerDetail = relationship("Pasenger", back_populates="luggageDetail")
+    saleDetail = relationship("Sale" , back_populates="luggageDetail")
 
     def __init__(self, type="", weight="", type_flight=""):
         self.type=type

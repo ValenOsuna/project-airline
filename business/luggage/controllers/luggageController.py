@@ -8,7 +8,7 @@ def create(Data):
     pprint(vars(luggages))
 
 @staticmethod
-def search_by_id(id):
+def search_luggage_by_id(id):
     session = Session()
     user = session.query(Luggages).filter_by(id=id).first()
     session.close()

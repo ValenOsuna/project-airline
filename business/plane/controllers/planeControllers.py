@@ -21,7 +21,8 @@ def decompress_obj(plane):
     return plane_data
 
 
-def plane_data(plane, fare_type):
+def plane_data(plane, fare_type, luggageType):
+    print(plane.fare)
     if fare_type in plane.fare:
         if fare_type == "D":
             luggage = "pi"
@@ -32,8 +33,12 @@ def plane_data(plane, fare_type):
         elif fare_type == "C":
             luggage = "ch"
     else:
-        luggage = None
-    return luggage
+        return None
+
+    if luggageType in luggage:
+        return luggage
+    else:
+        return None
 
 
 def search_plane_by_id(id):
