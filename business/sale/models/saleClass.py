@@ -6,20 +6,20 @@ from db import Base, Session
 class Sale(Base):
     __tablename__ = "sales"
 
-    id = Column("id" , Integer, autoincrement = True , unique = True , primary_key=True)
+    id = Column("id" , Integer, autoincrement=True , unique=True, primary_key=True)
     issue_date = Column("issue_date" , String , nullable = False)
-    reservation_number = Column("reservation_number" , Integer, unique = True)
+    reservation_number = Column("reservation_number" , Integer, unique=True)
     pay_method = Column("pay_method" , Boolean , nullable = False)
     accumulated_miles = Column("accumulated_miles", Integer)
-    fare = Column("fare" , Integer , nullable = False)
+    fare = Column("fare", Integer, nullable=False)
+    flight = Column("flight", Integer, ForeignKey("flights.id"))
 
-    pasenger_data = Column("pasenger_data" , Integer , ForeignKey("pasengers.id"))
-    ticket_data = Column("ticket_data" , Integer , ForeignKey("tickets.id"))
-    plane_data = Column("plane_data" , Integer , ForeignKey("planes.id"))
+    pasenger_data = Column("pasenger_data", Integer, ForeignKey("pasengers.id"))
+    ticket_data = Column("ticket_data", Integer, ForeignKey("tickets.id"))
 
-    planeDetail = relationship("Plane" , back_populates="saleDetail")
-    pasengerDetail = relationship("Pasenger" , back_populates= "saleDetail")
-    ticketDetail = relationship("Ticket" , back_populates="saleDetail" , cascade= "all, delete")
+    flightDetail = relationship("Flight", back_populates="saleDetail")
+    pasengerDetail = relationship("Pasenger", back_populates="saleDetail")
+    ticketDetail = relationship("Ticket", back_populates="saleDetail", cascade="all, delete")
 
 
     def __init__(self,
@@ -29,8 +29,9 @@ class Sale(Base):
                 pay_method  = None, 
                 accumulated_miles  = None,
                 fare = None,
-                plane_data = None,
-                ticket_data = None):
+                flight = None,
+                ticket_data = None
+                ):
         
         self.issue_date = issue_date
         self.reservation_number = reservation_number
@@ -38,17 +39,17 @@ class Sale(Base):
         self.pay_method = pay_method
         self.accumulated_miles = accumulated_miles
         self.fare = fare
-        self.plane_data = plane_data
+        self.flight = flight
         self.ticket_data = ticket_data
 
-    def createSale(self,data):
+    def createSale(self, data):
         self.issue_date = data["issue_date"]
         self.reservation_number = data["reservation_number"]
         self.pasenger_data = data["pasenger_data"]
         self.pay_method = data["pay_method"]
         self.accumulated_miles = data["accumulated_miles"]
         self.fare = data["fare"]
-        self.plane_data = data["plane_data"]
+        self.flight = data["flight"]
         self.ticket_data = data["ticket_data"]
 
     def save(self):

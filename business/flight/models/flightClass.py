@@ -1,4 +1,4 @@
-from sqlalchemy import Column , Integer , String 
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from db import Base, Session
 
@@ -10,28 +10,33 @@ class Flights(Base):
     origin = Column("origin", String)
     departure_time = Column("departure_time", String)
     boarding_time = Column("boarding_time", String)
+    plane = Column("plane", Integer, ForeignKey("planes.id"))
 
-
-    ticketDetail = relationship("Ticket", back_populates= "flightDetail" , cascade="all, delete")
+    planeDetail = relationship("Plane", back_populates="flightDetail")
+    ticketDetail = relationship("Ticket", back_populates="flightDetail", cascade="all, delete")
     airlineDetail = relationship("Airlines", back_populates="flightDetail")
+    saleDetail = relationship("Sale", back_populate="flightDetail")
 
-
-    def __init__(self, 
+    def __init__(self,
                  destination  = None ,
                  origin  = None,
                  departure_time = None,
-                 boarding_time = None):
+                 boarding_time = None,
+                 plane=""
+                 ):
         
         self.destination = destination
         self.origin = origin
         self.departure_time = departure_time
         self.boarding_time = boarding_time
+        self.plane = plane
 
     def Cargar(self, Data):
         self.destination = Data["destination"]
         self.origin = Data["origin"]
         self.departure_time = Data["departure_time"]
         self.boarding_time = Data["boarding_time"]
+        self.plane = Data["plane"]
         
 
     def save(self):
