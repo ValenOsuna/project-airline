@@ -12,6 +12,7 @@ class Plane(Base):
     fare = Column("fare", Integer, nullable=False)
 
     saleDetail = relationship("Sale", back_populates="planeDetail", cascade="all, delete")
+    flightDetail = relationship("Flght", back_populate="planeDetail")
 
     def __init__(self,
                  model=0,

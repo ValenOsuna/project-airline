@@ -1,7 +1,7 @@
 from ..models.saleClass import Sale
 from flask import jsonify
 from db import Session
-from business import search_plane_by_id , search_pasenger_by_id,  search_ticket_by_id
+from business import search_plane_by_id , search_pasenger_by_id,  search_ticket_by_id, plane_data, search_flight_by_id, validation_passport
 
 
 def  createSale(data):
@@ -91,26 +91,31 @@ def search_by_id(id):
 
 def dataUpdater(data):
     session = Session()
+    flight = search_flight_by_id(data["flight"])
     ticket = search_ticket_by_id(data["ticket_data"])
     pasenger = search_pasenger_by_id(data["pasenger_data"])
-    plane = search_plane_by_id(data["plane_data"])
+    plane = search_plane_by_id(flight.plane)
 
     if ticket is None :
         raise ValueError("Ticket_data")
-    if pasenger is None:
+    if flight is None :
+        raise ValueError("flight")
+    if pasenger is None or validation_passport(pasenger["day_pasaport"]) == False:
         raise ValueError("pasenger_data")
-    if plane is None:
-        raise ValueError("plane_data")
     if plane.capacity > 0:
         plane.capacity -= 1
     else:  
         raise ValueError("The plane is full")
 
+    data_luggage = plane_data(plane, data["fare"])
+    if data_luggage is None:
+        raise ValueError("Fare not allowed for this plane")
+
     data["accumulated_miles"] = (ticket.price * 0.1) + pasenger.accumulated_miles
     pasenger.accumulated_miles = data["accumulated_miles"]
 
     data["ticket_data"] = ticket.id
-    data["plane_data"] = plane.id
+    data["flight"] = flight.id
     data["pasenger_data"] = pasenger.id
     session.add(plane)
     session.add(pasenger)

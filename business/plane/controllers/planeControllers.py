@@ -22,26 +22,18 @@ def decompress_obj(plane):
 
 
 def plane_data(plane, fare_type):
-    if fare_type in plane.fare_types:
-        fare = f"{plane.fare}"
-        if fare_type == "economy":
-            luggage = "personal item"
-        elif fare_type == "premium":
-            luggage = "carry-on"
-        elif fare_type == "business":
-            luggage = "checked"
-        else:
-            luggage = "luggage type not available"
+    if fare_type in plane.fare:
+        if fare_type == "D":
+            luggage = "pi"
+        elif fare_type == "A":
+            luggage = ["pi", "c", "ch"]
+        elif fare_type == "B":
+            luggage = ["c", "ch", "can"]
+        elif fare_type == "C":
+            luggage = "ch"
     else:
-        fare = "Fare type not available"
-        luggage = "luggage type not available"
-    plane_data = {"model": f"{plane.model}",
-                  "capacity": f"{plane.capacity}",
-                  "fare": fare,
-                  "luggage": luggage
-                  }
-    # print(plane_data)
-    return plane_data
+        luggage = None
+    return luggage
 
 
 def search_plane_by_id(id):
