@@ -54,10 +54,10 @@ def descomprimir(Pasenger):
         return "Dato inexistente"
     
 @staticmethod
-def validacion_passport(fecha_vencimiento_str):
+def validation_passport(expiration_date_str):
     try:
-        fecha_vencimiento = datetime.strptime(fecha_vencimiento_str, "Y-M-D")
-        fecha_actual = datetime.now()
-        return fecha_actual <= fecha_vencimiento
+        expiration_date = datetime.strptime(expiration_date_str, "%Y-%m-%d")
+        current_date = datetime.now()
+        return current_date <= expiration_date
     except:
         "passport not valid"

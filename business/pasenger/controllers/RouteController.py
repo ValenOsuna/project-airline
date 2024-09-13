@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from .pasengerController import create, delete, search_pasenger_by_id, update, descomprimir, validacion_passport
+from .pasengerController import create, delete, search_pasenger_by_id, update, descomprimir, validation_passport
 
 pasenger = Blueprint("pasenger", __name__)
 
@@ -34,14 +34,14 @@ def update_data():
     return update(**data)
 
 
-@pasenger.route('/validar', methods=['POST'])
-def validar_pasaporte():
+@pasenger.route('/validation', methods=['POST'])
+def validation_pasaporte():
     data = request.json
-    fecha_vencimiento_str = data.get('fecha_vencimiento')
+    expiration_date_str = data.get('expiration_date')
     
-    if not fecha_vencimiento_str:
-        return jsonify({"error": "Falta la fecha de vencimiento"}), 400
+    if not expiration_date_str:
+        return jsonify({"error": "Expiration date missing"}), 400
 
-    es_valido = validacion_passport(fecha_vencimiento_str)
+    es_valido = validation_passport(expiration_date_str)
     return jsonify({"valido": es_valido})
 
