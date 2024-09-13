@@ -9,14 +9,14 @@ class Plane(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     model = Column("model", Integer, nullable=False)
     capacity = Column("capacity", Integer, nullable=False)
-    fare = Column("fare" , Integer , nullable = False)
+    fare = Column("fare", Integer, nullable=False)
 
-    saleDetail = relationship("Sale" , back_populates="planeDetail" , cascade="all, delete")
+    saleDetail = relationship("Sale", back_populates="planeDetail", cascade="all, delete")
 
     def __init__(self,
                  model=0,
                  capacity="",
-                 fare = ""
+                 fare=""
                  ):
         self.model = model
         self.capacity = capacity

@@ -101,7 +101,6 @@ def dataUpdater(data):
         raise ValueError("pasenger_data")
     if plane is None:
         raise ValueError("plane_data")
-    
     if plane.capacity > 0:
         plane.capacity -= 1
     else:  
@@ -113,7 +112,6 @@ def dataUpdater(data):
     data["ticket_data"] = ticket.id
     data["plane_data"] = plane.id
     data["pasenger_data"] = pasenger.id
-    
     session.add(plane)
     session.add(pasenger)
     session.commit()
