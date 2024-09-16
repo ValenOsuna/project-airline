@@ -10,22 +10,26 @@ class Airport(Base):
     city = Column("city", String, nullable=False)
     country = Column("country", String, nullable=False)
     acronym = Column("acronym", String, nullable=False)
+    gates = Column("gates", String, nullable=False)
 
     destinationDetail = relationship("Destination", back_populates="airportDetail")
 
     def __init__(self,
                  city="",
                  country="",
-                 acronym=""
+                 acronym="",
+                 gates = "",
                  ):
         self.city = city
         self.country = country
         self.acronym = acronym
+        self.gates = gates
 
     def createAirport(self, Data):
         self.city = Data["city"]
         self.acronym = Data["acronym"]
         self.country = Data["country"]
+        self.gates = Data["gates"]
         session = Session()
         session.add(self)
         session.commit()

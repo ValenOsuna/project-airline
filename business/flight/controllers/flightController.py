@@ -1,10 +1,12 @@
 from ..models.flightClass import Flight
 from flask import jsonify
 from db import Session
+from business import search_destination_by_id, search_airport_by_id
 
 def createFlight(Data):
     try: 
         flight = Flight()
+        Data = register_flight()
         flight.Cargar(Data)
         flight.save()
         return jsonify({"msg" : "Vuelo cargado exitosamente "}), 201
@@ -70,3 +72,19 @@ def readFlight(id):
             "boarding time": f"{flight.boarding_time}",
             "departure time": f"{flight.departure_time}"}), 200
 
+
+def register_flight(Flight):
+    destination = search_destination_by_id(Flight.destination)
+    origin = search_destination_by_id(Flight.origin)
+    final_destination_airport = search_airport_by_id(destination.airport)
+    origin_airport = search_airport_by_id(origin.airport)
+    if destination == None:
+        raise ValueError("destination")
+    if origin == None:
+        raise ValueError("origin")
+    if final_destination_airport == None:
+        raise ValueError("final airport")
+    if origin_airport == None:
+        raise ValueError("final origin")
+    if destination.requiered_visa == True:
+        print("OK")
