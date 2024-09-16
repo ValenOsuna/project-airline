@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .airportController import create, update, search_by_id, delete, decompress_obj
+from .airportController import create, update, search_airport_by_id, delete, decompress_obj
 
 
 airport = Blueprint("airport", __name__)
@@ -25,7 +25,7 @@ def query_airport():
 @airport.route("/airport-search", methods=["POST"])
 def search_airport():
     response = request.get_json().get("id")
-    return decompress_obj(search_by_id(response))
+    return decompress_obj(search_airport_by_id(response))
 
 
 @airport.route("/airport_delete", methods=["DELETE"])

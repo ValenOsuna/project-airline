@@ -18,7 +18,7 @@ def decompress_obj(airport):
     return airpot_data
 
 
-def search_by_id(id):
+def search_airport_by_id(id):
     session = Session()
     airport = session.query(Airport).filter_by(id=id).first()
     session.close()

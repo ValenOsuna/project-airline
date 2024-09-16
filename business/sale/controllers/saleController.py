@@ -2,7 +2,7 @@ from ..models.saleClass import Sale
 from flask import jsonify
 from db import Session
 from business import search_plane_by_id , search_pasenger_by_id, search_luggage_by_id,  search_ticket_by_id, plane_data, search_flight_by_id, validation_passport
-
+from datetime import datetime, timedelta
 
 def  createSale(data):
     try:
@@ -134,3 +134,16 @@ def dataUpdater(data):
     session.commit()
     session.close()
     return data
+
+@staticmethod
+def canceled(data):
+    sale = search_by_id(data["id"])
+    flight = search_flight_by_id(sale.flight)
+    departure_time = datetime.strptime(flight.departure_time, "%Y-%m-%d")
+    current_date = datetime.now()
+    cancelled = timedelta(days=1)
+    departure_time = departure_time - cancelled
+    if current_date < departure_time:
+        raise ValueError("fligth is not cancelled")
+    else:
+        deleteSale(sale.id)

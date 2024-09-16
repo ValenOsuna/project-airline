@@ -24,7 +24,7 @@ def updateDestination(**kwargs):
         return jsonify({"msg": f"No data has been sent to modify the id: '{id}'"}),400
     
     id = kwargs.get("id")
-    destination = search_by_id(id)
+    destination = search_destination_by_id(id)
 
     if not destination:
         return jsonify({"msg" : "Destination not found" , "keyError" : "id"}), 404    
@@ -41,7 +41,7 @@ def updateDestination(**kwargs):
 
 def deleteDesination(id):
     session = Session()
-    destination = search_by_id(id)
+    destination = search_destination_by_id(id)
     if not destination:
         return jsonify({"msg" : "Destination not found" , "keyError" : "id"}), 404
     session.delete(destination)
@@ -52,7 +52,7 @@ def deleteDesination(id):
 
 def readDestination(id):
     session = Session()
-    destination = search_by_id(id)
+    destination = search_destination_by_id(id)
     if not destination:
         return jsonify({"msg" : "Destination not found" , "keyError" : "id"}), 404 
     session.close()
@@ -61,10 +61,8 @@ def readDestination(id):
             "requiered_visa": f"{destination.requiered_visa}",
             "airports": f"{destination.airport}"}), 200
 
-
-
              
-def search_by_id(id) -> Destination:
+def search_destination_by_id(id) -> Destination:
         session = Session()
         destination = session.query(Destination).filter_by(id=id).first()
         session.close()
