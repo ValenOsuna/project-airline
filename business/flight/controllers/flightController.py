@@ -1,19 +1,21 @@
 from ..models.flightClass import Flight
 from flask import jsonify
 from db import Session
-from business import search_destination_by_id, search_airport_by_id
 
-def createFlight(Data):
-    try: 
+from business.destination.controllers.destinationController import search_destination_by_id
+from business.airport.controllers.airportController import search_airport_by_id
+
+def createFlight(data):
+    #try: 
         flight = Flight()
-        Data = register_flight()
-        flight.Cargar(Data)
+        register_flight(data)
+        flight.Cargar(data)
         flight.save()
         return jsonify({"msg" : "Vuelo cargado exitosamente "}), 201
     
-    except:
-        return jsonify({"msg": "No se ha podido cargar el vuelo ",
-                "AtributosObjeto" : "destination , origin , departure_time , boarding_time"}), 400
+   # except:
+        #return jsonify({"msg": "No se ha podido cargar el vuelo ",
+                #"AtributosObjeto" : "destination , origin , departure_time , boarding_time , plane"}), 400
 
 def updateFlight(**kwargs):
     session = Session()
@@ -23,7 +25,7 @@ def updateFlight(**kwargs):
         return jsonify({"msg": f"No se han enviado datos para modificar el id: '{id}'"}),400
     
     id = kwargs.get("id")
-    flight = session.query(Flight).filter_by(id=Flight.id).first()
+    flight = search_flight_by_id(id=id)
 
     if not flight:
         return jsonify({"msg" : "Vuelo no encontrado" , "keyError" : "id"}), 404 
@@ -70,12 +72,14 @@ def readFlight(id):
     return jsonify({"origin": f"{flight.origin}", 
             "destination": f"{flight.destination}",
             "boarding time": f"{flight.boarding_time}",
-            "departure time": f"{flight.departure_time}"}), 200
+            "departure time": f"{flight.departure_time}",
+            "plane" : f"{flight.plane}"}), 200
+    
 
 
 def register_flight(Flight):
-    destination = search_destination_by_id(Flight.destination)
-    origin = search_destination_by_id(Flight.origin)
+    destination = search_destination_by_id(Flight["destination"])
+    origin = search_destination_by_id(Flight["origin"]  )
     final_destination_airport = search_airport_by_id(destination.airport)
     origin_airport = search_airport_by_id(origin.airport)
     if destination == None:

@@ -15,7 +15,7 @@ def  createSale(data):
         return jsonify({"msg" : "sale created successfully"})
     
     except ValueError as exception:
-        return jsonify ({"msg" : "destination could not be loaded" ,"keyError" : str(exception)})
+        return jsonify ({"msg" : "sale could not be loaded" ,"keyError" : str(exception)})
     
     except:
         return jsonify ({"msg" : "destination could not be loaded" , 
@@ -135,15 +135,28 @@ def dataUpdater(data):
     session.close()
     return data
 
-@staticmethod
-def canceled(data):
-    sale = search_by_id(data["id"])
+
+def cancelFlight(id):
+    sale = search_by_id(id)
+    if sale is None:
+        raise ValueError("sale id")
+   
     flight = search_flight_by_id(sale.flight)
-    departure_time = datetime.strptime(flight.departure_time, "%Y-%m-%d")
+    ticket = search_ticket_by_id(sale.ticket_data)
+    pasenger = search_pasenger_by_id(sale.pasenger_data)
+
+    departure_time = datetime.strptime(flight.departure_time, "%Y-%m-%d %H:%M")
+
     current_date = datetime.now()
-    cancelled = timedelta(days=1)
-    departure_time = departure_time - cancelled
-    if current_date < departure_time:
-        raise ValueError("fligth is not cancelled")
+    if departure_time - current_date <= timedelta(days=1):
+        return{"msg":"Flight cannot be canceled within 24 hours of departure"}
     else:
+        session = Session()
+        pasenger.accumulated_miles -= (ticket.price * 0.1)
         deleteSale(sale.id)
+        session.add(pasenger)
+        session.commit()
+        session.close()
+
+        return {"msg":"Flight canceled succes"}
+    
