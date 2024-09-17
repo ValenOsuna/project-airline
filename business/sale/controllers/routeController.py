@@ -1,4 +1,4 @@
-from .saleController import createSale, deleteSale, updateSale, readSale
+from .saleController import createSale, deleteSale, updateSale, readSale , cancelFlight
 from flask import Blueprint, request
 
 sale = Blueprint("sale", __name__)
@@ -26,3 +26,9 @@ def update():
 def delete():
     id = request.get_json().get("id")
     return deleteSale(id)
+
+
+@sale.route("/cancel", methods=['POST'])
+def cancel():
+    id = request.get_json().get("id")
+    return cancelFlight(id)

@@ -22,7 +22,6 @@ def search_airport_by_id(id):
     session = Session()
     airport = session.query(Airport).filter_by(id=id).first()
     session.close()
-    pprint(vars(airport))
     return airport
 
 

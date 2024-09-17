@@ -22,7 +22,6 @@ def decompress_obj(plane):
 
 
 def plane_data(plane, fare_type, luggageType):
-    print(plane.fare)
     if fare_type in plane.fare:
         if fare_type == "D":
             luggage = "pi"
