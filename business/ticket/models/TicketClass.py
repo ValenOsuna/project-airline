@@ -15,10 +15,10 @@ class Ticket(Base):
     visa_check = Column("visa_check",Boolean)
     number_passport = Column("number_passport", Integer)
     reservation_number = Column("reservation_number", Integer)
+    
 
     flight = Column("flights", Integer, ForeignKey("flights.id"))
     flightDetail = relationship("Flight", back_populates="ticketDetail", cascade="all, delete")
-    saleDetail = relationship("Sale" , back_populates= "ticketDetail")
 
     def __init__(self,
                  gate="",
@@ -28,7 +28,8 @@ class Ticket(Base):
                  group=0,
                  visa_check=None,
                  number_passport=None,
-                 reservation_number=None
+                 reservation_number=None,
+                 flight = None
                  ):
         self.gate = gate
         self.airline = airline
@@ -38,6 +39,7 @@ class Ticket(Base):
         self.visa_check = visa_check
         self.number_passport = number_passport
         self.reservation_number = reservation_number
+        self.flight = flight
 
     def ticket_create(self, response):
         self.gate = response["gate"]
@@ -48,6 +50,7 @@ class Ticket(Base):
         self.visa_check = response["visa_check"]
         self.reservation_number = response["reservation_number"]
         self.number_passport = response["number_passport"]
+        self.flight = response["flight"]
         session = Session()
         session.add(self)
         session.commit()

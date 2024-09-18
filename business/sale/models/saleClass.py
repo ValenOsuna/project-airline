@@ -17,11 +17,9 @@ class Sale(Base):
     flight = Column("flight", Integer, ForeignKey("flights.id"))
     luggage = Column("luggage" , Integer , ForeignKey("luggages.id"))
     pasenger_data = Column("pasenger_data", Integer, ForeignKey("pasengers.id"))
-    ticket_data = Column("ticket_data", Integer, ForeignKey("tickets.id"))
 
     flightDetail = relationship("Flight", back_populates="saleDetail")
     pasengerDetail = relationship("Pasenger", back_populates="saleDetail")
-    ticketDetail = relationship("Ticket", back_populates="saleDetail", cascade="all, delete")
     luggageDetail = relationship("Luggages" , back_populates="saleDetail")
 
 
@@ -45,7 +43,6 @@ class Sale(Base):
         self.accumulated_miles = accumulated_miles
         self.fare = fare
         self.flight = flight
-        self.ticket_data = ticket_data
         self.luggage = luggage
         self.price = price
 
@@ -57,7 +54,6 @@ class Sale(Base):
         self.accumulated_miles = data["accumulated_miles"]
         self.fare = data["fare"]
         self.flight = data["flight"]
-        self.ticket_data = data["ticket_data"]
         self.luggage = data["luggage"]
         self.price = data["price"]
 

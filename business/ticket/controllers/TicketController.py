@@ -1,7 +1,10 @@
 from db import Session
 from ..models.TicketClass import Ticket
 from pprint import pprint
-from business import search_pasenger_by_id, search_destination_by_id, search_sale_by_id, search_flight_by_id
+from business.pasenger.controllers.pasengerController import search_pasenger_by_id
+from business.destination.controllers.destinationController import search_destination_by_id
+from business.sale.controllers.saleController import search_sale_by_id
+from business.flight.controllers.flightController import search_flight_by_id
 
 def decompress_obj(Ticket):
     if Ticket != None:
@@ -59,13 +62,14 @@ def delete(self):
 
 def create(data):
     ticket = Ticket()
-    ticket.ticket_create(data)
-    check_visa(data)
+    data["visa_check"] = check_visa(data)
     data = data_update(data)
-    pprint(vars(ticket))
+    ticket.ticket_create(data)
 
 def check_visa(data):
     sale = search_sale_by_id(data["sale"])
+    if sale == None:
+        raise ValueError("Sale")
     pasenger = search_pasenger_by_id(sale.pasenger_data)
     flight = search_flight_by_id(sale.flight)
     destination = search_destination_by_id(flight.destination)
@@ -77,7 +81,7 @@ def check_visa(data):
         if pasenger.visa == True:
             return True
         else:
-            return False
+            raise ValueError("This destination requiere Visa")
     else:
         True
 
@@ -86,6 +90,6 @@ def data_update(data):
     if sale == None:
         raise ValueError("sale")
     pasenger = search_pasenger_by_id(sale.pasenger_data)
-    data["passport_data"] = pasenger.number_passport
+    data["number_passport"] = pasenger.number_passport
     data["reservation_number"] = sale.reservation_number
     return data
