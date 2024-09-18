@@ -39,7 +39,7 @@ def updateSale(**kwargs):
         return jsonify({"msg": f"No data has been sent to modify the id: '{id}'"}),400
     
     id = kwargs.get("id")
-    sale = search_by_id(id)
+    sale = search_sale_by_id(id)
 
     if not sale:
         return jsonify({"msg" : "Sale not found" , "keyError" : "id"}), 404    
@@ -56,7 +56,7 @@ def updateSale(**kwargs):
 
 def deleteSale(id):
     session = Session()
-    sale = search_by_id(id)
+    sale = search_sale_by_id(id)
     if not sale:
         return jsonify({"msg" : "Sale not found" , "keyError" : "id"}), 404
     
@@ -68,7 +68,7 @@ def deleteSale(id):
 
 def readSale(id):
     session = Session()
-    sale = search_by_id(id)
+    sale = search_sale_by_id(id)
     if not sale:
         return jsonify({"msg" : "Destination not found" , "keyError" : "id"}), 404 
     session.close()
@@ -85,7 +85,7 @@ def readSale(id):
 
 
              
-def search_by_id(id):
+def search_sale_by_id(id):
         session = Session()
         sale = session.query(Sale).filter_by(id = id).first()
         session.close()
@@ -94,15 +94,12 @@ def search_by_id(id):
 def dataUpdater(data):
     session = Session()
     flight = search_flight_by_id(data["flight"])
-    ticket = search_ticket_by_id(data["ticket_data"])
     pasenger = search_pasenger_by_id(data["pasenger_data"])
     luggage = search_luggage_by_id(data["luggage"])
   
 
     if luggage is None:
         raise ValueError("luggage")
-    if ticket is None :
-        raise ValueError("Ticket_data")
     if flight is None :
         raise ValueError("flight")
     if pasenger is None:
@@ -121,10 +118,9 @@ def dataUpdater(data):
     if data_luggage is None:
         raise ValueError("Fare not allowed for this plane")
 
-    data["accumulated_miles"] = (ticket.price * 0.1) + pasenger.accumulated_miles
+    data["accumulated_miles"] = (data.price * 0.1) + pasenger.accumulated_miles
     pasenger.accumulated_miles = data["accumulated_miles"]
 
-    data["ticket_data"] = ticket.id
     data["luggage"] = luggage.id
     data["flight"] = flight.id
     data["pasenger_data"] = pasenger.id
@@ -137,12 +133,11 @@ def dataUpdater(data):
 
 
 def cancelFlight(id):
-    sale = search_by_id(id)
+    sale = search_sale_by_id(id)
     if sale is None:
         raise ValueError("sale id")
    
     flight = search_flight_by_id(sale.flight)
-    ticket = search_ticket_by_id(sale.ticket_data)
     pasenger = search_pasenger_by_id(sale.pasenger_data)
 
     departure_time = datetime.strptime(flight.departure_time, "%Y-%m-%d %H:%M")
@@ -152,7 +147,7 @@ def cancelFlight(id):
         return{"msg":"Flight cannot be canceled within 24 hours of departure"}
     else:
         session = Session()
-        pasenger.accumulated_miles -= (ticket.price * 0.1)
+        pasenger.accumulated_miles -= (sale.price * 0.1)
         deleteSale(sale.id)
         session.add(pasenger)
         session.commit()

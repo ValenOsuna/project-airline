@@ -1,4 +1,4 @@
-from sqlalchemy import Column , Integer , String ,ForeignKey, Boolean
+from sqlalchemy import Column , Integer , String ,ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship 
 from db import Base, Session
 
@@ -12,6 +12,7 @@ class Sale(Base):
     pay_method = Column("pay_method" , Boolean , nullable = False)
     accumulated_miles = Column("accumulated_miles", Integer)
     fare = Column("fare", Integer, nullable=False)
+    price = Column("price", Float, nullable=False)
 
     flight = Column("flight", Integer, ForeignKey("flights.id"))
     luggage = Column("luggage" , Integer , ForeignKey("luggages.id"))
@@ -33,7 +34,8 @@ class Sale(Base):
                 fare = None,
                 flight = None,
                 ticket_data = None,
-                luggage = None
+                luggage = None,
+                price = None
                 ):
         
         self.issue_date = issue_date
@@ -45,6 +47,7 @@ class Sale(Base):
         self.flight = flight
         self.ticket_data = ticket_data
         self.luggage = luggage
+        self.price = price
 
     def createSale(self, data):
         self.issue_date = data["issue_date"]
@@ -56,6 +59,7 @@ class Sale(Base):
         self.flight = data["flight"]
         self.ticket_data = data["ticket_data"]
         self.luggage = data["luggage"]
+        self.price = data["price"]
 
     def save(self):
         session = Session()
