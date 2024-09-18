@@ -77,9 +77,9 @@ def readFlight(id):
     
 
 
-def register_flight(Flight):
-    destination = search_destination_by_id(Flight["destination"])
-    origin = search_destination_by_id(Flight["origin"]  )
+def register_flight(data):
+    destination = search_destination_by_id(data["destination"])
+    origin = search_destination_by_id(data["origin"]  )
     final_destination_airport = search_airport_by_id(destination.airport)
     origin_airport = search_airport_by_id(origin.airport)
     if destination == None:
@@ -90,5 +90,4 @@ def register_flight(Flight):
         raise ValueError("final airport")
     if origin_airport == None:
         raise ValueError("final origin")
-    if destination.requiered_visa == True:
-        print("OK")
+    

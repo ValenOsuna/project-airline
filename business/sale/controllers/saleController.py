@@ -1,7 +1,13 @@
 from ..models.saleClass import Sale
 from flask import jsonify
 from db import Session
-from business import search_plane_by_id , search_pasenger_by_id, search_luggage_by_id,  search_ticket_by_id, plane_data, search_flight_by_id, validation_passport
+
+from business.pasenger.controllers.pasengerController import search_pasenger_by_id, validation_passport
+from business.plane.controllers.planeControllers import search_plane_by_id , plane_data
+from business.flight.controllers.flightController import search_flight_by_id
+from business.luggage.controllers.luggageController import search_luggage_by_id
+
+
 from datetime import datetime, timedelta
 
 def  createSale(data):
@@ -27,7 +33,7 @@ def  createSale(data):
                                                 "accumulated_miles": "--",
                                                 "fare" : "--",
                                                 "pasenger_data": "--",
-                                                "ticket_data": "--",
+                                                "price": "--",
                                                 "flight": "--",
                                                 "luggage": "--"}}) , 400
     
@@ -79,7 +85,7 @@ def readSale(id):
                     "pay_method": sale.pay_method,
                     "accumulated_miles": sale.accumulated_miles,
                     "fare": sale.fare,
-                    "ticket_data": sale.ticket_data,
+                    "price": sale.price,
                     "flight" : sale.flight,
                     "luggage" : sale.luggage}), 200
 
@@ -118,7 +124,7 @@ def dataUpdater(data):
     if data_luggage is None:
         raise ValueError("Fare not allowed for this plane")
 
-    data["accumulated_miles"] = (data.price * 0.1) + pasenger.accumulated_miles
+    data["accumulated_miles"] = (data["price"] * 0.1) + pasenger.accumulated_miles
     pasenger.accumulated_miles = data["accumulated_miles"]
 
     data["luggage"] = luggage.id
