@@ -9,7 +9,7 @@ def create(Data):
     pprint(vars(airline))
 
 @staticmethod
-def search_by_id(id):
+def search_airline_by_id(id):
     session = Session()
     user = session.query(Airlines).filter_by(id=id).first()
     session.close()
@@ -84,3 +84,10 @@ def descomprimir_obj(Airlines):
         return airline_data
     else:
         return "Dato inexistente"
+
+def search_airline_by_flight_id(flight_list):
+    session = Session()
+    user = session.query(Airlines).where(flight_list == flight_list).first()
+    print(user)
+    session.close()
+    return user

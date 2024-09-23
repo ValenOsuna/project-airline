@@ -1,10 +1,11 @@
 from db import Session
 from ..models.TicketClass import Ticket
 from pprint import pprint
-from business.pasenger.controllers.pasengerController import search_pasenger_by_id
+from business.pasenger.controllers.pasengerController import search_pasenger_by_id, search_pasenger_by_passport
 from business.destination.controllers.destinationController import search_destination_by_id
-from business.sale.controllers.saleController import search_sale_by_id
+from business.sale.controllers.saleController import search_sale_by_id,search_sale_by_reservation
 from business.flight.controllers.flightController import search_flight_by_id
+from business.airline.controllers.airlineController import search_airline_by_flight_id
 
 def decompress_obj(Ticket):
     if Ticket != None:
@@ -67,7 +68,7 @@ def create(data):
     ticket.ticket_create(data)
 
 def check_visa(data):
-    sale = search_sale_by_id(data["sale"])
+    sale = search_sale_by_reservation(data["reservation_number"])
     if sale == None:
         raise ValueError("Sale")
     pasenger = search_pasenger_by_id(sale.pasenger_data)
@@ -85,11 +86,26 @@ def check_visa(data):
     else:
         True
 
+
 def data_update(data):
-    sale = search_sale_by_id(data["sale"])
+    session = Session()
+    pasenger = search_pasenger_by_passport(data["number_passport"])
+    sale = search_sale_by_reservation(data["reservation_number"])
+    if pasenger == None:
+        raise ValueError("pasenger")
     if sale == None:
         raise ValueError("sale")
-    pasenger = search_pasenger_by_id(sale.pasenger_data)
-    data["number_passport"] = pasenger.number_passport
-    data["reservation_number"] = sale.reservation_number
+    if sale.pasenger_data != pasenger.id:
+        raise ValueError("Sale not belong to this passenger")
+
+    
+  
+    data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
+    data["airline"] = search_airline_by_flight_id(sale.flightDetail.id).id
+    data["group"] = sale.fare
+    data["seat"] = sale.flightDetail.planeDetail.capacity
+    data["terminal"]= 1
+    data["flight"] = sale.flightDetail.id
+
+    session.close()
     return data

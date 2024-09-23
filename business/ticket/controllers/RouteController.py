@@ -7,12 +7,12 @@ ticket = Blueprint("ticket", __name__)
 
 @ticket.route("/create_ticket", methods=["POST"])
 def ticket_create():
-    try:
+   # try:
         response = request.get_json()
         create(response)
         return {"msg": "The ticket has been created correctly"}
 
-    except:
+   # except:
         return {"msg": "The ticket has irregularities, please verify the details"}
 
 

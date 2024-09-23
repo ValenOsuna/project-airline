@@ -1,17 +1,17 @@
 from ..models.saleClass import Sale
 from flask import jsonify
 from db import Session
+from business.flight.models.flightClass import Flight
 
 from business.pasenger.controllers.pasengerController import search_pasenger_by_id, validation_passport
 from business.plane.controllers.planeControllers import search_plane_by_id , plane_data
 from business.flight.controllers.flightController import search_flight_by_id
 from business.luggage.controllers.luggageController import search_luggage_by_id
 
-
 from datetime import datetime, timedelta
 
 def  createSale(data):
-    try:
+#    try:
         dataUpdate = dataUpdater(data)
         
 
@@ -20,10 +20,10 @@ def  createSale(data):
         sale.save()
         return jsonify({"msg" : "sale created successfully"})
     
-    except ValueError as exception:
+#    except ValueError as exception:
         return jsonify ({"msg" : "sale could not be loaded" ,"keyError" : str(exception)})
     
-    except:
+#    except:
         return jsonify ({"msg" : "destination could not be loaded" , 
                         "DestinationAttributes": {
                                                 "issue_date": "--",
@@ -93,8 +93,10 @@ def readSale(id):
              
 def search_sale_by_id(id):
         session = Session()
-        sale = session.query(Sale).filter_by(id = id).first()
+        sale = session.query(Sale).where(Sale.id == id).first()
+        print()
         session.close()
+        
         return sale
 
 def dataUpdater(data):
@@ -161,3 +163,9 @@ def cancelFlight(id):
 
         return {"msg":"Flight canceled succes"}
     
+def search_sale_by_reservation(reservation_number):
+        session = Session()
+        sale = session.query(Sale).filter(Sale.reservation_number == reservation_number).first()
+        
+       # session.close()
+        return sale
