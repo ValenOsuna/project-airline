@@ -61,3 +61,12 @@ def validation_passport(expiration_date_str):
         return current_date <= expiration_date
     except:
         "passport not valid"
+
+def search_pasenger_by_passport(number_passport):
+    session = Session()
+    try:
+        user = session.query(Pasenger).filter_by(number_passport=number_passport).first()
+        session.close()
+        return user
+    except:
+        return {"Error"}

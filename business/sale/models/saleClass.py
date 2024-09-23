@@ -11,7 +11,7 @@ class Sale(Base):
     reservation_number = Column("reservation_number" , Integer, unique=True)
     pay_method = Column("pay_method" , Boolean , nullable = False)
     accumulated_miles = Column("accumulated_miles", Integer)
-    fare = Column("fare", Integer, nullable=False)
+    fare = Column("fare", String, nullable=False)
     price = Column("price", Float, nullable=False)
 
     flight = Column("flight", Integer, ForeignKey("flights.id"))

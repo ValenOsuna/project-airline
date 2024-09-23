@@ -10,6 +10,7 @@ class Destination(Base):
     requiered_visa = Column("requiered_visa", Boolean)
     airport = Column("airport", Integer , ForeignKey("airports.id"))
 
+    flightDetail = relationship("Flight" ,back_populates="destinationDetail")
     airportDetail = relationship("Airport" , back_populates= "destinationDetail", cascade="all, delete")
 
 

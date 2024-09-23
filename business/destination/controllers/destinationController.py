@@ -4,13 +4,13 @@ from db import Session
 
 
 def  createDestination(data):
-    try:
+    #try:
         destination = Destination()
         destination.createDestination(data)
         destination.save()
         return jsonify({"msg" : "destination created successfully"})
     
-    except:
+    #except:
         return jsonify ({"msg" : "destination could not be loaded" , 
                         "DestinationAttributes": {"name" : "--" ,
                                                   "requiered_visa" : "--",

@@ -6,12 +6,13 @@ class Flight(Base):
     __tablename__ = "flights"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
-    destination = Column("destination", String)
+    destination = Column("destination", Integer, ForeignKey("destinations.id"))
     origin = Column("origin", String)
     departure_time = Column("departure_time", String)
     boarding_time = Column("boarding_time", String)
     plane = Column("plane", Integer, ForeignKey("planes.id"))
 
+    destinationDetail = relationship("Destination", back_populates="flightDetail")
     planeDetail = relationship("Plane", back_populates="flightDetail")
     ticketDetail = relationship("Ticket", back_populates="flightDetail", cascade="all, delete")
     airlineDetail = relationship("Airlines", back_populates="flightDetail")
