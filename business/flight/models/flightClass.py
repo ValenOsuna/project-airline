@@ -11,6 +11,9 @@ class Flight(Base):
     departure_time = Column("departure_time", String)
     boarding_time = Column("boarding_time", String)
     plane = Column("plane", Integer, ForeignKey("planes.id"))
+    terminal = Column("terminal", String, nullable = False)
+    group = Column("group", String, nullable = False)
+    gate = Column("gate", Integer, nullable= False)
 
     destinationDetail = relationship("Destination", back_populates="flightDetail")
     planeDetail = relationship("Plane", back_populates="flightDetail")
@@ -23,7 +26,10 @@ class Flight(Base):
                  origin  = None,
                  departure_time = None,
                  boarding_time = None,
-                 plane=""
+                 plane="",
+                 terminal = None,
+                 group = None,
+                 gate = None
                  ):
         
         self.destination = destination
@@ -31,6 +37,9 @@ class Flight(Base):
         self.departure_time = departure_time
         self.boarding_time = boarding_time
         self.plane = plane
+        self.group = group
+        self.terminal = terminal
+        self.gate = gate
 
     def Cargar(self, Data):
         self.destination = Data["destination"]
@@ -38,7 +47,9 @@ class Flight(Base):
         self.departure_time = Data["departure_time"]
         self.boarding_time = Data["boarding_time"]
         self.plane = Data["plane"]
-        
+        self.terminal = Data["terminal"]
+        self.group = Data["group"]
+        self.gate = Data["gate"]
 
     def save(self):
         session = Session()

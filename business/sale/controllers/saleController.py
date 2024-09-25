@@ -11,7 +11,7 @@ from business.luggage.controllers.luggageController import search_luggage_by_id
 from datetime import datetime, timedelta
 
 def  createSale(data):
-#    try:
+    try:
         dataUpdate = dataUpdater(data)
         
 
@@ -20,10 +20,10 @@ def  createSale(data):
         sale.save()
         return jsonify({"msg" : "sale created successfully"})
     
-#    except ValueError as exception:
+    except ValueError as exception:
         return jsonify ({"msg" : "sale could not be loaded" ,"keyError" : str(exception)})
     
-#    except:
+    except:
         return jsonify ({"msg" : "destination could not be loaded" , 
                         "DestinationAttributes": {
                                                 "issue_date": "--",
