@@ -23,12 +23,14 @@ class Flight(Base):
     airlineDetail = relationship("Airlines", back_populates="flightDetail")
     saleDetail = relationship("Sale", back_populates="flightDetail")
 
+    seatAuxRelation = relationship("SeatAux" , back_populates="flightRelation")
+
     def __init__(self,
                  destination  = None ,
                  origin  = None,
                  departure_time = None,
                  boarding_time = None,
-                 plane="",
+                 plane = None,
                  terminal = None,
                  group = None,
                  gate = None,

@@ -27,3 +27,4 @@ from .luggage.models.luggageClass import Luggages
 from .pasenger.models.pasengerClass import Pasenger
 from .plane.models.planeClass import Plane
 from .sale.models.saleClass import Sale
+from .seatAux.models.seatAuxClass import SeatAux

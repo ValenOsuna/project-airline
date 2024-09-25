@@ -2,8 +2,8 @@ from flask import Flask, request
 from flask import jsonify
 from db import Base, ENGINE
 
-from business import airline, flight, ticket, destination, sale, luggage, pasenger, airport, plane
-from business import Flight, Airlines, Ticket, Destination, Sale, Luggages, Pasenger, Airport, Plane
+from business import airline, flight, ticket, destination, sale, luggage, pasenger, airport, plane #, seatAux
+from business import Flight, Airlines, Ticket, Destination, Sale, Luggages, Pasenger, Airport, Plane, SeatAux
 
 
 app = Flask(__name__)
