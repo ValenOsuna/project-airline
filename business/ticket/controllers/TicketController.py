@@ -102,10 +102,10 @@ def data_update(data):
   
     data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
     data["airline"] = search_airline_by_flight_id(sale.flightDetail.id).id
-    data["group"] = sale.fare
+    data["group"] = sale.flightDetail.group
     data["seat"] = sale.flightDetail.planeDetail.capacity
-    data["terminal"]= 1
+    data["terminal"]= sale.flightDetail.terminal
     data["flight"] = sale.flightDetail.id
 
-    session.close()
+#    session.close()
     return data
