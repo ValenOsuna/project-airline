@@ -7,6 +7,7 @@ from business.sale.controllers.saleController import search_sale_by_id,search_sa
 from business.flight.controllers.flightController import search_flight_by_id
 from business.airline.controllers.airlineController import search_airline_by_flight_id
 
+
 def decompress_obj(Ticket):
     if Ticket != None:
         fac = {"price": f"{Ticket.price}",
@@ -67,6 +68,7 @@ def create(data):
     data = data_update(data)
     ticket.ticket_create(data)
 
+
 def check_visa(data):
     sale = search_sale_by_reservation(data["reservation_number"])
     if sale == None:
@@ -98,13 +100,11 @@ def data_update(data):
     if sale.pasenger_data != pasenger.id:
         raise ValueError("Sale not belong to this passenger")
 
-    
-  
     data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
     data["airline"] = search_airline_by_flight_id(sale.flightDetail.id).id
     data["group"] = sale.flightDetail.group
     data["seat"] = sale.flightDetail.planeDetail.capacity
-    data["terminal"]= sale.flightDetail.terminal
+    data["terminal"] = sale.flightDetail.terminal
     data["flight"] = sale.flightDetail.id
 
 #    session.close()
