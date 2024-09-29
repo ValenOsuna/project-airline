@@ -3,16 +3,16 @@ from sqlalchemy.orm import relationship
 from db import Base, Session
 
 
-class Plane(Base):
-    __tablename__ = 'planes'
+class Airplane(Base):
+    __tablename__ = 'airplanes'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    model = Column("model", Integer, nullable=False)
+    model = Column("model", String, nullable=False)
     capacity = Column("capacity", Integer, nullable=False)
     fare = Column("fare", String, nullable=False)
 
     
-    flightDetail = relationship("Flight", back_populates="planeDetail")
+    flightDetail = relationship("Flight", back_populates="airplaneDetail")
 
     def __init__(self,
                  model=0,
@@ -23,7 +23,7 @@ class Plane(Base):
         self.capacity = capacity
         self.fare = fare
 
-    def createPlane(self, Data):
+    def createAirplane(self, Data):
         self.model = Data["model"]
         self.capacity = Data["capacity"]
         self.fare = Data["fare"]

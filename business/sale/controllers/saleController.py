@@ -4,7 +4,7 @@ from db import Session
 from business.flight.models.flightClass import Flight
 
 from business.pasenger.controllers.pasengerController import search_pasenger_by_id, validation_passport
-from business.plane.controllers.planeControllers import search_plane_by_id , plane_data
+from business.airplane.controllers.airplaneControllers import search_airplane_by_id , airplane_data
 from business.flight.controllers.flightController import search_flight_by_id
 from business.luggage.controllers.luggageController import search_luggage_by_id
 
@@ -115,16 +115,16 @@ def dataUpdater(data):
     if validation_passport(pasenger.day_pasaport) == False:
         raise ValueError("Expired passport")
     
-    plane = search_plane_by_id(flight.plane)
+    airplane = search_airplane_by_id(flight.airplane)
 
-    if plane.capacity > 0:
-        plane.capacity -= 1
+    if airplane.capacity > 0:
+        airplane.capacity -= 1
     else:  
-        raise ValueError("The plane is full")
+        raise ValueError("The airplane is full")
 
-    data_luggage = plane_data(plane, data["fare"], luggage.type)
+    data_luggage = airplane_data(airplane, data["fare"], luggage.type)
     if data_luggage is None:
-        raise ValueError("Fare not allowed for this plane")
+        raise ValueError("Fare not allowed for this airplane")
 
     data["accumulated_miles"] = (data["price"] * 0.1) + pasenger.accumulated_miles
     pasenger.accumulated_miles = data["accumulated_miles"]
@@ -133,7 +133,7 @@ def dataUpdater(data):
     data["flight"] = flight.id
     data["pasenger_data"] = pasenger.id
     
-    session.add(plane)
+    session.add(airplane)
     session.add(pasenger)
     session.commit()
     session.close()

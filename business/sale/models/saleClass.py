@@ -13,15 +13,19 @@ class Sale(Base):
     accumulated_miles = Column("accumulated_miles", Integer)
     fare = Column("fare", String, nullable=False)
     price = Column("price", Float, nullable=False)
-    seats = Column("seat", String, nullable=False)
+    seat_data = Column("seat_data", String, ForeignKey("seats.id"))
 
     flight = Column("flight", Integer, ForeignKey("flights.id"))
     luggage = Column("luggage", Integer, ForeignKey("luggages.id"))
     pasenger_data = Column("pasenger_data", Integer, ForeignKey("pasengers.id"))
+    
 
     flightDetail = relationship("Flight", back_populates="saleDetail")
     pasengerDetail = relationship("Pasenger", back_populates="saleDetail")
     luggageDetail = relationship("Luggages", back_populates="saleDetail")
+
+    seatRelation = relationship("Seat" , back_populates= "saleRelation")
+
 
     def __init__(self,
                  issue_date=None,
