@@ -10,7 +10,7 @@ class Flight(Base):
     origin = Column("origin", String)
     departure_time = Column("departure_time", String)
     boarding_time = Column("boarding_time", String)
-    plane = Column("plane", Integer, ForeignKey("planes.id"))
+    airairplane = Column("airplane", Integer, ForeignKey("airplanes.id"))
     terminal = Column("terminal", String, nullable = False)
     group = Column("group", String, nullable = False)
     gate = Column("gate", Integer, nullable= False)
@@ -18,19 +18,19 @@ class Flight(Base):
     column = Column("column", Integer, nullable=False)
 
     destinationDetail = relationship("Destination", back_populates="flightDetail")
-    planeDetail = relationship("Plane", back_populates="flightDetail")
+    airplaneDetail = relationship("Airplane", back_populates="flightDetail")
     ticketDetail = relationship("Ticket", back_populates="flightDetail", cascade="all, delete")
     airlineDetail = relationship("Airlines", back_populates="flightDetail")
     saleDetail = relationship("Sale", back_populates="flightDetail")
 
-    seatAuxRelation = relationship("SeatAux" , back_populates="flightRelation")
+    seatRelation = relationship("Seat" , back_populates="flightRelation")
 
     def __init__(self,
                  destination  = None ,
                  origin  = None,
                  departure_time = None,
                  boarding_time = None,
-                 plane = None,
+                 airplane = None,
                  terminal = None,
                  group = None,
                  gate = None,
@@ -42,7 +42,7 @@ class Flight(Base):
         self.origin = origin
         self.departure_time = departure_time
         self.boarding_time = boarding_time
-        self.plane = plane
+        self.airplane = airplane
         self.group = group
         self.terminal = terminal
         self.gate = gate
@@ -54,7 +54,7 @@ class Flight(Base):
         self.origin = Data["origin"]
         self.departure_time = Data["departure_time"]
         self.boarding_time = Data["boarding_time"]
-        self.plane = Data["plane"]
+        self.airplane = Data["airplane"]
         self.terminal = Data["terminal"]
         self.group = Data["group"]
         self.gate = Data["gate"]

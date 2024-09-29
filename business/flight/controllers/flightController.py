@@ -15,7 +15,7 @@ def createFlight(data):
     
    # except:
         #return jsonify({"msg": "No se ha podido cargar el vuelo ",
-                #"AtributosObjeto" : "destination , origin , departure_time , boarding_time , plane"}), 400
+                #"AtributosObjeto" : "destination , origin , departure_time , boarding_time , airplane"}), 400
 
 def updateFlight(**kwargs):
     session = Session()
@@ -73,7 +73,7 @@ def readFlight(id):
             "destination": f"{flight.destination}",
             "boarding time": f"{flight.boarding_time}",
             "departure time": f"{flight.departure_time}",
-            "plane" : f"{flight.plane}"}), 200
+            "airplane" : f"{flight.airplane}"}), 200
     
 
 

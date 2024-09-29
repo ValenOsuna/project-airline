@@ -4,7 +4,7 @@ from .ticket.controllers.TicketController import create, search_ticket_by_id, up
 from .luggage.controllers.luggageController import create, search_luggage_by_id, update, delete
 from .pasenger.controllers.pasengerController import create, search_pasenger_by_id, update, delete, validation_passport, search_pasenger_by_passport
 from .airport.controllers.airportController import create, search_airport_by_id, update, delete, decompress_obj
-from .plane.controllers.planeControllers import create, search_plane_by_id, update, delete, decompress_obj, plane_data
+from .airplane.controllers.airplaneControllers import create, search_airplane_by_id, update, delete, decompress_obj, airplane_data
 from .destination.controllers.destinationController import createDestination, updateDestination, deleteDesination, search_destination_by_id, readDestination
 from .sale.controllers.saleController import search_sale_by_id, search_sale_by_reservation
 
@@ -16,7 +16,7 @@ from .sale.controllers.routeController import sale
 from .luggage.controllers.RouteController import luggage
 from .pasenger.controllers.RouteController import pasenger
 from .airport.controllers.routeairpotContoller import airport
-from .plane.controllers.routeplaneController import plane
+from .airplane.controllers.routeController import airplane
 
 from .flight.models.flightClass import Flight
 from .airline.models.airlineClass import Airlines
@@ -25,6 +25,6 @@ from .airport.models.airportClass import Airport
 from .destination.models.destinationClass import Destination
 from .luggage.models.luggageClass import Luggages
 from .pasenger.models.pasengerClass import Pasenger
-from .plane.models.planeClass import Plane
+from .airplane.models.airplaneClass import Airplane
 from .sale.models.saleClass import Sale
-from .seatAux.models.seatAuxClass import SeatAux
+from .seat.models.seatClass import Seat
