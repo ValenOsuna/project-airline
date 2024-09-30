@@ -10,7 +10,7 @@ class Flight(Base):
     origin = Column("origin", String)
     departure_time = Column("departure_time", String)
     boarding_time = Column("boarding_time", String)
-    airairplane = Column("airplane", Integer, ForeignKey("airplanes.id"))
+    airplane = Column("airplane", Integer, ForeignKey("airplanes.id"))
     terminal = Column("terminal", String, nullable = False)
     group = Column("group", String, nullable = False)
     gate = Column("gate", Integer, nullable= False)

@@ -23,9 +23,11 @@ class Seat(Base):
         
 
     def createSeat(self, data):
-       self
+       self.seat = data["seat"]
+       self.flight = data["flight"]
     
-def save(self):
+
+    def save(self):
         session = Session()
         session.add(self)
         session.commit()

@@ -19,6 +19,7 @@ def decompress_obj(airplane):
 
 
 def airplane_data(airplane, fare_type, luggageType):
+    print(airplane.fare)
     if fare_type in airplane.fare:
         if fare_type == "FC": #Primera
             luggage = ["pi", "c", "ch"]
@@ -30,7 +31,6 @@ def airplane_data(airplane, fare_type, luggageType):
             luggage = "pi"
     else:
         return None
-
     if luggageType in luggage:
         return luggage
     else:
