@@ -3,6 +3,7 @@ from flask import jsonify
 from db import Session
 from business.flight.models.flightClass import Flight
 
+from business.seat.controllers.seatController import seatCheck, createSeat, search_seat_return_objet
 from business.pasenger.controllers.pasengerController import search_pasenger_by_id, validation_passport
 from business.airplane.controllers.airplaneControllers import search_airplane_by_id , airplane_data
 from business.flight.controllers.flightController import search_flight_by_id
@@ -11,7 +12,7 @@ from business.luggage.controllers.luggageController import search_luggage_by_id
 from datetime import datetime, timedelta
 
 def  createSale(data):
-    try:
+#    try:
         dataUpdate = dataUpdater(data)
         
 
@@ -20,10 +21,10 @@ def  createSale(data):
         sale.save()
         return jsonify({"msg" : "sale created successfully"})
     
-    except ValueError as exception:
+#    except ValueError as exception:
         return jsonify ({"msg" : "sale could not be loaded" ,"keyError" : str(exception)})
     
-    except:
+#   except:
         return jsonify ({"msg" : "destination could not be loaded" , 
                         "DestinationAttributes": {
                                                 "issue_date": "--",
@@ -116,11 +117,19 @@ def dataUpdater(data):
         raise ValueError("Expired passport")
     
     airplane = search_airplane_by_id(flight.airplane)
+    
+
 
     if airplane.capacity > 0:
         airplane.capacity -= 1
     else:  
         raise ValueError("The airplane is full")
+
+    seat = seatCheck(airplane, data["fare"], data["seat"], flight)
+    print(seat)
+    if seat == False:
+        raise ValueError("seat not avaliable")
+    
 
     data_luggage = airplane_data(airplane, data["fare"], luggage.type)
     if data_luggage is None:
@@ -132,7 +141,8 @@ def dataUpdater(data):
     data["luggage"] = luggage.id
     data["flight"] = flight.id
     data["pasenger_data"] = pasenger.id
-    
+    createSeat(data)
+    data["seat_data"] = search_seat_return_objet(data["seat"]).id
     session.add(airplane)
     session.add(pasenger)
     session.commit()

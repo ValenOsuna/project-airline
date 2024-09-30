@@ -37,7 +37,7 @@ class Sale(Base):
                  flight=None,
                  luggage=None,
                  price=None,
-                 seats=None
+                 seat_data=None
                  ):
 
         self.issue_date = issue_date
@@ -49,7 +49,7 @@ class Sale(Base):
         self.flight = flight
         self.luggage = luggage
         self.price = price
-        self.seats = seats
+        self.seat_data = seat_data
 
     def createSale(self, data):
         self.issue_date = data["issue_date"]
@@ -61,7 +61,7 @@ class Sale(Base):
         self.flight = data["flight"]
         self.luggage = data["luggage"]
         self.price = data["price"]
-        self.seats = data["seats"]
+        self.seat_data = data["seat_data"]
 
     def save(self):
         session = Session()

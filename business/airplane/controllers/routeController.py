@@ -7,11 +7,11 @@ airplane = Blueprint("airplane", __name__)
 
 @airplane.route("/airplane_create", methods=["POST"])
 def create_airplane():
-    try:
+#    try:
         response = request.get_json()
         create(response)
         return {"msg": "The aircraft has been loaded successfully."}
-    except:
+#    except:
         return {"msg": "The selected aircraft is not operating"}
 
 
