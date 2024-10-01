@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Boolean
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from db import Base, Session
 
@@ -7,11 +7,11 @@ class Ticket(Base):
     __tablename__ = 'tickets'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    gate = Column("gate", String)
-    airline = Column("airline", String)
-    terminal = Column("terminal", Integer)
-    seat = Column("seat", Integer)
-    group = Column("group", Integer)
+    gate = Column("gate", String, nullable=False)
+    airline = Column("airline", String, nullable=False)
+    terminal = Column("terminal", Integer, nullable=False)
+    seat = Column("seat", Integer, nullable=False)
+    group = Column("group", Integer, nullable=False)
     flight = Column("flights", Integer, ForeignKey("flights.id"))
 
     flightDetail = relationship("Flight", back_populates="ticketDetail", cascade="all, delete")

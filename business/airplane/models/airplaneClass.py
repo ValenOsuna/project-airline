@@ -11,7 +11,6 @@ class Airplane(Base):
     capacity = Column("capacity", Integer, nullable=False)
     fare = Column("fare", String, nullable=False)
 
-    
     flightDetail = relationship("Flight", back_populates="airplaneDetail")
 
     def __init__(self,
