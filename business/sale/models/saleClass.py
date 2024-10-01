@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String,ForeignKey, Boolean, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship
 from db import Base, Session
 
@@ -10,22 +10,18 @@ class Sale(Base):
     issue_date = Column("issue_date", String, nullable=False)
     reservation_number = Column("reservation_number", Integer, unique=True)
     pay_method = Column("pay_method", Boolean, nullable=False)
-    accumulated_miles = Column("accumulated_miles", Integer)
+    accumulated_miles = Column("accumulated_miles", Integer, nullable=False)
     fare = Column("fare", String, nullable=False)
     price = Column("price", Float, nullable=False)
     seat_data = Column("seat_data", String, ForeignKey("seats.id"))
-
     flight = Column("flight", Integer, ForeignKey("flights.id"))
     luggage = Column("luggage", Integer, ForeignKey("luggages.id"))
     pasenger_data = Column("pasenger_data", Integer, ForeignKey("pasengers.id"))
-    
 
     flightDetail = relationship("Flight", back_populates="saleDetail")
     pasengerDetail = relationship("Pasenger", back_populates="saleDetail")
     luggageDetail = relationship("Luggages", back_populates="saleDetail")
-
-    seatRelation = relationship("Seat" , back_populates= "saleRelation")
-
+    seatRelation = relationship("Seat", back_populates="saleRelation")
 
     def __init__(self,
                  issue_date=None,

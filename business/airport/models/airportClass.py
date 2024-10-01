@@ -18,7 +18,7 @@ class Airport(Base):
                  city="",
                  country="",
                  acronym="",
-                 gates = "",
+                 gates="",
                  ):
         self.city = city
         self.country = country

@@ -2,18 +2,19 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from db import Base, Session
 
+
 class Flight(Base):
     __tablename__ = "flights"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     destination = Column("destination", Integer, ForeignKey("destinations.id"))
-    origin = Column("origin", String)
-    departure_time = Column("departure_time", String)
-    boarding_time = Column("boarding_time", String)
+    origin = Column("origin", String, nullable=False)
+    departure_time = Column("departure_time", String, nullable=False)
+    boarding_time = Column("boarding_time", String, nullable=False)
     airplane = Column("airplane", Integer, ForeignKey("airplanes.id"))
-    terminal = Column("terminal", String, nullable = False)
-    group = Column("group", String, nullable = False)
-    gate = Column("gate", Integer, nullable= False)
+    terminal = Column("terminal", String, nullable=False)
+    group = Column("group", String, nullable=False)
+    gate = Column("gate", Integer, nullable=False)
     row = Column("row", String, nullable=False)
     column = Column("column", Integer, nullable=False)
 
@@ -22,22 +23,21 @@ class Flight(Base):
     ticketDetail = relationship("Ticket", back_populates="flightDetail", cascade="all, delete")
     airlineDetail = relationship("Airlines", back_populates="flightDetail")
     saleDetail = relationship("Sale", back_populates="flightDetail")
-
-    seatRelation = relationship("Seat" , back_populates="flightRelation")
+    seatRelation = relationship("Seat", back_populates="flightRelation")
 
     def __init__(self,
-                 destination  = None ,
-                 origin  = None,
-                 departure_time = None,
-                 boarding_time = None,
-                 airplane = None,
-                 terminal = None,
-                 group = None,
-                 gate = None,
-                 row= None,
-                 column= None
+                 destination=None,
+                 origin=None,
+                 departure_time=None,
+                 boarding_time=None,
+                 airplane=None,
+                 terminal=None,
+                 group=None,
+                 gate=None,
+                 row=None,
+                 column=None
                  ):
-        
+
         self.destination = destination
         self.origin = origin
         self.departure_time = departure_time

@@ -1,22 +1,22 @@
-from sqlalchemy import Column, String, Integer , ForeignKey
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from db import Base , Session
+from db import Base, Session
 
 
 class Airlines(Base):
-    __tablename__= "airlines"
+    __tablename__ = "airlines"
 
-    id = Column("id", Integer , autoincrement= True , unique= True , primary_key= True)
+    id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     name = Column("name", String, nullable=False)
     acronym = Column("acronym", String, nullable=False)
-    flight_list = Column("flight_list", Integer , ForeignKey("flights.id"))
+    flight_list = Column("flight_list", Integer, ForeignKey("flights.id"))
 
     flightDetail = relationship("Flight", back_populates="airlineDetail", cascade="all, delete")
-    
-    def __init__(self, name="", acronym="", flight_list=""):    
-        self.name=name
-        self.acronym=acronym
-        self.flight_list=flight_list
+
+    def __init__(self, name="", acronym="", flight_list=""):
+        self.name = name
+        self.acronym = acronym
+        self.flight_list = flight_list
 
     def create(self, Data):
         self.name = Data["name"]
@@ -26,6 +26,3 @@ class Airlines(Base):
         session.add(self)
         session.commit()
         session.close()
-        
-    
-
