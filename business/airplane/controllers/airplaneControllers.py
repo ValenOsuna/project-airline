@@ -7,8 +7,6 @@ def create(Data):
     airplane = Airplane()
     airplane.createAirplane(Data)
 
-   
-
 
 def decompress_obj(airplane):
     airplane_data = {"model": f"{airplane.model}",
@@ -21,13 +19,13 @@ def decompress_obj(airplane):
 def airplane_data(airplane, fare_type, luggageType):
     print(airplane.fare)
     if fare_type in airplane.fare:
-        if fare_type == "FC": #Primera
+        if fare_type == "FC": # Primera
             luggage = ["pi", "c", "ch"]
-        elif fare_type == "BC": #Ejecutivo
+        elif fare_type == "BC": # Ejecutivo
             luggage = ["c", "ch", "can"]
-        elif fare_type == "PC": #Premiun
-            luggage = "ch" 
-        elif fare_type == "EC": #Economy
+        elif fare_type == "PC": # Premiun
+            luggage = "ch"
+        elif fare_type == "EC": # Economy
             luggage = "pi"
     else:
         return None
@@ -67,6 +65,5 @@ def delete(id):
     if airplane:
         session.delete(airplane)
         session.commit()
-        
+
     session.close()
-   

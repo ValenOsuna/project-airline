@@ -2,17 +2,19 @@ from ..models.luggageClass import Luggages
 from pprint import pprint
 from db import Session
 
+
 def create(Data):
     luggages = Luggages()
     luggages.create(Data)
     pprint(vars(luggages))
 
-@staticmethod
+
 def search_luggage_by_id(id):
     session = Session()
     user = session.query(Luggages).filter_by(id=id).first()
     session.close()
     return user
+
 
 def update(**kwargs):
     session = Session()
@@ -29,7 +31,8 @@ def update(**kwargs):
         return "base actualizada"
     except:
         return "Error"
-    
+
+
 def delete(id):
     session = Session()
     try:
@@ -42,11 +45,12 @@ def delete(id):
     except:
         return "Error"
 
+
 def descomprimir(Luggages):
     if Luggages != None:
         luggages_info = {"type": f"{Luggages.type}",
-                        "weight": f"{Luggages.weight}",
-                        "type_flight": f"{Luggages.type_flight}"}
+                         "weight": f"{Luggages.weight}",
+                         "type_flight": f"{Luggages.type_flight}"}
         return luggages_info
     else:
         return "Dato inexistente"

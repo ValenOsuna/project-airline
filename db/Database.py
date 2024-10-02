@@ -12,5 +12,5 @@ try:
     Session = sessionmaker(bind=ENGINE)
 
 except:
-    print("error de conexion")
+    print("Error de conexion")
     raise

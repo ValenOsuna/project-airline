@@ -49,4 +49,3 @@ def delete(id):
         session.delete(airport)
         session.commit()
         return airport
-
