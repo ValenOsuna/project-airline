@@ -1,11 +1,11 @@
 from db import Session
 from ..models.TicketClass import Ticket
-from pprint import pprint
 from business.pasenger.controllers.pasengerController import search_pasenger_by_id, search_pasenger_by_passport
 from business.destination.controllers.destinationController import search_destination_by_id
 from business.sale.controllers.saleController import search_sale_by_id,search_sale_by_reservation
 from business.flight.controllers.flightController import search_flight_by_id
 from business.airline.controllers.airlineController import search_airline_by_flight_id
+from business.seat.controllers.seatController import search_seat_return_objet
 
 
 def decompress_obj(Ticket):
@@ -103,7 +103,7 @@ def data_update(data):
     data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
     data["airline"] = search_airline_by_flight_id(sale.flightDetail.id).id
     data["group"] = sale.flightDetail.group
-    data["seat"] = sale.flightDetail.airplaneDetail.capacity
+    data["seat"] = search_seat_return_objet(int(sale.seat_data)).seat
     data["terminal"] = sale.flightDetail.terminal
     data["flight"] = sale.flightDetail.id
 

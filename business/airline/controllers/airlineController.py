@@ -8,12 +8,13 @@ def create(Data):
     airline.create(Data)
     pprint(vars(airline))
 
-@staticmethod
+
 def search_airline_by_id(id):
     session = Session()
     user = session.query(Airlines).filter_by(id=id).first()
     session.close()
     return user
+
 
 def search(id):
     try:
@@ -22,6 +23,7 @@ def search(id):
         return Data[0]
     except:
         print("Aerolinea no se encuentra cargado o no esta disponible, Verifique base de datos")
+
 
 def update_data(**kwargs):
     session = Session()
@@ -37,7 +39,8 @@ def update_data(**kwargs):
         session.close()
         return "la base de datos de aerolineas ha sido actualizada"
     except:
-            return "datos inexistentes"
+        return "datos inexistentes"
+
 
 def update(**data):
     id = data["id"]
@@ -54,6 +57,7 @@ def update(**data):
     else:
         return "datos inexistentes"
 
+
 def delete_data(self):
     session = Session()
     try:
@@ -65,7 +69,8 @@ def delete_data(self):
             return user
     except:
         return "Delete"
-    
+
+
 def delete(id):
     airline = search(id)
     if airline != None:
@@ -84,6 +89,7 @@ def descomprimir_obj(Airlines):
         return airline_data
     else:
         return "Dato inexistente"
+
 
 def search_airline_by_flight_id(flight_list):
     session = Session()
