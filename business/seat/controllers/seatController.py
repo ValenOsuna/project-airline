@@ -3,67 +3,55 @@ from db import Session
 import ast
 
 
-def seatCheck(airplane, fare, seat, flight):
-    if search_seat_return_objet(seat) != None:
-        raise ValueError("seat not avaliable")
-    airplane = ast.literal_eval(airplane.fare)
-
-    if len(airplane) == 4:
-        if fare == "FC":
-            return seatFC(seat, 0)
-
-        elif fare == "BC":
-            return seatBC(seat, 6)
-
-        elif fare == "PC":
-            return seatPC(seat, 12)
-
-        elif fare == "EC":
-            return seatEC(seat, flight, 20)
-
-    if airplane == ['BC', 'PC', 'EC']:
-        if fare == "BC":
-            return seatBC(seat, 0)
-
-        elif fare == "PC":
-            return seatPC(seat, 6)
-
-        elif fare == "EC":
-            return seatEC(seat, flight, 14)
-
 #['FC','BC','PC','EC']
 
+def seatCheck(airplane, wantedFare, wantedSeat, flight):
+    
+    if search_seat_return_objet(wantedSeat) != None:
+        raise ValueError("seat not avaliable")
+    
+    airplane = ast.literal_eval(airplane.fare)
+    
+    return seatCheckConditional(wantedSeat, airplane , wantedFare, flight)
 
-def seatFC(seat, nro):
-    seatNumber = int(seat[1:3])
-    if (seatNumber > nro and seatNumber <= nro + 6) and (seat[0:1] == "A" or seat[0:1] == "B"):
-        return True
-    else:
-        return False
+def seatCheckConditional(wantedSeat , airplane , wantedFare, flight):
+    condition = False
+    seatPerClass = {
+                    "FC" : ["A" , "B"],
+                    "BC" : ["A" , "B" , "C"],
+                    "PC" : ["A" , "B" , "C"],
+                    "EC" : ast.literal_eval(flight.row)}
 
+    seatNumber = int(wantedSeat[1:3])
+    seatRow = wantedSeat[0:1]
 
-def seatBC(seat, nro):
-    seatNumber = int(seat[1:3])
-    if (seatNumber > nro and seatNumber <= nro + 6) and (seat[0:1] == "A" or seat[0:1] == "B" or seat[0:1] == "C"):
-        return True
-    else:
-        return False
+    startRange , endRange =  checkSeatRange(airplane, wantedFare, flight)
 
+    if (seatNumber > startRange and seatNumber <= endRange) and (seatRow in seatPerClass[wantedFare]):
+        condition = True
+    
+    return condition
 
-def seatPC(seat, nro):
-    seatNumber = int(seat[1:3])
-    if (seatNumber > nro and seatNumber <= nro + 8) and (seat[0:1] == "A" or seat[0:1] == "B" or seat[0:1] == "C" or seat[0:1] == "D"):
-        return True
-    else:
-        return False
+def checkSeatRange(airplane , wantedFare, flight):
+    seatRangesAux = {
+        "FC" : 6,
+        "BC" : 6,
+        "PC" : 8,
+        "EC" : flight.column
+    }
 
+    start = 0
+    for airplaneFare in airplane:
+        if airplaneFare == wantedFare:
+            end = start + seatRangesAux[airplaneFare]
+            break
+        else: 
+            start += seatRangesAux[airplaneFare]
 
-def seatEC(seat, flight, nro):
-    seatNumber = int(seat[1:3])
-    if (seatNumber > nro and seatNumber <= flight.column) and (seat[0:1] == "A" or seat[0:1] == "B" or seat[0:1] == "C" or seat[0:1] == "D") :
-        return True
-    else:
-        return False
+    if end > seatRangesAux["EC"]:
+        end = seatRangesAux["EC"]
+
+    return start , end
 
 
 def createSeat(Data):
@@ -82,10 +70,3 @@ def search_seat_return_objet(wantedSeat):
     session.close()
     if search:
         return search
-
-
-prueba = {
-    "FC": 6,
-    "BC": 6,
-    "PC": 8
-}

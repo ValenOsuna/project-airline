@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 Base = declarative_base()
 
-DATABASE_URL = "mysql+pymysql://root:1235pelansha@localhost/airline"
+DATABASE_URL = "mysql+pymysql://root:46251275@localhost/airline"
 ENGINE = create_engine(DATABASE_URL)
 
 try:
@@ -12,5 +12,5 @@ try:
     Session = sessionmaker(bind=ENGINE)
 
 except:
-    print("Error de conexion")
+    print("error de conexion")
     raise
