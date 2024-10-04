@@ -18,7 +18,7 @@ def  createSale(data):
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
-        return jsonify({"msg": "sale created successfully"})
+        return sale
 
     except ValueError as exception:
         return jsonify ({"msg": "sale could not be loaded", "keyError": str(exception)})

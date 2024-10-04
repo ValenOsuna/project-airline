@@ -8,7 +8,7 @@ def createDestination(data):
         destination = Destination()
         destination.createDestination(data)
         destination.save()
-        return jsonify({"msg": "destination created successfully"})
+        return destination
 
     except:
         return jsonify({"msg": "destination could not be loaded",

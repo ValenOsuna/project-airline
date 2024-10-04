@@ -6,6 +6,7 @@ from pprint import pprint
 def create(Data):
     airplane = Airplane()
     airplane.createAirplane(Data)
+    return airplane
 
 
 def decompress_obj(airplane):

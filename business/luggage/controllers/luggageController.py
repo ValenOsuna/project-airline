@@ -6,7 +6,7 @@ from db import Session
 def create(Data):
     luggages = Luggages()
     luggages.create(Data)
-    pprint(vars(luggages))
+    return luggages
 
 
 def search_luggage_by_id(id):
