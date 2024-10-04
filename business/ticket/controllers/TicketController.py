@@ -64,29 +64,12 @@ def delete(self):
 
 def create(data):
     ticket = Ticket()
-    data["visa_check"] = check_visa(data)
-    data = data_update(data)
-    ticket.ticket_create(data)
-
-
-def check_visa(data):
-    sale = search_sale_by_reservation(data["reservation_number"])
-    if sale == None:
-        raise ValueError("Sale")
-    pasenger = search_pasenger_by_id(sale.pasenger_data)
-    flight = search_flight_by_id(sale.flight)
-    destination = search_destination_by_id(flight.destination)
-    if pasenger == None:
-        raise ValueError("pasenger")
-    if destination == None:
-        raise ValueError("destination")
-    if destination.requiered_visa == True:
-        if pasenger.visa == True:
-            return True
-        else:
-            raise ValueError("This destination requiere Visa")
+    if data["visa_check"] == True:
+        data = data_update(data)
+        ticket.ticket_create(data)
+        return ticket
     else:
-        True
+        raise ValueError("destination requered visa")
 
 
 def data_update(data):

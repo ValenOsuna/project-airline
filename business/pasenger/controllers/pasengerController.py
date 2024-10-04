@@ -7,7 +7,7 @@ from datetime import datetime
 def create(Data):
     pasenger = Pasenger()
     pasenger.create(Data)
-    pprint(vars(pasenger))
+    return pasenger
 
 
 def search_pasenger_by_id(id):

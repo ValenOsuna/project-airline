@@ -4,10 +4,9 @@ from pprint import pprint
 
 
 def create(Data):
-    airpot = Airport()
-    airpot.createAirport(Data)
-    pprint(vars(airpot))
-    return {"msg": "Successful airport selection"}
+    airport = Airport()
+    airport.createAirport(Data)
+    return airport
 
 
 def decompress_obj(airport):

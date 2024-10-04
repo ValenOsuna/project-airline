@@ -23,6 +23,10 @@ class Seat(Base):
         self.seat = data["seat"]
         self.flight = data["flight"]
 
+    def dump(self):
+        return vars(self)
+
+
     def save(self):
         session = Session()
         session.add(self)

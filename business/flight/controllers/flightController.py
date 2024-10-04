@@ -15,7 +15,7 @@ def createFlight(data):
         data = verification_airplane(data)
         flight.Cargar(data)
         flight.save()
-        return jsonify({"msg": "Vuelo cargado exitosamente "}), 201
+        return flight
 
     except:
         return jsonify({"msg": "No se ha podido cargar el vuelo ",

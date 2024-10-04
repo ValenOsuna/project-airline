@@ -1,7 +1,9 @@
 from business.seat.models.seatClass import Seat
 from db import Session
 import ast
-
+from business.flight.controllers.flightController import search_flight_by_id
+from business.flight.models.flightClass import Flight
+import json
 
 #['FC','BC','PC','EC']
 
@@ -11,6 +13,9 @@ def seatCheck(airplane, wantedFare, wantedSeat, flight):
         raise ValueError("seat not avaliable")
     
     airplane = ast.literal_eval(airplane.fare)
+
+    if wantedFare not in airplane:
+        raise  ValueError(f" flight doesn't have class '{wantedFare}' ")
     
     return seatCheckConditional(wantedSeat, airplane , wantedFare, flight)
 
@@ -19,7 +24,7 @@ def seatCheckConditional(wantedSeat , airplane , wantedFare, flight):
     seatPerClass = {
                     "FC" : ["A" , "B"],
                     "BC" : ["A" , "B" , "C"],
-                    "PC" : ["A" , "B" , "C"],
+                    "PC" : ["A" , "B" , "C", "D"],
                     "EC" : ast.literal_eval(flight.row)}
 
     seatNumber = int(wantedSeat[1:3])
@@ -70,3 +75,18 @@ def search_seat_return_objet(wantedSeat):
     session.close()
     if search:
         return search
+
+    
+def search_seats(id):
+    session = Session()
+    seats = session.query(Seat).join(Flight).filter(Seat.flight==id).all()
+    print (vars(seats[0]))
+    #results = json.dumps(item.dump for item in seats)
+    results = []
+    for item in seats:
+        results.append(item.dump())
+        print(item.__dict__)
+    return results
+
+    
+

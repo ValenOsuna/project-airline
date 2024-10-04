@@ -7,6 +7,7 @@ from .airport.controllers.airportController import create, search_airport_by_id,
 from .airplane.controllers.airplaneControllers import create, search_airplane_by_id, update, delete, decompress_obj, airplane_data
 from .destination.controllers.destinationController import createDestination, updateDestination, deleteDesination, search_destination_by_id, readDestination
 from .sale.controllers.saleController import search_sale_by_id, search_sale_by_reservation
+from .seat.controllers.seatController import search_seats
 
 from .airline.controllers.RouteController import airline
 from .flight.controllers.RouteController import flight
@@ -17,6 +18,7 @@ from .luggage.controllers.RouteController import luggage
 from .pasenger.controllers.RouteController import pasenger
 from .airport.controllers.routeairpotContoller import airport
 from .airplane.controllers.routeController import airplane
+from .seat.controllers.RouteController import seat
 
 from .flight.models.flightClass import Flight
 from .airline.models.airlineClass import Airlines
