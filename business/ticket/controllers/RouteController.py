@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .TicketController import create, update, search_ticket_by_id, delete, decompress_obj
+from .TicketController import create, update, search_ticket_by_id, delete
 
 
 ticket = Blueprint("ticket", __name__)
@@ -7,12 +7,12 @@ ticket = Blueprint("ticket", __name__)
 
 @ticket.route("/create_ticket", methods=["POST"])
 def ticket_create():
-    try:
+  #  try:
         response = request.get_json()
         create(response)
         return {"msg": "The ticket has been created correctly"}
 
-    except:
+  #  except:
         return {"msg": "The ticket has irregularities, please verify the details"}
 
 
@@ -35,4 +35,9 @@ def adjust_tickets():
 @ticket.route("/search_ticket", methods=["POST"])
 def consult_tickets():
     response = request.get_json().get("id")
-    return decompress_obj(search_ticket_by_id(response))
+    ticket = search_ticket_by_id(response)
+    
+    if ticket is None:
+        return {"msg":"Ticket not found"}
+    
+    return ticket.to_dict()

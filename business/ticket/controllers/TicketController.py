@@ -1,24 +1,6 @@
 from db import Session
-from ..models.TicketClass import Ticket
-from business.pasenger.controllers.pasengerController import search_pasenger_by_id, search_pasenger_by_passport
-from business.destination.controllers.destinationController import search_destination_by_id
-from business.sale.controllers.saleController import search_sale_by_id,search_sale_by_reservation
-from business.flight.controllers.flightController import search_flight_by_id
-from business.airline.controllers.airlineController import search_airline_by_flight_id
-from business.seat.controllers.seatController import search_seat_return_objet
-
-
-def decompress_obj(Ticket):
-    if Ticket != None:
-        fac = {"price": f"{Ticket.price}",
-               "gate": f"{Ticket.gate}",
-               "airline": f"{Ticket.airline}",
-               "terminal": f"{Ticket.terminal}",
-               "seat": f"{Ticket.seat}",
-               "group": f"{Ticket.group}"}
-        return fac
-    else:
-        return {"msg": "It can fail, said Tusan."}
+from ..models.TicketClass import Ticket 
+from .HelperController import data_update
 
 
 def search_ticket_by_id(id):
@@ -72,23 +54,4 @@ def create(data):
         raise ValueError("destination requered visa")
 
 
-def data_update(data):
-    session = Session()
-    pasenger = search_pasenger_by_passport(data["number_passport"])
-    sale = search_sale_by_reservation(data["reservation_number"])
-    if pasenger == None:
-        raise ValueError("pasenger")
-    if sale == None:
-        raise ValueError("sale")
-    if sale.pasenger_data != pasenger.id:
-        raise ValueError("Sale not belong to this passenger")
 
-    data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
-    data["airline"] = search_airline_by_flight_id(sale.flightDetail.id).id
-    data["group"] = sale.flightDetail.group
-    data["seat"] = search_seat_return_objet(int(sale.seat_data)).seat
-    data["terminal"] = sale.flightDetail.terminal
-    data["flight"] = sale.flightDetail.id
-
-#    session.close()
-    return data

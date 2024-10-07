@@ -1,7 +1,9 @@
 from ..models.saleClass import Sale
 from flask import jsonify
 from db import Session
-from business.flight.models.flightClass import Flight
+from business.flight.models.flightClass import Flight 
+from business.destination.models.destinationClass import Destination
+from sqlalchemy.orm import joinedload
 
 from business.seat.controllers.seatController import seatCheck, createSeat, search_seat_return_objet
 from business.pasenger.controllers.pasengerController import search_pasenger_by_id, validation_passport
@@ -168,6 +170,13 @@ def cancelFlight(id):
 
 def search_sale_by_reservation(reservation_number):
         session = Session()
-        sale = session.query(Sale).filter(Sale.reservation_number == reservation_number).first()
-       # session.close()
+        sale = session.query(Sale).options(
+            joinedload(Sale.flightDetail).joinedload(Flight.airlineDetail),  
+            joinedload(Sale.flightDetail).joinedload(Flight.destinationDetail).joinedload(Destination.airportDetail)  
+        ).filter(Sale.reservation_number == reservation_number).first()
+        
+        
+        session.close()
         return sale
+
+     

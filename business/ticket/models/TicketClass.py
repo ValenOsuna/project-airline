@@ -42,3 +42,13 @@ class Ticket(Base):
         session.add(self)
         session.commit()
         session.close()
+
+    def to_dict(self):
+        return {
+            "gate": self.gate,
+            "airline": self.airline,
+            "terminal": self.terminal,
+            "seat": self.seat,
+            "group": self.group,
+            "flight": self.flight
+        } 

@@ -9,6 +9,8 @@ from .destination.controllers.destinationController import createDestination, up
 from .sale.controllers.saleController import search_sale_by_id, search_sale_by_reservation
 from .seat.controllers.seatController import search_seats
 
+
+
 from .airline.controllers.RouteController import airline
 from .flight.controllers.RouteController import flight
 from .ticket.controllers.RouteController import ticket
