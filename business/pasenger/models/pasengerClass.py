@@ -36,3 +36,12 @@ class Pasenger(Base):
         session.add(self)
         session.commit()
         session.close()
+
+    def to_dict(self):
+    
+        return {"number_pasaport": self.number_pasaport,
+                "day_pasaport": self.day_pasaport,
+                "nationality": self.nationality,
+                "country_emision": self.country_emision,
+                "accumulated_miles": self.accumulated_miles}
+        

@@ -47,16 +47,7 @@ def delete(id):
         return "Error"
 
 
-def descomprimir(Pasenger):
-    if Pasenger != None:
-        Pasenger_info = {"number_pasaport": f"{Pasenger.number_pasaport}",
-                         "day_pasaport": f"{Pasenger.day_pasaport}",
-                         "nationality": f"{Pasenger.nationality}",
-                         "country_emision": f"{Pasenger.country_emision}",
-                         "accumulated_miles": f"{Pasenger.accumulated_miles}"}
-        return Pasenger_info
-    else:
-        return "Dato inexistente"
+
 
 
 def validation_passport(expiration_date_str):

@@ -90,7 +90,7 @@ def descomprimir_obj(Airlines):
         return "Dato inexistente"
 
 
-def search_airline_by_flight_id(flight_list):
+def search_airline_by_flight_id(flight_list) -> Airlines:
     session = Session()
     user = session.query(Airlines).where(flight_list == flight_list).first()
     print(user)

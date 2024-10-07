@@ -1,7 +1,6 @@
 from business.seat.models.seatClass import Seat
 from db import Session
 import ast
-from business.flight.controllers.flightController import search_flight_by_id
 from business.flight.models.flightClass import Flight
 import json
 
@@ -68,10 +67,12 @@ def createSeat(Data):
 
 def search_seat_return_objet(wantedSeat):
     session = Session()
-    if type(wantedSeat) == str:
+    if isinstance(wantedSeat , str):
         search = session.query(Seat).filter_by(seat=wantedSeat).first()
-    elif type(wantedSeat) == int:
+
+    elif isinstance(wantedSeat , int):
         search = session.query(Seat).filter_by(id=wantedSeat).first()
+        
     session.close()
     if search:
         return search
@@ -80,7 +81,7 @@ def search_seat_return_objet(wantedSeat):
 def search_seats(id):
     session = Session()
     seats = session.query(Seat).join(Flight).filter(Seat.flight==id).all()
-    print (vars(seats[0]))
+
     #results = json.dumps(item.dump for item in seats)
     results = []
     for item in seats:

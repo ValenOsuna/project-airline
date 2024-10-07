@@ -16,8 +16,12 @@ def create_data():
     
 @pasenger.route("/search", methods=["POST"])
 def search_data():
-    Data = request.get_json().get("id")
-    return descomprimir(search_pasenger_by_id(Data))
+    response = request.get_json().get("id")
+    data = (search_pasenger_by_id(response))
+    if data is None:
+        return {"msg" : "Passanger not found"}
+    
+    return data.to_dict()
 
 @pasenger.route("/delete", methods=["POST"])
 def delete_data():
