@@ -112,7 +112,7 @@ def dataUpdater(data):
         raise ValueError("flight")
     if passenger is None:
         raise ValueError("passenger_data")
-    if validation_passport(passenger.day_pasaport) == False:
+    if validation_passport(passenger.passport_expiration) == False:
         raise ValueError("Expired passport")
 
     airplane = search_airplane_by_id(flight.airplane)

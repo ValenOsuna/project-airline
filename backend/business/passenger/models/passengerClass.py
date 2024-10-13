@@ -7,8 +7,8 @@ class Passenger(Base):
     __tablename__ = "passengers"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
-    number_passport = Column("number_pasaport", Integer, unique=True, nullable=False)
-    day_pasaport = Column("day_pasaport", String, nullable=False)
+    passport_number = Column("passport_number", Integer, unique=True, nullable=False)
+    passport_expiration = Column("passport_expiration", String, nullable=False)
     nationality = Column("nationality", String, nullable=False)
     country_emision = Column("country_emision", String, nullable=False)
     accumulated_miles = Column("accumulated_miles", Integer, nullable=False)
@@ -17,15 +17,15 @@ class Passenger(Base):
 
     saleDetail = relationship("Sale", back_populates="pasengerDetail", cascade="all, delete")
 
-    def __init__(self, number_pasaport="", 
-                 day_pasaport="",
+    def __init__(self, passport_number="", 
+                 passport_expiration="",
                 nationality="",
                 country_emision="",
                 accumulated_miles=0,
                 luggage = 0,
                 visa=None):
-        self.number_passport = number_pasaport
-        self.day_pasaport = day_pasaport
+        self.number_passport = passport_number
+        self.passport_expiration = passport_expiration
         self.nationality = nationality
         self.country_emision = country_emision
         self.accumulated_miles = accumulated_miles
@@ -33,8 +33,8 @@ class Passenger(Base):
         self.visa = visa
 
     def create(self, data):
-        self.number_passport = data["number_pasaport"]
-        self.day_pasaport = data["day_pasaport"]
+        self.passport_number = data["passport_number"]
+        self.passport_expiration = data["passport_expiration"]
         self.nationality = data["nationality"]
         self.country_emision = data["country_emision"]
         self.accumulated_miles = data["accumulated_miles"]
@@ -47,8 +47,8 @@ class Passenger(Base):
 
     def to_dict(self):
     
-        return {"number_pasaport": self.number_passport,
-                "day_pasaport": self.day_pasaport,
+        return {"passport_number": self.number_passport,
+                "passport_expiration": self.passport_expiration,
                 "nationality": self.nationality,
                 "country_emision": self.country_emision,
                 "accumulated_miles": self.accumulated_miles,
