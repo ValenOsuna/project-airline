@@ -1,16 +1,16 @@
-from business.pasenger.controllers.pasengerController import search_pasenger_by_passport
+from business.passenger.controllers.passengerController import search_pasenger_by_passport
 from business.sale.controllers.saleController import search_sale_by_reservation
 from business.seat.controllers.seatController import search_seat_return_objet
 
 def data_check(data):
  
-    pasenger = search_pasenger_by_passport(data["number_passport"])
+    passenger = search_pasenger_by_passport(data["number_passport"])
     sale = search_sale_by_reservation(data["reservation_number"])
-    if pasenger == None:
-        raise ValueError("pasenger")
+    if passenger == None:
+        raise ValueError("passenger")
     if sale == None:
         raise ValueError("sale")
-    if sale.pasenger_data != pasenger.id:
+    if sale.passenger_data != passenger.id:
         raise ValueError("Sale not belong to this passenger")
     
     return sale

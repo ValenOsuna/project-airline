@@ -32,3 +32,9 @@ class Destination(Base):
         session.add(self)
         session.commit()
         session.close()
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "requiered_visa": self.requiered_visa,
+            "airport": self.airport}

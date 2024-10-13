@@ -5,13 +5,13 @@ luggage = Blueprint("luggages", __name__)
 
 @luggage.route("/create", methods=["POST"])
 def create_data():
-    try:
+ #   try:
         Data = request.get_json()
         create(Data)
 
         return "Exito"
     
-    except:
+   # except:
         return "Error"
     
 

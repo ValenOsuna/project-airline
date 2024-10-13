@@ -3,8 +3,8 @@ from sqlalchemy.orm import relationship
 from db import Base, Session
 
 
-class Pasenger(Base):
-    __tablename__ = "pasengers"
+class Passenger(Base):
+    __tablename__ = "passengers"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     number_passport = Column("number_pasaport", Integer, unique=True, nullable=False)
@@ -17,21 +17,29 @@ class Pasenger(Base):
 
     saleDetail = relationship("Sale", back_populates="pasengerDetail", cascade="all, delete")
 
-    def __init__(self, number_pasaport="", day_pasaport="", nationality="", country_emision="", accumulated_miles=0, visa=None):
+    def __init__(self, number_pasaport="", 
+                 day_pasaport="",
+                nationality="",
+                country_emision="",
+                accumulated_miles=0,
+                luggage = 0,
+                visa=None):
         self.number_passport = number_pasaport
         self.day_pasaport = day_pasaport
         self.nationality = nationality
         self.country_emision = country_emision
         self.accumulated_miles = accumulated_miles
+        self.luggage = luggage
         self.visa = visa
 
-    def create(self, Data):
-        self.number_passport = Data["number_pasaport"]
-        self.day_pasaport = Data["day_pasaport"]
-        self.nationality = Data["nationality"]
-        self.country_emision = Data["country_emision"]
-        self.accumulated_miles = Data["accumulated_miles"]
-        self.visa = Data["visa"]
+    def create(self, data):
+        self.number_passport = data["number_pasaport"]
+        self.day_pasaport = data["day_pasaport"]
+        self.nationality = data["nationality"]
+        self.country_emision = data["country_emision"]
+        self.accumulated_miles = data["accumulated_miles"]
+        self.luggage = data["luggage"]
+        self.visa = data["visa"]
         session = Session()
         session.add(self)
         session.commit()
@@ -43,5 +51,6 @@ class Pasenger(Base):
                 "day_pasaport": self.day_pasaport,
                 "nationality": self.nationality,
                 "country_emision": self.country_emision,
-                "accumulated_miles": self.accumulated_miles}
+                "accumulated_miles": self.accumulated_miles,
+                "luggage" : self.luggage}
         

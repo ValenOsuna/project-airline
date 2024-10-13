@@ -12,7 +12,7 @@ class Ticket(Base):
     terminal = Column("terminal", Integer, nullable=False)
     seat = Column("seat", Integer, nullable=False)
     group = Column("group", Integer, nullable=False)
-    flight = Column("flights", Integer, ForeignKey("flights.id"))
+    flight = Column("flight", Integer, ForeignKey("flights.id"))
 
     flightDetail = relationship("Flight", back_populates="ticketDetail")
 

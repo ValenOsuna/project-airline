@@ -66,3 +66,17 @@ class Flight(Base):
         session.add(self)
         session.commit()
         session.close()
+
+    def to_dict(self):
+        return {
+            "destination": self.destination,
+            "origin": self.origin,
+            "departure_time": self.departure_time,
+            "boarding_time": self.boarding_time,
+            "airplane": self.airplane,
+            "terminal": self.terminal,
+            "group": self.group,
+            "gate": self.gate,
+            "row": self.row,
+            "column": self.column,
+        }

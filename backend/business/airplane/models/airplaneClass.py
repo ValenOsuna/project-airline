@@ -36,3 +36,9 @@ class Airplane(Base):
         session.add(self)
         session.commit()
         session.close()
+
+    def to_dict(self):
+        return {
+            "model": self.model,
+            "capacity": self.capacity,
+            "fare": self.fare}

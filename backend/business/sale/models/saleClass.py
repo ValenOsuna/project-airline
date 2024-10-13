@@ -16,17 +16,17 @@ class Sale(Base):
     seat_data = Column("seat_data", String, ForeignKey("seats.id"))
     flight = Column("flight", Integer, ForeignKey("flights.id"))
     luggage = Column("luggage", Integer, ForeignKey("luggages.id"))
-    pasenger_data = Column("pasenger_data", Integer, ForeignKey("pasengers.id"))
+    passenger_data = Column("passenger_data", Integer, ForeignKey("passengers.id"))
 
     flightDetail = relationship("Flight", back_populates="saleDetail")
-    pasengerDetail = relationship("Pasenger", back_populates="saleDetail")
+    pasengerDetail = relationship("Passenger", back_populates="saleDetail")
     luggageDetail = relationship("Luggages", back_populates="saleDetail")
     seatRelation = relationship("Seat", back_populates="saleRelation")
 
     def __init__(self,
                  issue_date=None,
                  reservation_number=None,
-                 pasenger_data=None,
+                 passenger_data=None,
                  pay_method=None,
                  accumulated_miles=None,
                  fare=None,
@@ -38,7 +38,7 @@ class Sale(Base):
 
         self.issue_date = issue_date
         self.reservation_number = reservation_number
-        self.pasenger_data = pasenger_data
+        self.passenger_data = passenger_data
         self.pay_method = pay_method
         self.accumulated_miles = accumulated_miles
         self.fare = fare
@@ -50,7 +50,7 @@ class Sale(Base):
     def createSale(self, data):
         self.issue_date = data["issue_date"]
         self.reservation_number = data["reservation_number"]
-        self.pasenger_data = data["pasenger_data"]
+        self.passenger_data = data["passenger_data"]
         self.pay_method = data["pay_method"]
         self.accumulated_miles = data["accumulated_miles"]
         self.fare = data["fare"]
@@ -58,6 +58,20 @@ class Sale(Base):
         self.luggage = data["luggage"]
         self.price = data["price"]
         self.seat_data = data["seat_data"]
+
+    def to_dict(self):
+        return {
+            "issue_date": self.issue_date,
+            "reservation_number": self.reservation_number,
+            "passenger_data": self.passenger_data,
+            "pay_method": self.pay_method,
+            "accumulated_miles": self.accumulated_miles,
+            "fare": self.fare,
+            "flight": self.flight,
+            "luggage": self.luggage,
+            "price": self.price,
+            "seat_data": self.seat_data}
+
 
     def save(self):
         session = Session()
