@@ -30,6 +30,7 @@ def seatCheckConditional(wantedSeat , airplane , wantedFare, flight):
     seatRow = wantedSeat[0:1]
 
     startRange , endRange =  checkSeatRange(airplane, wantedFare, flight)
+    print(startRange , endRange)
 
     if (seatNumber > startRange and seatNumber <= endRange) and (seatRow in seatPerClass[wantedFare]):
         condition = True

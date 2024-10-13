@@ -26,3 +26,9 @@ class Luggages(Base):
         session.add(self)
         session.commit()
         session.close()
+
+    def to_dict(self):
+        return {
+            "type": self.type,
+            "weight": self.weight,
+            "type_flight": self.type_flight}

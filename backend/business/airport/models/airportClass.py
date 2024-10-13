@@ -40,3 +40,10 @@ class Airport(Base):
         session.add(self)
         session.commit()
         session.close()
+
+    def to_dict(self):
+        return {
+            "city": self.city,
+            "acronym": self.acronym,
+            "country": self.country,
+            "gates": self.gates}

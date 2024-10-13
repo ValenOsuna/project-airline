@@ -6,7 +6,7 @@ from business.destination.models.destinationClass import Destination
 from sqlalchemy.orm import joinedload
 
 from business.seat.controllers.seatController import seatCheck, createSeat, search_seat_return_objet
-from business.pasenger.controllers.pasengerController import search_pasenger_by_id, validation_passport
+from business.passenger.controllers.passengerController import search_pasenger_by_id, validation_passport
 from business.airplane.controllers.airplaneControllers import search_airplane_by_id , airplane_data
 from business.flight.controllers.flightController import search_flight_by_id
 from business.luggage.controllers.luggageController import search_luggage_by_id
@@ -15,26 +15,26 @@ from datetime import datetime, timedelta
 
 
 def  createSale(data):
-    try:
+    #try:
         dataUpdate = dataUpdater(data)
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
         return sale
 
-    except ValueError as exception:
+    #except ValueError as exception:
         return jsonify ({"msg": "sale could not be loaded", "keyError": str(exception)})
 
-    except:
+    #except:
         return jsonify ({"msg": "destination could not be loaded",
                         "DestinationAttributes": {
                                                 "issue_date": "--",
                                                 "reservation_number": "--",
-                                                "pasenger_data": "--",
+                                                "passenger_data": "--",
                                                 "pay_method": "--",
                                                 "accumulated_miles": "--",
                                                 "fare": "--",
-                                                "pasenger_data": "--",
+                                                "passenger_data": "--",
                                                 "price": "--",
                                                 "flight": "--",
                                                 "luggage": "--"}}), 400
@@ -83,7 +83,7 @@ def readSale(id):
 
     return jsonify({"issue_date": sale.issue_date,
                     "reservation_number": sale.reservation_number,
-                    "pasenger_data": sale.pasenger_data,
+                    "passenger_data": sale.passenger_data,
                     "pay_method": sale.pay_method,
                     "accumulated_miles": sale.accumulated_miles,
                     "fare": sale.fare,
@@ -103,16 +103,16 @@ def search_sale_by_id(id):
 def dataUpdater(data):
     session = Session()
     flight = search_flight_by_id(data["flight"])
-    pasenger = search_pasenger_by_id(data["pasenger_data"])
+    passenger = search_pasenger_by_id(data["passenger_data"])
     luggage = search_luggage_by_id(data["luggage"])
 
     if luggage is None:
         raise ValueError("luggage")
     if flight is None :
         raise ValueError("flight")
-    if pasenger is None:
-        raise ValueError("pasenger_data")
-    if validation_passport(pasenger.day_pasaport) == False:
+    if passenger is None:
+        raise ValueError("passenger_data")
+    if validation_passport(passenger.day_pasaport) == False:
         raise ValueError("Expired passport")
 
     airplane = search_airplane_by_id(flight.airplane)
@@ -131,16 +131,16 @@ def dataUpdater(data):
     if data_luggage is None:
         raise ValueError("Fare not allowed for this airplane")
 
-    data["accumulated_miles"] = (data["price"] * 0.1) + pasenger.accumulated_miles
-    pasenger.accumulated_miles = data["accumulated_miles"]
+    data["accumulated_miles"] = (data["price"] * 0.1) + passenger.accumulated_miles
+    passenger.accumulated_miles = data["accumulated_miles"]
 
     data["luggage"] = luggage.id
     data["flight"] = flight.id
-    data["pasenger_data"] = pasenger.id
+    data["passenger_data"] = passenger.id
     createSeat(data)
     data["seat_data"] = search_seat_return_objet(data["seat"]).id
     session.add(airplane)
-    session.add(pasenger)
+    session.add(passenger)
     session.commit()
     session.close()
     return data
@@ -151,7 +151,7 @@ def cancelFlight(id):
     if sale is None:
         raise ValueError("sale id")
     flight = search_flight_by_id(sale.flight)
-    pasenger = search_pasenger_by_id(sale.pasenger_data)
+    passenger = search_pasenger_by_id(sale.passenger_data)
 
     departure_time = datetime.strptime(flight.departure_time, "%Y-%m-%d %H:%M")
 
@@ -160,9 +160,9 @@ def cancelFlight(id):
         return {"msg": "Flight cannot be canceled within 24 hours of departure"}
     else:
         session = Session()
-        pasenger.accumulated_miles -= (sale.price * 0.1)
+        passenger.accumulated_miles -= (sale.price * 0.1)
         deleteSale(sale.id)
-        session.add(pasenger)
+        session.add(passenger)
         session.commit()
         session.close()
         return {"msg": "Flight canceled succes"}
