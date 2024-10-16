@@ -17,14 +17,13 @@ class Passenger(Base):
 
     saleDetail = relationship("Sale", back_populates="pasengerDetail", cascade="all, delete")
 
-    def __init__(self,
-                 passport_number="",
+    def __init__(self, passport_number="", 
                  passport_expiration="",
-                 nationality="",
-                 country_emision="",
-                 accumulated_miles=0,
-                 luggage=0,
-                 visa=None):
+                nationality="",
+                country_emision="",
+                accumulated_miles=0,
+                luggage = 0,
+                visa=None):
         self.number_passport = passport_number
         self.passport_expiration = passport_expiration
         self.nationality = nationality
@@ -48,7 +47,7 @@ class Passenger(Base):
 
     def to_dict(self):
     
-        return {"passport_number": self.passport_number,
+        return {"passport_number": self.number_passport,
                 "passport_expiration": self.passport_expiration,
                 "nationality": self.nationality,
                 "country_emision": self.country_emision,
