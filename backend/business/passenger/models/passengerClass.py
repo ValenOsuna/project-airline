@@ -7,6 +7,8 @@ class Passenger(Base):
     __tablename__ = "passengers"
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
+    name = Column("name", String, nullable=False)
+    surname = Column("surname", String, nullable=False)
     passport_number = Column("passport_number", Integer, unique=True, nullable=False)
     passport_expiration = Column("passport_expiration", String, nullable=False)
     nationality = Column("nationality", String, nullable=False)
@@ -17,13 +19,18 @@ class Passenger(Base):
 
     saleDetail = relationship("Sale", back_populates="pasengerDetail", cascade="all, delete")
 
-    def __init__(self, passport_number="", 
+    def __init__(self,
+                 name="",
+                 surname="",
+                 passport_number="",
                  passport_expiration="",
-                nationality="",
-                country_emision="",
-                accumulated_miles=0,
-                luggage = 0,
-                visa=None):
+                 nationality="",
+                 country_emision="",
+                 accumulated_miles=0,
+                 luggage=0,
+                 visa=None):
+        self.name = name
+        self.surname = surname
         self.number_passport = passport_number
         self.passport_expiration = passport_expiration
         self.nationality = nationality
@@ -33,6 +40,8 @@ class Passenger(Base):
         self.visa = visa
 
     def create(self, data):
+        self.name = data["name"]
+        self.surname = data["surname"]
         self.passport_number = data["passport_number"]
         self.passport_expiration = data["passport_expiration"]
         self.nationality = data["nationality"]
