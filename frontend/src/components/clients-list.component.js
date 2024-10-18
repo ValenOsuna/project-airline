@@ -36,19 +36,24 @@ export default class ClientList extends Component{
 
     render(){
         return (
+
             <div className="container mt-3">
+                <div className="col-md-2">
                 <form>
                     <div className="mb-3">
                     <label className="form-label">Id del Cliente</label>
                     <input type="text" className="form-control" id="id" value={ this.state.id} onChange={this.onChangeId} />
                     <div id="emailHelp" className="form-text"></div>
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={ this.getClient }>Buscar</button>
+                    <button type="button" className="btn btn-primary" onClick={ this.getClient }>Buscar</button>
                 </form>
+                </div>
+                
                 <div className="mb-3 col-md-4" id="data">
                     datos:
                 </div>
-            </div>);
+            </div>
+        );
     }
 
     
