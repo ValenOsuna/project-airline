@@ -9,7 +9,7 @@ import ClientList from './components/clients-list.component';
 function App() {
   return (
     <div className="App">
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark bg-dark-subtle">
             <div className="container-fluid">
               <a className="navbar-brand" href="#">Aerolinea</a>
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,7 @@ function App() {
                   <li className="nav-item">
                     <a className="nav-link active" aria-current="page" href="#">Inicio</a>
                   </li>
-                 
+                
                   <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Cliente
@@ -35,8 +35,16 @@ function App() {
                 </ul>
               </div>
             </div>
-          </nav>
-    </div>
+        </nav>
+        {/* Component ClientList */}
+        <div className='container'>
+          <ClientList />
+        </div>
+        
+      </div>
+
+       
+   
  );
 }
 

@@ -36,23 +36,30 @@ export default class ClientList extends Component{
 
     render(){
         return (
-
-            <div className="container mt-3">
-                <div className="col-md-2">
-                <form>
-                    <div className="mb-3">
-                    <label className="form-label">Id del Cliente</label>
-                    <input type="text" className="form-control" id="id" value={ this.state.id} onChange={this.onChangeId} />
-                    <div id="emailHelp" className="form-text"></div>
+            <div className="row">
+                <div className="col-md-3">
+                    <div className="card mt-5 bg-light-subtle">
+                        <div className="card-body">
+                            <form cl>
+                                <div className="mb-3">
+                                    <label className="form-label"><h4>ID Cliente</h4></label>
+                                    <input type="text" className="form-control bg-light-subtle" id="id" value={ this.state.id} onChange={this.onChangeId} />
+                                </div>
+                                <button type="button" className="btn btn-success" onClick={ this.getClient }>Buscar</button>
+                            </form>
+                        </div>
                     </div>
-                    <button type="button" className="btn btn-primary" onClick={ this.getClient }>Buscar</button>
-                </form>
                 </div>
-                
-                <div className="mb-3 col-md-4" id="data">
-                    datos:
-                </div>
-            </div>
+                <div className="col-md-9 mb-3" id="data">
+                    <div className="card mt-5 bg-light-subtle   ">
+                        <div className="card-body">
+                            <h4>Datos del Usuario:</h4>
+                            <hr/>
+                            <div id="data"></div>
+                        </div>
+                    </div>
+                </div>  
+            </div>         
         );
     }
 
