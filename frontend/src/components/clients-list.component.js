@@ -50,7 +50,7 @@ export default class ClientList extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="col-md-9 mb-3" id="data">
+                <div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
