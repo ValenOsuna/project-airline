@@ -59,5 +59,7 @@ class Passenger(Base):
                 "nationality": self.nationality,
                 "country_emision": self.country_emision,
                 "accumulated_miles": self.accumulated_miles,
-                "luggage" : self.luggage}
+                "luggage" : self.luggage,
+                "name" : self.name,
+                "surname" : self.surname}
         
