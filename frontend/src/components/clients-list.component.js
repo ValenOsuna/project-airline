@@ -22,7 +22,14 @@ export default class ClientList extends Component{
                 console.log (response.data);
                 //setcontent(response.data);
                 //document.getElementById('data').innerText = JSON.stringify(response.data);
-                document.getElementById('data').innerText = response.data.nationality;
+                document.getElementById('dataName').innerText = response.data.name;
+                document.getElementById('dataSurname').innerText = response.data.surname;
+                document.getElementById('dataPassport_number').innerText = response.data.passport_number;
+                document.getElementById('dataPassport_expiration').innerText = response.data.passport_expiration;
+                document.getElementById('dataNationality').innerText = response.data.nationality;
+                document.getElementById('dataAccumulated_Miles').innerText = response.data.accumulated_miles;
+                document.getElementById('dataCountry_emision').innerText = response.data.country_emision;
+                document.getElementById('dataLuggage').innerText = response.data.luggage;
             })
             .catch(e => {
                 console.log(e);
@@ -54,8 +61,43 @@ export default class ClientList extends Component{
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
+
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    
+                                    <th scope="col">name</th>
+                                    <th scope="col">surname</th>
+                                    <th scope="col">passport number</th>
+                                    <th scope="col">passport expiration</th>
+                                    <th scope="col">nationality</th>
+                                    <th scope="col">accummulated milles</th>
+                                    <th scope="col">country emission</th>
+                                    <th scope="col">luggage </th>
+                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    
+                                    <td id = "dataName" class="table-primary"> </td>
+                                    <td id = "dataSurname" class="table-secondary"> </td>
+                                    <td id = "dataPassport_number" class="table-success"> </td>
+                                    <td id = "dataPassport_expiration" class = "table-danger"> </td> 
+                                    <td id = "dataNationality" class = "table-warning"> </td>
+                                    <td id = "dataAccumulated_Miles" class="table-info"> </td>
+                                    <td id = "dataCountry_emision" class="table-light" > </td>
+                                    <td id = "dataLuggage" class="table-primary" > </td>
+                                    
+                                    </tr>
+                                    
+                                </tbody>
+                                <a href="https://es.wikipedia.org/wiki/LGBT">PRIDE</a>
+                            </table>
                             <hr/>
-                            <div id="data"></div>
+                            
+
                         </div>
                     </div>
                 </div>  
