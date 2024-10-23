@@ -19,7 +19,7 @@ export default class AirlineList extends Component{
             .then(response => {
                 console.log (response.data);
                 document.getElementById('name').innerText = response.data.name;
-                document.getElementById('flight_list').innerText = response.data.fligth_list;
+                document.getElementById('flight_list').innerText = response.data.flight_list;
                 document.getElementById('acronym').innerText = response.data.acronym;
             })
             .catch(e => {

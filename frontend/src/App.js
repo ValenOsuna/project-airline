@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
 
 import ClientList from './components/clients-list.component';
-
+import AirportList from "./components/airport-list.component"
 
 function App() {
   return (
@@ -45,15 +45,7 @@ function App() {
           <AirportList />
           </div>
 
-        <div className='container'>
-          <AirlineList />
-        </div>
-        <div className='container'>
-        <TicketsList />
-        </div>
-        <div className='container'>
-        <DestinationsList />
-        </div>
+        
       </div>
 
        

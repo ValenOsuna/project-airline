@@ -5,7 +5,7 @@ from .airportController import create, update, search_airport_by_id, delete, dec
 airport = Blueprint("airport", __name__)
 
 
-@airport.route("/airport-create", methods=["POST"])
+@airport.route("/create", methods=["POST"])
 def airportCreate():
     try:
         response = request.get_json()
@@ -15,20 +15,20 @@ def airportCreate():
         return {"msg": "The chosen airport is not operational..."}
 
 
-@airport.route("/airport-update", methods=["POST"])
+@airport.route("/update", methods=["POST"])
 def query_airport():
     response = request.get_json()
     id = request.get_json().get("id")
     return update(**response)
 
 
-@airport.route("/airport-search", methods=["POST"])
+@airport.route("/search", methods=["POST"])
 def search_airport():
     response = request.get_json().get("id")
     return decompress_obj(search_airport_by_id(response))
 
 
-@airport.route("/airport_delete", methods=["DELETE"])
+@airport.route("/delete", methods=["DELETE"])
 def del_aiport():
     try:
         response = request.get_json().get("id")
