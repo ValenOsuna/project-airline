@@ -22,14 +22,14 @@ export default class ClientList extends Component{
                 console.log (response.data);
                 //setcontent(response.data);
                 //document.getElementById('data').innerText = JSON.stringify(response.data);
-                document.getElementById('dataName').innerText = response.data.name;
-                document.getElementById('dataSurname').innerText = response.data.surname;
-                document.getElementById('dataPassport_number').innerText = response.data.passport_number;
-                document.getElementById('dataPassport_expiration').innerText = response.data.passport_expiration;
-                document.getElementById('dataNationality').innerText = response.data.nationality;
-                document.getElementById('dataAccumulated_Miles').innerText = response.data.accumulated_miles;
-                document.getElementById('dataCountry_emision').innerText = response.data.country_emision;
-                document.getElementById('dataLuggage').innerText = response.data.luggage;
+                document.getElementById('name').innerText = response.data.name;
+                document.getElementById('surname').innerText = response.data.surname;
+                document.getElementById('passport_number').innerText = response.data.passport_number;
+                document.getElementById('passport_expiration').innerText = response.data.passport_expiration;
+                document.getElementById('nationality').innerText = response.data.nationality;
+                document.getElementById('accumulated_miles').innerText = response.data.accumulated_miles;
+                document.getElementById('country_emision').innerText = response.data.country_emision;
+                document.getElementById('luggage').innerText = response.data.luggage;
             })
             .catch(e => {
                 console.log(e);
@@ -64,39 +64,39 @@ export default class ClientList extends Component{
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="name"></span>
                                     </div>
                                     <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Apellido:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="surname"></span>
                                     </div>
                                     <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Numero pasaporte:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="passport_number"></span>
                                     </div>
                                     <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Fecha Expiracion:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="passport_expiration"></span>
                                     </div>
                                    
                                 </div>
                                 <div className="col-md-6">
                                 <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Nacionalidad:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="nationality"></span>
                                     </div>
                                     <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Pais emisor:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="country_emision"></span>
                                     </div>
                                     <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Millas acumuladas:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="accumulated_miles"></span>
                                     </div>
                                     <div className="col">
-                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="">value</span>
+                                        <label className="text-capitalize fw-bold">Equipaje:&#160;</label>
+                                        <span className="fst-italic mt-1" id="luggage"></span>
                                     </div>
                                                                    
                                 </div>
