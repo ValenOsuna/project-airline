@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
 
 import ClientList from './components/clients-list.component';
+import AirportList from './components/airport-list.components';
+import AirlineList from './components/airline-list.components';
 
 
 function App() {
@@ -39,6 +41,14 @@ function App() {
         {/* Component ClientList */}
         <div className='container'>
           <ClientList />
+          </div>
+
+        <div className='container'>
+          <AirportList />
+          </div>
+
+        <div className='container'>
+          <AirlineList />
         </div>
         
       </div>
