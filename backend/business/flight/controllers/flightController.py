@@ -74,8 +74,8 @@ def readFlight(id):
 
     return jsonify({"origin": f"{flight.origin}",
                     "destination": f"{flight.destination}",
-                    "boarding time": f"{flight.boarding_time}",
-                    "departure time": f"{flight.departure_time}",
+                    "boarding_time": f"{flight.boarding_time}",
+                    "departure_time": flight.departure_time ,
                     "airplane": f"{flight.airplane}"}), 200
 
 
