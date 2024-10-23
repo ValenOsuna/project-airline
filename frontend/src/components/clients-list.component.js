@@ -13,6 +13,7 @@ export default class ClientList extends Component{
             data: null
         };
     }
+
     getClient(){
         var id_client = this.state.id
         //var content = " "
@@ -35,6 +36,7 @@ export default class ClientList extends Component{
                 console.log(e);
             });
     }
+    
     onChangeId(e){
         this.setState({
             id: e.target.value
