@@ -61,42 +61,46 @@ export default class ClientList extends Component{
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
-
-
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                    
-                                    <th scope="col">name</th>
-                                    <th scope="col">surname</th>
-                                    <th scope="col">passport number</th>
-                                    <th scope="col">passport expiration</th>
-                                    <th scope="col">nationality</th>
-                                    <th scope="col">accummulated milles</th>
-                                    <th scope="col">country emission</th>
-                                    <th scope="col">luggage </th>
-                                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    
-                                    <td id = "dataName" class="table-primary"> </td>
-                                    <td id = "dataSurname" class="table-secondary"> </td>
-                                    <td id = "dataPassport_number" class="table-success"> </td>
-                                    <td id = "dataPassport_expiration" class = "table-danger"> </td> 
-                                    <td id = "dataNationality" class = "table-warning"> </td>
-                                    <td id = "dataAccumulated_Miles" class="table-info"> </td>
-                                    <td id = "dataCountry_emision" class="table-light" > </td>
-                                    <td id = "dataLuggage" class="table-primary" > </td>
-                                    
-                                    </tr>
-                                    
-                                </tbody>
-                                <a href="https://es.wikipedia.org/wiki/LGBT">PRIDE</a>
-                            </table>
-                            <hr/>
-                            
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                   
+                                </div>
+                                <div className="col-md-6">
+                                <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Field:&nbsp;</label>
+                                        <span className="fst-italic mt-1" id="">value</span>
+                                    </div>
+                                                                   
+                                </div>
+                            </div>                           
 
                         </div>
                     </div>
@@ -104,6 +108,6 @@ export default class ClientList extends Component{
             </div>         
         );
     }
-
-    
+ 
+                                    
 }
