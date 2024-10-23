@@ -6,14 +6,14 @@ export default class FlightList extends Component{
 
     constructor(props){
         super(props);
-        this.getClient = this.getClient.bind(this);
+        this.getFlight = this.getFlight.bind(this);
         this.onChangeId = this.onChangeId.bind(this);
         this.state = {
             id: null,
             data: null
         };
     }
-    getClient(){
+    getFlight(){
         var id_flight = this.state.id
         //var content = " "
         //const [content, setcontent ] = useState(' ');
@@ -51,7 +51,7 @@ export default class FlightList extends Component{
                                     <label className="form-label"><h4>ID Vuelo</h4></label>
                                     <input type="text" className="form-control bg-light-subtle" id="id" value={ this.state.id} onChange={this.onChangeId} />
                                 </div>
-                                <button type="button" className="btn btn-success" onClick={ this.getClient }>Buscar</button>
+                                <button type="button" className="btn btn-success" onClick={ this.getFlight }>Buscar</button>
                             </form>
                         </div>
                     </div>

@@ -58,19 +58,19 @@ export default class AirportList extends Component{
                                 <div className="col-md-6">
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Ciudad:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="city">value</span>
+                                        <span className="fst-italic mt-1" id="city"></span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Pais:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="country">value</span>
+                                        <span className="fst-italic mt-1" id="country"></span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Siglas:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="acronym">value</span>
+                                        <span className="fst-italic mt-1" id="acronym"></span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Puertas:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="gates">value</span>
+                                        <span className="fst-italic mt-1" id="gates"></span>
                                     </div>
                                                                    
                                 </div>

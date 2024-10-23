@@ -84,7 +84,7 @@ def descomprimir_obj(Airlines):
     if Airlines != None:
         airline_data = {"name": f"{Airlines.name}",
                         "acronym": f"{Airlines.acronym}",
-                        "flight List": f"{Airlines.flight_list}"}
+                        "flight_list": f"{Airlines.flight_list}"}
         return airline_data
     else:
         return "Dato inexistente"
