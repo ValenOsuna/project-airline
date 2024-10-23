@@ -51,4 +51,4 @@ class Ticket(Base):
             "seat": self.seat,
             "group": self.group,
             "flight": self.flight
-        } 
+        }

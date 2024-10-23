@@ -52,6 +52,3 @@ def create(data):
         return ticket
     else:
         raise ValueError("destination requered visa")
-
-
-
