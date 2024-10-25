@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ClientDataServices from "../services/clients.services"; 
 
 
-export default class ClientList extends Component{ 
+export default class ClientSearch extends Component{ 
 
     constructor(props){
         super(props);

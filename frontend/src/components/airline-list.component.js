@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AirlinetDataService from "../services/airline.services"; 
 
 
-export default class AirlineList extends Component{ 
+export default class AirlineSearch extends Component{ 
 
     constructor(props){
         super(props);

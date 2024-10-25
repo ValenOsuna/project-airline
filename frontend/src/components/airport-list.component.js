@@ -3,7 +3,7 @@ import AirportDataService from "../services/airport.services";
 import airportServices from "../services/airport.services";
 
 
-export default class AirportList extends Component{
+export default class AirportSearch extends Component{
 
     constructor(props){
         super(props);
@@ -42,7 +42,7 @@ export default class AirportList extends Component{
                         <div className="card-body">
                             <form cl>
                                 <div className="mb-3">
-                                    <label className="form-label"><h4>ID aeropuerto</h4></label>
+                                    <label className="form-label"><h4>ID Aeropuerto</h4></label>
                                     <input type="text" className="form-control bg-light-subtle" id="id" value={ this.state.id} onChange={this.onChangeId} />
                                 </div>
                                 <button type="button" className="btn btn-success" onClick={ this.getAirport }>Buscar</button>

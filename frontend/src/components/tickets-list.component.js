@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TicketDataServices from "../services/tickets.services"; 
 
 
-export default class TicketsList extends Component{ 
+export default class TicketSearch extends Component{ 
 
     constructor(props){
         super(props);
@@ -47,7 +47,7 @@ export default class TicketsList extends Component{
                         <div className="card-body">
                             <form cl>
                                 <div className="mb-3">
-                                    <label className="form-label"><h4>ID Ticket</h4></label>
+                                    <label className="form-label"><h4>ID Boleto</h4></label>
                                     <input type="text" className="form-control bg-light-subtle" id="id" value={ this.state.id} onChange={this.onChangeId} />
                                 </div>
                                 <button type="button" className="btn btn-success" onClick={ this.getTicket }>Buscar</button>

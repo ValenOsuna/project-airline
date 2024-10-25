@@ -5,7 +5,7 @@ from .TicketController import create, update, search_ticket_by_id, delete
 ticket = Blueprint("ticket", __name__)
 
 
-@ticket.route("/create_ticket", methods=["POST"])
+@ticket.route("/create", methods=["POST"])
 def ticket_create():
     try:
         response = request.get_json()
@@ -14,7 +14,7 @@ def ticket_create():
         return {"msg": "The ticket has irregularities, please verify the details"}
 
 
-@ticket.route("/delete_ticket", methods=["DELETE"])
+@ticket.route("/delete", methods=["DELETE"])
 def ticket_delete():
     try:
         response = request.get_json().get("id")
@@ -23,14 +23,14 @@ def ticket_delete():
         return {"error"}
 
 
-@ticket.route("/update_ticket", methods=["POST"])  # methods PUT O PACH
+@ticket.route("/update", methods=["POST"])  # methods PUT O PACH
 def adjust_tickets():
     response = request.get_json()
     id = request.get_json().get("id")
     return update(**response)
 
 
-@ticket.route("/search_ticket", methods=["POST"])
+@ticket.route("/search", methods=["POST"])
 def consult_tickets():
     response = request.get_json().get("id")
     ticket = search_ticket_by_id(response)
