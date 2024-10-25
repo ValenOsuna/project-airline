@@ -10,6 +10,7 @@ def airportCreate():
     try:
         response = request.get_json()
         return create(response)
+    
     except:
         return {"msg": "The chosen airport is not operational..."}
 
@@ -17,14 +18,17 @@ def airportCreate():
 @airport.route("/update", methods=["POST"])
 def query_airport():
     response = request.get_json()
-    id = request.get_json().get("id")
     return update(**response)
 
 
 @airport.route("/search", methods=["POST"])
 def search_airport():
-    response = request.get_json().get("id")
-    return decompress_obj(search_airport_by_id(response))
+    try: 
+        response = request.get_json().get("id")
+        return decompress_obj(search_airport_by_id(response))
+    
+    except:
+        return {"msg" : "not found"}
 
 
 @airport.route("/delete", methods=["DELETE"])
@@ -32,5 +36,6 @@ def del_aiport():
     try:
         response = request.get_json().get("id")
         return delete(response)
+    
     except:
         return {"msg": "The selected aircraft is not in the operations list"}
