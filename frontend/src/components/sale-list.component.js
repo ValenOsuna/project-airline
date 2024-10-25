@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SaleDataService from "../services/sale.services";
 
 
-export default class SaleList extends Component{ 
+export default class SaleSearch extends Component{ 
 
     constructor(props){
         super(props);

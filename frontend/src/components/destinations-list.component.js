@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DestinationDataServices from "../services/destinations.services";
 
 
-export default class DestinationsList extends Component{
+export default class DestinationSearch extends Component{
 
     constructor(props){
         super(props);
@@ -24,7 +24,7 @@ export default class DestinationsList extends Component{
                 //document.getElementById('data').innerText = JSON.stringify(response.data);
                 document.getElementById('name').innerText = response.data.name;
                 document.getElementById('requiered_visa').innerText = response.data.requiered_visa;
-                document.getElementById('airport').innerText = response.data.airport
+                document.getElementById('airport').innerText = response.data.airports
             })
             .catch(e => {
                 console.log(e);

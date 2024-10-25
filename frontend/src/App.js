@@ -4,13 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
 import { Routes, Route, Link } from "react-router-dom"
 
-import ClientList from './components/clients-list.component';
-import AirportList from "./components/airport-list.component"
-import DestinationList from "./components/destinations-list.component"
-import FlightList from "./components/flight-list.component"
-import TicketList from "./components/tickets-list.component"
-import AirlineList from './components/airline-list.component';
-import SaleList from "./components/sale-list.component"
+import ClientSearch from './components/clients-list.component';
+import AirportSearch from "./components/airport-list.component"
+import DestinationSearch from "./components/destinations-list.component"
+import FlightSearch from "./components/flight-list.component"
+import TicketSearch from "./components/tickets-list.component"
+import AirlineSearch from './components/airline-list.component';
+import SaleSearch from "./components/sale-list.component"
 
 
 function App() {
@@ -28,16 +28,86 @@ function App() {
                     <a className="nav-link active" aria-current="page" href="#">Inicio</a>
                   </li>
                 
+                  
+
+                  <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Aerolinea
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li> <Link to={'/search-airline'} className="dropdown-item" >Buscar</Link> </li>
+                      <li><a className="dropdown-item" href="#">Editar</a></li>
+                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                    </ul>
+                  </li>
+
+                  <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Aeropuerto
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li> <Link to={"/search-airport"} className="dropdown-item" >Buscar</Link> </li>
+                      <li><a className="dropdown-item" href="#">Editar</a></li>
+                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                    </ul>
+                  </li>
+
+                  <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Boleto
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li> <Link to={"/search-ticket"} className="dropdown-item" >Buscar</Link> </li>
+                      <li><a className="dropdown-item" href="#">Editar</a></li>
+                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                    </ul>
+                  </li>
+
                   <li className="nav-item dropdown">
                     <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Cliente
                     </a>
                     <ul className="dropdown-menu">
-                      <li> <Link to={"/search-client"} className="dropdown-item" >Buscar</Link> </li>
+                      <li> <Link to={"/search-client"} className="dropdown-item"> Buscar </Link> </li>
                       <li><a className="dropdown-item" href="#">Editar</a></li>
                       <li><a className="dropdown-item" href="#">Lista</a></li>
                     </ul>
                   </li>
+
+                  <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Destino
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li> <Link to={"/search-destination"} className="dropdown-item"> Buscar </Link> </li>
+                      <li><a className="dropdown-item" href="#">Editar</a></li>
+                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                    </ul>
+                  </li>
+
+                  <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Venta
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li> <Link to={"/search-sale"} className="dropdown-item"> Buscar </Link> </li>
+                      <li><a className="dropdown-item" href="#">Editar</a></li>
+                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                    </ul>
+                  </li>
+
+                  <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Vuelo
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li> <Link to={"/search-flight"} className="dropdown-item"> Buscar </Link> </li>
+                      <li><a className="dropdown-item" href="#">Editar</a></li>
+                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                    </ul>
+                  </li>
+
+                  
                   
                 </ul>
               </div>
@@ -46,7 +116,13 @@ function App() {
         {/* Component ClientList */}
         <div className='container'>
           <Routes>
-            <Route path='/search-client' element={<ClientList/>} />
+            <Route path='/search-client' element={<ClientSearch/>} />
+            <Route path='/search-airport' element={<AirportSearch/>} />
+            <Route path='/search-airline' element={<AirlineSearch/>} />
+            <Route path='/search-destination' element={<DestinationSearch/>} />
+            <Route path='/search-flight' element={<FlightSearch/>} />
+            <Route path='/search-sale' element={<SaleSearch/>} />
+            <Route path='/search-ticket' element={<TicketSearch/>} />
 
           </Routes>
         </div>
