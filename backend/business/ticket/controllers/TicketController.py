@@ -1,5 +1,5 @@
 from db import Session
-from ..models.TicketClass import Ticket 
+from ..models.TicketClass import Ticket
 from .HelperController import data_update
 
 
@@ -46,9 +46,9 @@ def delete(self):
 
 def create(data):
     ticket = Ticket()
-    if data["visa_check"] == True:
-        data = data_update(data)
-        ticket.ticket_create(data)
-        return ticket
-    else:
-        raise ValueError("destination requered visa")
+    # if data["visa_check"] == True:
+    data = data_update(data)
+    ticket.ticket_create(data)
+    return ticket
+    # else:
+    raise ValueError("destination requered visa")

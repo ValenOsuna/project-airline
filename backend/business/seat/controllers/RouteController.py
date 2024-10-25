@@ -3,6 +3,7 @@ from flask import Blueprint, request
 
 seat = Blueprint("seat", __name__)
 
+
 @seat.route("/search", methods=['POST'])
 def search():
     id = request.get_json().get("id")

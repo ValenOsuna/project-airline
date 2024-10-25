@@ -6,19 +6,18 @@ import json
 
 #['FC','BC','PC','EC']
 
+
 def seatCheck(airplane, wantedFare, wantedSeat, flight):
-    
     if search_seat_return_objet(wantedSeat) != None:
         raise ValueError("seat not avaliable")
-    
     airplane = ast.literal_eval(airplane.fare)
 
     if wantedFare not in airplane:
         raise  ValueError(f" flight doesn't have class '{wantedFare}' ")
-    
-    return seatCheckConditional(wantedSeat, airplane , wantedFare, flight)
+    return seatCheckConditional(wantedSeat, airplane, wantedFare, flight)
 
-def seatCheckConditional(wantedSeat , airplane , wantedFare, flight):
+
+def seatCheckConditional(wantedSeat, airplane, wantedFare, flight):
     condition = False
     seatPerClass = {
                     "FC" : ["A" , "B"],

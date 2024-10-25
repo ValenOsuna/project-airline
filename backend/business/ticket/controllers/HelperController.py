@@ -4,7 +4,7 @@ from business.seat.controllers.seatController import search_seat_return_objet
 
 
 def data_check(data):
-    passenger = search_pasenger_by_passport(data["number_passport"])
+    passenger = search_pasenger_by_passport(data["passport_number"])
     sale = search_sale_by_reservation(data["reservation_number"])
     if passenger == None:
         raise ValueError("passenger")
@@ -23,5 +23,4 @@ def data_update(data):
     data["seat"] = search_seat_return_objet(int(sale.seat_data)).seat
     data["terminal"] = sale.flightDetail.terminal
     data["flight"] = sale.flightDetail.id
-
     return data

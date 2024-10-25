@@ -72,9 +72,9 @@ class Sale(Base):
             "price": self.price,
             "seat_data": self.seat_data}
 
-
     def save(self):
         session = Session()
         session.add(self)
         session.commit()
+        session.refresh(self)
         session.close()

@@ -26,9 +26,9 @@ class Seat(Base):
     def dump(self):
         return vars(self)
 
-
     def save(self):
         session = Session()
         session.add(self)
         session.commit()
+        session.refresh(self)
         session.close()

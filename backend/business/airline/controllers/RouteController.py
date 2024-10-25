@@ -8,12 +8,10 @@ airline = Blueprint("airlines", __name__)
 def createAirline():
     try:
         Data = request.get_json()
-        create(Data)
-
-        return {"msg" : "datos de aerolinea cargados "}
+        return create(Data)
 
     except:
-       return {"msg": "No se encuentran datos de aerolinea "}
+        return {"msg": "No se encuentran datos de aerolinea "}
 
 
 @airline.route("/search", methods=['POST'])

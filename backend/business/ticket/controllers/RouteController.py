@@ -7,12 +7,10 @@ ticket = Blueprint("ticket", __name__)
 
 @ticket.route("/create_ticket", methods=["POST"])
 def ticket_create():
-  #  try:
+    try:
         response = request.get_json()
-        create(response)
-        return {"msg": "The ticket has been created correctly"}
-
-  #  except:
+        return create(response)
+    except:
         return {"msg": "The ticket has irregularities, please verify the details"}
 
 
@@ -25,7 +23,7 @@ def ticket_delete():
         return {"error"}
 
 
-@ticket.route("/update_ticket", methods=["POST"]) # methods PUT O PACH
+@ticket.route("/update_ticket", methods=["POST"])  # methods PUT O PACH
 def adjust_tickets():
     response = request.get_json()
     id = request.get_json().get("id")
