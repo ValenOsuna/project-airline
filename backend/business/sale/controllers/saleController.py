@@ -14,19 +14,19 @@ from business.luggage.controllers.luggageController import search_luggage_by_id
 from datetime import datetime, timedelta
 
 
-def  createSale(data):
-    #try:
+def createSale(data):
+    try:
         dataUpdate = dataUpdater(data)
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
         return sale
 
-    #except ValueError as exception:
-        return jsonify ({"msg": "sale could not be loaded", "keyError": str(exception)})
+    except ValueError as exception:
+        return jsonify({"msg": "sale could not be loaded", "keyError": str(exception)})
 
-    #except:
-        return jsonify ({"msg": "destination could not be loaded",
+    except:
+        return jsonify({"msg": "destination could not be loaded",
                         "DestinationAttributes": {
                                                 "issue_date": "--",
                                                 "reservation_number": "--",
@@ -37,7 +37,8 @@ def  createSale(data):
                                                 "passenger_data": "--",
                                                 "price": "--",
                                                 "flight": "--",
-                                                "luggage": "--"}}), 400
+                                                "luggage": "--",
+                                                "seat": "--"}}), 400
 
 
 def updateSale(**kwargs):
@@ -108,7 +109,7 @@ def dataUpdater(data):
 
     if luggage is None:
         raise ValueError("luggage")
-    if flight is None :
+    if flight is None:
         raise ValueError("flight")
     if passenger is None:
         raise ValueError("passenger_data")
@@ -174,9 +175,5 @@ def search_sale_by_reservation(reservation_number):
             joinedload(Sale.flightDetail).joinedload(Flight.airlineDetail),  
             joinedload(Sale.flightDetail).joinedload(Flight.destinationDetail).joinedload(Destination.airportDetail)  
         ).filter(Sale.reservation_number == reservation_number).first()
-        
-        
         session.close()
         return sale
-
-     

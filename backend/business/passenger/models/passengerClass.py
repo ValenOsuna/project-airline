@@ -15,7 +15,7 @@ class Passenger(Base):
     country_emision = Column("country_emision", String, nullable=False)
     accumulated_miles = Column("accumulated_miles", Integer, nullable=False)
     luggage = Column("luggage", Integer, ForeignKey("luggages.id"))
-  
+
     saleDetail = relationship("Sale", back_populates="pasengerDetail", cascade="all, delete")
 
     def __init__(self,
@@ -29,13 +29,12 @@ class Passenger(Base):
                  luggage=0):
         self.name = name
         self.surname = surname
-        self.number_passport = passport_number
+        self.passport_number = passport_number
         self.passport_expiration = passport_expiration
         self.nationality = nationality
         self.country_emision = country_emision
         self.accumulated_miles = accumulated_miles
         self.luggage = luggage
-       
 
     def create(self, data):
         self.name = data["name"]
@@ -50,16 +49,15 @@ class Passenger(Base):
         session = Session()
         session.add(self)
         session.commit()
+        session.refresh(self)
         session.close()
 
     def to_dict(self):
-    
         return {"passport_number": self.passport_number,
                 "passport_expiration": self.passport_expiration,
                 "nationality": self.nationality,
                 "country_emision": self.country_emision,
                 "accumulated_miles": self.accumulated_miles,
-                "luggage" : self.luggage,
-                "name" : self.name,
-                "surname" : self.surname}
-        
+                "luggage": self.luggage,
+                "name": self.name,
+                "surname": self.surname}

@@ -25,6 +25,7 @@ class Airlines(Base):
         session = Session()
         session.add(self)
         session.commit()
+        session.refresh(self)
         session.close()
 
     def to_dict(self):
@@ -32,4 +33,3 @@ class Airlines(Base):
             "name": self.name,
             "acronym": self.acronym,
             "flight_list": self.flight_list}
-

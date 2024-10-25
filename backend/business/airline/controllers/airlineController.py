@@ -6,7 +6,8 @@ from db import Session
 def create(Data):
     airline = Airlines()
     airline.create(Data)
-    return airline
+    return airline.to_dict()
+
 
 def search_airline_by_id(id):
     session = Session()

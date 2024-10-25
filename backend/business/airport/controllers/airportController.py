@@ -10,10 +10,10 @@ def create(Data):
 
 
 def decompress_obj(airport):
-    airpot_data = {"city": airport.city ,
+    airpot_data = {"city": airport.city,
                    "country": airport.country,
                    "acronym": airport.acronym,
-                   "gates" : airport.gates
+                   "gates": airport.gates
                    }
     return airpot_data
 

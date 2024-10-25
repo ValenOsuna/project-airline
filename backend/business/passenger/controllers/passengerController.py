@@ -47,9 +47,6 @@ def delete(id):
         return "Error"
 
 
-
-
-
 def validation_passport(expiration_date_str):
     try:
         expiration_date = datetime.strptime(expiration_date_str, "%Y-%m-%d")
@@ -59,10 +56,10 @@ def validation_passport(expiration_date_str):
         "passport not valid"
 
 
-def search_pasenger_by_passport(number_passport):
+def search_pasenger_by_passport(passport_number):
     session = Session()
     try:
-        user = session.query(Passenger).filter_by(number_passport=number_passport).first()
+        user = session.query(Passenger).filter_by(passport_number=passport_number).first()
         session.close()
         return user
     except:

@@ -8,9 +8,7 @@ passenger = Blueprint("passenger", __name__)
 def create_data():
     try:
         Data = request.get_json()
-        create(Data)
-
-        return "Exito"
+        return create(Data)
 
     except:
         return "Error"

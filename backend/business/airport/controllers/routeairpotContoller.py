@@ -9,8 +9,7 @@ airport = Blueprint("airport", __name__)
 def airportCreate():
     try:
         response = request.get_json()
-        create(response)
-        return {"msg": "The airport has been loaded correctly"}
+        return create(response)
     except:
         return {"msg": "The chosen airport is not operational..."}
 
