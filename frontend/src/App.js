@@ -2,9 +2,16 @@ import logo from './logo.svg';
 //import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
+import { Routes, Route, Link } from "react-router-dom"
 
 import ClientList from './components/clients-list.component';
 import AirportList from "./components/airport-list.component"
+import DestinationList from "./components/destinations-list.component"
+import FlightList from "./components/flight-list.component"
+import TicketList from "./components/tickets-list.component"
+import AirlineList from './components/airline-list.component';
+import SaleList from "./components/sale-list.component"
+
 
 function App() {
   return (
@@ -26,7 +33,7 @@ function App() {
                       Cliente
                     </a>
                     <ul className="dropdown-menu">
-                      <li><a className="dropdown-item" href="#">Buscar</a></li>
+                      <li> <Link to={"/search-client"} className="dropdown-item" >Buscar</Link> </li>
                       <li><a className="dropdown-item" href="#">Editar</a></li>
                       <li><a className="dropdown-item" href="#">Lista</a></li>
                     </ul>
@@ -38,12 +45,14 @@ function App() {
         </nav>
         {/* Component ClientList */}
         <div className='container'>
-          <ClientList />
-          </div>
+          <Routes>
+            <Route path='/search-client' element={<ClientList/>} />
 
-        <div className='container'>
-          <AirportList />
-          </div>
+          </Routes>
+        </div>
+
+      
+        
 
         
       </div>

@@ -1,6 +1,5 @@
 from db import Session
 from ..models.airportClass import Airport
-from pprint import pprint
 
 
 def create(Data):
@@ -10,6 +9,8 @@ def create(Data):
 
 
 def decompress_obj(airport):
+    if airport == None:
+        raise ValueError("airport not found")
     airpot_data = {"city": airport.city,
                    "country": airport.country,
                    "acronym": airport.acronym,
@@ -22,6 +23,7 @@ def search_airport_by_id(id):
     session = Session()
     airport = session.query(Airport).filter_by(id=id).first()
     session.close()
+    
     return airport
 
 
