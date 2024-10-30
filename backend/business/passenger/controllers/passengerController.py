@@ -7,7 +7,7 @@ from datetime import datetime
 def create(Data):
     passenger = Passenger()
     passenger.create(Data)
-    return passenger
+    return passenger.to_dict()
 
 
 def search_pasenger_by_id(id):
