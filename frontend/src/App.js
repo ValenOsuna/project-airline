@@ -16,6 +16,8 @@ import AirlineCreate from './components/airline-create.component';
 import AirportCreate from './components/airport-create.component';
 import FlightCreate from './components/flight-create.component';
 import SaleCreate from './components/sale-create.component';
+import TicketCreate from './components/ticket-create.component';
+import DestinationCreate from './components/destination-create.component';
 
 function App() {
   return (
@@ -64,6 +66,7 @@ function App() {
                     </a>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-ticket"} className="dropdown-item" >Buscar</Link> </li>
+                      <li> <Link to={"/create-ticket"} className="dropdown-item"> Crear </Link> </li>
                       <li><a className="dropdown-item" href="#">Editar</a></li>
                       <li><a className="dropdown-item" href="#">Lista</a></li>
                     </ul>
@@ -87,6 +90,7 @@ function App() {
                     </a>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-destination"} className="dropdown-item"> Buscar </Link> </li>
+                      <li> <Link to={"/create-destination"} className="dropdown-item"> Crear </Link> </li>
                       <li><a className="dropdown-item" href="#">Editar</a></li>
                       <li><a className="dropdown-item" href="#">Lista</a></li>
                     </ul>
@@ -137,6 +141,8 @@ function App() {
             <Route path='/create-airport' element={<AirportCreate/>} />
             <Route path='/create-sale' element={<SaleCreate/>} />
             <Route path='/create-flight' element={<FlightCreate/>} />
+            <Route path='/create-ticket' element={<TicketCreate/>} />
+            <Route path='/create-destination' element={<DestinationCreate/>} />
 
           </Routes>
         </div>
