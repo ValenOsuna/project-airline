@@ -6,6 +6,10 @@ class AirlinetDataService{
         return client_api.post(`/airline/search`,{id:id})
     }
 
+    create(data){
+        return client_api.post('/airline/create',{data})
+    }
+
    
 }
 
