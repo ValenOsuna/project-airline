@@ -12,6 +12,10 @@ import TicketSearch from "./components/tickets-list.component"
 import AirlineSearch from './components/airline-list.component';
 import SaleSearch from "./components/sale-list.component"
 import ClientCreate from './components/client-create.component';
+import AirlineCreate from './components/airline-create.component';
+import AirportCreate from './components/airport-create.component';
+import FlightCreate from './components/flight-create.component';
+import SaleCreate from './components/sale-create.component';
 
 function App() {
   return (
@@ -131,6 +135,10 @@ function App() {
             <Route path='/search-sale' element={<SaleSearch/>} />
             <Route path='/search-ticket' element={<TicketSearch/>} />
             <Route path='/create-client' element={<ClientCreate/>} />
+            <Route path='/create-airline' element={<AirlineCreate/>} />
+            <Route path='/create-airport' element={<AirportCreate/>} />
+            <Route path='/create-sale' element={<SaleCreate/>} />
+            <Route path='/create-flight' element={<FlightCreate/>} />
 
           </Routes>
         </div>
