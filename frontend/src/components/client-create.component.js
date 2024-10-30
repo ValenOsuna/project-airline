@@ -6,8 +6,7 @@ export default class ClientCreate extends Component{
 
     constructor(props){
         super(props);
-        this.getClient = this.getClient.bind(this);
-        this.onChangeId = this.onChangeId.bind(this);
+        this.PostClient = this.PostClient.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeSurname = this.onChangeSurname.bind(this);
         this.onChangeNumber = this.onChangeNumber.bind(this);
@@ -17,8 +16,7 @@ export default class ClientCreate extends Component{
         this.onChangeCountry = this.onChangeCountry.bind(this);
         this.onChangeLuggage = this.onChangeLuggage.bind(this);
         this.state = {
-            id: null,
-            //data: null
+    
             name: null,
             surname: null,
             passport_number: null,
@@ -30,20 +28,27 @@ export default class ClientCreate extends Component{
         };
     }
 
-    getClient(){
-        var id_client = this.state.id
-        ClientDataServices.post(data)
-            .then(response => {
-                
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
-    
-    onChangeId(e){
-        this.setState({
-            id: e.target.value
+    PostClient(){
+        const clientData = {
+            name: this.state.name,
+            surname: this.state.surname,
+            passport_number: this.state.passport_number,
+            passport_expiration: this.state.passport_expiration,
+            nationality: this.state.nationality,
+            accumulated_miles: this.state.accumulated_miles,
+            country_emision: this.state.country_emision,
+            luggage: this.state.luggage
+        };
+        
+        console.log(clientData)
+        ClientDataServices.create(clientData)
+        
+        .then(response => {
+            console.log("Cliente creado:", response.data);
+            
+        })
+        .catch(e => {
+            console.log(e);
         });
     }
 
@@ -146,7 +151,7 @@ export default class ClientCreate extends Component{
                                     <input type="text" className="form-control bg-light-subtle" id="country_emision" value={ this.state.country_emision} onChange={this.onChangeCountry} />
                                 
                                 </div>
-                                <button type="button" className="btn btn-success" onClick={ this.getClient}>Crear</button>
+                                <button type="button" className="btn btn-success" onClick={ this.PostClient}>Crear</button>
                             </form>
                         </div>
                     </div>

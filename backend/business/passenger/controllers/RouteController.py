@@ -7,8 +7,9 @@ passenger = Blueprint("passenger", __name__)
 @passenger.route("/create", methods=["POST"])
 def create_data():
     try:
-        Data = request.get_json()
-        return create(Data)
+        data = request.get_json().get("data")
+        print(data)
+        return create(data)
 
     except:
         return "Error"
