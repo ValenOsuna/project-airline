@@ -9,15 +9,15 @@ from business.airplane.controllers.airplaneControllers import search_airplane_by
 
 
 def createFlight(data):
-    try:
+  # try:
         flight = Flight()
         register_flight(data)
         data = verification_airplane(data)
         flight.Cargar(data)
         flight.save()
-        return flight
+        return flight.to_dict()
 
-    except:
+   # except:
         return jsonify({"msg": "No se ha podido cargar el vuelo ",
                         "AtributosObjeto": "destination, origin, departure_time, boarding_time, airplane"}), 400
 

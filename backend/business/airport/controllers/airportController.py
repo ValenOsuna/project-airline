@@ -5,7 +5,7 @@ from ..models.airportClass import Airport
 def create(Data):
     airport = Airport()
     airport.createAirport(Data)
-    return airport
+    return airport.to_dict()
 
 
 def decompress_obj(airport):

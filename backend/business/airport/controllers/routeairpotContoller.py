@@ -8,8 +8,9 @@ airport = Blueprint("airport", __name__)
 @airport.route("/create", methods=["POST"])
 def airportCreate():
     try:
-        response = request.get_json()
-        return create(response)
+        data = request.get_json().get("data")
+        print(data)
+        return create(data)
     
     except:
         return {"msg": "The chosen airport is not operational..."}
