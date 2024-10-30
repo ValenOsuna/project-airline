@@ -1,12 +1,12 @@
-import tickets_api from "../api-common";
+import client_api from "../api-common";
 
 
 class TicketsDataService{
     get(id){
-        return tickets_api.post(`/ticket/search`,{id:id})
+        return client_api.post(`/ticket/search`,{id:id})
     }
     create(data){
-        return tickets_api.post('/ticket/create',{data})
+        return client_api.post('/ticket/create',{data})
     }
 }
 

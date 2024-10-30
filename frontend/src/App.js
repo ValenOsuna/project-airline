@@ -16,6 +16,8 @@ import AirlineCreate from './components/airline-create.component';
 import AirportCreate from './components/airport-create.component';
 import FlightCreate from './components/flight-create.component';
 import SaleCreate from './components/sale-create.component';
+import TicketCreate from './components/ticket-create.component';
+import DestinationCreate from './components/destination-create.component';
 
 function App() {
   return (
@@ -139,6 +141,8 @@ function App() {
             <Route path='/create-airport' element={<AirportCreate/>} />
             <Route path='/create-sale' element={<SaleCreate/>} />
             <Route path='/create-flight' element={<FlightCreate/>} />
+            <Route path='/create-ticket' element={<TicketCreate/>} />
+            <Route path='/create-destination' element={<DestinationCreate/>} />
 
           </Routes>
         </div>

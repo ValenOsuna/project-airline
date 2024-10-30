@@ -1,12 +1,12 @@
-import destinations_api from "../api-common";
+import client_api from "../api-common";
 
 
 class DestinationsDataService{
     get(id){
-        return destinations_api.post(`/destination/search`,{id:id})
+        return client_api.post(`/destination/search`,{id:id})
     }
     create(data){
-        return destinations_api.post('/destination/create',{data})
+        return client_api.post('/destination/create',{data})
     }
 }
 
