@@ -4,17 +4,14 @@ from db import Session
 
 
 def createDestination(data):
-   # try:
+    try:
         destination = Destination()
         destination.createDestination(data)
         destination.save()
         return destination.to_dict()
 
-  #  except:
-        return jsonify({"msg": "destination could not be loaded",
-                        "DestinationAttributes": {"name": "--",
-                                                  "requiered_visa": "--",
-                                                  "airports": "--"}}), 400
+    except:
+        raise
 
 
 def updateDestination(**kwargs):

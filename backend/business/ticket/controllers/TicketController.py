@@ -46,9 +46,9 @@ def delete(self):
 
 def create(data):
     ticket = Ticket()
-    # if data["visa_check"] == True:
-    data = data_update(data)
-    ticket.ticket_create(data)
-    return ticket
-    # else:
-    raise ValueError("destination requered visa")
+    if data["visa_check"]:
+        data = data_update(data)
+        ticket.ticket_create(data)
+        return ticket
+    else:
+        raise ValueError("destination requered visa")
