@@ -6,8 +6,8 @@ flight = Blueprint("flight", __name__)
 
 @flight.route("/create", methods=['POST'])
 def create():
-    Data = request.get_json()
-    return createFlight(Data)
+    data = request.get_json().get("data")
+    return createFlight(data)
 
 
 @flight.route("/search", methods=['POST'])

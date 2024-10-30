@@ -20,7 +20,7 @@ def createSale(data):
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
-        return sale
+        return sale.to_dict()
 
     except ValueError as exception:
         return jsonify({"msg": "sale could not be loaded", "keyError": str(exception)})
