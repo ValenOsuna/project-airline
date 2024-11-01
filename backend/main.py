@@ -8,7 +8,7 @@ from business import Flight, Airlines, Ticket, Destination, Sale, Luggages, Pass
 
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*":{"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.register_blueprint(airline, url_prefix="/airline")
 app.register_blueprint(flight, url_prefix="/flight")

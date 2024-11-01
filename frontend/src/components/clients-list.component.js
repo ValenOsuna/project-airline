@@ -1,15 +1,33 @@
 import React, { Component } from "react";
 import ClientDataServices from "../services/clients.services"; 
+import clientsServices from "../services/clients.services";
 
 export default class ClientSearch extends Component{ 
 
     constructor(props){
         super(props);
         this.getClient = this.getClient.bind(this);
+        this.handlePutEdit = this.handlePutEdit.bind(this)
         this.onChangeId = this.onChangeId.bind(this);
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeSurname = this.onChangeSurname.bind(this);
+        this.onChangeNumber = this.onChangeNumber.bind(this);
+        this.onChangeExpiration = this.onChangeExpiration.bind(this);
+        this.onChangeNationality = this.onChangeNationality.bind(this);
+        this.onChangeMiles = this.onChangeMiles.bind(this);
+        this.onChangeCountry = this.onChangeCountry.bind(this);
+        this.onChangeLuggage = this.onChangeLuggage.bind(this);
         this.state = {
             id: null,
-            data: null
+            data: null,
+            name: null,
+            surname: null,
+            passport_number: null,
+            passport_expiration: null,
+            nationality: null,
+            accumulated_miles: null,
+            country_emision: null,
+            luggage: null
         };
     }
 
@@ -22,14 +40,21 @@ export default class ClientSearch extends Component{
                 console.log (response.data);
                 //setcontent(response.data);
                 //document.getElementById('data').innerText = JSON.stringify(response.data);
-                document.getElementById('name').innerText = response.data.name;
-                document.getElementById('surname').innerText = response.data.surname;
-                document.getElementById('passport_number').innerText = response.data.passport_number;
-                document.getElementById('passport_expiration').innerText = response.data.passport_expiration;
-                document.getElementById('nationality').innerText = response.data.nationality;
-                document.getElementById('accumulated_miles').innerText = response.data.accumulated_miles;
-                document.getElementById('country_emision').innerText = response.data.country_emision;
-                document.getElementById('luggage').innerText = response.data.luggage;
+                //document.getElementById('name').innerText = response.data.name;
+                this.state.id = response.data.id;
+                //this.state.name = response.data.name;
+                this.setState({
+                    id: response.data.id,
+                    name: response.data.name,
+                    surname: response.data.surname,
+                    passport_number: response.data.passport_number,
+                    passport_expiration: response.data.passport_expiration,
+                    nationality: response.data.nationality,
+                    country_emision: response.data.country_emision,
+                    accumulated_miles: response.data.accumulated_miles,
+                    luggage: response.data.luggage
+                });
+                
             })
             .catch(e => {
                 console.log(e);
@@ -41,6 +66,54 @@ export default class ClientSearch extends Component{
             id: e.target.value
         });
     }
+    onChangeName(e){
+        this.setState({
+            name: e.target.value
+        });
+    }
+
+    onChangeSurname(e){
+        this.setState({
+            surname: e.target.value
+        });
+    }
+
+    onChangeNumber(e){
+        this.setState({
+            passport_number: e.target.value
+        });
+    }
+
+    onChangeExpiration(e){
+        this.setState({
+            passport_expiration: e.target.value
+        });
+    }
+
+    onChangeNationality(e){
+        this.setState({
+            nationality: e.target.value
+        });
+    }
+
+    onChangeMiles(e){
+        this.setState({
+            accumulated_miles: e.target.value
+        });
+    }
+
+    onChangeCountry(e){
+        this.setState({
+            country_emision: e.target.value
+        });
+    }
+
+    onChangeLuggage(e){
+        this.setState({
+            luggage: e.target.value
+        });
+    }
+
     handleEdit(){
         document.getElementById("viewClient").classList.add("d-none")
         document.getElementById("viewEdit").classList.remove("d-none")
@@ -48,8 +121,20 @@ export default class ClientSearch extends Component{
     handlePutEdit(){
         // EDIT SERVICES
         document.getElementById("saveButton").setAttribute("disabled",true)
-        console.log("EDIT ACTION")
+        const data = {
+            id: this.state.id,
+            name: this.state.name,
+            surname: this.state.surname,
+            passport_number: this.state.passport_number,
+            passport_expiration: this.state.passport_expiration,
+            nationality: this.state.nationality,
+            accumulated_miles: this.state.accumulated_miles,
+            country_emision: this.state.country_emision,
+            luggage: this.state.luggage
+        };
+        ClientDataServices.update(data)
     }
+
     handleCancel(){
         document.getElementById("viewEdit").classList.add("d-none")
         document.getElementById("viewClient").classList.remove("d-none")
@@ -81,38 +166,38 @@ export default class ClientSearch extends Component{
                                 <div className="col-md-6">
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="name"></span>
+                                        <span className="fst-italic mt-1" id="name">{ this.state.name }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Apellido:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="surname"></span>
+                                        <span className="fst-italic mt-1" id="surname">{ this.state.surname }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Numero pasaporte:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="passport_number"></span>
+                                        <span className="fst-italic mt-1" id="passport_number">{ this.state.passport_number }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Fecha Expiracion:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="passport_expiration"></span>
+                                        <span className="fst-italic mt-1" id="passport_expiration">{ this.state.passport_expiration }</span>
                                     </div>
                                    
                                 </div>
                                 <div className="col-md-6">
                                 <div className="col">
                                         <label className="text-capitalize fw-bold">Nacionalidad:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="nationality"></span>
+                                        <span className="fst-italic mt-1" id="nationality">{ this.state.nationality }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Pais emisor:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="country_emision"></span>
+                                        <span className="fst-italic mt-1" id="country_emision">{ this.state.country_emision }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Millas acumuladas:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="accumulated_miles"></span>
+                                        <span className="fst-italic mt-1" id="accumulated_miles">{ this.state.accumulated_miles }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Equipaje:&#160;</label>
-                                        <span className="fst-italic mt-1" id="luggage"></span>
+                                        <span className="fst-italic mt-1" id="luggage">{ this.state.luggage }</span>
                                     </div>
                                                                    
                                 </div>
@@ -130,38 +215,38 @@ export default class ClientSearch extends Component{
                                 <div className="col-md-6">
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
-                                        <input className="fst-italic mt-1 form-control" id="name" value={this.state.name}></input>
+                                        <input className="fst-italic mt-1 form-control" id="name" value={this.state.name} onChange={this.onChangeName}></input>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Apellido:&nbsp;</label>
-                                        <input className="fst-italic mt-1 form-control" id="surname" value={this.state.surname}></input>
+                                        <input className="fst-italic mt-1 form-control" id="surname" value={this.state.surname} onChange={this.onChangeSurname}></input>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Numero pasaporte:&nbsp;</label>
-                                        <input className="fst-italic mt-1 form-control" id="passport_number" value={this.state.passport_number}></input>
+                                        <input className="fst-italic mt-1 form-control" id="passport_number" value={this.state.passport_number} onChange={this.onChangeNumber}></input>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Fecha Expiracion:&nbsp;</label>
-                                        <input className="fst-italic mt-1 form-control" id="passport_expiration" value={this.state.passport_expiration}></input>
+                                        <input className="fst-italic mt-1 form-control" id="passport_expiration" value={this.state.passport_expiration} onChange={this.onChangeExpiration}></input>
                                     </div>
                                    
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
                                             <label className="text-capitalize fw-bold">Nacionalidad:&nbsp;</label>
-                                            <input className="fst-italic mt-1 form-control" id="nationality" value={this.state.nationality}></input>
+                                            <input className="fst-italic mt-1 form-control" id="nationality" value={this.state.nationality} onChange={this.onChangeNationality}></input>
                                         </div>
                                         <div className="col">
                                             <label className="text-capitalize fw-bold">Pais emisor:&nbsp;</label>
-                                            <input className="fst-italic mt-1 form-control" id="country_emision" value={this.state.country_emision}></input>
+                                            <input className="fst-italic mt-1 form-control" id="country_emision" value={this.state.country_emision} onChange={this.onChangeCountry}></input>
                                         </div>
                                         <div className="col">
                                             <label className="text-capitalize fw-bold">Millas acumuladas:&nbsp;</label>
-                                            <input className="fst-italic mt-1 form-control" id="accumulated_miles" value={this.state.accumulated_miles}></input>
+                                            <input className="fst-italic mt-1 form-control" id="accumulated_miles" value={this.state.accumulated_miles} onChange={ this.onChangeMiles }></input>
                                         </div>
                                         <div className="col">
                                             <label className="text-capitalize fw-bold">Equipaje:&#160;</label>
-                                            <input className="fst-italic mt-1 form-control" id="luggage" value={this.state.luggage}></input>
+                                            <input className="fst-italic mt-1 form-control" id="luggage" value={this.state.luggage} onChange={ this.onChangeLuggage }></input>
                                         </div>
                                                                     
                                     </div>

@@ -53,7 +53,8 @@ class Passenger(Base):
         session.close()
 
     def to_dict(self):
-        return {"passport_number": self.passport_number,
+        return {"id": self.id,
+                "passport_number": self.passport_number,
                 "passport_expiration": self.passport_expiration,
                 "nationality": self.nationality,
                 "country_emision": self.country_emision,

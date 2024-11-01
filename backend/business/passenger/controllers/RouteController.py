@@ -21,7 +21,7 @@ def search_data():
     data = (search_pasenger_by_id(response))
     if data is None:
         return {"msg": "Passanger not found"}
-
+    print(vars(data))
     return data.to_dict()
 
 
@@ -36,8 +36,7 @@ def delete_data():
 
 @passenger.route("update", methods=["POST"])
 def update_data():
-    data = request.get_json()
-    id = request.get_json().get("id")
+    data = request.get_json().get("data")
     return update(**data)
 
 

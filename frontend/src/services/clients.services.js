@@ -8,6 +8,9 @@ class ClientsDataService{
     create(data){
         return client_api.post('/passenger/create',{data})
     }
+    update(data){
+        return client_api.post('/passenger/update',{data})
+    }
 }
 
 export default new ClientsDataService();
