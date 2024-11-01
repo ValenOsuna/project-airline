@@ -50,6 +50,10 @@ export default class ClientSearch extends Component{
         document.getElementById("saveButton").setAttribute("disabled",true)
         console.log("EDIT ACTION")
     }
+    handleCancel(){
+        document.getElementById("viewEdit").classList.add("d-none")
+        document.getElementById("viewClient").classList.remove("d-none")
+    }
     render(){
         return (
             <div className="row">
@@ -121,7 +125,7 @@ export default class ClientSearch extends Component{
                             <h4>Datos del Usuario:</h4>
                             <div className="row">
                                 <div className="col-md-12 text-end">
-                                    <button type="button" className="btn btn-danger" onClick={ this.handleEdit }>Cancelar <i class="fa-solid fa-pencil"></i></button>
+                                    <button type="button" className="btn btn-danger" onClick={ this.handleCancel }>Cancelar <i class="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
