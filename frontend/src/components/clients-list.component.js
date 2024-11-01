@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ClientDataServices from "../services/clients.services"; 
 
-
 export default class ClientSearch extends Component{ 
 
     constructor(props){
@@ -42,7 +41,15 @@ export default class ClientSearch extends Component{
             id: e.target.value
         });
     }
-
+    handleEdit(){
+        document.getElementById("viewClient").classList.add("d-none")
+        document.getElementById("viewEdit").classList.remove("d-none")
+    }
+    handlePutEdit(){
+        // EDIT SERVICES
+        document.getElementById("saveButton").setAttribute("disabled",true)
+        console.log("EDIT ACTION")
+    }
     render(){
         return (
             <div className="row">
@@ -60,10 +67,13 @@ export default class ClientSearch extends Component{
                     </div>
                 </div>
                 <div className="col-md-9 mb-3">
-                    <div className="card mt-5 bg-light-subtle">
+                    <div className="card mt-5 bg-light-subtle" id="viewClient">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
                             <div className="row">
+                                <div className="col-md-12 text-end">
+                                    <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
+                                </div>
                                 <div className="col-md-6">
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
@@ -102,6 +112,58 @@ export default class ClientSearch extends Component{
                                     </div>
                                                                    
                                 </div>
+                            </div>                           
+
+                        </div>
+                    </div>
+                    <div className="card mt-5 bg-light-subtle d-none" id="viewEdit">
+                        <div className="card-body">
+                            <h4>Datos del Usuario:</h4>
+                            <div className="row">
+                                <div className="col-md-12 text-end">
+                                    <button type="button" className="btn btn-danger" onClick={ this.handleEdit }>Cancelar <i class="fa-solid fa-pencil"></i></button>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
+                                        <input className="fst-italic mt-1 form-control" id="name" value={this.state.name}></input>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Apellido:&nbsp;</label>
+                                        <input className="fst-italic mt-1 form-control" id="surname" value={this.state.surname}></input>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Numero pasaporte:&nbsp;</label>
+                                        <input className="fst-italic mt-1 form-control" id="passport_number" value={this.state.passport_number}></input>
+                                    </div>
+                                    <div className="col">
+                                        <label className="text-capitalize fw-bold">Fecha Expiracion:&nbsp;</label>
+                                        <input className="fst-italic mt-1 form-control" id="passport_expiration" value={this.state.passport_expiration}></input>
+                                    </div>
+                                   
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="col">
+                                            <label className="text-capitalize fw-bold">Nacionalidad:&nbsp;</label>
+                                            <input className="fst-italic mt-1 form-control" id="nationality" value={this.state.nationality}></input>
+                                        </div>
+                                        <div className="col">
+                                            <label className="text-capitalize fw-bold">Pais emisor:&nbsp;</label>
+                                            <input className="fst-italic mt-1 form-control" id="country_emision" value={this.state.country_emision}></input>
+                                        </div>
+                                        <div className="col">
+                                            <label className="text-capitalize fw-bold">Millas acumuladas:&nbsp;</label>
+                                            <input className="fst-italic mt-1 form-control" id="accumulated_miles" value={this.state.accumulated_miles}></input>
+                                        </div>
+                                        <div className="col">
+                                            <label className="text-capitalize fw-bold">Equipaje:&#160;</label>
+                                            <input className="fst-italic mt-1 form-control" id="luggage" value={this.state.luggage}></input>
+                                        </div>
+                                                                    
+                                    </div>
+                                    
+                                        <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }>Guardar&#160; <i class="fa-solid fa-save"></i></button>
+                                    
                             </div>                           
 
                         </div>
