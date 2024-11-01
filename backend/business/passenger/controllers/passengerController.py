@@ -18,20 +18,21 @@ def search_pasenger_by_id(id):
 
 
 def update(**kwargs):
+    print(kwargs)
     session = Session()
-    try:
-        id = kwargs["id"]
-        user = session.query(Passenger).filter_by(id=id).first()
-        if user:
-            for key, value in kwargs.items():
-                if hasattr(user, key):
-                    setattr(user, key, value)
-            session.commit()
-            session.refresh(user)
-        session.close()
-        return "base actualizada"
-    except:
-        return "Error"
+    # try:
+    id = kwargs["id"]
+    user = session.query(Passenger).filter_by(id=id).first()
+    if user:
+        for key, value in kwargs.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+        session.commit()
+        session.refresh(user)
+    session.close()
+    return "base actualizada"
+# except:
+    return "Error"
 
 
 def delete(id):
