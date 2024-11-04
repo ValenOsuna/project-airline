@@ -8,6 +8,10 @@ class AirlinetDataService{
 
     create(data){
         return client_api.post('/airline/create',{data})
+    
+    }
+    update(data){
+        return client_api.post('/airline/update',{data})
     }
 
    
