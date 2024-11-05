@@ -18,8 +18,9 @@ def airportCreate():
 
 @airport.route("/update", methods=["POST"])
 def query_airport():
-    response = request.get_json()
-    return update(**response)
+    data = request.get_json().get("data")
+    print(data)
+    return update(**data)
 
 
 @airport.route("/search", methods=["POST"])
