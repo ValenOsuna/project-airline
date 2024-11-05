@@ -9,6 +9,10 @@ class SaleDataService{
     create(data){
         return client_api.post(`/sale/create`,{data})
     }
+
+    update(data){
+        return client_api.put(`/sale/update`,{data})
+    }
 }
 
 export default new SaleDataService();

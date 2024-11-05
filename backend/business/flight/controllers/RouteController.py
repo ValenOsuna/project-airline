@@ -18,7 +18,8 @@ def search():
 
 @flight.route("/update", methods=['PUT', 'PATCH'])
 def update():
-    Data = request.get_json()
+    Data = request.get_json().get("data")
+    print(Data)
     return updateFlight(**Data)
 
 

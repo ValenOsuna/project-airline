@@ -72,7 +72,8 @@ def readFlight(id):
         return jsonify({"msg": "Vuelo no encontrado", "keyError": "id"}), 404
     session.close()
 
-    return jsonify({"origin": f"{flight.origin}",
+    return jsonify({"id": flight.id,
+                    "origin": f"{flight.origin}",
                     "destination": f"{flight.destination}",
                     "boarding_time": f"{flight.boarding_time}",
                     "departure_time": flight.departure_time,

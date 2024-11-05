@@ -8,6 +8,10 @@ class FlightDataService{
     create(data){
         return client_api.post(`/flight/create`,{data})
     }
+    update(data){
+        return client_api.patch(`/flight/update`,{data})
+    }
 }
+
 
 export default new FlightDataService();
