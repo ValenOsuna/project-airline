@@ -10,13 +10,9 @@ def create(Data):
 
 def decompress_obj(airport):
     if airport == None:
-        raise ValueError("airport not found")
-    airpot_data = {"city": airport.city,
-                   "country": airport.country,
-                   "acronym": airport.acronym,
-                   "gates": airport.gates
-                   }
-    return airpot_data
+        return airport.to_dict()
+    else:
+        return "datos inexistente"
 
 
 def search_airport_by_id(id):

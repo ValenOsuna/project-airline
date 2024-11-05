@@ -8,6 +8,7 @@ export default class AirportSearch extends Component{
     constructor(props){
         super(props);
         this.getAirport = this.getAirport.bind(this);
+        this.handlePutEdit = this.handlePutEdit.bind(this);
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeCity = this.onChangeCity.bind(this);
         this.onChangeCountry = this.onChangeCountry.bind(this);
@@ -115,22 +116,25 @@ export default class AirportSearch extends Component{
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
                             <div className="row">
+                                <div className="col-md-12 text-end">
+                                    <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
+                                </div>
                                 <div className="col-md-6">
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Ciudad:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="city"></span>
+                                        <span className="fst-italic mt-1" id="city">{ this.state.city }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Pais:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="country"></span>
+                                        <span className="fst-italic mt-1" id="country">{ this.state.country }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Siglas:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="acronym"></span>
+                                        <span className="fst-italic mt-1" id="acronym">{ this.state.acronym }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Puertas:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="gates"></span>
+                                        <span className="fst-italic mt-1" id="gates">{ this.state.gates }</span>
                                      </div>
                                                                    
                                 </div>

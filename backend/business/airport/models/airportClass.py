@@ -44,6 +44,7 @@ class Airport(Base):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "city": self.city,
             "acronym": self.acronym,
             "country": self.country,
