@@ -27,19 +27,19 @@ def search(id):
 
 def update_data(**kwargs):
     session = Session()
-    try:
-        id = kwargs["id"]
-        user = session.query(Airlines).filter_by(id=id).first()
-        if user:
-            for key, value in kwargs.items():
-                if hasattr(user, key):
-                    setattr(user, key, value)
-            session.commit()
-            session.refresh(user)
-        session.close()
-        return "la base de datos de aerolineas ha sido actualizada"
-    except:
-        return "datos inexistentes"
+    #try:
+    id = kwargs["id"]
+    user = session.query(Airlines).filter_by(id=id).first()
+    if user:
+        for key, value in kwargs.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+        session.commit()
+        session.refresh(user)
+    session.close()
+    return "la base de datos de aerolineas ha sido actualizada"
+    #except:
+    return "datos inexistentes"
 
 
 def update(**data):
@@ -81,12 +81,9 @@ def delete(id):
         return "datos inexistentes"
 
 
-def descomprimir_obj(Airlines):
-    if Airlines != None:
-        airline_data = {"name": f"{Airlines.name}",
-                        "acronym": f"{Airlines.acronym}",
-                        "flight_list": f"{Airlines.flight_list}"}
-        return airline_data
+def descomprimir_obj(airlines):
+    if airlines != None:
+        return airlines.to_dict()
     else:
         return "Dato inexistente"
 
