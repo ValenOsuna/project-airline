@@ -7,6 +7,7 @@ export default class AirlineSearch extends Component{
     constructor(props){
         super(props);
         this.getAirline = this.getAirline.bind(this);
+        this.handlePutEdit = this.handlePutEdit.bind(this)
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeFlight_list = this.onChangeFlight_list.bind(this);
@@ -86,7 +87,7 @@ export default class AirlineSearch extends Component{
         return (
             <div className="row">
                 <div className="col-md-3">
-                    <div className="card mt-5 bg-light-subtle">
+                    <div className="card mt-5 bg-light-subtle"  >
                         <div className="card-body">
                             <form cl>
                                 <div className="mb-3">
@@ -99,22 +100,25 @@ export default class AirlineSearch extends Component{
                     </div>
                 </div>
                 <div className="col-md-9 mb-3">
-                    <div className="card mt-5 bg-light-subtle">
+                    <div className="card mt-5 bg-light-subtle" id="viewAirline">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
                             <div className="row">
+                                <div className="col-md-12 text-end">
+                                    <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
+                                </div>
                                 <div className="col-md-6">
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="name"></span>
+                                        <span className="fst-italic mt-1" id="name"> { this.state.name } </span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Lista vuelos:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="flight_list"></span>
+                                        <span className="fst-italic mt-1" id="flight_list">{ this.state.flight_list }</span>
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Siglas:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="acronym"></span>
+                                        <span className="fst-italic mt-1" id="acronym">{ this.state.acronym } </span>
                                     </div>
                                     </div>
                                                                    

@@ -32,6 +32,6 @@ def delete_aerolinea():
 
 @airline.route("/update", methods=['POST'])
 def update_airlines():
-        data = request.get_json()
-        id = request.get_json().get("id")
+        data = request.get_json().get("data")
+        print(data)
         return update_data(**data)
