@@ -82,15 +82,7 @@ def readSale(id):
         return jsonify({"msg": "Destination not found", "keyError": "id"}), 404
     session.close()
 
-    return jsonify({"issue_date": sale.issue_date,
-                    "reservation_number": sale.reservation_number,
-                    "passenger_data": sale.passenger_data,
-                    "pay_method": sale.pay_method,
-                    "accumulated_miles": sale.accumulated_miles,
-                    "fare": sale.fare,
-                    "price": sale.price,
-                    "flight": sale.flight,
-                    "luggage": sale.luggage}), 200
+    return sale.to_dict()
 
 
 def search_sale_by_id(id):

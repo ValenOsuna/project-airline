@@ -19,7 +19,9 @@ def search():
 
 @sale.route("/update", methods=['PUT', 'PATCH'])
 def update():
-    Data = request.get_json()
+    
+    Data = request.get_json().get("data")
+    print(Data)
     return updateSale(**Data)
 
 

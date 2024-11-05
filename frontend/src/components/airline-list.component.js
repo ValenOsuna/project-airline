@@ -25,7 +25,6 @@ export default class AirlineSearch extends Component{
         AirlinetDataService.get(id_airline)
             .then(response => {
                 console.log (response.data);
-                this.state.id = response.data.id;
                 this.setState({
                 id: response.data.id,
                 name: response.data.name,
