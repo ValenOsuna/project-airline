@@ -19,7 +19,6 @@ def airportCreate():
 @airport.route("/update", methods=["POST"])
 def query_airport():
     data = request.get_json().get("data")
-    print(data)
     return update(**data)
 
 
@@ -30,7 +29,7 @@ def search_airport():
         return decompress_obj(search_airport_by_id(response))
     
     except:
-        return {"msg" : "not found"}
+        raise
 
 
 @airport.route("/delete", methods=["DELETE"])

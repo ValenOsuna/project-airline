@@ -18,7 +18,7 @@ from .destination.controllers.routeController import destination
 from .sale.controllers.routeController import sale
 from .luggage.controllers.RouteController import luggage
 from .passenger.controllers.RouteController import passenger
-from .airport.controllers.routeairpotContoller import airport
+from .airport.controllers.routeController import airport
 from .airplane.controllers.routeController import airplane
 from .seat.controllers.RouteController import seat
 

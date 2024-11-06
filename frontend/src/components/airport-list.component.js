@@ -112,7 +112,7 @@ export default class AirportSearch extends Component{
                     </div>
                 </div>
                 <div className="col-md-9 mb-3">
-                    <div className="card mt-5 bg-light-subtle">
+                    <div className="card mt-5 bg-light-subtle" id="viewAirport">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
                             <div className="row">
