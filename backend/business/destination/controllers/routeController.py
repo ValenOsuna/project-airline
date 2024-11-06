@@ -18,9 +18,9 @@ def search():
     return readDestination(id)
 
 
-@destination.route("/update", methods=['PUT', 'PATCH'])
+@destination.route("/update", methods=['POST'])
 def update():
-    Data = request.get_json()
+    Data = request.get_json().get("data")
     return updateDestination(**Data)
 
 

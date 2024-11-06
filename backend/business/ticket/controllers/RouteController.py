@@ -27,7 +27,7 @@ def ticket_delete():
 @ticket.route("/update", methods=["POST"])  # methods PUT O PACH
 def adjust_tickets():
     response = request.get_json()
-    id = request.get_json().get("id")
+    print(response)
     return update(**response)
 
 

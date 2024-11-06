@@ -36,6 +36,7 @@ class Destination(Base):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "name": self.name,
             "requiered_visa": self.requiered_visa,
             "airport": self.airport}

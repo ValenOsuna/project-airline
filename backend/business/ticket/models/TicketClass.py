@@ -46,6 +46,7 @@ class Ticket(Base):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "gate": self.gate,
             "airline": self.airline,
             "terminal": self.terminal,

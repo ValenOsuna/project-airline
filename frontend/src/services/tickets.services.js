@@ -8,6 +8,9 @@ class TicketsDataService{
     create(data){
         return client_api.post('/ticket/create',{data})
     }
+    update(data){
+        return client_api.post('/ticket/update',{data})
+    }
 }
 
 export default new TicketsDataService();
