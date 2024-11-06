@@ -9,15 +9,16 @@ def create(Data):
 
 
 def decompress_obj(airport):
-    if airport == None:
+    print(vars(airport))
+    if airport != None:
         return airport.to_dict()
     else:
         return "datos inexistente"
 
 
-def search_airport_by_id(id):
+def search_airport_by_id(data):
     session = Session()
-    airport = session.query(Airport).filter_by(id=id).first()
+    airport = session.query(Airport).filter_by(id=data).first()
     session.close()
     
     return airport
