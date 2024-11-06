@@ -22,6 +22,7 @@ def updateDestination(**kwargs):
         return jsonify({"msg": f"No data has been sent to modify the id: '{id}'"}), 400
 
     id = kwargs.get("id")
+    kwargs["requiered_visa"] = bool(kwargs["requiered_visa"])
     destination = search_destination_by_id(id)
 
     if not destination:
@@ -56,7 +57,8 @@ def readDestination(id):
         return jsonify({"msg": "Destination not found", "keyError": "id"}), 404
     session.close()
 
-    return jsonify({"name": f"{destination.name}",
+    return jsonify({"id": f"{destination.id}",
+                    "name": f"{destination.name}",
                     "requiered_visa": f"{destination.requiered_visa}",
                     "airports": f"{destination.airport}"}), 200
 

@@ -15,20 +15,21 @@ def search_ticket_by_id(id):
 
 def update(**kwargs):
     session = Session()
-    try:
-        id = kwargs["id"]
-        user = session.query(Ticket).filter_by(id=id).first()
-        if user:
-            for key, value, in kwargs.items():
-                if hasattr(user, key):
-                    setattr(user, key, value)
-            session.commit()
-            session.refresh(user)
-        session.close()
-        return {"msg": "Update successful paper"}
+    #try:
+    print(kwargs)
+    user = session.query(Ticket).filter_by(id=id).first()
+    print(user)
+    if user:
+        for key, value, in kwargs.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
+        session.commit()
+        session.refresh(user)
+    session.close()
+    return {"msg": "Update successful paper"}
 
-    except:
-        return {"msg": "The desired ticket was modified. Next time please don't change the destination at the last minute..."}
+    #except:
+    return {"msg": "The desired ticket was modified. Next time please don't change the destination at the last minute..."}
 
 
 def delete(self):

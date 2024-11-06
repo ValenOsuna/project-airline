@@ -8,6 +8,9 @@ class DestinationsDataService{
     create(data){
         return client_api.post('/destination/create',{data})
     }
+    update(data){
+        return client_api.post('/destination/update',{data})
+    }
 }
 
 export default new DestinationsDataService();
