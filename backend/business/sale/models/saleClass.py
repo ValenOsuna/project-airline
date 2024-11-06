@@ -65,7 +65,7 @@ class Sale(Base):
             "issue_date": self.issue_date,
             "reservation_number": self.reservation_number,
             "passenger_data": self.passenger_data,
-            "pay_method": self.pay_method,
+            "pay_method": "Credito" if self.pay_method else "Debito",
             "accumulated_miles": self.accumulated_miles,
             "fare": self.fare,
             "flight": self.flight,

@@ -26,7 +26,7 @@ export default class SaleSearch extends Component {
             id: '',
             issue_date: null,
             reservation_number: null,
-            pay_method: null,
+            pay_method: '',
             fare: null,
             price: null,
             flight: null,
@@ -41,10 +41,12 @@ export default class SaleSearch extends Component {
         const id_sale = this.state.id;
         SaleDataService.get(id_sale)
             .then(response => {
+                console.log(response)
                 this.setState({
                     id :response.data.id,
                     issue_date: response.data.issue_date,
                     reservation_number: response.data.reservation_number,
+                    accumulated_miles: response.data.accumulated_miles,
                     pay_method: response.data.pay_method,
                     fare: response.data.fare,
                     price: response.data.price,
@@ -258,7 +260,10 @@ export default class SaleSearch extends Component {
                                 <div className="col-md-6">
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Medio de pago:&nbsp;</label>
-                                        <input className="form-control" value={this.state.pay_method} onChange={this.onChangepay_method} />
+                                        <input className="form-control" 
+                                        value={this.state.pay_method} 
+                                        onChange={this.onChangepay_method} />
+
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Precio:&nbsp;</label>
