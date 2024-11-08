@@ -169,3 +169,11 @@ def search_sale_by_reservation(reservation_number):
         ).filter(Sale.reservation_number == reservation_number).first()
         session.close()
         return sale
+
+def search_list_sale(issueDate):
+    session = Session()
+    list = session.query(Sale).filter(Sale.issue_date.like(f'%{issueDate}%'))
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+    return results
