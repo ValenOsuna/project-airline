@@ -68,3 +68,11 @@ def search_destination_by_id(id) -> Destination:
         destination = session.query(Destination).filter_by(id=id).first()
         session.close()
         return destination
+
+def search_list_destination(name):
+    session = Session()
+    list = session.query(Destination).filter(Destination.name.like(f'%{name}%'))
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+    return results
