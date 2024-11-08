@@ -54,3 +54,11 @@ def descomprimir(Luggages):
         return luggages_info
     else:
         return "Dato inexistente"
+
+def search_list_luggage(type):
+    session = Session()
+    list = session.query(Luggages).filter(Luggages.type.like(f'%{type}%'))
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+    return results

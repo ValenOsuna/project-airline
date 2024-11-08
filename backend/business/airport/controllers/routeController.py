@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .airportController import create, update, search_airport_by_id, delete, decompress_obj
+from .airportController import create, update, search_airport_by_id, delete, decompress_obj, search_airport_city
 
 
 airport = Blueprint("airport", __name__)
@@ -40,3 +40,10 @@ def del_aiport():
     
     except:
         return {"msg": "The selected aircraft is not in the operations list"}
+    
+
+@airport.route('/list', methods=['GET'])
+def result_list():
+    city = request.get_json().get("city")
+    return search_airport_city(city)
+

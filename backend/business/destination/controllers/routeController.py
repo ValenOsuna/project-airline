@@ -1,4 +1,4 @@
-from .destinationController import createDestination, deleteDesination, updateDestination, readDestination
+from .destinationController import createDestination, deleteDesination, updateDestination, readDestination , search_list_destination
 from flask import Blueprint, request
 
 destination = Blueprint("destination", __name__)
@@ -28,3 +28,9 @@ def update():
 def delete():
     id = request.get_json().get("id")
     return deleteDesination(id)
+
+@destination.route("/list", methods=['GET'])
+def listResult():
+    data = request.get_json().get("data").get("name")
+    print(data)
+    return search_list_destination(data)

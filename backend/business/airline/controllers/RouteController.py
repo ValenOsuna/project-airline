@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .airlineController import create, delete_data, search_airline_by_id, update_data, descomprimir_obj
+from .airlineController import create, delete_data, search_airline_by_id, update_data, descomprimir_obj, search_airline_name
 
 airline = Blueprint("airlines", __name__)
 
@@ -35,3 +35,8 @@ def update_airlines():
         data = request.get_json().get("data")
         print(data)
         return update_data(**data)
+
+@airline.route('/list', methods=['GET'])
+def result_list():
+    name = request.get_json().get("name")
+    return search_airline_name(name)

@@ -94,3 +94,12 @@ def search_airline_by_flight_id(flight_list) -> Airlines:
     print(user)
     session.close()
     return user
+
+def search_airline_name(name):
+    session = Session()
+    list = session.query(Airlines).filter(Airlines.name.like(f'%{name}%'))
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+        print(item.__dict__)
+    return results
