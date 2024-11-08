@@ -48,3 +48,13 @@ def delete(id):
         session.delete(airport)
         session.commit()
         return airport
+    
+
+def search_airport_city(city):
+    session = Session()
+    list = session.query(Airport).filter(Airport.city.like(f'%{city}%'))
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+        print(item.__dict__)
+    return results

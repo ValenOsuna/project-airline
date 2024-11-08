@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from .airplaneControllers import create, update, search_airplane_by_id, delete, decompress_obj
+from .airplaneControllers import create, update, search_airplane_by_id, delete, decompress_obj, search_airplane_model
 
 
 airplane = Blueprint("airplane", __name__)
@@ -35,3 +35,8 @@ def delete_airplane():
         return {"msg": "the airplane is eliminade of the list"}
     except:
         return {"msg": "The selected aircraft has been removed from the list"}
+    
+@airplane.route('/list', methods=['GET'])
+def result_list():
+    model = request.get_json().get("model")
+    return search_airplane_model(model)
