@@ -68,3 +68,12 @@ def delete(id):
         session.commit()
 
     session.close()
+
+def search_airplane_model(model):
+    session = Session()
+    list = session.query(Airplane).filter(Airplane.model.like(f'%{model}%'))
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+        print(item.__dict__)
+    return results
