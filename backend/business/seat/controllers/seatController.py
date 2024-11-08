@@ -88,6 +88,3 @@ def search_seats(id):
         results.append(item.dump())
         print(item.__dict__)
     return results
-
-    
-

@@ -9,8 +9,6 @@ export default class SaleSearch extends Component {
         this.handlePutEdit = this.handlePutEdit.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
-
-      
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeIssueDate = this.onChangeIssueDate.bind(this);
         this.onChangeReservationNumber = this.onChangeReservationNumber.bind(this);

@@ -26,17 +26,15 @@ def ticket_delete():
 
 @ticket.route("/update", methods=["POST"])  # methods PUT O PACH
 def adjust_tickets():
-    response = request.get_json()
-    print(response)
-    return update(**response)
+    response = request.get_json().get("id")
+    ticket = search_ticket_by_id(response)
+    return vars(ticket)
 
 
 @ticket.route("/search", methods=["POST"])
 def consult_tickets():
     response = request.get_json().get("id")
     ticket = search_ticket_by_id(response)
-    
     if ticket is None:
-        return {"msg":"Ticket not found"}
-    
+        return {"msg": "Ticket not found"}
     return ticket.to_dict()

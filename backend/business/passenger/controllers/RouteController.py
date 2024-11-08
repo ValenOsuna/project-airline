@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from .passengerController import create, delete, search_pasenger_by_id, update, validation_passport
+from .passengerController import create, delete, search_pasenger_by_id, update, validation_passport, search_list
 
 passenger = Blueprint("passenger", __name__)
 
@@ -34,7 +34,7 @@ def delete_data():
         return "Error"
 
 
-@passenger.route("update", methods=["POST"])
+@passenger.route("/update", methods=["POST"])
 def update_data():
     data = request.get_json().get("data")
     return update(**data)
@@ -49,3 +49,9 @@ def validation_pasaporte():
 
     es_valido = validation_passport(expiration_date_str)
     return jsonify({"valido": es_valido})
+
+
+@passenger.route('/list', methods=['GET'])
+def result_list():
+    name = request.get_json().get("name")
+    return search_list(name)

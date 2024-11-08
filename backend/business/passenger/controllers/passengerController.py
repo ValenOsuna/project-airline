@@ -65,3 +65,13 @@ def search_pasenger_by_passport(passport_number):
         return user
     except:
         return {"Error"}
+
+
+def search_list(name):
+    session = Session()
+    list = session.query(Passenger).filter(Passenger.name.like(f'%{name}%'))
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+        print(item.__dict__)
+    return results

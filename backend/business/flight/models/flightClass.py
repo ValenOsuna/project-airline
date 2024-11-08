@@ -17,6 +17,7 @@ class Flight(Base):
     gate = Column("gate", Integer, nullable=False)
     row = Column("row", String, nullable=False)
     column = Column("column", Integer, nullable=False)
+    date = Column("date", String, nullable=False)
 
     destinationDetail = relationship("Destination", back_populates="flightDetail")
     airplaneDetail = relationship("Airplane", back_populates="flightDetail")
@@ -35,7 +36,8 @@ class Flight(Base):
                  group=None,
                  gate=None,
                  row=None,
-                 column=None
+                 column=None,
+                 date=None
                  ):
 
         self.destination = destination
@@ -48,6 +50,7 @@ class Flight(Base):
         self.gate = gate
         self.row = row
         self.column = column
+        self.date = date
 
     def Cargar(self, Data):
         self.destination = Data["destination"]
@@ -60,6 +63,7 @@ class Flight(Base):
         self.gate = Data["gate"]
         self.row = Data["row"]
         self.column = Data["column"]
+        self.date = Data["date"]
 
     def save(self):
         session = Session()
@@ -80,4 +84,5 @@ class Flight(Base):
             "gate": self.gate,
             "row": self.row,
             "column": self.column,
+            "date": self.column
         }

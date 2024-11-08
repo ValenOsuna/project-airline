@@ -9,17 +9,17 @@ from business.airplane.controllers.airplaneControllers import search_airplane_by
 
 
 def createFlight(data):
-  # try:
-        flight = Flight()
-        register_flight(data)
-        data = verification_airplane(data)
-        flight.Cargar(data)
-        flight.save()
-        return flight.to_dict()
+    #try:
+    flight = Flight()
+    register_flight(data)
+    data = verification_airplane(data)
+    flight.Cargar(data)
+    flight.save()
+    return flight.to_dict()
 
-   # except:
-        return jsonify({"msg": "No se ha podido cargar el vuelo ",
-                        "AtributosObjeto": "destination, origin, departure_time, boarding_time, airplane"}), 400
+    #except:
+    return jsonify({"msg": "No se ha podido cargar el vuelo ",
+                        "AtributosObjeto": "destination, origin, departure_time, boarding_time, airplane, date"}), 400
 
 
 def updateFlight(**kwargs):
@@ -77,7 +77,8 @@ def readFlight(id):
                     "destination": f"{flight.destination}",
                     "boarding_time": f"{flight.boarding_time}",
                     "departure_time": flight.departure_time,
-                    "airplane": f"{flight.airplane}"}), 200
+                    "airplane": f"{flight.airplane}",
+                    "date": f"{flight.date}"}), 200
 
 
 def register_flight(data):
@@ -102,3 +103,13 @@ def verification_airplane(data):
     row = ast.literal_eval(data["row"])
     data["column"] = int(airplane.capacity / len(row))
     return data
+
+
+def search_flight_date(date):
+    session = Session()
+    list = session.query(Flight).filter_by(date=date).all()
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+        print(item.__dict__)
+    return results

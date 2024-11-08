@@ -7,6 +7,7 @@ def search_ticket_by_id(id):
     session = Session()
     try:
         user = session.query(Ticket).filter_by(id=id).first()
+        session.refresh(user)
         session.close()
         return user
     except:
@@ -16,9 +17,8 @@ def search_ticket_by_id(id):
 def update(**kwargs):
     session = Session()
     #try:
-    print(kwargs)
-    user = session.query(Ticket).filter_by(id=id).first()
-    print(user)
+    user = session.query(Ticket).filter_by(id=kwargs).first()
+    print("A", user)
     if user:
         for key, value, in kwargs.items():
             if hasattr(user, key):
@@ -26,7 +26,7 @@ def update(**kwargs):
         session.commit()
         session.refresh(user)
     session.close()
-    return {"msg": "Update successful paper"}
+    return vars(user)
 
     #except:
     return {"msg": "The desired ticket was modified. Next time please don't change the destination at the last minute..."}
