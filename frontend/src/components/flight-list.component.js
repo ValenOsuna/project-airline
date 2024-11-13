@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FlightDataService from "../services/flight.services";
 
+
 export default class FlightSearch extends Component {
     constructor(props) {
         super(props);
@@ -11,18 +12,26 @@ export default class FlightSearch extends Component {
 
     getFlights() {
        
-        FlightDataService.getfligths()
+        FlightDataService.getflights()
             .then(response => {
                 
                 this.setState({data: response.data}); 
+                console.log(this.state.data)
             })
             .catch(e => {
                 console.log(e);
             });
+
+        
     }
 
+    componentDidMount(){
+        this.getFlights()
+    }
+
+   
     render() {
-        const { flights } = this.state.data;
+        
         return (
             <div className="row">
                 <div className="col-md-12">
@@ -32,19 +41,19 @@ export default class FlightSearch extends Component {
                                 <thead>
                                     <tr>
                                         <th className="text-capitalize">id</th>
-                                        <th className="text-capitalize">destination</th>
-                                        <th className="text-capitalize">origin</th>
-                                        <th className="text-capitalize">departure_time</th>
-                                        <th className="text-capitalize">boarding_time</th>
-                                        <th className="text-capitalize">airplane</th>
-                                        <th className="text-capitalize">terminal</th>
-                                        <th className="text-capitalize">group</th>
-                                        <th className="text-capitalize">gate</th>
-                                        <th className="text-capitalize">ro</th>
+                                        <th className="text-capitalize">Destino</th>
+                                        <th className="text-capitalize">Origen</th>
+                                        <th className="text-capitalize">Hora despegue</th>
+                                        <th className="text-capitalize">Hora abordaje</th>
+                                        <th className="text-capitalize">Avión</th>
+                                        <th className="text-capitalize">Terminal</th>
+                                        <th className="text-capitalize">Grupo</th>
+                                        <th className="text-capitalize">Puerta</th>
+                                        <th className="text-capitalize">Filas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {flights.map((flight) => (
+                                 {this.state.data.map((flight) => (
                                     <tr key={flight.id} className="text-capitalize">
                                     <td>{flight.id}</td>
                                     <td>{flight.destination}</td>
@@ -58,6 +67,7 @@ export default class FlightSearch extends Component {
                                     <td>{flight.row}</td>
                                     </tr>
                                 ))}
+
                                 </tbody>
                             </table>
 
@@ -68,3 +78,5 @@ export default class FlightSearch extends Component {
         );
     }
 }
+
+
