@@ -3,11 +3,10 @@ from ..models.TicketClass import Ticket
 from .HelperController import data_update
 
 
-def search_ticket_by_id(id):
+def search_ticket_by_id(data):
     session = Session()
     try:
-        user = session.query(Ticket).filter_by(id=id).first()
-        session.refresh(user)
+        user = session.query(Ticket).filter_by(id=data).first()
         session.close()
         return user
     except:
@@ -16,20 +15,20 @@ def search_ticket_by_id(id):
 
 def update(**kwargs):
     session = Session()
-    #try:
-    user = session.query(Ticket).filter_by(id=kwargs).first()
-    print("A", user)
-    if user:
-        for key, value, in kwargs.items():
-            if hasattr(user, key):
-                setattr(user, key, value)
-        session.commit()
-        session.refresh(user)
-    session.close()
-    return vars(user)
+    try:
+        id = kwargs["id"]
+        user = session.query(Ticket).filter_by(id=id).first()
+        if user:
+            for key, value, in kwargs.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+            session.commit()
+            session.refresh(user)
+        session.close()
+        return user.to_dict()
 
-    #except:
-    return {"msg": "The desired ticket was modified. Next time please don't change the destination at the last minute..."}
+    except:
+        return {"msg": "The desired ticket was modified. Next time please don't change the destination at the last minute..."}
 
 
 def delete(self):
@@ -39,7 +38,7 @@ def delete(self):
         if user:
             session.delete(user)
             session.commit()
-            session.close
+            session.close()
             return user
     except:
         return {"msg": "The ticket has been successfully canceled. Many for choosing our company and will not return again."}
