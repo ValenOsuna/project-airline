@@ -11,6 +11,9 @@ class FlightDataService{
     update(data){
         return client_api.patch(`/flight/update`,{data})
     }
+    getfligths(){
+        return client_api.get(`/flight/list`)
+    }
 }
 
 

@@ -7,7 +7,8 @@ import { Routes, Route, Link } from "react-router-dom"
 import ClientSearch from './components/clients-list.component';
 import AirportSearch from "./components/airport-list.component"
 import DestinationSearch from "./components/destinations-list.component"
-import FlightSearch from "./components/flight-list.component"
+import FlightList from "./components/flight-list.component"
+import FlightSearch from "./components/flight-search.component"
 import TicketSearch from "./components/tickets-list.component"
 import AirlineSearch from './components/airline-list.component';
 import SaleSearch from "./components/sale-list.component"
@@ -116,7 +117,7 @@ function App() {
                       <li> <Link to={"/search-flight"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-flight"} className="dropdown-item"> Crear </Link> </li>
                       <li><a className="dropdown-item" href="#">Editar</a></li>
-                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                      <li><Link to={"/search-list"} className="dropdown-item"> Lista </Link></li>
                     </ul>
                   </li>
 
@@ -134,6 +135,7 @@ function App() {
             <Route path='/search-airline' element={<AirlineSearch/>} />
             <Route path='/search-destination' element={<DestinationSearch/>} />
             <Route path='/search-flight' element={<FlightSearch/>} />
+            <Route path='/search-list' element={<FlightList/>} />
             <Route path='/search-sale' element={<SaleSearch/>} />
             <Route path='/search-ticket' element={<TicketSearch/>} />
             <Route path='/create-client' element={<ClientCreate/>} />
