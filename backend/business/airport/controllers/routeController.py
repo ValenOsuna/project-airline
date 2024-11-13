@@ -46,4 +46,3 @@ def del_aiport():
 def result_list():
     city = request.get_json().get("city")
     return search_airport_city(city)
-

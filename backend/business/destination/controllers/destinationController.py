@@ -64,16 +64,11 @@ def readDestination(id):
 
 
 def search_destination_by_id(id) -> Destination:
-<<<<<<< HEAD
     session = Session()
     destination = session.query(Destination).filter_by(id=id).first()
     session.close()
     return destination
-=======
-        session = Session()
-        destination = session.query(Destination).filter_by(id=id).first()
-        session.close()
-        return destination
+
 
 def search_list_destination(name):
     session = Session()
@@ -82,4 +77,3 @@ def search_list_destination(name):
     for item in list:
         results.append(item.to_dict())
     return results
->>>>>>> d4595ec909efc8bca8507ab29c6907f3ecce9c70

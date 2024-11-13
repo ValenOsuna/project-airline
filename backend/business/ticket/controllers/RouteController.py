@@ -8,7 +8,7 @@ ticket = Blueprint("ticket", __name__)
 @ticket.route("/create", methods=["POST"])
 def ticket_create():
     try:
-        response = request.get_json()
+        response = request.get_json().get("id")
         return create(response)
     except:
         raise
@@ -26,9 +26,9 @@ def ticket_delete():
 
 @ticket.route("/update", methods=["POST"])  # methods PUT O PACH
 def adjust_tickets():
-    response = request.get_json().get("id")
-    ticket = search_ticket_by_id(response)
-    return vars(ticket)
+    response = request.get_json().get("data")
+    ticket = update(**response)
+    return ticket
 
 
 @ticket.route("/search", methods=["POST"])
