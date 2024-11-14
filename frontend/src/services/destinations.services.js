@@ -11,6 +11,9 @@ class DestinationsDataService{
     update(data){
         return client_api.post('/destination/update',{data})
     }
+    getDestinations(){
+        return client_api.get(`/destination/list`,{params:{name:"Chicago"}})
+    }
 }
 
 export default new DestinationsDataService();

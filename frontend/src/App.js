@@ -4,19 +4,21 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.js"
 import { Routes, Route, Link } from "react-router-dom"
 
-import ClientSearch from './components/clients-list.component';
-import AirportSearch from "./components/airport-list.component"
-import DestinationSearch from "./components/destinations-list.component"
+import ClientSearch from './components/clients-search.component';
+import AirportSearch from "./components/airport-search.component"
+import DestinationSearch from "./components/destinations-search.component"
+import DestinationList from './components/destinations-list.component';
 import FlightList from "./components/flight-list.component"
 import FlightSearch from "./components/flight-search.component"
-import TicketSearch from "./components/tickets-list.component"
-import AirlineSearch from './components/airline-list.component';
-import SaleSearch from "./components/sale-list.component"
+import TicketSearch from "./components/tickets-search.component"
+import AirlineSearch from './components/airline-search.component';
+import SaleSearch from "./components/sale-search.component"
 import ClientCreate from './components/client-create.component';
 import AirlineCreate from './components/airline-create.component';
 import AirportCreate from './components/airport-create.component';
 import FlightCreate from './components/flight-create.component';
 import SaleCreate from './components/sale-create.component';
+import SaleList from './components/sale-list.component';
 import TicketCreate from './components/ticket-create.component';
 import DestinationCreate from './components/destination-create.component';
 
@@ -93,7 +95,7 @@ function App() {
                       <li> <Link to={"/search-destination"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-destination"} className="dropdown-item"> Crear </Link> </li>
                       <li><a className="dropdown-item" href="#">Editar</a></li>
-                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                      <li> <Link to={"/list-destination"} className="dropdown-item"> Lista </Link> </li>
                     </ul>
                   </li>
 
@@ -105,7 +107,7 @@ function App() {
                       <li> <Link to={"/search-sale"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-sale"} className="dropdown-item"> Crear </Link> </li>
                       <li><a className="dropdown-item" href="#">Editar</a></li>
-                      <li><a className="dropdown-item" href="#">Lista</a></li>
+                      <li> <Link to={"/list-sale"} className="dropdown-item"> Lista </Link> </li>
                     </ul>
                   </li>
 
@@ -134,9 +136,11 @@ function App() {
             <Route path='/search-airport' element={<AirportSearch/>} />
             <Route path='/search-airline' element={<AirlineSearch/>} />
             <Route path='/search-destination' element={<DestinationSearch/>} />
+            <Route path='/list-destination' element={<DestinationList/>} />
             <Route path='/search-flight' element={<FlightSearch/>} />
             <Route path='/search-list' element={<FlightList/>} />
             <Route path='/search-sale' element={<SaleSearch/>} />
+            <Route path='/list-sale' element={<SaleList/>} />
             <Route path='/search-ticket' element={<TicketSearch/>} />
             <Route path='/create-client' element={<ClientCreate/>} />
             <Route path='/create-airline' element={<AirlineCreate/>} />

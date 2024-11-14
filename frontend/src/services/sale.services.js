@@ -13,6 +13,10 @@ class SaleDataService{
     update(data){
         return client_api.put(`/sale/update`,{data})
     }
+
+    getSales(){
+        return client_api.get(`/sale/list`,{params:{issue_date:"22-11-04"}})
+    }
 }
 
 export default new SaleDataService();

@@ -38,7 +38,6 @@ def cancel():
 
 @sale.route("/list", methods=['GET'])
 def listResult():
-    data = request.get_json().get("data").get("issue_date")
-    print(data)
+    data = request.args.get("issue_date")
     return search_list_sale(data)
 
