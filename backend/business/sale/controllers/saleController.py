@@ -176,4 +176,5 @@ def search_list_sale(issueDate):
     results = []
     for item in list:
         results.append(item.to_dict())
+        print(item.to_dict())
     return results

@@ -38,5 +38,5 @@ class Destination(Base):
         return {
             "id": self.id,
             "name": self.name,
-            "requiered_visa": self.requiered_visa,
+            "requiered_visa": "Si" if self.requiered_visa else "No",
             "airport": self.airport}
