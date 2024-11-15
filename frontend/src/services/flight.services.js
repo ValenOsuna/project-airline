@@ -11,8 +11,8 @@ class FlightDataService{
     update(data){
         return client_api.patch(`/flight/update`,{data})
     }
-    getflights(){
-        return client_api.get(`/flight/list`,{params:{date:"2024-09-16"}})
+    getflights(date){
+        return client_api.get(`/flight/list`,{params:{date}})
     }
 }
 
