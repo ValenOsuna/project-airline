@@ -37,7 +37,7 @@ export default class SaleList extends Component {
                 <div className="col-md-12">
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">
-                            <table>
+                            <table class="table table-bordered border-primary">
                                 <thead>
                                     <tr>
                                         <th className="text-capitalize">id</th>

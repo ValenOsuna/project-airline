@@ -13,6 +13,9 @@ class AirlinetDataService{
     update(data){
         return client_api.post('/airline/update',{data})
     }
+    getAirline(){
+        return client_api.get(`/airline/list`,{params:{name:"argentina"}})
+    }
 
    
 }

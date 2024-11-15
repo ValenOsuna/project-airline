@@ -38,5 +38,6 @@ def update_airlines():
 
 @airline.route('/list', methods=['GET'])
 def result_list():
-    name = request.get_json().get("name")
+    name = request.args.get("name")
+    print(name)
     return search_airline_name(name)
