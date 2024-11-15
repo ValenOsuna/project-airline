@@ -7,12 +7,10 @@ airport = Blueprint("airport", __name__)
 
 @airport.route("/create", methods=["POST"])
 def airportCreate():
-    #try:
+    try:
         data = request.get_json().get("data")
-        print(data)
         return create(data)
-    
-    #except:
+    except:
         return {"msg": "The chosen airport is not operational..."}
 
 
@@ -24,10 +22,9 @@ def query_airport():
 
 @airport.route("/search", methods=["POST"])
 def search_airport():
-    try: 
+    try:
         response = request.get_json().get("id")
         return decompress_obj(search_airport_by_id(response))
-    
     except:
         raise
 
@@ -37,12 +34,12 @@ def del_aiport():
     try:
         response = request.get_json().get("id")
         return delete(response)
-    
     except:
         return {"msg": "The selected aircraft is not in the operations list"}
-    
+
 
 @airport.route('/list', methods=['GET'])
 def result_list():
-    city = request.get_json().get("city")
-    return search_airport_city(city)
+    country = request.args.get("country")
+    print(country)
+    return search_airport_city(country)
