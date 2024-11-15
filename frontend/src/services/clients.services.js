@@ -11,6 +11,9 @@ class ClientsDataService{
     update(data){
         return client_api.post('/passenger/update',{data})
     }
+    getClient(){
+        return client_api.get(`/passenger/list`,{params:{name:"Gonza"}})
+    }
 }
 
 export default new ClientsDataService();
