@@ -32,6 +32,4 @@ def delete():
 @flight.route('/list', methods=['GET'])
 def result_list():
     data = request.args.get("date")
-    
-    print(data)
     return search_flight_date(data)

@@ -29,6 +29,7 @@ def delete():
     id = request.get_json().get("id")
     return deleteDesination(id)
 
+
 @destination.route("/list", methods=['GET'])
 def listResult():
     data = request.args.get("name")

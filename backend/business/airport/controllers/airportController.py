@@ -10,7 +10,7 @@ def create(Data):
 
 
 def decompress_obj(airport):
-    print(vars(airport))
+    print(airport)
     if airport != None:
         return airport.to_dict()
     else:
@@ -50,11 +50,12 @@ def delete(id):
         session.delete(airport)
         session.commit()
         return airport
-    
 
-def search_airport_city(city):
+
+def search_airport_city(country):
     session = Session()
-    list = session.query(Airport).filter(Airport.city.like(f'%{city}%'))
+    list = session.query(Airport).filter(Airport.country.like(f'%{country}%'))
+    print(list)
     results = []
     for item in list:
         results.append(item.to_dict())
