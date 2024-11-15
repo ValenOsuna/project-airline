@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import DestinationsDataService from "../services/destinations.services";
+import AirlinetDataService from "../services/airline.services";
 
 
-export default class DestinationList extends Component {
+export default class Airlinelist extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -10,9 +10,9 @@ export default class DestinationList extends Component {
         };
     }
 
-    getDestinations() {
+    getAirline() {
        
-        DestinationsDataService.getDestinations()
+        AirlinetDataService.getAirline()
             .then(response => {
                 
                 this.setState({data: response.data}); 
@@ -26,7 +26,7 @@ export default class DestinationList extends Component {
     }
 
     componentDidMount(){
-        this.getDestinations()
+        this.getAirline()
     }
 
    
@@ -42,19 +42,17 @@ export default class DestinationList extends Component {
                                     <tr>
                                         <th className="text-capitalize">id</th>
                                         <th className="text-capitalize">Nombre</th>
-                                        <th className="text-capitalize">Requiere Visa</th>
-                                        <th className="text-capitalize">Aeropuerto</th>
+                                        <th className="text-capitalize">Siglas</th>
+                                        <th className="text-capitalize">lista vuelo</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-                                 {this.state.data.map((destination) => (
-                                    <tr key={destination.id} className="text-capitalize">
-                                    <td>{destination.id}</td>
-                                    <td>{destination.name}</td>
-                                    <td>{destination.requiered_visa}</td>
-                                    <td>{destination.airport}</td>
-                                    </tr>
+                                 {this.state.data.map((airline) => (
+                                    <tr key={airline.id} className="text-capitalize">
+                                    <td>{airline.id}</td>
+                                    <td>{airline.name}</td>
+                                    <td>{airline.acronym}</td>
+                                    <td>{airline.flight_list}</td>                                    </tr>
                                 ))}
 
                                 </tbody>
@@ -67,5 +65,3 @@ export default class DestinationList extends Component {
         );
     }
 }
-
-
