@@ -53,5 +53,5 @@ def validation_pasaporte():
 
 @passenger.route('/list', methods=['GET'])
 def result_list():
-    name = request.get_json().get("name")
+    name = request.args.get("name")
     return search_list(name)

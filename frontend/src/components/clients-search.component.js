@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ClientDataServices from "../services/clients.services"; 
-import clientsServices from "../services/clients.services";
+
 
 export default class ClientSearch extends Component{ 
 
