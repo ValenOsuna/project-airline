@@ -2,21 +2,26 @@ import React, { Component } from "react";
 import FlightDataService from "../services/flight.services";
 
 
+
 export default class FlightSearch extends Component {
     constructor(props) {
         super(props);
+        this.getFlights = this.getFlights.bind(this)
         this.state = {
-           data: []
+            data: []
         };
     }
 
-    getFlights() {
-       
-        FlightDataService.getflights()
+    getFlights(e) {
+        
+        
+        FlightDataService.getflights((e.target.value))
             .then(response => {
                 
+                
                 this.setState({data: response.data}); 
-                console.log(this.state.data)
+                console.log(this.state.flightDate)
+                
             })
             .catch(e => {
                 console.log(e);
@@ -25,10 +30,9 @@ export default class FlightSearch extends Component {
         
     }
 
-    componentDidMount(){
-        this.getFlights()
-    }
 
+
+   
    
     render() {
         
@@ -37,7 +41,16 @@ export default class FlightSearch extends Component {
                 <div className="col-md-12">
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">
-                            <table class="table table-bordered border-primary">
+
+                            
+                                <label>
+                                    
+                                    Fecha seleccionada:
+                                    <input className="form-control mb-2" type="date" id="flightDate" value={ this.state.flightDate} onChange={this.getFlights}/>
+                        
+                                </label>
+
+                            <table className="table table-bordered border-primary">
                                 <thead>
                                     <tr>
                                         <th className="text-capitalize">id</th>
