@@ -15,6 +15,7 @@ export default class DestinationCreate extends Component{
             name: null,
             requiered_visa: null,
             airport: null,
+            data: []
         };
     }
 
@@ -55,6 +56,23 @@ export default class DestinationCreate extends Component{
         });
     }
 
+    getDestination() {
+        
+        
+        DestinationDataServices.getDestinations()
+            .then(response => {
+                
+                
+                this.setState({data: response.data}); 
+                console.log(response.data)
+                
+            })
+            .catch(e => {
+                console.log(e);
+            });
+
+        
+    }    
     render(){
         return (
             <div className="row">
@@ -74,9 +92,15 @@ export default class DestinationCreate extends Component{
                                 </div>
 
                                 <div className="mb-3">
-                                    <label className="form-label"><h4>Aeropuerto</h4></label>
-                                    <input type="text" className="form-control bg-light-subtle" airport="airport" value={ this.state.airport} onChange={this.onChangeAirport} />
+                                    <label className="form-label"><h4>Aeropuerto</h4></label> 
+                                    {this.state.data.map((destination) => (
+                                    <select  className="text-capitalize">
+                                    <option key={destination.id}>{destination.id}</option>
+                                    <option key={destination.id}>holis</option>
+                                    </select>
+                                ))}
                                 </div>
+
                                 <button type="button" className="btn btn-success" onClick={ this.PostDestination }>Crear</button>
                             </form>
                         </div>
