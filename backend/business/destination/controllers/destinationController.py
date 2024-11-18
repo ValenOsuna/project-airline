@@ -70,9 +70,9 @@ def search_destination_by_id(id) -> Destination:
     return destination
 
 
-def search_list_destination(name):
+def search_list_destination():
     session = Session()
-    list = session.query(Destination).filter(Destination.name.like(f'%{name}%'))
+    list = session.query(Destination)
     results = []
     for item in list:
         results.append(item.to_dict())

@@ -12,7 +12,7 @@ class DestinationsDataService{
         return client_api.post('/destination/update',{data})
     }
     getDestinations(){
-        return client_api.get(`/destination/list`,{params:{name:"Chicago"}})
+        return client_api.get(`/destination/list`)
     }
 }
 

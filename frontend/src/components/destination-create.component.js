@@ -10,6 +10,7 @@ export default class DestinationCreate extends Component{
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeRequiered_visa = this.onChangeRequiered_visa.bind(this);
         this.onChangeAirport = this.onChangeAirport.bind(this);
+        this.getDestination = this.getDestination.bind(this);
         this.state = {
     
             name: null,
@@ -73,9 +74,12 @@ export default class DestinationCreate extends Component{
 
         
     }    
+    
     render(){
+        
         return (
-            <div className="row">
+            
+            <div className="row" onLoad={this.getDestination()}>
                 <div className="col-md-2"></div>
                 <div className="col-md-8">
                     <div className="card mt-5 bg-light-subtle">
@@ -93,12 +97,14 @@ export default class DestinationCreate extends Component{
 
                                 <div className="mb-3">
                                     <label className="form-label"><h4>Aeropuerto</h4></label> 
+                                    <select className="form-control bg-light-subtle">
                                     {this.state.data.map((destination) => (
-                                    <select  className="text-capitalize">
-                                    <option key={destination.id}>{destination.id}</option>
-                                    <option key={destination.id}>holis</option>
-                                    </select>
-                                ))}
+                                        
+                                        <option  key={destination.name}>{destination.name}</option>
+                                        
+                                        
+                                    
+                                    ))}</select>
                                 </div>
 
                                 <button type="button" className="btn btn-success" onClick={ this.PostDestination }>Crear</button>
