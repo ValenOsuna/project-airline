@@ -32,6 +32,4 @@ def delete():
 
 @destination.route("/list", methods=['GET'])
 def listResult():
-    data = request.args.get("name")
-    print(data)
-    return search_list_destination(data)
+    return search_list_destination()
