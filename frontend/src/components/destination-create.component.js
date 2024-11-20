@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import DestinationDataServices from "../services/destinations.services"; 
-
+import DestinationDataServices from "../services/destinations.services";
+import AirportDataServices from "../services/airport.services";
 
 export default class DestinationCreate extends Component{ 
 
@@ -10,7 +10,7 @@ export default class DestinationCreate extends Component{
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeRequiered_visa = this.onChangeRequiered_visa.bind(this);
         this.onChangeAirport = this.onChangeAirport.bind(this);
-        this.getDestination = this.getDestination.bind(this);
+        this.getAirport = this.getAirport.bind(this);
         this.state = {
     
             name: null,
@@ -57,10 +57,10 @@ export default class DestinationCreate extends Component{
         });
     }
 
-    getDestination() {
+    getAirport() {
         
         
-        DestinationDataServices.getDestinations()
+        AirportDataServices.getAirport()
             .then(response => {
                 
                 
@@ -74,12 +74,14 @@ export default class DestinationCreate extends Component{
 
         
     }    
-    
+    componentDidMount() {
+        this.getAirport();
+    }
     render(){
         
         return (
             
-            <div className="row" onLoad={this.getDestination()}>
+            <div className="row">
                 <div className="col-md-2"></div>
                 <div className="col-md-8">
                     <div className="card mt-5 bg-light-subtle">
@@ -97,14 +99,14 @@ export default class DestinationCreate extends Component{
 
                                 <div className="mb-3">
                                     <label className="form-label"><h4>Aeropuerto</h4></label> 
-                                    <select className="form-control bg-light-subtle">
-                                    {this.state.data.map((destination) => (
+                                    <select className="form-control bg-light-subtle" value={ this.state.airport} onChange={this.onChangeAirport}>
+                                    {this.state.data.map((airport) => (
                                         
-                                        <option  key={destination.name}>{destination.name}</option>
+                                        <option  key={airport.acronym}>{airport.acronym}</option>
                                         
                                         
                                     
-                                    ))}</select>
+                                    ))}</select> 
                                 </div>
 
                                 <button type="button" className="btn btn-success" onClick={ this.PostDestination }>Crear</button>
