@@ -16,7 +16,7 @@ class Destination(Base):
 
     def __init__(self,
                  name=None,
-                 requiered_visa=None,
+                 requiered_visa="",
                  airport=None):
         self.name = name
         self.requiered_visa = requiered_visa
@@ -24,7 +24,8 @@ class Destination(Base):
 
     def createDestination(self, data):
         self.name = data["name"]
-        self.requiered_visa = data["requiered_visa"]
+        self.requiered_visa = True if data["requiered_visa"] == 1 else False
+        print(self.requiered_visa)
         self.airport = data["airport"]
 
     def save(self):
@@ -35,8 +36,9 @@ class Destination(Base):
         session.close()
 
     def to_dict(self):
+        print(self.requiered_visa)
         return {
             "id": self.id,
             "name": self.name,
-            "requiered_visa": "Si" if self.requiered_visa else "No",
+            "requiered_visa": True if self.requiered_visa else False,
             "airport": self.airport}

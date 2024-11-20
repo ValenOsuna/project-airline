@@ -11,7 +11,7 @@ class DestinationsDataService{
     update(data){
         return client_api.post('/destination/update',{data})
     }
-    getDestinations(){
+    getAirport(){
         return client_api.get(`/destination/list`)
     }
 }

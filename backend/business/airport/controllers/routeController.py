@@ -40,6 +40,4 @@ def del_aiport():
 
 @airport.route('/list', methods=['GET'])
 def result_list():
-    country = request.args.get("country")
-    print(country)
-    return search_airport_city(country)
+    return search_airport_city()

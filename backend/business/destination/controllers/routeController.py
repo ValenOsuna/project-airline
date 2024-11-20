@@ -7,8 +7,7 @@ destination = Blueprint("destination", __name__)
 @destination.route("/create", methods=['POST'])
 def create():
     Data = request.get_json().get("data")
-    Data["requiered_visa"] = bool(Data["requiered_visa"])
-    print(Data)
+    Data["requiered_visa"] = True if Data["requiered_visa"] == 1 else False
     return createDestination(Data)
 
 

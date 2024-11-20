@@ -52,10 +52,9 @@ def delete(id):
         return airport
 
 
-def search_airport_city(country):
+def search_airport_city():
     session = Session()
-    list = session.query(Airport).filter(Airport.country.like(f'%{country}%'))
-    print(list)
+    list = session.query(Airport)
     results = []
     for item in list:
         results.append(item.to_dict())

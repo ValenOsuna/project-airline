@@ -12,7 +12,7 @@ class AirportDataService{
         return client_api.post('/airport/update', { data })
     }
     getAirport(){
-        return client_api.get('/airport/list', { params: { country: "Argentina" }})
+        return client_api.get('/airport/list')
     }
 }
 
