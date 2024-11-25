@@ -10,7 +10,6 @@ def create(Data):
 
 
 def decompress_obj(airport):
-    print(airport)
     if airport != None:
         return airport.to_dict()
     else:
@@ -18,10 +17,8 @@ def decompress_obj(airport):
 
 
 def search_airport_by_id(data):
-    print(data)
     session = Session()
     airport = session.query(Airport).filter_by(id=data).first()
-    print(airport)
     session.close()
     return airport
 
@@ -49,7 +46,7 @@ def delete(id):
     if airport:
         session.delete(airport)
         session.commit()
-        return airport
+        return {"msg": "Delete Succes"}
 
 
 def search_airport_city():

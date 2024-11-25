@@ -14,6 +14,9 @@ class ClientsDataService{
     getClient(){
         return client_api.get(`/passenger/list`,{params:{name:"Gonza"}})
     }
+    delete(id){
+        return client_api.post(`/passenger/delete`,{id:id})
+    }
 }
 
 export default new ClientsDataService();

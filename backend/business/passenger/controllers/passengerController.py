@@ -43,7 +43,7 @@ def delete(id):
             session.delete(user)
             session.commit()
             session.close()
-            return user
+            return {"msg" : "Delete Succes"}
     except:
         return "Error"
 

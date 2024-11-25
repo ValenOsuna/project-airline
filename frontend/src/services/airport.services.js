@@ -14,6 +14,10 @@ class AirportDataService{
     getAirport(){
         return client_api.get('/airport/list')
     }
+    delete(id){
+        console.log(id)
+        return client_api.post(`/airport/delete`, { id:id })
+    }
 }
 
 export default new AirportDataService();

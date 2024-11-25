@@ -17,6 +17,10 @@ class AirlinetDataService{
         return client_api.get(`/airline/list`,{params:{name:"argentina"}})
     }
 
+    delete(id){
+        return client_api.post(`/airline/delete`,{id:id})
+    }
+
    
 }
 
