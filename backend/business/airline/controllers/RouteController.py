@@ -23,10 +23,12 @@ def search_aerolinea():
 
 @airline.route("/delete", methods=['POST'])
 def delete_aerolinea():
-    try:
+    #try:
+    
         Data = request.get_json().get("id")
+        print(Data)
         return delete_data(Data)
-    except:
+    #except:
         {"Error"}
 
 

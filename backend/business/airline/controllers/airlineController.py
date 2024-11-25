@@ -58,10 +58,10 @@ def update(**data):
         return "datos inexistentes"
 
 
-def delete_data(self):
+def delete_data(id):
     session = Session()
     try:
-        user = session.query(Airlines).filter_by(id=self.id).first()
+        user = session.query(Airlines).filter_by(id=id).first()
         if user:
             session.delete(user)
             session.commit()

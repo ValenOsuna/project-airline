@@ -11,6 +11,7 @@ export default class ClientSearch extends Component{
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeSurname = this.onChangeSurname.bind(this);
+        this.clientDelete = this.clientDelete.bind(this);
         this.onChangeNumber = this.onChangeNumber.bind(this);
         this.onChangeExpiration = this.onChangeExpiration.bind(this);
         this.onChangeNationality = this.onChangeNationality.bind(this);
@@ -38,11 +39,9 @@ export default class ClientSearch extends Component{
         ClientDataServices.get(id_client)
             .then(response => {
                 console.log (response.data);
-                //setcontent(response.data);
-                //document.getElementById('data').innerText = JSON.stringify(response.data);
-                //document.getElementById('name').innerText = response.data.name;
+                
                 this.state.id = response.data.id;
-                //this.state.name = response.data.name;
+                
                 this.setState({
                     id: response.data.id,
                     name: response.data.name,
@@ -139,6 +138,11 @@ export default class ClientSearch extends Component{
         document.getElementById("viewEdit").classList.add("d-none")
         document.getElementById("viewClient").classList.remove("d-none")
     }
+
+    clientDelete(){
+        ClientDataServices.delete(this.state.id)
+    }
+
     render(){
         return (
             <div className="row">
@@ -162,6 +166,7 @@ export default class ClientSearch extends Component{
                             <div className="row">
                                 <div className="col-md-12 text-end">
                                     <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
+                                    <button type="submit" className="btn btn-warning" onClick={ this.clientDelete }>Eliminar <i class="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">

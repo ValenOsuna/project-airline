@@ -10,6 +10,7 @@ export default class AirlineSearch extends Component{
         this.handlePutEdit = this.handlePutEdit.bind(this)
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
+        this.airlineDelete = this.airlineDelete.bind(this)
         this.onChangeFlight_list = this.onChangeFlight_list.bind(this);
         this.onChangeAcronym = this.onChangeAcronym.bind(this)
         this.state = {
@@ -81,6 +82,8 @@ export default class AirlineSearch extends Component{
         document.getElementById("viewEdit").classList.add("d-none")
         document.getElementById("viewAirline").classList.remove("d-none")
     }
+    airlineDelete(){
+        AirlinetDataService.delete(this.state.id)}
             
     render(){
         return (
@@ -105,6 +108,7 @@ export default class AirlineSearch extends Component{
                             <div className="row">
                                 <div className="col-md-12 text-end">
                                     <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
+                                    <button type="button" className="btn btn-danger" onClick={ this.airlineDelete }>Eliminar <i class="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">

@@ -8,6 +8,7 @@ export default class AirportSearch extends Component{
     constructor(props){
         super(props);
         this.getAirport = this.getAirport.bind(this);
+        this.AirportDelete = this.AirportDelete.bind(this);
         this.handlePutEdit = this.handlePutEdit.bind(this);
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeCity = this.onChangeCity.bind(this);
@@ -94,6 +95,9 @@ export default class AirportSearch extends Component{
         document.getElementById("viewAirport").classList.remove("d-none")
     }
 
+    AirportDelete(){
+        AirportDataService.delete(this.state.id)
+    }
 
     render(){
         return (
@@ -118,6 +122,9 @@ export default class AirportSearch extends Component{
                             <div className="row">
                                 <div className="col-md-12 text-end">
                                     <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
+                                </div>
+                                <div className="col-md-12 text-end">
+                                    <button type="button" className="btn btn-warning" onClick={ this.AirportDelete }>Eliminar <i class="bi bi-trash"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
