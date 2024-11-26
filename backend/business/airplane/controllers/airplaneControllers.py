@@ -10,11 +10,10 @@ def create(Data):
 
 
 def decompress_obj(airplane):
-    airplane_data = {"model": f"{airplane.model}",
-                     "capacity": f"{airplane.capacity}",
-                     "fare": f"{airplane.fare}"
-                     }
-    return airplane_data
+    if airplane :
+        return airplane.to_dict()
+    else:
+        return {"msg" : "Error , unable no descompress None (airplane)"}
 
 
 def airplane_data(airplane, fare_type, luggageType):
