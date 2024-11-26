@@ -23,7 +23,9 @@ def query_airplane():
 
 @airplane.route("/search", methods=["POST"])
 def search_airplane():
+    print(request.get_json())
     response = request.get_json().get("id")
+    print(response)
 
     return decompress_obj(search_airplane_by_id(response))
 
