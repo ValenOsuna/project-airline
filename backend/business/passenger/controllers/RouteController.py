@@ -29,7 +29,8 @@ def search_data():
 def delete_data():
     try:
         Data = request.get_json().get("id")
-        return delete(Data)
+        delete(Data)
+        return {"msg": "DELETE succes"}
     except:
         return "Error"
 
