@@ -154,7 +154,7 @@ export default class ClientSearch extends Component{
                                     <label className="form-label"><h4>ID Cliente</h4></label>
                                     <input type="text" className="form-control bg-light-subtle" id="id" value={ this.state.id} onChange={this.onChangeId} />
                                 </div>
-                                <button type="button" className="btn btn-success" onClick={ this.getClient }>Buscar</button>
+                                <button type="button" className="btn btn-success" onClick={ this.getClient }> Buscar </button>
                             </form>
                         </div>
                     </div>
@@ -165,8 +165,7 @@ export default class ClientSearch extends Component{
                             <h4>Datos del Usuario:</h4>
                             <div className="row">
                                 <div className="col-md-12 text-end">
-                                    <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
-                                    <button type="submit" className="btn btn-warning" onClick={ this.clientDelete }>Eliminar <i class="fa-solid fa-pencil"></i></button>
+                                    <button type="button" className="btn btn-warning" onClick={ this.handleEdit }> Editar <i class="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
@@ -206,8 +205,8 @@ export default class ClientSearch extends Component{
                                     </div>
                                                                    
                                 </div>
-                            </div>                           
-
+                                <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }> Eliminar <i class="bi bi-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                     <div className="card mt-5 bg-light-subtle d-none" id="viewEdit">
@@ -215,7 +214,7 @@ export default class ClientSearch extends Component{
                             <h4>Datos del Usuario:</h4>
                             <div className="row">
                                 <div className="col-md-12 text-end">
-                                    <button type="button" className="btn btn-danger" onClick={ this.handleCancel }>Cancelar <i class="fa-solid fa-pencil"></i></button>
+                                    <button type="button" className="btn btn-danger" onClick={ this.handleCancel }> Cancelar <i class="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
@@ -256,7 +255,7 @@ export default class ClientSearch extends Component{
                                                                     
                                     </div>
                                     
-                                        <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }>Guardar&#160; <i class="fa-solid fa-save"></i></button>
+                                        <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }> Guardar &#160; <i class="fa-solid fa-save"></i></button>
                                     
                             </div>                           
 

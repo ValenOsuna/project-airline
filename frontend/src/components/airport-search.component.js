@@ -118,13 +118,12 @@ export default class AirportSearch extends Component{
                 <div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewAirport">
                         <div className="card-body">
-                            <h4>Datos del Usuario:</h4>
+                            <h4>Datos del Aeropuerto:</h4>
                             <div className="row">
                                 <div className="col-md-12 text-end">
                                     <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-12 text-end">
-                                    <button type="button" className="btn btn-warning" onClick={ this.AirportDelete }>Eliminar <i class="bi bi-trash"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
@@ -145,13 +144,14 @@ export default class AirportSearch extends Component{
                                      </div>
                                                                    
                                 </div>
+                                <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }>Eliminar <i class="bi bi-trash"></i></button>
                             </div>                           
 
                         </div>
                     </div>
                     <div className="card mt-5 bg-light-subtle d-none" id="viewEdit">
                         <div className="card-body">
-                            <h4>Datos del Usuario:</h4>
+                            <h4>Datos del Aeropuerto:</h4>
                             <div className="row">
                                 <div className="col-md-12 text-end">
                                     <button type="button" className="btn btn-danger" onClick={ this.handleCancel }>Cancelar <i class="fa-solid fa-pencil"></i></button>

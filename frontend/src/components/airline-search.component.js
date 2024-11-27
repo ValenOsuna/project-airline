@@ -104,11 +104,10 @@ export default class AirlineSearch extends Component{
                 <div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewAirline">
                         <div className="card-body">
-                            <h4>Datos del Usuario:</h4>
+                            <h4>Datos de la Aerolinea:</h4>
                             <div className="row">
                                 <div className="col-md-12 text-end">
                                     <button type="button" className="btn btn-warning" onClick={ this.handleEdit }>Editar <i class="fa-solid fa-pencil"></i></button>
-                                    <button type="button" className="btn btn-danger" onClick={ this.airlineDelete }>Eliminar <i class="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
@@ -124,7 +123,7 @@ export default class AirlineSearch extends Component{
                                         <span className="fst-italic mt-1" id="acronym">{ this.state.acronym } </span>
                                     </div>
                                     </div>
-                                                                   
+                                    <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }>Eliminar <i class="bi bi-trash"></i></button>                         
                                     </div>
                                 </div>                           
 
@@ -132,7 +131,7 @@ export default class AirlineSearch extends Component{
                         </div>
                         <div className="card mt-5 bg-light-subtle d-none" id="viewEdit">
                         <div className="card-body">
-                            <h4>Datos del Usuario:</h4>
+                            <h4>Datos de la Aerolinea:</h4>
                             <div className="row">
                                 <div className="col-md-12 text-end">
                                     <button type="button" className="btn btn-danger" onClick={ this.handleCancel }>Cancelar <i class="fa-solid fa-pencil"></i></button>
