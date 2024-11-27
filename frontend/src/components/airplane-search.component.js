@@ -127,7 +127,7 @@ export default class AirplaneSearch extends Component{
                                         <span className="fst-italic mt-1" id="fare">{this.state.fare}</span>
                                     </div>                               
                                 </div>
-                                <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }>Eliminar <i class="bi bi-trash"></i></button>
+                                <button type="submit" class="btn btn-outline-danger" onClick={ this.AirplaneDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
                     </div>

@@ -24,6 +24,7 @@ import SaleList from './components/sale-list.component';
 import SaleSearch from "./components/sale-search.component";
 import TicketCreate from './components/ticket-create.component';
 import TicketSearch from "./components/tickets-search.component";
+import SaleMake from './components/sale-make.component';
 
 
 function App() {
@@ -122,7 +123,7 @@ function App() {
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-sale"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-sale"} className="dropdown-item"> Crear </Link> </li>
-                      <li><a className="dropdown-item" href="#">Editar</a></li>
+                      <li> <Link to={"/make-sale"} className="dropdown-item"> Realizar Venta </Link> </li>
                       <li> <Link to={"/list-sale"} className="dropdown-item"> Lista </Link> </li>
                     </ul>
                   </li>
@@ -168,6 +169,7 @@ function App() {
             <Route path='/search-list' element={<FlightList/>} />
             <Route path='/search-sale' element={<SaleSearch/>} />
             <Route path='/search-ticket' element={<TicketSearch/>} />
+            <Route path='/make-sale' element={<SaleMake/>} />
         </Routes>
 
         </div>

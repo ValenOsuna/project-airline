@@ -13,7 +13,7 @@ def decompress_obj(airplane):
     if airplane :
         return airplane.to_dict()
     else:
-        return {"msg" : "Error , unable no descompress None (airplane)"}
+        return {"msg": "Error , unable no descompress None (airplane)"}
 
 
 def airplane_data(airplane, fare_type, luggageType):
@@ -65,8 +65,8 @@ def delete(id):
     if airplane:
         session.delete(airplane)
         session.commit()
-
     session.close()
+
 
 def search_airplane_model(model):
     session = Session()

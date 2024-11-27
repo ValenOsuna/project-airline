@@ -30,7 +30,7 @@ def search_airplane():
     return decompress_obj(search_airplane_by_id(response))
 
 
-@airplane.route("/delete", methods=["DELETE" , "POST"])
+@airplane.route("/delete", methods=["DELETE", "POST"])
 def delete_airplane():
     try:
         response = request.get_json().get("id")
@@ -38,7 +38,8 @@ def delete_airplane():
         return {"msg": "DELETE succes"}
     except:
         return {"msg": "The selected aircraft has been removed from the list"}
-    
+
+
 @airplane.route('/list', methods=['GET'])
 def result_list():
     model = request.get_json().get("model")
