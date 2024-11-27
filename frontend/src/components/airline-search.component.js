@@ -123,7 +123,7 @@ export default class AirlineSearch extends Component{
                                         <span className="fst-italic mt-1" id="acronym">{ this.state.acronym } </span>
                                     </div>
                                     </div>
-                                    <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }>Eliminar <i class="bi bi-trash"></i></button>                         
+                                    <button type="submit" class="btn btn-outline-danger" onClick={ this.airlineDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>                         
                                     </div>
                                 </div>                           
 

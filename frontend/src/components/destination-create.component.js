@@ -62,11 +62,8 @@ export default class DestinationCreate extends Component{
         
         AirportDataServices.getAirport()
             .then(response => {
-                
-                
                 this.setState({data: response.data}); 
                 console.log(response.data)
-                
             })
             .catch(e => {
                 console.log(e);
@@ -101,11 +98,7 @@ export default class DestinationCreate extends Component{
                                     <label className="form-label"><h4>Aeropuerto</h4></label> 
                                     <select className="form-control bg-light-subtle" value={ this.state.airport} onChange={this.onChangeAirport}>
                                     {this.state.data.map((airport) => (
-                                        
-                                        <option  key={airport.acronym}>{airport.acronym}</option>
-                                        
-                                        
-                                    
+                                        <option  value={airport.id}>{airport.acronym}</option>
                                     ))}</select> 
                                 </div>
 

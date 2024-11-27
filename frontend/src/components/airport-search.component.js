@@ -144,7 +144,7 @@ export default class AirportSearch extends Component{
                                      </div>
                                                                    
                                 </div>
-                                <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }>Eliminar <i class="bi bi-trash"></i></button>
+                                <button type="submit" class="btn btn-outline-danger" onClick={ this.AirportDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>
                             </div>                           
 
                         </div>
