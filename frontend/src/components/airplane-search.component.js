@@ -112,7 +112,6 @@ export default class AirplaneSearch extends Component{
                                     <button type="button" className="btn btn-warning" onClick={this.handleEdit}>Editar <i className="fa-solid fa-pencil"></i></button>
                                 </div>
                                 <div className="col-md-12 text-end">
-                                    <button type="button" className="btn btn-warning" onClick={this.AirplaneDelete}>Eliminar <i className="bi bi-trash"></i></button>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
@@ -128,7 +127,8 @@ export default class AirplaneSearch extends Component{
                                         <span className="fst-italic mt-1" id="fare">{this.state.fare}</span>
                                     </div>                               
                                 </div>
-                            </div>                           
+                                <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }>Eliminar <i class="bi bi-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                     <div className="card mt-5 bg-light-subtle d-none" id="viewEdit">
