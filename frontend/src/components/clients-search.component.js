@@ -37,7 +37,7 @@ export default class ClientSearch extends Component{
         ClientDataServices.get(id_client)
             .then(response => {
                 console.log (response.data);
-                this.state.id = response.data.id;
+                
                 this.setState({
                     id: response.data.id,
                     name: response.data.name,
