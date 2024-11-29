@@ -17,7 +17,6 @@ export default class ClientSearch extends Component{
         this.onChangeNationality = this.onChangeNationality.bind(this);
         this.onChangeMiles = this.onChangeMiles.bind(this);
         this.onChangeCountry = this.onChangeCountry.bind(this);
-        this.onChangeLuggage = this.onChangeLuggage.bind(this);
         this.state = {
             id: null,
             data: null,
@@ -27,8 +26,7 @@ export default class ClientSearch extends Component{
             passport_expiration: null,
             nationality: null,
             accumulated_miles: null,
-            country_emision: null,
-            luggage: null
+            country_emision: null
         };
     }
 
@@ -39,9 +37,7 @@ export default class ClientSearch extends Component{
         ClientDataServices.get(id_client)
             .then(response => {
                 console.log (response.data);
-                
                 this.state.id = response.data.id;
-                
                 this.setState({
                     id: response.data.id,
                     name: response.data.name,
@@ -50,8 +46,7 @@ export default class ClientSearch extends Component{
                     passport_expiration: response.data.passport_expiration,
                     nationality: response.data.nationality,
                     country_emision: response.data.country_emision,
-                    accumulated_miles: response.data.accumulated_miles,
-                    luggage: response.data.luggage
+                    accumulated_miles: response.data.accumulated_miles
                 });
                 
             })
@@ -107,12 +102,6 @@ export default class ClientSearch extends Component{
         });
     }
 
-    onChangeLuggage(e){
-        this.setState({
-            luggage: e.target.value
-        });
-    }
-
     handleEdit(){
         document.getElementById("viewClient").classList.add("d-none")
         document.getElementById("viewEdit").classList.remove("d-none")
@@ -128,8 +117,7 @@ export default class ClientSearch extends Component{
             passport_expiration: this.state.passport_expiration,
             nationality: this.state.nationality,
             accumulated_miles: this.state.accumulated_miles,
-            country_emision: this.state.country_emision,
-            luggage: this.state.luggage
+            country_emision: this.state.country_emision
         };
         ClientDataServices.update(data)
     }
@@ -184,7 +172,7 @@ export default class ClientSearch extends Component{
                                         <label className="text-capitalize fw-bold">Fecha Expiracion:&nbsp;</label>
                                         <span className="fst-italic mt-1" id="passport_expiration">{ this.state.passport_expiration }</span>
                                     </div>
-                                   
+
                                 </div>
                                 <div className="col-md-6">
                                 <div className="col">
@@ -199,11 +187,7 @@ export default class ClientSearch extends Component{
                                         <label className="text-capitalize fw-bold">Millas acumuladas:&nbsp;</label>
                                         <span className="fst-italic mt-1" id="accumulated_miles">{ this.state.accumulated_miles }</span>
                                     </div>
-                                    <div className="col">
-                                        <label className="text-capitalize fw-bold">Equipaje:&#160;</label>
-                                        <span className="fst-italic mt-1" id="luggage">{ this.state.luggage }</span>
-                                    </div>
-                                                                   
+                         
                                 </div>
                                 <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }> Eliminar <i class="fa-solid fa-trash"></i></button>
                             </div>
@@ -233,7 +217,7 @@ export default class ClientSearch extends Component{
                                         <label className="text-capitalize fw-bold">Fecha Expiracion:&nbsp;</label>
                                         <input className="fst-italic mt-1 form-control" id="passport_expiration" value={this.state.passport_expiration} onChange={this.onChangeExpiration}></input>
                                     </div>
-                                   
+ 
                                 </div>
                                 <div className="col-md-6">
                                     <div className="col">
@@ -248,23 +232,13 @@ export default class ClientSearch extends Component{
                                             <label className="text-capitalize fw-bold">Millas acumuladas:&nbsp;</label>
                                             <input className="fst-italic mt-1 form-control" id="accumulated_miles" value={this.state.accumulated_miles} onChange={ this.onChangeMiles }></input>
                                         </div>
-                                        <div className="col">
-                                            <label className="text-capitalize fw-bold">Equipaje:&#160;</label>
-                                            <input className="fst-italic mt-1 form-control" id="luggage" value={this.state.luggage} onChange={ this.onChangeLuggage }></input>
-                                        </div>
-                                                                    
                                     </div>
-                                    
                                         <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }> Guardar &#160; <i class="fa-solid fa-save"></i></button>
-                                    
-                            </div>                           
-
+                            </div>
                         </div>
                     </div>
-                </div>  
-            </div>         
+                </div>
+            </div>
         );
     }
- 
-                                    
 }

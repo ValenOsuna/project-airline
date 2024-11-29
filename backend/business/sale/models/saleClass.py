@@ -61,7 +61,7 @@ class Sale(Base):
 
     def to_dict(self):
         return {
-            "id" : self.id,
+            "id": self.id,
             "issue_date": self.issue_date,
             "reservation_number": self.reservation_number,
             "passenger_data": self.passenger_data,

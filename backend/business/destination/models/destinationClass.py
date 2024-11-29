@@ -25,7 +25,6 @@ class Destination(Base):
     def createDestination(self, data):
         self.name = data["name"]
         self.requiered_visa = True if data["requiered_visa"] == 1 else False
-        print(self.requiered_visa)
         self.airport = data["airport"]
 
     def save(self):

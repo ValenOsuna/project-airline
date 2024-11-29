@@ -11,7 +11,6 @@ def ticket_create():
         response = request.get_json().get("id")
         return create(response)
     except:
-        raise
         return {"msg": "The ticket has irregularities, please verify the details"}
 
 

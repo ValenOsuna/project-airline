@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy import Column, String, Integer
 from sqlalchemy.orm import relationship
 from db import Base, Session
 
@@ -14,7 +14,6 @@ class Passenger(Base):
     nationality = Column("nationality", String, nullable=False)
     country_emision = Column("country_emision", String, nullable=False)
     accumulated_miles = Column("accumulated_miles", Integer, nullable=False)
-    luggage = Column("luggage", Integer, ForeignKey("luggages.id"))
 
     saleDetail = relationship("Sale", back_populates="pasengerDetail", cascade="all, delete")
 
@@ -25,8 +24,8 @@ class Passenger(Base):
                  passport_expiration="",
                  nationality="",
                  country_emision="",
-                 accumulated_miles=0,
-                 luggage=0):
+                 accumulated_miles=0
+                 ):
         self.name = name
         self.surname = surname
         self.passport_number = passport_number
@@ -34,7 +33,6 @@ class Passenger(Base):
         self.nationality = nationality
         self.country_emision = country_emision
         self.accumulated_miles = accumulated_miles
-        self.luggage = luggage
 
     def create(self, data):
         self.name = data["name"]
@@ -44,8 +42,6 @@ class Passenger(Base):
         self.nationality = data["nationality"]
         self.country_emision = data["country_emision"]
         self.accumulated_miles = data["accumulated_miles"]
-        self.luggage = data["luggage"]
-
         session = Session()
         session.add(self)
         session.commit()
@@ -59,6 +55,5 @@ class Passenger(Base):
                 "nationality": self.nationality,
                 "country_emision": self.country_emision,
                 "accumulated_miles": self.accumulated_miles,
-                "luggage": self.luggage,
                 "name": self.name,
                 "surname": self.surname}

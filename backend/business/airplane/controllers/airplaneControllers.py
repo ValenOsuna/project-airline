@@ -1,6 +1,5 @@
 from db import Session
 from ..models.airplaneClass import Airplane
-from pprint import pprint
 
 
 def create(Data):
@@ -10,14 +9,13 @@ def create(Data):
 
 
 def decompress_obj(airplane):
-    if airplane :
+    if airplane:
         return airplane.to_dict()
     else:
         return {"msg": "Error , unable no descompress None (airplane)"}
 
 
 def airplane_data(airplane, fare_type, luggageType):
-    print(airplane.fare)
     if fare_type in airplane.fare:
         if fare_type == "FC":  # Primera
             luggage = ["pi", "c", "ch"]

@@ -29,13 +29,11 @@ def search_airport():
         raise
 
 
-@airport.route("/delete", methods=["DELETE" , "POST"])
+@airport.route("/delete", methods=["DELETE", "POST"])
 def del_aiport():
     try:
-        
-        response = request.get_json().get("id")   
+        response = request.get_json().get("id")
         return delete(response)
-
     except:
         return {"msg": "The selected aircraft is not in the operations list"}
 

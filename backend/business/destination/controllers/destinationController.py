@@ -8,9 +8,7 @@ def createDestination(data):
         destination = Destination()
         destination.createDestination(data)
         destination.save()
-        print(vars(destination))
         return destination.to_dict()
-
     except:
         raise
 

@@ -30,7 +30,7 @@ class Airlines(Base):
 
     def to_dict(self):
         return {
-            "id" : self.id,
+            "id": self.id,
             "name": self.name,
             "acronym": self.acronym,
             "flight_list": self.flight_list}

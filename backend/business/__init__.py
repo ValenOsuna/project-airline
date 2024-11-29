@@ -1,5 +1,5 @@
-from .airline.controllers.airlineController import create, search, delete, descomprimir_obj, update,search_airline_by_id, search_airline_by_flight_id
-from .flight.controllers.flightController import createFlight , updateFlight , deleteFlight , readFlight, search_flight_by_id
+from .airline.controllers.airlineController import create, search, delete, descomprimir_obj, update, search_airline_by_id, search_airline_by_flight_id
+from .flight.controllers.flightController import createFlight, updateFlight, deleteFlight, readFlight, search_flight_by_id
 from .ticket.controllers.TicketController import create, search_ticket_by_id, update, delete
 from .luggage.controllers.luggageController import create, search_luggage_by_id, update, delete
 from .passenger.controllers.passengerController import create, search_pasenger_by_id, update, delete, validation_passport, search_pasenger_by_passport

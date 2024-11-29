@@ -7,7 +7,6 @@ sale = Blueprint("sale", __name__)
 @sale.route("/create", methods=['POST'])
 def create():
     data = request.get_json().get("data")
-    print(data)
     return createSale(data)
 
 

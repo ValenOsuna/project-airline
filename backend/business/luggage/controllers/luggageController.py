@@ -1,5 +1,4 @@
 from ..models.luggageClass import Luggages
-from pprint import pprint
 from db import Session
 
 
@@ -54,6 +53,7 @@ def descomprimir(Luggages):
         return luggages_info
     else:
         return "Dato inexistente"
+
 
 def search_list_luggage(type):
     session = Session()

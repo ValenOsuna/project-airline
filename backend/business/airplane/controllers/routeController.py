@@ -17,16 +17,12 @@ def create_airplane():
 @airplane.route("/update", methods=["POST"])
 def query_airplane():
     response = request.get_json().get("data")
-    print(response)
     return update(**response)
 
 
 @airplane.route("/search", methods=["POST"])
 def search_airplane():
-    print(request.get_json())
     response = request.get_json().get("id")
-    print(response)
-
     return decompress_obj(search_airplane_by_id(response))
 
 

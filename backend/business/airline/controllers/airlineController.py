@@ -1,5 +1,4 @@
 from ..models.airlineClass import Airlines
-from pprint import pprint
 from db import Session
 
 
@@ -19,7 +18,6 @@ def search_airline_by_id(id):
 def search(id):
     try:
         Data = Session.query(Airlines).where(Airlines.id == id)
-        pprint(vars(Data[0]))
         return Data[0]
     except:
         print("Aerolinea no se encuentra cargado o no esta disponible, Verifique base de datos")
@@ -27,19 +25,19 @@ def search(id):
 
 def update_data(**kwargs):
     session = Session()
-    #try:
-    id = kwargs["id"]
-    user = session.query(Airlines).filter_by(id=id).first()
-    if user:
-        for key, value in kwargs.items():
-            if hasattr(user, key):
-                setattr(user, key, value)
-        session.commit()
-        session.refresh(user)
-    session.close()
-    return "la base de datos de aerolineas ha sido actualizada"
-    #except:
-    return "datos inexistentes"
+    try:
+        id = kwargs["id"]
+        user = session.query(Airlines).filter_by(id=id).first()
+        if user:
+            for key, value in kwargs.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+            session.commit()
+            session.refresh(user)
+        session.close()
+        return "la base de datos de aerolineas ha sido actualizada"
+    except:
+        return "datos inexistentes"
 
 
 def update(**data):
@@ -91,9 +89,9 @@ def descomprimir_obj(airlines):
 def search_airline_by_flight_id(flight_list) -> Airlines:
     session = Session()
     user = session.query(Airlines).where(flight_list == flight_list).first()
-    print(user)
     session.close()
     return user
+
 
 def search_airline_name(name):
     session = Session()

@@ -1,4 +1,4 @@
-from .destinationController import createDestination, deleteDesination, updateDestination, readDestination , search_list_destination
+from .destinationController import createDestination, deleteDesination, updateDestination, readDestination, search_list_destination
 from flask import Blueprint, request
 
 destination = Blueprint("destination", __name__)

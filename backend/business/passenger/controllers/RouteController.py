@@ -8,9 +8,7 @@ passenger = Blueprint("passenger", __name__)
 def create_data():
     try:
         data = request.get_json().get("data")
-        print(data)
         return create(data)
-
     except:
         return "Error"
 
@@ -21,7 +19,6 @@ def search_data():
     data = (search_pasenger_by_id(response))
     if data is None:
         return {"msg": "Passanger not found"}
-    print(vars(data))
     return data.to_dict()
 
 
