@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer
+from sqlalchemy.orm import relationship
 from db import Base, Session
 
 
@@ -9,6 +10,8 @@ class Luggages(Base):
     type = Column("type", String, nullable=False)
     weight = Column("weight", Integer, nullable=False)
     type_flight = Column("type_flight", String, nullable=False)
+
+    saleDetail = relationship("Sale", back_populates="luggageDetail")
 
     def __init__(self, type="", weight="", type_flight=""):
         self.type = type
