@@ -1,4 +1,4 @@
-from .flightController import createFlight, deleteFlight, updateFlight, readFlight, search_flight_date
+from .flightController import createFlight, deleteFlight, updateFlight, readFlight, search_flight_date, list_fligth_origin
 from flask import Blueprint, request
 
 flight = Blueprint("flight", __name__)
@@ -33,3 +33,9 @@ def delete():
 def result_list():
     data = request.args.get("date")
     return search_flight_date(data)
+
+@flight.route('/list-origin', methods=['GET'])
+def result_list():
+    origin = request.args.get("origin")
+    destination = request.args.get("destination")
+    return list_fligth_origin(origin, destination)
