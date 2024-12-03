@@ -113,3 +113,12 @@ def search_flight_date(date):
         results.append(item.to_dict())
         print(item.__dict__)
     return results
+
+def list_fligth_origin(origin, destination):
+    session = Session()
+    list = session.query(Flight).filter_by(origin=origin, destination=destination).all()
+    results = []
+    for item in list:
+        results.append(item.to_dict())
+        print(item.__dict__)
+    return results

@@ -14,6 +14,9 @@ class FlightDataService{
     getflights(date){
         return client_api.get(`/flight/list`,{params:{date}})
     }
+    getflightsbyorigin(origin, destination){
+        return client_api.get(`/flight/list-origin`,{params:{origin, destination}})
+    }
 }
 
 
