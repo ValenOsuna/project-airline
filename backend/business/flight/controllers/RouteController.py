@@ -35,7 +35,7 @@ def result_list():
     return search_flight_date(data)
 
 @flight.route('/list-origin', methods=['GET'])
-def result_list():
+def list():
     origin = request.args.get("origin")
     destination = request.args.get("destination")
     return list_fligth_origin(origin, destination)

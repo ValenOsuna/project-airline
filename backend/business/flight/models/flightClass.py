@@ -8,7 +8,7 @@ class Flight(Base):
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     destination = Column("destination", Integer, ForeignKey("destinations.id"))
-    origin = Column("origin", String, nullable=False)
+    origin = Column("origin", Integer, ForeignKey("destinations.id"))
     departure_time = Column("departure_time", String, nullable=False)
     boarding_time = Column("boarding_time", String, nullable=False)
     airplane = Column("airplane", Integer, ForeignKey("airplanes.id"))
@@ -19,7 +19,8 @@ class Flight(Base):
     column = Column("column", Integer, nullable=False)
     date = Column("date", String, nullable=False)
 
-    destinationDetail = relationship("Destination", back_populates="flightDetail")
+    originDetail = relationship("Destination" , foreign_keys=[origin])
+    destinationDetail = relationship("Destination",  foreign_keys=[destination])
     airplaneDetail = relationship("Airplane", back_populates="flightDetail")
     ticketDetail = relationship("Ticket", back_populates="flightDetail", cascade="all, delete")
     airlineDetail = relationship("Airlines", back_populates="flightDetail")
@@ -74,8 +75,8 @@ class Flight(Base):
 
     def to_dict(self):
         return {
-            "destination": self.destination,
-            "origin": self.origin,
+            "destination": self.destinationDetail.name,
+            "origin": self.originDetail.name,
             "departure_time": self.departure_time,
             "boarding_time": self.boarding_time,
             "airplane": self.airplane,
@@ -84,5 +85,5 @@ class Flight(Base):
             "gate": self.gate,
             "row": self.row,
             "column": self.column,
-            "date": self.column
+            "date": self.date
         }

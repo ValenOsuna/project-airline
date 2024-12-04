@@ -18,6 +18,4 @@ class FlightDataService{
         return client_api.get(`/flight/list-origin`,{params:{origin, destination}})
     }
 }
-
-
-export default new FlightDataService();
+    export default new FlightDataService();

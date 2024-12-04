@@ -11,7 +11,6 @@ class Destination(Base):
     requiered_visa = Column("requiered_visa", Boolean)
     airport = Column("airport", Integer, ForeignKey("airports.id"))
 
-    flightDetail = relationship("Flight", back_populates="destinationDetail")
     airportDetail = relationship("Airport", back_populates="destinationDetail", cascade="all, delete")
 
     def __init__(self,
@@ -35,7 +34,6 @@ class Destination(Base):
         session.close()
 
     def to_dict(self):
-        print(self.requiered_visa)
         return {
             "id": self.id,
             "name": self.name,
