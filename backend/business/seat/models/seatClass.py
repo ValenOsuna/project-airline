@@ -32,3 +32,9 @@ class Seat(Base):
         session.commit()
         session.refresh(self)
         session.close()
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "seat": self.seat,
+            "flight": self.flight}
