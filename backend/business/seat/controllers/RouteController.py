@@ -7,4 +7,5 @@ seat = Blueprint("seat", __name__)
 @seat.route("/search", methods=['POST'])
 def search():
     id = request.get_json().get("id")
-    return search_seats(id)
+    fr = request.get_json().get("fare")
+    return search_seats(id, fr)

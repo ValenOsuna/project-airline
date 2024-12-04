@@ -2,8 +2,8 @@ import client_api from "../api-common";
 
 class SeatDataService{
 
-    getSeats(id){
-        return client_api.post(`/seat/search`,{id:id})
+    getSeats(id,fare){
+        return client_api.post(`/seat/search`,{id:id, fare:fare})
     }
 }
 

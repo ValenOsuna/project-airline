@@ -76,22 +76,12 @@ def search_seat_return_objet(wantedSeat):
         return search
 
 
-def search_seats(id):
-    print("print del id", id)
+def search_seats(id, fr):
     session = Session()
-    seats = session.query(Seat).filter_by(flight=id).all()
+    seats = session.query(Seat).filter_by(flight=id, fare=fr).all()
     # results = json.dumps(item.dump for item in seats)
     results = []
     for item in seats:
         results.append(item.to_dict())
         print(item.__dict__)
     return results
-
-def nombre_cualquiera(fare, flight, airplane):
-    seatPerClass = {
-                    "FC": ["A", "B"],
-                    "BC": ["A", "B", "C"],
-                    "PC": ["A", "B", "C", "D"],
-                    "EC": ast.literal_eval(flight.row)}
-    checkSeatRange(flight.airplane, fare, flight)
-    seatPerClass[fare] 
