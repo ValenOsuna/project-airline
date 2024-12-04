@@ -1,39 +1,49 @@
 import React, { Component } from "react";
 import ClientDataServices from "../services/clients.services";
 import DestinationsDataService from "../services/destinations.services";
-import FlightDataService from "../services/flight.services"
+import FlightDataService from "../services/flight.services";
 
 export default class SaleMake extends Component {
   constructor(props) {
     super(props);
     this.onChangeDestination = this.onChangeDestination.bind(this);
     this.onChangeOrigin = this.onChangeOrigin.bind(this);
-    this.Flight = this.Flight.bind(this);
+    this.getFlight = this.getFlight.bind(this);
     this.getClient = this.getClient.bind(this);
+    this.getDestination = this.getDestination.bind(this);
     this.onChangeId = this.onChangeId.bind(this);
+    this.onChangeFlight = this.onChangeFlight.bind(this);
     this.handleNext = this.handleNext.bind(this);
     this.handlePrevious = this.handlePrevious.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       id: null,
-      destination: null,
+      destination: 0,
+      origin: 0,
       name: null,
       surname: null,
       passport_number: null,
       destinationlist: [],
-      origin:null,
-      flight:null,
-      flightlist:[],
+      flight: null,
+      flightlist: [],
       step: 1,
       formData: {},
     };
   }
 
   handleNext() {
-    this.setState({
-        step: this.state.step + 1
-    })  
-}
+    this.setState(
+      {
+        step: this.state.step + 1,
+      },
+      () => {
+        if (this.state.step === 3) {
+          console.log("Aca");
+          this.getFlight();
+        }
+      }
+    );
+  }
 
   onChangeId(event) {
     this.setState({
@@ -43,23 +53,22 @@ export default class SaleMake extends Component {
 
   handlePrevious() {
     this.setState({
-        step: this.state.step - 1
-    })  
+      step: this.state.step - 1,
+    });
   }
 
   handleInputChange(event) {}
 
   handleSubmit(event) {
     event.preventDefault();
-
   }
   getClient() {
     var id_client = this.state.id;
-    
+
     ClientDataServices.get(id_client)
       .then((response) => {
         console.log(response.data);
-        
+
         this.setState({
           id: response.data.id,
           name: response.data.name,
@@ -72,49 +81,45 @@ export default class SaleMake extends Component {
       });
   }
 
-  Destinations() {
-
+  getDestination() {
     DestinationsDataService.getDestinations()
-        .then(response => {
-
-            this.setState({destinationlist: response.data});
-            console.log(this.state.destinationlist)
-        })
-        .catch(e => {
-            console.log(e);
-        });
-
-
-}
-  Flight() {
-
-    FlightDataService.getflightsbyorigin()
-        .then(response => {
-
-            this.setState({flightlist: response.data});
-            console.log(this.state.flightlist)
-        })
-        .catch(e => {
-            console.log(e);
-        });
-
-
+      .then((response) => {
+        this.setState({ destinationlist: response.data });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  getFlight() {
+    FlightDataService.getflightsbyorigin(
+      this.state.origin,
+      this.state.destination
+    )
+      .then((response) => {
+        this.setState({ flightlist: response.data });
+        console.log(this.state.flightlist);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
-onChangeDestination(event) {
-  this.setState({ destination: event.target.value });
-}
+  onChangeDestination(event) {
+    this.setState({ destination: event.target.value });
+  }
 
-onChangeOrigin(event) {
-  this.setState({ origin: event.target.value });
-}
-//dislexia de event
+  onChangeOrigin(event) {
+    this.setState({ origin: event.target.value });
+  }
 
-componentDidMount() {
-  this.Destinations();
-}
+  onChangeFlight(event) {
+    this.setState({ flight: event.target.value });
+  }
+  //dislexia de event
 
-
+  componentDidMount() {
+    this.getDestination();
+  }
 
   render() {
     return (
@@ -173,6 +178,66 @@ componentDidMount() {
                   </div>
                 )}
 
+                {this.state.step === 2 && (
+                  <div className="row">
+                    <div className="mb-3 ">
+                      <div className="col-8">
+                        <label className="form-label">
+                          <h4>Destino</h4>
+                        </label>
+                        <select
+                          className="form-control bg-light-subtle"
+                          value={this.state.destination}
+                          onChange={this.onChangeDestination}
+                        >
+                          <option selected>Seleccionar destino</option>
+                          {this.state.destinationlist.map((destination) => (
+                            <option value={destination.id}>
+                              {destination.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="col-8 mt-4">
+                        <label className="form-label">
+                          <h4>Origen</h4>
+                        </label>
+                        <select
+                          className="form-control bg-light-subtle"
+                          value={this.state.origin}
+                          onChange={this.onChangeOrigin}
+                        >
+                          <option selected>Seleccionar origen</option>
+                          {this.state.destinationlist.map((origin) => (
+                            <option value={origin.id}>{origin.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {this.state.step === 3 && (
+                  <div className="row">
+                    <div className="mb-3">
+                    <div className="col-10 mt-4">
+                      <label className="form-label">
+                        <h4>Vuelo disponibles</h4>
+                      </label>
+                      <select
+                        className="form-control bg-light-subtle"
+                        value={this.state.flight}
+                        onChange={this.onChangeFlight}
+                      >
+                        {this.state.flightlist.map((flight) => (
+                          <option value={flight.id}> Fecha : {flight.date} | Horario salida : {flight.departure_time} | Origen : {flight.origin} | Destino : {flight.destination}</option>
+                        ))}
+                      </select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="d-flex justify-content-between">
                   {this.state.step > 1 && (
                     <button
@@ -200,20 +265,6 @@ componentDidMount() {
                       Enviar
                     </button>
                   )}
-
-                    {this.state.step === 2 && (
-                    <div className="mb-3">
-                    <label className="form-label"><h4>Destino</h4></label> 
-                    <select className="form-control bg-light-subtle" value={ this.state.destination} onChange={this.onChangeDestination}>
-                    {this.state.destinationlist.map((destination) => (
-                        <option  value={destination.id}>{destination.name}</option>
-                    ))}</select>
-                    <label className="form-label"><h4>Origen</h4></label> 
-                    <select className="form-control bg-light-subtle" value={ this.state.origin} onChange={this.onChangeOrigin}>
-                    {this.state.destinationlist.map((origin) => (
-                        <option  value={origin.id}>{origin.name}</option>
-                    ))}</select> 
-                      </div>)}
                 </div>
               </div>
             </div>
