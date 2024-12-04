@@ -18,6 +18,7 @@ export default class SaleMake extends Component {
     this.handleNext = this.handleNext.bind(this);
     this.handlePrevious = this.handlePrevious.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChangeFare = this.onChangeFare.bind(this);
     this.state = {
       id: null,
       destination: 0,
@@ -29,6 +30,7 @@ export default class SaleMake extends Component {
       flight: 0,
       flightlist: [],
       seatsList: [],
+      fare: "",
       step: 1,
       formData: {},
     };
@@ -42,10 +44,6 @@ export default class SaleMake extends Component {
       () => {
         if (this.state.step === 3) {
           this.getFlight();
-        }
-        if (this.state.step === 4) {
-          console.log("Aprobado por chayanne");
-          this.SeatsGet();
         }
       }
     );
@@ -121,6 +119,12 @@ export default class SaleMake extends Component {
   onChangeFlight(event) {
     this.setState({ flight: event.target.value });
   }
+  onChangeFare(event) {
+    this.setState({ fare: event.target.value     
+    },
+    () => {this.SeatsGet();
+      }
+    )}
   //dislexia de event
 
   componentDidMount() {
@@ -130,6 +134,7 @@ export default class SaleMake extends Component {
   SeatsGet() {
     SeatDataService.getSeats(
       this.state.flight,
+      this.state.fare
     )
       .then((response) => {
         this.setState({ seatsList: response.data });
@@ -264,6 +269,16 @@ export default class SaleMake extends Component {
                       <label className="form-label">
                         <h4>Asientos ocupados</h4>
                       </label>
+                      <select 
+                        className="form-control bg-light-subtle"
+                        value={this.state.fare}
+                        onChange={this.onChangeFare}>
+                        <option selected>Seleccionar Tarifa</option>
+                        <option value={"FC"}>Primera clase </option>
+                        <option value={"PC"}>Clase Premium</option>
+                        <option value={"BC"}>Clase Ejecutiva</option>
+                        <option value={"EC"}>Clase Economica </option>                        
+                      </select>
                       <select
                         className="form-control bg-light-subtle"
                         value={this.state.seatsList}
