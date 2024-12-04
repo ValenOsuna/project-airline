@@ -75,6 +75,7 @@ class Flight(Base):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "destination": self.destinationDetail.name,
             "origin": self.originDetail.name,
             "departure_time": self.departure_time,

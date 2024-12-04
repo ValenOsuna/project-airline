@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import ClientDataServices from "../services/clients.services";
 import DestinationsDataService from "../services/destinations.services";
 import FlightDataService from "../services/flight.services";
+import SeatDataService from "../services/seat.services";
 
 export default class SaleMake extends Component {
   constructor(props) {
     super(props);
     this.onChangeDestination = this.onChangeDestination.bind(this);
     this.onChangeOrigin = this.onChangeOrigin.bind(this);
+    this.SeatsGet = this.SeatsGet.bind(this);
     this.getFlight = this.getFlight.bind(this);
     this.getClient = this.getClient.bind(this);
     this.getDestination = this.getDestination.bind(this);
@@ -24,8 +26,9 @@ export default class SaleMake extends Component {
       surname: null,
       passport_number: null,
       destinationlist: [],
-      flight: null,
+      flight: 0,
       flightlist: [],
+      seatsList: [],
       step: 1,
       formData: {},
     };
@@ -38,8 +41,11 @@ export default class SaleMake extends Component {
       },
       () => {
         if (this.state.step === 3) {
-          console.log("Aca");
           this.getFlight();
+        }
+        if (this.state.step === 4) {
+          console.log("Aprobado por chayanne");
+          this.SeatsGet();
         }
       }
     );
@@ -119,6 +125,19 @@ export default class SaleMake extends Component {
 
   componentDidMount() {
     this.getDestination();
+  }
+
+  SeatsGet() {
+    SeatDataService.getSeats(
+      this.state.flight,
+    )
+      .then((response) => {
+        this.setState({ seatsList: response.data });
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   render() {
@@ -229,6 +248,7 @@ export default class SaleMake extends Component {
                         value={this.state.flight}
                         onChange={this.onChangeFlight}
                       >
+                        <option selected>Seleccionar Vuelo</option>
                         {this.state.flightlist.map((flight) => (
                           <option value={flight.id}> Fecha : {flight.date} | Horario salida : {flight.departure_time} | Origen : {flight.origin} | Destino : {flight.destination}</option>
                         ))}
@@ -237,6 +257,26 @@ export default class SaleMake extends Component {
                     </div>
                   </div>
                 )}
+                  {this.state.step === 4 && (
+                  <div className="row">
+                    <div className="mb-3">
+                    <div className="col-10 mt-4">
+                      <label className="form-label">
+                        <h4>Asientos ocupados</h4>
+                      </label>
+                      <select
+                        className="form-control bg-light-subtle"
+                        value={this.state.seatsList}
+                      >
+                        {this.state.seatsList.map((seatsIndex) => (
+                        <option value={seatsIndex.seat}> {seatsIndex.seat} </option>
+                        ))}
+                      </select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
 
                 <div className="d-flex justify-content-between">
                   {this.state.step > 1 && (
@@ -248,7 +288,7 @@ export default class SaleMake extends Component {
                       Previo
                     </button>
                   )}
-                  {this.state.step < 3 ? (
+                  {this.state.step < 4 ? (
                     <button
                       type="button"
                       className="btn btn-success mt-1"
