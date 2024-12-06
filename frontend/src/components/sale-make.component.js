@@ -251,11 +251,11 @@ export default class SaleMake extends Component {
                       <select
                         className="form-control bg-light-subtle"
                         value={this.state.flight}
-                        onChange={this.onChangeFlight}
+                        onChange={this.onChangeFlight}                       
                       >
                         <option selected>Seleccionar Vuelo</option>
                         {this.state.flightlist.map((flight) => (
-                          <option value={flight.id}> Fecha : {flight.date} | Horario salida : {flight.departure_time} | Origen : {flight.origin} | Destino : {flight.destination}</option>
+                          <option value={flight}> Fecha : {flight.date} | Horario salida : {flight.departure_time} | Origen : {flight.origin} | Destino : {flight.destination}</option>
                         ))}
                       </select>
                       </div>
@@ -279,14 +279,45 @@ export default class SaleMake extends Component {
                         <option value={"BC"}>Clase Ejecutiva</option>
                         <option value={"EC"}>Clase Economica </option>                        
                       </select>
-                      <select
-                        className="form-control bg-light-subtle"
-                        value={this.state.seatsList}
-                      >
-                        {this.state.seatsList.map((seatsIndex) => (
-                        <option value={seatsIndex.seat}> {seatsIndex.seat} </option>
-                        ))}
-                      </select>
+                      <div className="container">
+                      <div class="row">
+                            <div class="col-md-4">
+                                <div class="seat">1A</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="seat">2A</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="seat">2B</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="seat">1B</div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="seat">3A</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="seat">4A</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="seat">4B</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="seat">3B</div>
+                            </div>
+                        </div>
+                        </div> 
                       </div>
                     </div>
                   </div>

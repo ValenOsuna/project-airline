@@ -76,12 +76,28 @@ def search_seat_return_objet(wantedSeat):
         return search
 
 
-def search_seats(id, fr):
+def search_seats(flight, fare):
+    print(flight)
+    final_scheme = []
+    seatPerClass = {
+                "FC": ["A", "B"],
+                "BC": ["A", "B", "C"],
+                "PC": ["A", "B", "C", "D"],
+                "EC": ast.literal_eval(flight["row"])}
+    start, stop = checkSeatRange(flight.airplane, fare, flight)
     session = Session()
-    seats = session.query(Seat).filter_by(flight=id, fare=fr).all()
-    # results = json.dumps(item.dump for item in seats)
+    seats = session.query(Seat).filter_by(flight=flight.id, fare=fare).all()
     results = []
     for item in seats:
-        results.append(item.to_dict())
-        print(item.__dict__)
+        ocupate = {"seat": item.seat, "occupied": True}
+        final_scheme.append(ocupate)
+
+    for R in range(start, stop):
+        for D in seatPerClass[fare]:
+            schemeSeat = D + R
+            for statusCheack in final_scheme:
+                if schemeSeat == statusCheack["seat"]:
+                    statusCheack["occupied": False]                   
+                final_scheme.append({"seat": schemeSeat, "occupied": False})
+            final_scheme.append(schemeSeat)
     return results
