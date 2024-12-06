@@ -2,6 +2,7 @@ from business.seat.models.seatClass import Seat
 from db import Session
 import ast
 from business.flight.models.flightClass import Flight
+from business.flight.controllers.flightController import search_flight_by_id
 
 # ['FC','BC','PC','EC']
 
@@ -76,28 +77,40 @@ def search_seat_return_objet(wantedSeat):
         return search
 
 
-def search_seats(flight, fare):
-    print(flight)
+def search_seats(flightObject, fareData):
+    session = Session()
+
     final_scheme = []
+    ocupateList = []
+
+    flightObject = search_flight_by_id(flightObject)
+    session.add(flightObject)
+    
+    
     seatPerClass = {
                 "FC": ["A", "B"],
                 "BC": ["A", "B", "C"],
                 "PC": ["A", "B", "C", "D"],
-                "EC": ast.literal_eval(flight["row"])}
-    start, stop = checkSeatRange(flight.airplane, fare, flight)
-    session = Session()
-    seats = session.query(Seat).filter_by(flight=flight.id, fare=fare).all()
-    results = []
+                "EC": ast.literal_eval(flightObject.row)}
+    
+    
+    start, stop = checkSeatRange(ast.literal_eval(flightObject.airplaneDetail.fare), fareData, flightObject)
+   
+    seats = session.query(Seat).filter_by(flight=flightObject.id, fare=fareData).all()
+    
     for item in seats:
-        ocupate = {"seat": item.seat, "occupied": True}
-        final_scheme.append(ocupate)
+        ocupate = {"seat": item.seat, "occupied": False}
+        ocupateList.append(ocupate)
 
     for R in range(start, stop):
-        for D in seatPerClass[fare]:
-            schemeSeat = D + R
+        for D in seatPerClass[fareData]:
+            schemeSeat = D + str(R)
             for statusCheack in final_scheme:
+                print(statusCheack)
+                
                 if schemeSeat == statusCheack["seat"]:
                     statusCheack["occupied": False]                   
                 final_scheme.append({"seat": schemeSeat, "occupied": False})
             final_scheme.append(schemeSeat)
-    return results
+
+    return final_scheme
