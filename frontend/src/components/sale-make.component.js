@@ -117,8 +117,11 @@ export default class SaleMake extends Component {
   }
 
   onChangeFlight(event) {
-    this.setState({ flight: event.target.value });
-  }
+    this.setState({ flight: event.target.value },
+    () => {console.log(this.state.flight);
+    }
+    )}
+  
   onChangeFare(event) {
     this.setState({ fare: event.target.value     
     },
@@ -255,7 +258,7 @@ export default class SaleMake extends Component {
                       >
                         <option selected>Seleccionar Vuelo</option>
                         {this.state.flightlist.map((flight) => (
-                          <option value={flight}> Fecha : {flight.date} | Horario salida : {flight.departure_time} | Origen : {flight.origin} | Destino : {flight.destination}</option>
+                          <option value={flight.id}> Fecha : {flight.date} | Horario salida : {flight.departure_time} | Origen : {flight.origin} | Destino : {flight.destination}</option>
                         ))}
                       </select>
                       </div>

@@ -74,6 +74,7 @@ class Flight(Base):
         session.close()
 
     def to_dict(self):
+        
         return {
             "id": self.id,
             "destination": self.destinationDetail.name,
