@@ -29,7 +29,7 @@ export default class SaleMake extends Component {
       destinationlist: [],
       flight: 0,
       flightlist: [],
-      seatsList: [],
+      seatsList: {},
       fare: "",
       step: 1,
       formData: {},
@@ -270,55 +270,66 @@ export default class SaleMake extends Component {
                     <div className="mb-3">
                     <div className="col-10 mt-4">
                       <label className="form-label">
-                        <h4>Asientos ocupados</h4>
+                        <h4>Asientos Ocupados</h4>
                       </label>
                       <select 
                         className="form-control bg-light-subtle"
                         value={this.state.fare}
                         onChange={this.onChangeFare}>
                         <option selected>Seleccionar Tarifa</option>
-                        <option value={"FC"}>Primera clase </option>
-                        <option value={"PC"}>Clase Premium</option>
+                        <option value={"FC"}>Primera Clase </option>
                         <option value={"BC"}>Clase Ejecutiva</option>
+                        <option value={"PC"}>Clase Premium</option>
                         <option value={"EC"}>Clase Economica </option>                        
                       </select>
-                      <div className="container">
-                      <div class="row">
-                            <div class="col-md-4">
-                                <div class="seat">1A</div>
+                      <div className="container mt-5">
+                      <div className="row">
+                      <div className="col-md-6" >
+                      {Object.entries(this.state.seatsList).map(([row, seats]) =>
+                        <React.Fragment key={row}>
+                        {row === "A" && (
+                          seats.map((seat) => (
+                            <><div className="row">
+                            <div className="col-md-6" key={seat.seat}>
+                            <div className="seat">{seat.seat}</div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="seat"></div>
+                              </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="seat">2A</div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="seat">2B</div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="seat">1B</div>
                             </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <div class="seat">3A</div>
+                            </>
+                          ))
+                        )}
+                        </React.Fragment>
+                      )}
+                      </div>
+                      <div className="col-md-6" >
+                      {Object.entries(this.state.seatsList).map(([row, seats]) =>
+                        <React.Fragment key={row}>
+                        {row === "B" && (
+                          seats.map((seat) => (
+                            <><div className="row">
+                            <div class="col-md-6">
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="seat"></div>
+                              </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="seat">4A</div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="seat">4B</div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="seat">3B</div>
-                            </div>
+                            <div className="col-md-6" key={seat.seat}>
+                            <div className="seat">{seat.seat}</div>
+                          </div>
+                          </div>
+                            </>
+                          ))
+                        )}
+                        </React.Fragment>
+                      )}
+                      </div>
                         </div>
                         </div> 
                       </div>

@@ -14,3 +14,17 @@ try:
 except:
     print("error de conexion")
     raise
+"""
+{this.state.seatsList.map((seat) => (
+                            <><div class="col-md-4">
+                          <div class="seat">{seat.seat}</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="seat"></div>
+                              </div>
+                            </div>
+                          </div></>
+                        ))}
+"""
