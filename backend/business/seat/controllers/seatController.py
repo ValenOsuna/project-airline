@@ -3,6 +3,7 @@ from db import Session
 import ast
 from business.flight.models.flightClass import Flight
 from business.flight.controllers.flightController import search_flight_by_id
+from pprint import pprint
 
 # ['FC','BC','PC','EC']
 
@@ -80,7 +81,7 @@ def search_seat_return_objet(wantedSeat):
 def search_seats(flightObject, fareData):
     session = Session()
 
-    final_scheme = []
+    final_schema = []
 
     flightObject = search_flight_by_id(flightObject)
     session.add(flightObject)
@@ -98,15 +99,22 @@ def search_seats(flightObject, fareData):
     stop += 1
 
     seats = session.query(Seat).filter_by(flight=flightObject.id, fare=fareData).all()
-    for R in range(start, stop):
-        for D in seatPerClass[fareData]:
-            schemeSeat = D + str(R)
-            final_scheme.append({"seat": schemeSeat, "occupied": False})
+    for number in range(start, stop):
+        for letter in seatPerClass[fareData]:
+            schemaSeat = letter + str(number)
+            final_schema.append({"seat": schemaSeat, "occupied": False})
     count = 0
     for item in seats:
-        for remplace in final_scheme:
+        for remplace in final_schema:
             if remplace["seat"] == item.seat:
                 ocupate = {"seat": item.seat, "occupied": True}
-                final_scheme[count] = ocupate
+                final_schema[count] = ocupate
             count += 1
-    return final_scheme
+            # pprint("este es el resultado", final_schema)
+    list_by_letter = {}
+    for letter in seatPerClass[fareData]:
+        list_by_letter[letter] = []
+        for seat in final_schema:
+            if letter == seat["seat"][0:1]:
+                list_by_letter[letter].append(seat)
+    return list_by_letter
