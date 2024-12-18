@@ -11,11 +11,14 @@ class FlightDataService{
     update(data){
         return client_api.patch(`/flight/update`,{data})
     }
-    getflights(date){
+    getFlights(date){
         return client_api.get(`/flight/list`,{params:{date}})
     }
     getflightsbyorigin(origin, destination){
         return client_api.get(`/flight/list-origin`,{params:{origin, destination}})
+    }
+    getFlightFare(id){
+        return client_api.get(`/flight/fare`,{params:{id}})
     }
 }
     export default new FlightDataService();

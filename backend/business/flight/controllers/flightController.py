@@ -48,9 +48,10 @@ def updateFlight(**kwargs):
 
 def search_flight_by_id(id):
     session = Session()
-    user = session.query(Flight).filter_by(id=id).first()
+    flight = session.query(Flight).filter_by(id=id).first()
+    
     session.close()
-    return user
+    return flight
 
 
 def deleteFlight(id):

@@ -1,5 +1,7 @@
-from .flightController import createFlight, deleteFlight, updateFlight, readFlight, search_flight_date, list_fligth_origin
+from .flightController import createFlight, deleteFlight, updateFlight, readFlight, search_flight_date, list_fligth_origin,search_flight_by_id
 from flask import Blueprint, request
+import ast
+from db import Session
 
 flight = Blueprint("flight", __name__)
 
@@ -39,3 +41,13 @@ def list():
     origin = request.args.get("origin")
     destination = request.args.get("destination")
     return list_fligth_origin(origin, destination)
+
+@flight.route('/fare', methods=['GET'])
+def fare():
+    session = Session()
+    id = request.args.get("id")
+    flight = search_flight_by_id(id)
+    session.add(flight)
+    fareList = ast.literal_eval(flight.airplaneDetail.fare)
+    session.close()
+    return fareList
