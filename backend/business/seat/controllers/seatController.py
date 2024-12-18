@@ -85,16 +85,17 @@ def search_seats(flightObject, fareData):
 
     flightObject = search_flight_by_id(flightObject)
     session.add(flightObject)
+    airplaneFare = ast.literal_eval(flightObject.airplaneDetail.fare)
 
-    if fareData not in ast.literal_eval(flightObject.airplaneDetail.fare):
-        return None
+    if fareData not in airplaneFare:
+        return {}
 
     seatPerClass = {
                 "FC": ["A", "B"],
                 "BC": ["A", "B", "C"],
                 "PC": ["A", "B", "C", "D"],
                 "EC": ast.literal_eval(flightObject.row)}
-    start, stop = checkSeatRange(ast.literal_eval(flightObject.airplaneDetail.fare), fareData, flightObject)
+    start, stop = checkSeatRange(airplaneFare, fareData, flightObject)
     start += 1
     stop += 1
 
@@ -109,9 +110,10 @@ def search_seats(flightObject, fareData):
             if remplace["seat"] == item.seat:
                 ocupate = {"seat": item.seat, "occupied": True}
                 final_schema[count] = ocupate
+            
             count += 1
-            # pprint("este es el resultado", final_schema)
-    list_by_letter = {}
+           
+    list_by_letter = {"fare": airplaneFare}
     for letter in seatPerClass[fareData]:
         list_by_letter[letter] = []
         for seat in final_schema:
