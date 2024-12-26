@@ -3,7 +3,6 @@ import ClientDataServices from "../services/clients.services";
 import DestinationsDataService from "../services/destinations.services";
 import FlightDataService from "../services/flight.services";
 import SeatDataService from "../services/seat.services";
-import flightServices from "../services/flight.services";
 
 export default class SaleMake extends Component {
   constructor(props) {
