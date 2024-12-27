@@ -110,10 +110,9 @@ def search_seats(flightObject, fareData):
             if remplace["seat"] == item.seat:
                 ocupate = {"seat": item.seat, "occupied": True}
                 final_schema[count] = ocupate
-            
             count += 1
-           
-    list_by_letter = {"fare": airplaneFare}
+
+    list_by_letter = {}
     for letter in seatPerClass[fareData]:
         list_by_letter[letter] = []
         for seat in final_schema:
