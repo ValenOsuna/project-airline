@@ -1,47 +1,23 @@
 import React from "react";
+import Render from "./schema-aux.component";
 
 const seat = ({id, status}) => {
-    return (
-        <><React.Fragment key={id}>
-            <div className="col-md-6">
-                {id.includes("A") && (
-                    <>
-                        <div className="row">
-                            <div
-                                className="col-md-6"
-                                key={id}
-                            >
-                                <div className="seat">
-                                    {id}
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                )}
+    return ( 
+    
+        <div className="row">
+        {id.includes("A") && (
+            <Render id = {id}/> 
+        
+        )}
 
-            </div>
-        </React.Fragment>
-        <div />
-        <React.Fragment key={id}>
-                <div className="col-md-6">
-                    {id.includes("B") && (
-                        <>
-                            <div className="row">
-                                <div
-                                    className="col-md-6"
-                                    key={id}
-                                >
-                                    <div className="seat">
-                                        {id}
-                                    </div>
-                                </div>
-                            </div>
-                        </>
-                    )}
+        {id.includes("B") && (
+            <Render id = {id}/> 
+        
+        )}
 
-                </div>
-            </React.Fragment>
-            </>
+    </div>
+    
+      
     );
 };
 

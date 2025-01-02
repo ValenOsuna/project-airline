@@ -3,10 +3,8 @@ import Seat from "./seat.component";
 
 
 const Row = ({seatList}) => {
-    console.log("row")
-    console.log(seatList)
     return (
-        <div className="row">
+        <div className="row col-md-6">
             {seatList.map((seat) =>(
                 <Seat
                     key={seat.seat}
