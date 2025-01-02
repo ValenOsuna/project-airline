@@ -309,6 +309,7 @@ export default class SaleMake extends Component {
                         {this.state.seatsList ? (
                           <Class
                           response={this.state.seatsList}
+                          fare={this.state.clientFare}
                         />):("-")}
                         </div>
                       </div>

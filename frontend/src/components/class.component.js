@@ -2,7 +2,7 @@ import React from "react";
 import Row from "./row.component";
 
 
-const Section = ({response}) => {
+const Section = ({response, fare}) => {
     console.log("class:")
     console.log(response)
     return (
@@ -12,6 +12,7 @@ const Section = ({response}) => {
             {Object.keys(response).map((row) => (
                     <Row
                         key={row}
+                        airplaneFare={fare}
                         seatList={response[row]}
                     /> 
                 )
