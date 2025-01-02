@@ -15,6 +15,26 @@ const seat = ({id, status}) => {
         
         )}
 
+        {id.includes("C") && (
+                    <Render id = {id}/> 
+                
+                )}
+
+        {id.includes("D") && (
+                    <Render id = {id}/> 
+                
+                )}
+
+        {id.includes("F") && (
+                    <Render id = {id}/> 
+                
+                )}
+
+        {id.includes("G") && (
+                    <Render id = {id}/> 
+                
+                )}
+
     </div>
     
       
