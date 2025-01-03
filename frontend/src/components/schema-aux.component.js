@@ -1,10 +1,21 @@
+import React, { useState } from "react";
+
+
 const Render = ({id, status}) => {
-    console.log("status")
-    console.log(id , status)
-    return ( 
+        const [isClicked, setIsClicked] = useState(false);
+        const handleClick = () => {
+            setIsClicked(!isClicked)
+        };
     
+    return ( 
+        
         <div key={id}>
-            <div className="seat">{id}</div>
+            <div id={id} tabIndex={0}  
+            className={`seat  ${status ? "cross" : `avaliable ${isClicked ? 'selected' : ''}` } `} 
+            onClick={handleClick}>
+
+                {id}
+            </div>
         </div>
     );
 };
