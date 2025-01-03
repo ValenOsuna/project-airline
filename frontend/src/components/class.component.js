@@ -6,7 +6,7 @@ const Section = ({response, fare}) => {
     console.log("class:")
     console.log(response)
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 ml-2">
             <div className="row">
                 
             {Object.keys(response).map((row) => (
