@@ -6,32 +6,53 @@ const seat = ({id, status}) => {
     
         <div className="row">
         {id.includes("A") && (
-            <Render id = {id}/> 
+            <Render
+             id = {id}
+             status={status}
+            
+            /> 
         
         )}
 
         {id.includes("B") && (
-            <Render id = {id}/> 
+            <Render
+            id = {id}
+            status={status}
+           
+           /> 
         
         )}
 
         {id.includes("C") && (
-                    <Render id = {id}/> 
+                    <Render 
+                    id = {id}
+                    status={status}
+           
+                    />  
                 
                 )}
 
         {id.includes("D") && (
-                    <Render id = {id}/> 
+                    <Render 
+                    id = {id}
+                    status={status}
+                    /> 
                 
                 )}
 
         {id.includes("F") && (
-                    <Render id = {id}/> 
+                    <Render 
+                    id = {id}
+                    status={status}
+                    /> 
                 
                 )}
 
         {id.includes("G") && (
-                    <Render id = {id}/> 
+                    <Render 
+                    id = {id}
+                    status={status}
+                    /> 
                 
                 )}
 
