@@ -35,6 +35,7 @@ export default class SaleMake extends Component {
       clientFare: "",
       step: 1,
       formData: {},
+      selectedSeats: [],
     };
   }
 
@@ -62,8 +63,6 @@ export default class SaleMake extends Component {
       step: this.state.step - 1,
     });
   }
-
-  handleInputChange(event) {}
 
   handleSubmit(event) {
     event.preventDefault();
@@ -109,9 +108,9 @@ export default class SaleMake extends Component {
         console.log(e);
       });
   }
-
- 
-
+  static onChangeSelected(seatsArray){
+    this.setState({selectedSeats: seatsArray})
+  }
   onChangeDestination(event) {
     this.setState({ destination: event.target.value });
   }
