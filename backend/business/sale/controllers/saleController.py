@@ -6,7 +6,7 @@ from business.destination.models.destinationClass import Destination
 from sqlalchemy.orm import joinedload
 
 from business.seat.controllers.seatController import seatCheck, createSeat, search_seat_return_objet
-from business.passenger.controllers.passengerController import search_pasenger_by_id, validation_passport
+from business.passenger.controllers.passengerController import search_pasenger_by_passport, validation_passport
 from business.airplane.controllers.airplaneControllers import search_airplane_by_id, airplane_data
 from business.flight.controllers.flightController import search_flight_by_id
 from business.luggage.controllers.luggageController import search_luggage_by_id
@@ -15,17 +15,17 @@ from datetime import datetime, timedelta
 
 
 def createSale(data):
-    try:
+    #try:
         dataUpdate = dataUpdater(data)
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
         return sale.to_dict()
 
-    except ValueError as exception:
+   # except ValueError as exception:
         return jsonify({"msg": "sale could not be loaded", "keyError": str(exception)})
 
-    except:
+    #except:
         return jsonify({"msg": "destination could not be loaded",
                         "DestinationAttributes": {
                                                 "issue_date": "--",
@@ -90,7 +90,7 @@ def search_sale_by_id(id):
 def dataUpdater(data):
     session = Session()
     flight = search_flight_by_id(data["flight"])
-    passenger = search_pasenger_by_id(data["passenger_data"])
+    passenger = search_pasenger_by_passport(data["passenger_data"])
     luggage = search_luggage_by_id(data["luggage"])
     if luggage is None:
         raise ValueError("luggage")
@@ -134,7 +134,7 @@ def cancelFlight(id):
     if sale is None:
         raise ValueError("sale id")
     flight = search_flight_by_id(sale.flight)
-    passenger = search_pasenger_by_id(sale.passenger_data)
+    passenger = search_pasenger_by_passport(sale.passenger_data)
     departure_time = datetime.strptime(flight.departure_time, "%Y-%m-%d %H:%M")
     current_date = datetime.now()
     if departure_time - current_date <= timedelta(days=1):

@@ -20,7 +20,7 @@ def airplane_data(airplane, fare_type, luggageType):
         if fare_type == "FC":  # Primera
             luggage = ["pi", "c", "ch"]
         elif fare_type == "BC":  # Ejecutivo
-            luggage = ["c", "ch", "can"]
+            luggage = ["c", "ch", "pi"]
         elif fare_type == "PC":  # Premiun
             luggage = "ch"
         elif fare_type == "EC":  # Economy
