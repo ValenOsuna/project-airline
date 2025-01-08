@@ -1,13 +1,31 @@
 import React, { useState } from "react";
-import SaleMake from "./sale-make.component";
 
 var seatsArray = []
-const Render = ({id, status}) => {
+
+function defineArray (key, onChangeSelected){
+    var keyID = key.target.getAttribute('id')
+    
+    if (seatsArray.includes(keyID)){
+        seatsArray.splice(seatsArray.indexOf(keyID), 1)
+
+        
+    }
+    else {seatsArray.push(keyID)
+       
+    }
+
+    
+    onChangeSelected(seatsArray)
+    
+}
+
+const Render = ({id, status, onChangeSelected}) => {
         const [isClicked, setIsClicked] = useState(false);
         const handleClick = (key) => {
             setIsClicked(!isClicked)
-            seatsArray.push(key.target.getAttribute('id'))
-            SaleMake.onChangeSelected(seatsArray)
+
+            defineArray(key, onChangeSelected)
+            
         };
     
     return ( 

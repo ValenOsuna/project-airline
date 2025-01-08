@@ -1,7 +1,7 @@
 import React from "react";
 import Render from "./schema-aux.component";
 
-const seat = ({id, status}) => {
+const seat = ({id, status, onChangeSelected}) => {
     return ( 
     
         <div className="row">
@@ -9,6 +9,7 @@ const seat = ({id, status}) => {
             <Render
              id = {id}
              status={status}
+             onChangeSelected={onChangeSelected}
             
             /> 
         
@@ -18,41 +19,49 @@ const seat = ({id, status}) => {
             <Render
             id = {id}
             status={status}
+            onChangeSelected={onChangeSelected}
            
            /> 
         
         )}
 
         {id.includes("C") && (
-                    <Render 
+                    <Render
                     id = {id}
                     status={status}
-           
-                    />  
+                    onChangeSelected={onChangeSelected}
+                   
+                   />   
                 
                 )}
 
         {id.includes("D") && (
-                    <Render 
+                    <Render
                     id = {id}
                     status={status}
-                    /> 
+                    onChangeSelected={onChangeSelected}
+                   
+                   />  
                 
                 )}
 
         {id.includes("F") && (
-                    <Render 
+                    <Render
                     id = {id}
                     status={status}
-                    /> 
+                    onChangeSelected={onChangeSelected}
+                   
+                   />  
                 
                 )}
 
         {id.includes("G") && (
-                    <Render 
+                    <Render
                     id = {id}
                     status={status}
-                    /> 
+                    onChangeSelected={onChangeSelected}
+                   
+                   />  
                 
                 )}
 
