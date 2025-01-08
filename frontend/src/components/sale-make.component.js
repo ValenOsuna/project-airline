@@ -20,6 +20,7 @@ export default class SaleMake extends Component {
     this.handlePrevious = this.handlePrevious.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeFare = this.onChangeFare.bind(this);
+    this.onChangeSelected = this.onChangeSelected.bind(this);
     this.state = {
       id: null,
       destination: 0,
@@ -65,6 +66,11 @@ export default class SaleMake extends Component {
   }
 
   handleSubmit(event) {
+    this.setState({ formData : {
+      flight: this.state.flight,
+      passenger_data: this.state.passport_number,
+       
+  }});
     event.preventDefault();
   }
   getClient() {
@@ -108,9 +114,19 @@ export default class SaleMake extends Component {
         console.log(e);
       });
   }
-  static onChangeSelected(seatsArray){
-    this.setState({selectedSeats: seatsArray})
+   onChangeSelected(seatsArray){
+    this.setState({selectedSeats: seatsArray} , () => {
+      console.log("objeto: " , this.state.selectedSeats)
+    })
   }
+
+  onChangeFlight(event) {
+    this.setState({ flight: event.target.value }, () => {
+      this.getFlightFare(this.state.flight)
+      console.log(this.state.flight);
+    });
+  }  
+
   onChangeDestination(event) {
     this.setState({ destination: event.target.value });
   }
@@ -132,12 +148,7 @@ export default class SaleMake extends Component {
     
   }
 
-  onChangeFlight(event) {
-    this.setState({ flight: event.target.value }, () => {
-      this.getFlightFare(this.state.flight)
-      console.log(this.state.flight);
-    });
-  }
+ 
 
   onChangeFare(event) {
     this.setState({ clientFare: event.target.value }, () => {
@@ -161,7 +172,7 @@ export default class SaleMake extends Component {
       });
   }
 
-  render() {
+    render() {
     return (
       <div className="row">
         <form>
@@ -308,7 +319,7 @@ export default class SaleMake extends Component {
                         {this.state.seatsList ? (
                           <Class
                           response={this.state.seatsList}
-                          fare={this.state.clientFare}
+                          onChangeSelected={this.onChangeSelected}
                         />):("-")}
                         </div>
                       </div>
