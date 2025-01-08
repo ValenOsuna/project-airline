@@ -3,7 +3,9 @@ import ClientDataServices from "../services/clients.services";
 import DestinationsDataService from "../services/destinations.services";
 import FlightDataService from "../services/flight.services";
 import SeatDataService from "../services/seat.services";
+import SaleDataService from "../services/sale.services";
 import Class from "./class.component";
+
 
 export default class SaleMake extends Component {
   constructor(props) {
@@ -21,6 +23,7 @@ export default class SaleMake extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChangeFare = this.onChangeFare.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
+    this.onChangeLuggage = this.onChangeLuggage.bind(this); 
     this.state = {
       id: null,
       destination: 0,
@@ -28,6 +31,7 @@ export default class SaleMake extends Component {
       name: null,
       surname: null,
       passport_number: null,
+      accumulated_miles: null,
       destinationlist: [],
       flight: 0,
       flightlist: [],
@@ -37,6 +41,7 @@ export default class SaleMake extends Component {
       step: 1,
       formData: {},
       selectedSeats: [],
+      luggageType: null
     };
   }
 
@@ -49,6 +54,7 @@ export default class SaleMake extends Component {
         if (this.state.step === 3) {
           this.getFlight();
         }
+       
       }
     );
   }
@@ -67,12 +73,41 @@ export default class SaleMake extends Component {
 
   handleSubmit(event) {
     this.setState({ formData : {
-      flight: this.state.flight,
-      passenger_data: this.state.passport_number,
-       
-  }});
+      "issue_date": new Date().toJSON().slice(0, 10) ,
+      "reservation_number": 123456789,
+      "pay_method": true,
+      "accumulated_miles": this.state.accumulated_miles,
+      "fare": this.state.clientFare,
+      "passenger_data": this.state.passport_number,
+      "price": 250,
+      "flight": this.state.flight,
+      "luggage":this.state.luggageType,
+      "seat": this.state.selectedSeats[0]
+        
+  }} , () => {
+    this.makeSale()
     event.preventDefault();
+  });
+    
   }
+
+  makeSale(){
+    SaleDataService.create(this.state.formData)
+  .then((response) => {
+    console.log(response.data);
+
+   
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+}
+
+
+  
+  
+
+
   getClient() {
     var id_client = this.state.id;
 
@@ -85,6 +120,7 @@ export default class SaleMake extends Component {
           name: response.data.name,
           surname: response.data.surname,
           passport_number: response.data.passport_number,
+          accumulated_miles: response.data.accumulated_miles
         });
       })
       .catch((e) => {
@@ -119,6 +155,13 @@ export default class SaleMake extends Component {
       console.log("objeto: " , this.state.selectedSeats)
     })
   }
+
+  onChangeLuggage(event) {
+    this.setState({ luggageType: event.target.value }, () => {
+      console.log(this.state.luggageType);
+    });
+  }  
+
 
   onChangeFlight(event) {
     this.setState({ flight: event.target.value }, () => {
@@ -155,7 +198,7 @@ export default class SaleMake extends Component {
       this.SeatsGet();
     });
   }
-  //dislexia de event
+
 
   componentDidMount() {
     this.getDestination();
@@ -326,6 +369,32 @@ export default class SaleMake extends Component {
                     </div>
                 )}
 
+{this.state.step === 5 && (
+                  <div className="row">
+                    <div className="mb-3">
+                      <div className="col-10 mt-4">
+                        <label className="form-label">
+                          <h4>Equipaje</h4>
+                        </label>
+
+                        <select
+                          className="form-control bg-light-subtle"
+                          value={this.state.luggageType}
+                          onChange={this.onChangeLuggage}
+                        >
+                                                    
+                          <option selected>Seleccionar tipo de Equipaje</option>
+                          <option value={1}> Articulos personales</option>
+                          <option value={2}> Equipaje de mano </option>
+                          <option value={3}> Equipaje facturado </option>
+
+                        </select>
+                        
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="d-flex justify-content-between">
                   {this.state.step > 1 && (
                     <button
@@ -336,7 +405,7 @@ export default class SaleMake extends Component {
                       Previo
                     </button>
                   )}
-                  {this.state.step < 4 ? (
+                  {this.state.step < 5 ? (
                     <button
                       type="button"
                       className="btn btn-success mt-1"
