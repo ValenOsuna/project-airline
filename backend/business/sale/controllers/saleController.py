@@ -12,6 +12,7 @@ from business.flight.controllers.flightController import search_flight_by_id
 from business.luggage.controllers.luggageController import search_luggage_by_id
 
 from datetime import datetime, timedelta
+import json
 
 
 def createSale(data):
@@ -100,28 +101,41 @@ def dataUpdater(data):
         raise ValueError("passenger_data")
     if validation_passport(passenger.passport_expiration) == False:
         raise ValueError("Expired passport")
+    
+    data["luggage"] = luggage.id
+    data["flight"] = flight.id
+    data["passenger_data"] = passenger.id
 
     airplane = search_airplane_by_id(flight.airplane)
     if airplane.capacity > 0:
         airplane.capacity -= 1
     else:
         raise ValueError("The airplane is full")
-
-    seat = seatCheck(airplane, data["fare"], data["seat"], flight)
-    if seat == False:
-        raise ValueError("seat not avaliable")
-
+    
     data_luggage = airplane_data(airplane, data["fare"], luggage.type)
     if data_luggage is None:
         raise ValueError("Fare not allowed for this airplane")
+    
+    data["seat_data"] = []
+    
+    seatCount = 0
+    for individualSeat in data["seat"]:
+        seatCheck(airplane, data["fare"], individualSeat, flight)
+        seatCount += 1
+        data["seat"] = individualSeat
+        individualSeatID = createSeat(data)
+        data["seat_data"].append(individualSeatID.id)
 
-    data["accumulated_miles"] = (data["price"] * 0.1) + passenger.accumulated_miles
-    passenger.accumulated_miles = data["accumulated_miles"]
-    data["luggage"] = luggage.id
-    data["flight"] = flight.id
-    data["passenger_data"] = passenger.id
-    createSeat(data)
-    data["seat_data"] = search_seat_return_objet(data["seat"]).id
+    
+
+    
+    passenger.accumulated_miles = (data["price"] * 0.1 * seatCount) + passenger.accumulated_miles
+    data["accumulated_miles"] = passenger.accumulated_miles
+
+    data["seat_data"] = json.dumps(data["seat_data"])
+
+    
+     
     session.add(airplane)
     session.add(passenger)
     session.commit()
