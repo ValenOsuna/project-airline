@@ -10,7 +10,7 @@ from pprint import pprint
 
 def seatCheck(airplane, wantedFare, wantedSeat, flight):
     if search_seat_return_objet(wantedSeat) != None:
-        raise ValueError("seat not avaliable")
+        raise ValueError(f"{wantedSeat} seat not avaliable")
     airplane = ast.literal_eval(airplane.fare)
 
     if wantedFare not in airplane:
@@ -30,11 +30,14 @@ def seatCheckConditional(wantedSeat, airplane, wantedFare, flight):
     seatRow = wantedSeat[0:1]
 
     startRange, endRange = checkSeatRange(airplane, wantedFare, flight)
-    print(startRange, endRange)
 
     if (seatNumber > startRange and seatNumber <= endRange) and (seatRow in seatPerClass[wantedFare]):
         condition = True
-    return condition
+
+    if condition :
+        return condition
+    else:
+        raise ValueError(f"{wantedSeat} seat not avaliable in current fare")
 
 
 def checkSeatRange(airplane, wantedFare, flight):
