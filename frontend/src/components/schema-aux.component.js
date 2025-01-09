@@ -19,12 +19,20 @@ function defineArray (key, onChangeSelected){
     
 }
 
+function FixedButton(id) {
+    document.getElementById(id).classList.add("selected");
+    };
+
 const Render = ({id, status, onChangeSelected}) => {
         const [isClicked, setIsClicked] = useState(false);
         const handleClick = (key) => {
             setIsClicked(!isClicked)
 
             defineArray(key, onChangeSelected)
+            for (var i = 0; i < seatsArray.length; i++){
+                FixedButton(seatsArray[i])
+                console.log(seatsArray[i])
+            }
             
         };
     
