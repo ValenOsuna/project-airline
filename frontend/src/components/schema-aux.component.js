@@ -13,12 +13,13 @@ function defineArray (key, onChangeSelected, numberOfSales){
     else { if  (seatsArray.length < numberOfSales) {
         seatsArray.push(keyID)}
         
-        seatsArray.push(keyID)
+        
        
     }
 
     
     onChangeSelected(seatsArray)
+    console.log(seatsArray)
     
 }
 
