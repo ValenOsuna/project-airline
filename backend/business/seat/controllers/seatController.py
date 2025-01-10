@@ -25,7 +25,7 @@ def seatCheckConditional(wantedSeat, airplane, wantedFare, flight):
                     "BC": ["A", "B", "C"],
                     "PC": ["A", "B", "C", "D"],
                     "EC": ast.literal_eval(flight.row)}
-
+    print("b", wantedSeat)
     seatNumber = int(wantedSeat[1:3])
     seatRow = wantedSeat[0:1]
 

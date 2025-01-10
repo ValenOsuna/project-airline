@@ -33,6 +33,7 @@ class Airport(Base):
         session = Session()
         session.add(self)
         session.commit()
+        session.refresh(self)
         session.close()
 
     def save(self):

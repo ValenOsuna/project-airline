@@ -17,6 +17,9 @@ class SaleDataService{
     getSales(){
         return client_api.get(`/sale/list`,{params:{issue_date:"22-11-04"}})
     }
+    getSalesPrice(wantedFare, flight_price){
+        return client_api.post(`/sale/price`,{wantedFare, flight_price})
+    }
 }
 
 export default new SaleDataService();

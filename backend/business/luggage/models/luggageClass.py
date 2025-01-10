@@ -30,6 +30,7 @@ class Luggages(Base):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "type": self.type,
             "weight": self.weight,
             "type_flight": self.type_flight}

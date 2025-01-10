@@ -16,14 +16,16 @@ import json
 
 
 def createSale(data):
-    #try:
+    try:
         dataUpdate = dataUpdater(data)
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
         return sale.to_dict()
+    except:
+        raise
 
-   # except ValueError as exception:
+    #except ValueError as exception:
         return jsonify({"msg": "sale could not be loaded", "keyError": str(exception)})
 
     #except:
@@ -101,7 +103,7 @@ def dataUpdater(data):
         raise ValueError("passenger_data")
     if validation_passport(passenger.passport_expiration) == False:
         raise ValueError("Expired passport")
-    
+
     data["luggage"] = luggage.id
     data["flight"] = flight.id
     data["passenger_data"] = passenger.id
@@ -111,13 +113,13 @@ def dataUpdater(data):
         airplane.capacity -= 1
     else:
         raise ValueError("The airplane is full")
-    
+
     data_luggage = airplane_data(airplane, data["fare"], luggage.type)
     if data_luggage is None:
         raise ValueError("Fare not allowed for this airplane")
-    
+
     data["seat_data"] = []
-    
+
     seatCount = 0
     for individualSeat in data["seat"]:
         seatCheck(airplane, data["fare"], individualSeat, flight)
@@ -126,16 +128,11 @@ def dataUpdater(data):
         individualSeatID = createSeat(data)
         data["seat_data"].append(individualSeatID.id)
 
-    
-
-    
     passenger.accumulated_miles = (data["price"] * 0.1 * seatCount) + passenger.accumulated_miles
     data["accumulated_miles"] = passenger.accumulated_miles
 
     data["seat_data"] = json.dumps(data["seat_data"])
 
-    
-     
     session.add(airplane)
     session.add(passenger)
     session.commit()
@@ -181,3 +178,19 @@ def search_list_sale(issueDate):
         results.append(item.to_dict())
         print(item.to_dict())
     return results
+
+
+price = {
+    "FC": 2,
+    "BC": 1.6,
+    "PC": 1.4,
+    "EC": 1}
+
+
+def price_fare(wantedFare, flightID):
+    flight = search_flight_by_id(flightID)
+    print("a", vars(flight))
+    if wantedFare in price:
+        return price[wantedFare] * flight.price
+    else:
+        return wantedFare

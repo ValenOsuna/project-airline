@@ -5,7 +5,7 @@ from ..models.airplaneClass import Airplane
 def create(Data):
     airplane = Airplane()
     airplane.createAirplane(Data)
-    return airplane
+    return airplane.to_dict()
 
 
 def decompress_obj(airplane):

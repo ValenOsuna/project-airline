@@ -40,7 +40,7 @@ class Airplane(Base):
 
     def to_dict(self):
         return {
-            "id" : self.id,
+            "id": self.id,
             "model": self.model,
             "capacity": self.capacity,
             "fare": self.fare}
