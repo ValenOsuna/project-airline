@@ -3,7 +3,7 @@ import Seat from "./seat.component";
 
 
 
-const Row = ({seatList, onChangeSelected}) => { 
+const Row = ({seatList, onChangeSelected, numberOfSales}) => { 
     return (
     <div className="col">  
         <div className="row">
@@ -14,6 +14,7 @@ const Row = ({seatList, onChangeSelected}) => {
                     id={seat.seat}
                     status={seat.occupied}
                     onChangeSelected={onChangeSelected}
+                    numberOfSales = {numberOfSales}
                 
                     /> 
                

@@ -2,7 +2,7 @@ import React from "react";
 import Row from "./row.component";
 
 
-const Section = ({response, onChangeSelected}) => {
+const Section = ({response, onChangeSelected,numberOfSales}) => {
     console.log("class:")
     console.log(response)
     return (
@@ -14,6 +14,7 @@ const Section = ({response, onChangeSelected}) => {
                         key={row}
                         onChangeSelected={onChangeSelected}
                         seatList={response[row]}
+                        numberOfSales = {numberOfSales}
                     /> 
                 )
             )}</div>

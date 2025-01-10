@@ -1,7 +1,7 @@
 import React from "react";
 import Render from "./schema-aux.component";
 
-const seat = ({id, status, onChangeSelected}) => {
+const seat = ({id, status, onChangeSelected, numberOfSales}) => {
     return ( 
     
         <div className="row">
@@ -10,6 +10,7 @@ const seat = ({id, status, onChangeSelected}) => {
              id = {id}
              status={status}
              onChangeSelected={onChangeSelected}
+             numberOfSales = {numberOfSales}
             
             /> 
         
@@ -20,6 +21,7 @@ const seat = ({id, status, onChangeSelected}) => {
             id = {id}
             status={status}
             onChangeSelected={onChangeSelected}
+            numberOfSales = {numberOfSales}
            
            /> 
         
@@ -30,18 +32,20 @@ const seat = ({id, status, onChangeSelected}) => {
                     id = {id}
                     status={status}
                     onChangeSelected={onChangeSelected}
+                    numberOfSales = {numberOfSales}
                    
-                   />   
+                   />  
                 
                 )}
 
         {id.includes("D") && (
-                    <Render
-                    id = {id}
-                    status={status}
-                    onChangeSelected={onChangeSelected}
-                   
-                   />  
+                   <Render
+                   id = {id}
+                   status={status}
+                   onChangeSelected={onChangeSelected}
+                   numberOfSales = {numberOfSales}
+                  
+                  />  
                 
                 )}
 
@@ -50,8 +54,9 @@ const seat = ({id, status, onChangeSelected}) => {
                     id = {id}
                     status={status}
                     onChangeSelected={onChangeSelected}
+                    numberOfSales = {numberOfSales}
                    
-                   />  
+                   /> 
                 
                 )}
 
@@ -60,8 +65,9 @@ const seat = ({id, status, onChangeSelected}) => {
                     id = {id}
                     status={status}
                     onChangeSelected={onChangeSelected}
+                    numberOfSales = {numberOfSales}
                    
-                   />  
+                   /> 
                 
                 )}
 
