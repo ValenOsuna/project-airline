@@ -1,4 +1,4 @@
-from .saleController import createSale, deleteSale, updateSale, readSale, cancelFlight, search_list_sale
+from .saleController import createSale, deleteSale, updateSale, readSale, cancelFlight, price_fare, search_list_sale, price_fare
 from flask import Blueprint, request
 
 sale = Blueprint("sale", __name__)
@@ -38,3 +38,11 @@ def cancel():
 def listResult():
     data = request.args.get("issue_date")
     return search_list_sale(data)
+
+
+@sale.route("/price", methods=['POST'])
+def PriceResult():
+    print(request.get_json())
+    Fare = request.get_json().get("wantedFare")
+    flightID = request.get_json().get("flight_price")
+    return price_fare(Fare, flightID)

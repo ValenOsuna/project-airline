@@ -5,7 +5,7 @@ from db import Session
 def create(Data):
     luggages = Luggages()
     luggages.create(Data)
-    return luggages
+    return luggages.to_dict()
 
 
 def search_luggage_by_id(id):

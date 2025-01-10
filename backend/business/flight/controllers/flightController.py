@@ -49,7 +49,6 @@ def updateFlight(**kwargs):
 def search_flight_by_id(id):
     session = Session()
     flight = session.query(Flight).filter_by(id=id).first()
-    
     session.close()
     return flight
 
@@ -115,9 +114,10 @@ def search_flight_date(date):
         print(item.__dict__)
     return results
 
+
 def list_fligth_origin(org, dest):
     session = Session()
-    lista = session.query(Flight).filter_by(origin = int(org) , destination = int(dest)).all()
+    lista = session.query(Flight).filter_by(origin=int(org), destination=int(dest)).all()
     results = []
     for item in lista:
         results.append(item.to_dict())

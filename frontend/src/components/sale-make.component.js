@@ -43,7 +43,8 @@ export default class SaleMake extends Component {
       formData: {},
       selectedSeats: [],
       luggageType: null,
-      numberOfSales: ""
+      numberOfSales: "",
+      price: 0
     };
   }
 
@@ -73,7 +74,7 @@ export default class SaleMake extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit(event) { this.getSalePrice(this.state.clientFare, this.state.flight)
     this.setState({ formData : {
       "issue_date": new Date().toJSON().slice(0, 10) ,
       "reservation_number": 123456789,
@@ -84,7 +85,7 @@ export default class SaleMake extends Component {
       "price": 250,
       "flight": this.state.flight,
       "luggage":this.state.luggageType,
-      "seat": this.state.selectedSeats[0]
+      "seat": this.state.selectedSeats
         
   }} , () => {
     this.makeSale()
@@ -144,6 +145,17 @@ export default class SaleMake extends Component {
         console.log(e);
       });
   }
+
+  getSalePrice(wantedFare, flight_price) {
+    SaleDataService.getSalesPrice(wantedFare, flight_price)
+      .then((response) => {
+        this.setState({ price: response.data });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    }
+
   getFlight() {
     FlightDataService.getflightsbyorigin(
       this.state.origin,

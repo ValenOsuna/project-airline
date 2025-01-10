@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from db import Base, Session
 
@@ -18,8 +18,9 @@ class Flight(Base):
     row = Column("row", String, nullable=False)
     column = Column("column", Integer, nullable=False)
     date = Column("date", String, nullable=False)
+    price = Column("price", String, nullable=False)
 
-    originDetail = relationship("Destination" , foreign_keys=[origin])
+    originDetail = relationship("Destination", foreign_keys=[origin])
     destinationDetail = relationship("Destination",  foreign_keys=[destination])
     airplaneDetail = relationship("Airplane", back_populates="flightDetail")
     ticketDetail = relationship("Ticket", back_populates="flightDetail", cascade="all, delete")
@@ -38,7 +39,8 @@ class Flight(Base):
                  gate=None,
                  row=None,
                  column=None,
-                 date=None
+                 date=None,
+                 price=None
                  ):
 
         self.destination = destination
@@ -52,6 +54,7 @@ class Flight(Base):
         self.row = row
         self.column = column
         self.date = date
+        self.price = price
 
     def Cargar(self, Data):
         self.destination = Data["destination"]
@@ -65,6 +68,7 @@ class Flight(Base):
         self.row = Data["row"]
         self.column = Data["column"]
         self.date = Data["date"]
+        self.price = Data["price"]
 
     def save(self):
         session = Session()
@@ -86,5 +90,6 @@ class Flight(Base):
             "gate": self.gate,
             "row": self.row,
             "column": self.column,
-            "date": self.date
+            "date": self.date,
+            "price": self.price
         }

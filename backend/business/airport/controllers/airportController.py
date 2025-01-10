@@ -6,7 +6,10 @@ def create(Data):
     airport = Airport()
     airport.createAirport(Data)
     print(airport)
-    return airport
+    session = Session()
+    session.add(airport)
+    session.close()
+    return airport.to_dict()
 
 
 def decompress_obj(airport):

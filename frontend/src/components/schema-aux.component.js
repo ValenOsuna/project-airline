@@ -7,20 +7,14 @@ function defineArray (key, onChangeSelected, numberOfSales){
     
     if (seatsArray.includes(keyID)){
         seatsArray.splice(seatsArray.indexOf(keyID), 1)
-
-        
     }
     else { if  (seatsArray.length < numberOfSales) {
-        seatsArray.push(keyID)}
-        
-        
-       
+        seatsArray.push(keyID)}       
     }
-
     
     onChangeSelected(seatsArray)
     console.log(seatsArray)
-    
+
 }
 
 function FixedButton(id) {
