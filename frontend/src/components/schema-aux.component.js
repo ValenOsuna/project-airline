@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 var seatsArray = []
 
-function defineArray (key, onChangeSelected){
+function defineArray (key, onChangeSelected, numberOfSales){
     var keyID = key.target.getAttribute('id')
     
     if (seatsArray.includes(keyID)){
@@ -10,7 +10,10 @@ function defineArray (key, onChangeSelected){
 
         
     }
-    else {seatsArray.push(keyID)
+    else { if  (seatsArray.length < numberOfSales) {
+        seatsArray.push(keyID)}
+        
+        seatsArray.push(keyID)
        
     }
 
@@ -23,12 +26,12 @@ function FixedButton(id) {
     document.getElementById(id).classList.add("selected");
     };
 
-const Render = ({id, status, onChangeSelected}) => {
+const Render = ({id, status, onChangeSelected, numberOfSales}) => {
         const [isClicked, setIsClicked] = useState(false);
         const handleClick = (key) => {
             setIsClicked(!isClicked)
 
-            defineArray(key, onChangeSelected)
+            defineArray(key, onChangeSelected, numberOfSales)
             for (var i = 0; i < seatsArray.length; i++){
                 FixedButton(seatsArray[i])
                 console.log(seatsArray[i])

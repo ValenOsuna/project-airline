@@ -24,6 +24,7 @@ export default class SaleMake extends Component {
     this.onChangeFare = this.onChangeFare.bind(this);
     this.onChangeSelected = this.onChangeSelected.bind(this);
     this.onChangeLuggage = this.onChangeLuggage.bind(this); 
+    this.onChangeNumberOfsales = this.onChangeNumberOfsales.bind(this);
     this.state = {
       id: null,
       destination: 0,
@@ -41,7 +42,8 @@ export default class SaleMake extends Component {
       step: 1,
       formData: {},
       selectedSeats: [],
-      luggageType: null
+      luggageType: null,
+      numberOfSales: ""
     };
   }
 
@@ -105,7 +107,12 @@ export default class SaleMake extends Component {
 
 
   
-  
+  onChangeNumberOfsales(event) {
+    this.setState({
+      numberOfSales: event.target.value,
+    } ,() => {console.log(this.numberOfSales)});
+
+}
 
 
   getClient() {
@@ -152,7 +159,7 @@ export default class SaleMake extends Component {
   }
    onChangeSelected(seatsArray){
     this.setState({selectedSeats: seatsArray} , () => {
-      console.log("objeto: " , this.state.selectedSeats)
+  
     })
   }
 
@@ -333,6 +340,15 @@ export default class SaleMake extends Component {
                             </option>
                           ))}
                         </select>
+
+                        <div class="mb-3 mt-3">
+                        <label  for="numero" class="form-label">Número de pasajes</label>
+                        <input onChange={this.onChangeNumberOfsales} value= {this.state.numberOfSales} type="number" className="form-control" id="numero" placeholder="Introduce un número" /> 
+
+                      </div>
+
+
+
                       </div>
                     </div>
                   </div>
@@ -363,6 +379,7 @@ export default class SaleMake extends Component {
                           <Class
                           response={this.state.seatsList}
                           onChangeSelected={this.onChangeSelected}
+                          numberOfSales = {this.state.numberOfSales}
                         />):("-")}
                         </div>
                       </div>
