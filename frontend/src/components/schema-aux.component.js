@@ -1,17 +1,35 @@
 import React, { useState } from "react";
 
-var seatsArray = []
+var seatsArray = [];
 
+function PushArray(key) { 
+  seatsArray.push(key);
+}
 
-function FixedButton(id) {
-    document.getElementById(id).classList.add("selected");
-    };
+function spliceArray(key) {
+  if (seatsArray.includes(key)) {
+    seatsArray.splice(seatsArray.indexOf(key), 1);
+  } 
+}
 
-    for (var i = 0; i < seatsArray.length; i++){
-        FixedButton(seatsArray[i])
-        console.log(seatsArray[i])
+const Render = ({ id, status, onChangeSelected, numberOfSales }) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = (key) => {
+    const keyID = key.target.getAttribute("id");
+
+    if (seatsArray.includes(keyID)) {
+      setIsClicked(false);
+      spliceArray(keyID);
+
+    } else {
+
+      if (seatsArray.length < numberOfSales) {
+        setIsClicked(true);
+        PushArray(keyID);
+      }
     }
-
+    
 const Render = ({id, status, onChangeSelected, numberOfSales}) => {
         const [isClicked, setIsClicked] = useState(false);
         const handleClick = (key) => {
@@ -39,4 +57,12 @@ const Render = ({id, status, onChangeSelected, numberOfSales}) => {
     );
 };
 
-    export default Render;
+export default Render;
+
+export function FixedButton(array) {
+
+    for (var i = 0; i < array.length; i++){
+        document.getElementById(array[i]).classList.add("selected");
+        console.log(array[i])
+    }
+}
