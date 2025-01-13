@@ -5,6 +5,7 @@ import FlightDataService from "../services/flight.services";
 import SeatDataService from "../services/seat.services";
 import SaleDataService from "../services/sale.services";
 import Class from "./class.component";
+import { FixedButton } from "./schema-aux.component";
 
 
 export default class SaleMake extends Component {
@@ -57,6 +58,12 @@ export default class SaleMake extends Component {
         if (this.state.step === 3) {
           this.getFlight();
         }
+
+        if (this.state.step === 4) {
+          FixedButton(this.state.selectedSeats
+
+          );
+        }
        
       }
     );
@@ -71,6 +78,12 @@ export default class SaleMake extends Component {
   handlePrevious() {
     this.setState({
       step: this.state.step - 1,
+    } , () => {
+      if (this.state.step === 4) {
+        FixedButton(this.state.selectedSeats
+
+        );
+      }
     });
   }
 
