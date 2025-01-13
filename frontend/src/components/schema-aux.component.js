@@ -23,10 +23,7 @@ const Render = ({id, status, onChangeSelected, numberOfSales}) => {
                 setIsClicked(isClicked)
             }   seatsArray.splice(id)
             
-            onChangeSelected(seatsArray)
-            
-            
-            
+            onChangeSelected(seatsArray)            
         };
     
     return ( 
