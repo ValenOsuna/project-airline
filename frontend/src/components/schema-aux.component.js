@@ -29,23 +29,32 @@ const Render = ({ id, status, onChangeSelected, numberOfSales }) => {
         PushArray(keyID);
       }
     }
+    
+const Render = ({id, status, onChangeSelected, numberOfSales}) => {
+        const [isClicked, setIsClicked] = useState(false);
+        const handleClick = (key) => {
+            if (seatsArray.length < numberOfSales){
+                setIsClicked(!isClicked)
+                seatsArray.push(id)
+            }
+            else {
+                setIsClicked(isClicked)
+            }   seatsArray.splice(id)
+            
+            onChangeSelected(seatsArray)            
+        };
+    
+    return ( 
+        
+        <div key={id}>
+            <div id={id} tabIndex={0}  
+            className={`seat  ${status ? "cross" : `avaliable ${isClicked ? 'selected' : ''}` } `} 
+            onClick={handleClick}>
 
-    console.log(seatsArray)
-    onChangeSelected(seatsArray);
-  };
-
-  return (
-    <div key={id}>
-      <div
-        id={id}
-        tabIndex={0}
-        className={`seat ${status ? "cross" : `available ${isClicked ? "selected" : ""}`}`}
-        onClick={handleClick}
-      >
-        {id}
-      </div>
-    </div>
-  );
+                {id}
+            </div>
+        </div>
+    );
 };
 
 export default Render;

@@ -192,8 +192,7 @@ export default class SaleMake extends Component {
     this.setState({ luggageType: event.target.value }, () => {
       console.log(this.state.luggageType);
     });
-  }  
-
+  }
 
   onChangeFlight(event) {
     this.setState({ flight: event.target.value }, () => {
@@ -203,11 +202,14 @@ export default class SaleMake extends Component {
   }  
 
   onChangeDestination(event) {
-    this.setState({ destination: event.target.value });
+    this.setState({ destination: event.target.value }, ()=> {
+      console.log(typeof event.target.value)
+    });
   }
 
   onChangeOrigin(event) {
-    this.setState({ origin: event.target.value });
+    this.setState({ origin: event.target.value }, ()=> {
+      console.log( this.state.origin)});
   }
 
   getFlightFare(flightId){
@@ -218,19 +220,13 @@ export default class SaleMake extends Component {
     .catch((e) => {
       console.log(e);
     });
-
-   
-    
   }
-
- 
 
   onChangeFare(event) {
     this.setState({ clientFare: event.target.value }, () => {
       this.SeatsGet();
     });
   }
-
 
   componentDidMount() {
     this.getDestination();
@@ -318,9 +314,10 @@ export default class SaleMake extends Component {
                         >
                           <option selected>Seleccionar destino</option>
                           {this.state.destinationlist.map((destination) => (
-                            <option value={destination.id}>
-                              {destination.name}
-                            </option>
+                            destination.id !== parseInt(this.state.origin) && (
+                              <option value= { destination.id }>
+                              { destination.name }
+                              </option>)
                           ))}
                         </select>
                       </div>
@@ -335,7 +332,10 @@ export default class SaleMake extends Component {
                         >
                           <option selected>Seleccionar origen</option>
                           {this.state.destinationlist.map((origin) => (
-                            <option value={origin.id}>{origin.name}</option>
+                            origin.id !== parseInt(this.state.destination) && (
+                              <option value= { origin.id }>
+                              { origin.name }
+                              </option>)
                           ))}
                         </select>
                       </div>
