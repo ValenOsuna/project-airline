@@ -87,7 +87,7 @@ export default class SaleMake extends Component {
     });
   }
 
-  handleSubmit(event) { this.getSalePrice(this.state.clientFare, this.state.flight)
+  handleSubmit(event) { 
     this.setState({ formData : {
       "issue_date": new Date().toJSON().slice(0, 10) ,
       "reservation_number": 123456789,
@@ -95,7 +95,7 @@ export default class SaleMake extends Component {
       "accumulated_miles": this.state.accumulated_miles,
       "fare": this.state.clientFare,
       "passenger_data": this.state.passport_number,
-      "price": 250,
+      "price": this.state.price,
       "flight": this.state.flight,
       "luggage":this.state.luggageType,
       "seat": this.state.selectedSeats
@@ -225,6 +225,7 @@ export default class SaleMake extends Component {
   onChangeFare(event) {
     this.setState({ clientFare: event.target.value }, () => {
       this.SeatsGet();
+      this.getSalePrice(this.state.clientFare, this.state.flight)
     });
   }
 
@@ -406,6 +407,13 @@ export default class SaleMake extends Component {
                           onChangeSelected={this.onChangeSelected}
                           numberOfSales = {this.state.numberOfSales}
                         />):("-")}
+
+                        <div class="card border-success">
+                          <div class="card-body">
+                            <h5 class="card-title text-center">Precio final:</h5>
+                            <p class="card-text text-center text-success">$ {this.state.price * this.state.selectedSeats.length}</p>
+                          </div>
+                        </div>
                         </div>
                       </div>
                     </div>

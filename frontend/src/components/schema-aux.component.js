@@ -48,6 +48,7 @@ const Render = ({ id, status, onChangeSelected, numberOfSales }) => {
 export function FixedButton(array) {
   for (var i = 0; i < array.length; i++) {
     document.getElementById(array[i]).classList.add("selected");
+   
     
   }
 }

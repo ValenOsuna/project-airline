@@ -191,6 +191,6 @@ def price_fare(wantedFare, flightID):
     flight = search_flight_by_id(flightID)
     print("a", vars(flight))
     if wantedFare in price:
-        return price[wantedFare] * flight.price
+        return f"{price[wantedFare] * flight.price}"
     else:
         return wantedFare
