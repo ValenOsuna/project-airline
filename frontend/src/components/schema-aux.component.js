@@ -7,9 +7,8 @@ function PushArray(key) {
 }
 
 function spliceArray(key) {
-  if (seatsArray.includes(key)) {
-    seatsArray.splice(seatsArray.indexOf(key), 1);
-  }
+  seatsArray.splice(seatsArray.indexOf(key), 1);
+  
 }
 
 const Render = ({ id, status, onChangeSelected, numberOfSales }) => {
@@ -22,13 +21,14 @@ const Render = ({ id, status, onChangeSelected, numberOfSales }) => {
       setIsClicked(false);
       spliceArray(keyID);
     } else {
-      if (seatsArray.length < numberOfSales) {
+      if (seatsArray.length < numberOfSales && status !== true )  {
         setIsClicked(true);
         PushArray(keyID);
       }
     }
 
     onChangeSelected(seatsArray);
+    console.log(seatsArray)
   };
 
   return (
@@ -48,7 +48,7 @@ const Render = ({ id, status, onChangeSelected, numberOfSales }) => {
 export function FixedButton(array) {
   for (var i = 0; i < array.length; i++) {
     document.getElementById(array[i]).classList.add("selected");
-    console.log(array[i]);
+    
   }
 }
 
