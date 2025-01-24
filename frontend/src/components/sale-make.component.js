@@ -6,6 +6,8 @@ import SeatDataService from "../services/seat.services";
 import SaleDataService from "../services/sale.services";
 import Class from "./class.component";
 import { FixedButton } from "./schema-aux.component";
+import Resume from "./sale-resume.component";
+import { Link } from "react-router-dom";
 
 
 export default class SaleMake extends Component {
@@ -88,7 +90,7 @@ export default class SaleMake extends Component {
   }
 
   handleSubmit(event) { 
-    this.setState({ formData : {
+    this.setState({step : this.state.step + 1 ,formData : {
       "issue_date": new Date().toJSON().slice(0, 10) ,
       "reservation_number": 123456789,
       "pay_method": true,
@@ -242,6 +244,10 @@ export default class SaleMake extends Component {
       .catch((e) => {
         console.log(e);
       });
+  }
+
+  winPrint() {
+    window.print();
   }
 
     render() {
@@ -444,9 +450,36 @@ export default class SaleMake extends Component {
                     </div>
                   </div>
                 )}
-
+{this.state.step === 6 && (
+  <Resume
+  formData={this.state.formData}
+  />)}
                 <div className="d-flex justify-content-between">
-                  {this.state.step > 1 && (
+                {this.state.step === 6 && ( 
+                      <button
+                      type="button"
+                      className="btn btn-success mt-1"
+                      onClick={this.winPrint}
+                    >
+                      Imprimir
+                    </button>
+
+                    
+                  )}
+                  {this.state.step === 6 && (
+                      <Link to="/">
+                      <button
+                      type="button"
+                      className="btn btn-success mt-1"
+                     
+                    >
+                      Finalizar
+                    </button>
+                    </Link>
+
+                    
+                  )}
+                  {this.state.step > 1 && this.state.step < 6 && (
                     <button
                       type="button"
                       className="btn btn-success mt-1"
@@ -455,7 +488,7 @@ export default class SaleMake extends Component {
                       Previo
                     </button>
                   )}
-                  {this.state.step < 5 ? (
+                  {this.state.step < 5 && (
                     <button
                       type="button"
                       className="btn btn-success mt-1"
@@ -463,7 +496,7 @@ export default class SaleMake extends Component {
                     >
                       Siguiente
                     </button>
-                  ) : (
+                  ) }{ this.state.step === 5 && (
                     <button
                       type="button"
                       className="btn btn-success mt-1"
