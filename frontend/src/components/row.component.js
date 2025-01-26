@@ -7,7 +7,7 @@ const Row = ({seatList, onChangeSelected, numberOfSales}) => {
     return (
     <div className="col">  
         <div className="row">
-            
+
             {seatList.map((seat) =>(
                 <Seat
                     key={seat.seat}
