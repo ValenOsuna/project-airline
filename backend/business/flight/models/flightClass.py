@@ -91,5 +91,6 @@ class Flight(Base):
             "row": self.row,
             "column": self.column,
             "date": self.date,
-            "price": self.price
+            "price": self.price,
+            "airplaneModel": self.airplaneDetail.model
         }
