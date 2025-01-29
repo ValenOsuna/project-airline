@@ -8,10 +8,10 @@ ticket = Blueprint("ticket", __name__)
 @ticket.route("/create", methods=["POST"])
 def ticket_create():
     try:
-        response = request.get_json().get("id")
+        response = request.get_json().get("data")
         return create(response)
     except:
-        return {"msg": "The ticket has irregularities, please verify the details"}
+        raise
 
 
 @ticket.route("/delete", methods=["DELETE"])

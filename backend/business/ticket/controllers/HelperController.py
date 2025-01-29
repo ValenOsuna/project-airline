@@ -1,6 +1,8 @@
+import json
 from business.passenger.controllers.passengerController import search_pasenger_by_passport
 from business.sale.controllers.saleController import search_sale_by_reservation
 from business.seat.controllers.seatController import search_seat_return_objet
+import ast
 
 
 def data_check(data):
@@ -16,11 +18,18 @@ def data_check(data):
 
 
 def data_update(data):
+    
     sale = data_check(data)
-    data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
-    data["airline"] = sale.flightDetail.airlineDetail[0].id
-    data["group"] = sale.flightDetail.group
-    data["seat"] = search_seat_return_objet(int(sale.seat_data)).seat
-    data["terminal"] = sale.flightDetail.terminal
-    data["flight"] = sale.flightDetail.id
+    print(sale.flightDetail)
+    data["seat"] = []
+    for individualSeat in ast.literal_eval(sale.seat_data):
+
+        data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
+        data["airline"] = sale.flightDetail.airlineDetail[0].id
+        data["group"] = sale.flightDetail.group
+        data["seat"].append(search_seat_return_objet(int(individualSeat)).seat)
+        data["terminal"] = sale.flightDetail.terminal
+        data["flight"] = sale.flightDetail.id
+
+    
     return data

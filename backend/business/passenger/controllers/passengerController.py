@@ -57,12 +57,13 @@ def validation_passport(expiration_date_str):
 
 def search_pasenger_by_passport(passport_number):
     session = Session()
+    print(passport_number)
     try:
         user = session.query(Passenger).filter_by(passport_number=passport_number).first()
         session.close()
         return user
     except:
-        return {"Error"}
+        raise
 
 
 def search_list(name):

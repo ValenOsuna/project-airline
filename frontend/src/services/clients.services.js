@@ -17,6 +17,9 @@ class ClientsDataService{
     delete(id){
         return client_api.post(`/passenger/delete`,{id:id})
     }
+    getPassengerByPassport(id){
+        return client_api.post(`/passenger/search-passport`,{id:id})
+    }
 }
 
 export default new ClientsDataService();
