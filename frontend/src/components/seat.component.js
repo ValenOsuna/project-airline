@@ -23,6 +23,7 @@ const seat = ({id, status, onChangeSelected, numberOfSales, fare}) => {
             status={status}
             onChangeSelected={onChangeSelected}
             numberOfSales = {numberOfSales}
+            fare = {fare}
            
            /> 
         
@@ -34,8 +35,9 @@ const seat = ({id, status, onChangeSelected, numberOfSales, fare}) => {
                     status={status}
                     onChangeSelected={onChangeSelected}
                     numberOfSales = {numberOfSales}
+                    fare = {fare}
                    
-                   />  
+                   /> 
                 
                 )}
 
@@ -45,8 +47,9 @@ const seat = ({id, status, onChangeSelected, numberOfSales, fare}) => {
                    status={status}
                    onChangeSelected={onChangeSelected}
                    numberOfSales = {numberOfSales}
+                   fare = {fare}
                   
-                  />  
+                  /> 
                 
                 )}
 
@@ -56,6 +59,7 @@ const seat = ({id, status, onChangeSelected, numberOfSales, fare}) => {
                     status={status}
                     onChangeSelected={onChangeSelected}
                     numberOfSales = {numberOfSales}
+                    fare = {fare}
                    
                    /> 
                 
@@ -67,6 +71,7 @@ const seat = ({id, status, onChangeSelected, numberOfSales, fare}) => {
                     status={status}
                     onChangeSelected={onChangeSelected}
                     numberOfSales = {numberOfSales}
+                    fare = {fare}
                    
                    /> 
                 

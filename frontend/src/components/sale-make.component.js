@@ -162,14 +162,23 @@ export default class SaleMake extends Component {
   }
 
   getSalePrice(wantedFare, flight_price) {
-    SaleDataService.getSalesPrice(wantedFare, flight_price)
+    this.setState({ price : 0});
+    for (var i = 0 ; i < wantedFare.length ; i++){
+
+      SaleDataService.getSalesPrice(wantedFare[i].fare , flight_price)
+      
       .then((response) => {
-        this.setState({ price: response.data });
+        this.setState({ price : parseInt(response.data) + this.state.price });
+      
       })
       .catch((e) => {
         console.log(e);
       });
-    }
+    }}
+    
+   
+    
+    
 
   getFlight() {
     FlightDataService.getflightsbyorigin(
@@ -186,6 +195,8 @@ export default class SaleMake extends Component {
   }
    onChangeSelected(seatsArray){
     this.setState({selectedSeats: seatsArray} , () => {
+      this.getSalePrice(this.state.selectedSeats, this.state.flight)
+      
   
     })
   }
@@ -227,7 +238,7 @@ export default class SaleMake extends Component {
   onChangeFare(event) {
     this.setState({ clientFare: event.target.value }, () => {
       this.SeatsGet();
-      this.getSalePrice(this.state.clientFare, this.state.flight)
+      
     });
   }
 
@@ -401,7 +412,7 @@ export default class SaleMake extends Component {
                         <div class="card border-success">
                           <div class="card-body">
                             <h5 class="card-title text-center">Precio final:</h5>
-                            <p class="card-text text-center text-success">$ {this.state.price * this.state.selectedSeats.length}</p>
+                            <p class="card-text text-center text-success">$ {this.state.price}</p>
                           </div>
                         </div>
                         </div>
