@@ -7,7 +7,13 @@ function PushArray(key) {
 }
 
 function spliceArray(key) {
-  seatsArray.splice(seatsArray.indexOf(key), 1);
+  
+  for(var i = 0; i < seatsArray.length ; i++){
+    if (seatsArray[i].seat === key.seat ){
+      seatsArray.splice(i , 1)
+    }
+  }
+  
   
 }
 
@@ -20,8 +26,9 @@ const Render = ({ id, status, onChangeSelected, numberOfSales, fare }) => {
       "seat" : keyID ,
       "fare" : fare
     }
-
-    if (seatsArray.includes(currentSeatJson)) {
+    
+  
+    if (seatsArray.some(seat => seat.seat === currentSeatJson.seat && seat.fare === currentSeatJson.fare)) {
       setIsClicked(false);
       spliceArray(currentSeatJson);
     } else {
