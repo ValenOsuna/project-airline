@@ -33,14 +33,14 @@ function App() {
     <div className="App">
         <nav className="navbar navbar-expand navbar-dark bg-dark-subtle">
             <div className="container-fluid">
-              <a className="navbar-brand" href="#">Aerolinea</a>
+              <a className="navbar-brand" href="/">Aerolinea</a>
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">Inicio</a>
+                    <a className="nav-link active" aria-current="page" href="/">Inicio</a>
                   </li>
                 
                   
@@ -63,7 +63,6 @@ function App() {
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-airport"} className="dropdown-item" >Buscar</Link> </li>
                       <li> <Link to={'/create-airport'} className="dropdown-item" >Crear</Link> </li>
-                     
                       <li> <Link to={"/airport-list"} className="dropdown-item" >Lista</Link> </li>
                     </ul>
                   </li>
@@ -75,7 +74,6 @@ function App() {
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-airplane"} className="dropdown-item" >Buscar</Link> </li>
                       <li> <Link to={'/create-airport'} className="dropdown-item" >Crear</Link> </li>
-                     
                       <li> <Link to={"/airport-list"} className="dropdown-item" >Lista</Link> </li>
                     </ul>
                   </li>
@@ -98,7 +96,6 @@ function App() {
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-client"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-client"} className="dropdown-item"> Crear </Link> </li>
-              
                       <li> <Link to={"/list-client"} className="dropdown-item"> Lista </Link> </li>
                     </ul>
                   </li>
@@ -110,7 +107,6 @@ function App() {
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-destination"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-destination"} className="dropdown-item"> Crear </Link> </li>
-                      <li><a className="dropdown-item" href="#">Editar</a></li>
                       <li> <Link to={"/list-destination"} className="dropdown-item"> Lista </Link> </li>
                     </ul>
                   </li>
@@ -134,7 +130,6 @@ function App() {
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-flight"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-flight"} className="dropdown-item"> Crear </Link> </li>
-                      <li><a className="dropdown-item" href="#">Editar</a></li>
                       <li><Link to={"/search-list"} className="dropdown-item"> Lista </Link></li>
                     </ul>
                   </li>

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from .passengerController import create, delete, search_pasenger_by_id, update, validation_passport, search_list
+from .passengerController import create, delete,search_pasenger_by_passport, search_pasenger_by_id, update, validation_passport, search_list
 
 passenger = Blueprint("passenger", __name__)
 
@@ -20,6 +20,15 @@ def search_data():
     if data is None:
         return {"msg": "Passanger not found"}
     return data.to_dict()
+
+@passenger.route("/search-passport", methods=["POST"])
+def search_data_passport():
+    response = request.get_json().get("id")
+    data = (search_pasenger_by_passport(response))
+    if data is None:
+        return {"msg": "Passanger not found"}
+    return data.to_dict()
+
 
 
 @passenger.route("/delete", methods=["POST"])

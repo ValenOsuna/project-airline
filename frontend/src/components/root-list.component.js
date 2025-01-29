@@ -44,18 +44,21 @@ export default class RootView extends Component {
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">
 
+                        <label className="text-capitalize fw-bold mb-3">
+                          <h3>Vuelos hoy :&nbsp;</h3>
+                        </label>
 
-                            <table className="table table-bordered border-primary">
+                            <table className="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th className="text-capitalize">id</th>
-                                        <th className="text-capitalize">Destino</th>
-                                        <th className="text-capitalize">Origen</th>
-                                        <th className="text-capitalize">Hora despegue</th>
-                                        <th className="text-capitalize">Hora abordaje</th>
-                                        <th className="text-capitalize">Avión</th>
-                                        <th className="text-capitalize">Terminal</th>
-                                        <th className="text-capitalize">Puerta</th>
+                                        <th className="text-capitalize h5">#</th>
+                                        <th className="text-capitalize h5">Destino</th>
+                                        <th className="text-capitalize h5">Origen</th>
+                                        <th className="text-capitalize h5">Hora despegue</th>
+                                        <th className="text-capitalize h5">Hora abordaje</th>
+                                        <th className="text-capitalize h5">Avión</th>
+                                        <th className="text-capitalize h5">Terminal</th>
+                                        <th className="text-capitalize h5">Puerta</th>
                                         
                                     </tr>
                                 </thead>

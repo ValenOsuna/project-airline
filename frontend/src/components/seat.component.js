@@ -1,7 +1,7 @@
 import React from "react";
 import Render from "./schema-aux.component";
 
-const seat = ({id, status, onChangeSelected, numberOfSales}) => {
+const seat = ({id, status, onChangeSelected, numberOfSales, fare}) => {
     return ( 
     
         <div className="row">
@@ -11,6 +11,7 @@ const seat = ({id, status, onChangeSelected, numberOfSales}) => {
              status={status}
              onChangeSelected={onChangeSelected}
              numberOfSales = {numberOfSales}
+             fare = {fare}
             
             /> 
         

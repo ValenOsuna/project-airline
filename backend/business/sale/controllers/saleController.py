@@ -114,24 +114,29 @@ def dataUpdater(data):
     else:
         raise ValueError("The airplane is full")
 
-    data_luggage = airplane_data(airplane, data["fare"], luggage.type)
-    if data_luggage is None:
-        raise ValueError("Fare not allowed for this airplane")
+    for individualSeat in data["seat"]:
+        data_luggage = airplane_data(airplane, individualSeat["fare"], luggage.type)
+        if data_luggage is None:
+            raise ValueError("Fare not allowed for this airplane")
 
     data["seat_data"] = []
+    data["fare_data"] = []
 
     seatCount = 0
     for individualSeat in data["seat"]:
-        seatCheck(airplane, data["fare"], individualSeat, flight)
+        seatCheck(airplane, individualSeat["fare"], individualSeat["seat"], flight)
         seatCount += 1
-        data["seat"] = individualSeat
+        data["seat"] = individualSeat["seat"]
+        data["fare"] = individualSeat["fare"]
         individualSeatID = createSeat(data)
         data["seat_data"].append(individualSeatID.id)
+        data["fare_data"].append(individualSeat["fare"])
 
     passenger.accumulated_miles = (data["price"] * 0.1 * seatCount) + passenger.accumulated_miles
     data["accumulated_miles"] = passenger.accumulated_miles
 
     data["seat_data"] = json.dumps(data["seat_data"])
+    data["fare"] = json.dumps(data["fare_data"])
 
     session.add(airplane)
     session.add(passenger)

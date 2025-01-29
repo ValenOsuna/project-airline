@@ -11,19 +11,23 @@ function spliceArray(key) {
   
 }
 
-const Render = ({ id, status, onChangeSelected, numberOfSales }) => {
+const Render = ({ id, status, onChangeSelected, numberOfSales, fare }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = (key) => {
     const keyID = key.target.getAttribute("id");
+    var currentSeatJson = { 
+      "seat" : keyID ,
+      "fare" : fare
+    }
 
-    if (seatsArray.includes(keyID)) {
+    if (seatsArray.includes(currentSeatJson)) {
       setIsClicked(false);
-      spliceArray(keyID);
+      spliceArray(currentSeatJson);
     } else {
       if (seatsArray.length < numberOfSales && status !== true )  {
         setIsClicked(true);
-        PushArray(keyID);
+        PushArray(currentSeatJson);
       }
     }
 

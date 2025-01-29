@@ -134,7 +134,7 @@ export default class SaleMake extends Component {
   getClient() {
     var id_client = this.state.id;
 
-    ClientDataServices.get(id_client)
+    ClientDataServices.getPassengerByPassport(id_client)
       .then((response) => {
         console.log(response.data);
 
@@ -266,7 +266,7 @@ export default class SaleMake extends Component {
                         type="text"
                         className="form-control bg-light-subtle"
                         id="id"
-                        value={this.state.id}
+                        value={this.state.passport_number}
                         onChange={this.onChangeId}
                       />
 
@@ -278,33 +278,16 @@ export default class SaleMake extends Component {
                         Buscar
                       </button>
                     </div>
-                    <div className="col-md-6 mt-3">
-                      <div className="col">
-                        <label className="text-capitalize fw-bold">
-                          Nombre:&nbsp;
-                        </label>
-                        <span className="fst-italic mt-1" id="name">
-                          {this.state.name}
-                        </span>
-                      </div>
-                      <div className="col">
-                        <label className="text-capitalize fw-bold">
-                          Apellido:&nbsp;
-                        </label>
-                        <span className="fst-italic mt-1" id="surname">
-                          {this.state.surname}
-                        </span>
-                      </div>
-                      <div className="col">
-                        <label className="text-capitalize fw-bold">
-                          Numero pasaporte:&nbsp;
-                        </label>
-                        <span className="fst-italic mt-1" id="passport_number">
-                          {this.state.passport_number}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                    
+
+                <div class="card bg-body-secondary mb-3">
+                <ul class="list-group list-group-flush ">
+                  <li class="list-group-item bg-body-secondary">Nombre: {this.state.name}</li>
+                  <li class="list-group-item bg-body-secondary">Apellido: {this.state.surname}</li>
+                  <li class="list-group-item bg-body-secondary">Numero Pasaporte: {this.state.passport_number}</li>
+                </ul>
+                </div>
+                </div>
                 )}
 
                 {this.state.step === 2 && (
@@ -412,6 +395,7 @@ export default class SaleMake extends Component {
                           response={this.state.seatsList}
                           onChangeSelected={this.onChangeSelected}
                           numberOfSales = {this.state.numberOfSales}
+                          fare = {this.state.clientFare}
                         />):("-")}
 
                         <div class="card border-success">
