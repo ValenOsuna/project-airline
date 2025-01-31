@@ -26,6 +26,7 @@ import TicketCreate from './components/ticket-create.component';
 import TicketSearch from "./components/tickets-search.component";
 import SaleMake from './components/sale-make.component';
 import RootView from './components/root-list.component';
+import TicketValidation from './components/ticket-validation.component';
 
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-ticket"} className="dropdown-item" >Buscar</Link> </li>
                       <li> <Link to={"/create-ticket"} className="dropdown-item"> Crear </Link> </li>
+                      <li> <Link to={"/validation-ticket"} className="dropdown-item"> Validacion </Link> </li>
                       
                     </ul>
                   </li>
@@ -165,6 +167,7 @@ function App() {
             <Route path='/search-sale' element={<SaleSearch/>} />
             <Route path='/search-ticket' element={<TicketSearch/>} />
             <Route path='/make-sale' element={<SaleMake/>} />
+            <Route path='/validation-ticket' element={<TicketValidation/>}/>
         </Routes>
 
         </div>
