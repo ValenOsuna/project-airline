@@ -5,11 +5,14 @@ from business.flight.models.flightClass import Flight
 from business.destination.models.destinationClass import Destination
 from sqlalchemy.orm import joinedload
 
+
 from business.seat.controllers.seatController import seatCheck, createSeat, search_seat_return_objet
 from business.passenger.controllers.passengerController import search_pasenger_by_passport, validation_passport
-from business.airplane.controllers.airplaneControllers import search_airplane_by_id, airplane_data
+from business.airplane.controllers.airplaneControllers import search_airplane_by_id, checkAirplaneLuggageFare
 from business.flight.controllers.flightController import search_flight_by_id
-from business.luggage.controllers.luggageController import search_luggage_by_id
+
+from .saleHelpController import verifyData
+
 
 from datetime import datetime, timedelta
 import json
@@ -17,7 +20,7 @@ import json
 
 def createSale(data):
     try:
-        dataUpdate = dataUpdater(data)
+        dataUpdate = updateJson(data)
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
@@ -90,37 +93,19 @@ def search_sale_by_id(id):
     return sale
 
 
-def dataUpdater(data):
+def updateJson(data):
     session = Session()
-    flight = search_flight_by_id(data["flight"])
-    passenger = search_pasenger_by_passport(data["passenger_data"])
-    luggage = search_luggage_by_id(data["luggage"])
-    if luggage is None:
-        raise ValueError("luggage")
-    if flight is None:
-        raise ValueError("flight")
-    if passenger is None:
-        raise ValueError("passenger_data")
-    if validation_passport(passenger.passport_expiration) == False:
-        raise ValueError("Expired passport")
-
-    data["luggage"] = luggage.id
-    data["flight"] = flight.id
-    data["passenger_data"] = passenger.id
-
-    airplane = search_airplane_by_id(flight.airplane)
-    if airplane.capacity > 0:
-        airplane.capacity -= 1
-    else:
-        raise ValueError("The airplane is full")
+    
+    flight, passenger, luggage, airplane = verifyData(data)
+    
 
     for individualSeat in data["seat"]:
-        data_luggage = airplane_data(airplane, individualSeat["fare"], luggage.type)
+        data_luggage = checkAirplaneLuggageFare(airplane, individualSeat["fare"], luggage.type)
         if data_luggage is None:
             raise ValueError("Fare not allowed for this airplane")
 
-    data["seat_data"] = []
-    data["fare_data"] = []
+    listOfSeats = []
+    listOfFares = []
 
     seatCount = 0
     for individualSeat in data["seat"]:
@@ -129,19 +114,25 @@ def dataUpdater(data):
         data["seat"] = individualSeat["seat"]
         data["fare"] = individualSeat["fare"]
         individualSeatID = createSeat(data)
-        data["seat_data"].append(individualSeatID.id)
-        data["fare_data"].append(individualSeat["fare"])
+        listOfSeats.append(individualSeatID.id)
+        listOfFares.append(individualSeat["fare"])
 
-    passenger.accumulated_miles = (data["price"] * 0.1 * seatCount) + passenger.accumulated_miles
-    data["accumulated_miles"] = passenger.accumulated_miles
+    passenger.accumulated_miles = (data["price"] * 0.1) + passenger.accumulated_miles
 
-    data["seat_data"] = json.dumps(data["seat_data"])
-    data["fare"] = json.dumps(data["fare_data"])
+    data.update({"accumulated_miles" : passenger.accumulated_miles,
+            "luggage" : luggage.id,
+             "flight" : flight.id,
+             "passenger_data" : passenger.id,
+             "seat_data" : json.dumps(listOfSeats),
+             "fare" : json.dumps(listOfFares)})
+             
+    
 
     session.add(airplane)
     session.add(passenger)
     session.commit()
     session.close()
+
     return data
 
 
@@ -185,14 +176,14 @@ def search_list_sale(issueDate):
     return results
 
 
-price = {
+
+def price_fare(wantedFare, flightID):
+    price = {
     "FC": 2,
     "BC": 1.6,
     "PC": 1.4,
     "EC": 1}
 
-
-def price_fare(wantedFare, flightID):
     flight = search_flight_by_id(flightID)
     print("a", vars(flight))
     if wantedFare in price:

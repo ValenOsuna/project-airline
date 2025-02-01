@@ -15,7 +15,7 @@ def decompress_obj(airplane):
         return {"msg": "Error , unable no descompress None (airplane)"}
 
 
-def airplane_data(airplane, fare_type, luggageType):
+def checkAirplaneLuggageFare(airplane, fare_type, luggageType):
     if fare_type in airplane.fare:
         if fare_type == "FC":  # Primera
             luggage = ["pi", "c", "ch"]
