@@ -4,7 +4,7 @@ from .ticket.controllers.TicketController import create, search_ticket_by_id, up
 from .luggage.controllers.luggageController import create, search_luggage_by_id, update, delete
 from .passenger.controllers.passengerController import create, search_pasenger_by_id, update, delete, validation_passport, search_pasenger_by_passport
 from .airport.controllers.airportController import create, search_airport_by_id, update, delete, decompress_obj, search_airport_city
-from .airplane.controllers.airplaneControllers import create, search_airplane_by_id, update, delete, decompress_obj, airplane_data, search_airplane_model
+from .airplane.controllers.airplaneControllers import create, search_airplane_by_id, update, delete, decompress_obj, search_airplane_model
 from .destination.controllers.destinationController import createDestination, updateDestination, deleteDesination, search_destination_by_id, readDestination
 from .sale.controllers.saleController import search_sale_by_id, search_sale_by_reservation, price_fare
 from .seat.controllers.seatController import search_seats

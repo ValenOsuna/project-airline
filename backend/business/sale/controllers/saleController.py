@@ -95,9 +95,7 @@ def search_sale_by_id(id):
 
 def updateJson(data):
     session = Session()
-    
     flight, passenger, luggage, airplane = verifyData(data)
-    
 
     for individualSeat in data["seat"]:
         data_luggage = checkAirplaneLuggageFare(airplane, individualSeat["fare"], luggage.type)

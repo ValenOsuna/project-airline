@@ -36,7 +36,7 @@ const TicketView = ({listTickets}) => {
                                     </div>
                                     <div className="col">
                                         <label className="text-capitalize fw-bold">Vuelo:&nbsp;</label>
-                                        <span className="fst-italic mt-1" id="flight">{ data.flight }</span>
+                                        <span className="fst-italic mt-1" id="flight"> ID: { data.flight_data.id } | Origen: { data.flight_data.origin } | Destino: { data.flight_data.destination } | Fecha: { data.flight_data.date } | Embarque: { data.flight_data.boarding_time }</span>
                                     </div>
 
                                 </div>

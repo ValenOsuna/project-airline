@@ -91,8 +91,7 @@ export default class SaleMake extends Component {
 
   handleSubmit(event) { 
     this.setState({step : this.state.step + 1 ,formData : {
-      "issue_date": new Date().toJSON().slice(0, 10) ,
-      "reservation_number": 123456789,
+      "issue_date": new Date().toJSON().slice(0, 10),
       "pay_method": true,
       "accumulated_miles": this.state.accumulated_miles,
       "fare": this.state.clientFare,
@@ -113,23 +112,21 @@ export default class SaleMake extends Component {
     SaleDataService.create(this.state.formData)
   .then((response) => {
     console.log(response.data);
-
-   
+    this.setState({
+      formData: response.data
+    })
   })
   .catch((e) => {
     console.log(e);
   });
 }
 
-
-  
   onChangeNumberOfsales(event) {
     this.setState({
       numberOfSales: event.target.value,
     } ,() => {console.log(this.numberOfSales)});
 
 }
-
 
   getClient() {
     var id_client = this.state.id;
@@ -175,10 +172,6 @@ export default class SaleMake extends Component {
         console.log(e);
       });
     }}
-    
-   
-    
-    
 
   getFlight() {
     FlightDataService.getflightsbyorigin(

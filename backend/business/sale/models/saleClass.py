@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship
 from db import Base, Session
+import uuid
 
 
 class Sale(Base):
@@ -8,7 +9,7 @@ class Sale(Base):
 
     id = Column("id", Integer, autoincrement=True, unique=True, primary_key=True)
     issue_date = Column("issue_date", String, nullable=False)
-    reservation_number = Column("reservation_number", Integer, unique=True)
+    reservation_number = Column("reservation_number", String, unique=True)
     pay_method = Column("pay_method", Boolean, nullable=False)
     accumulated_miles = Column("accumulated_miles", Integer, nullable=False)
     fare = Column("fare", String, nullable=False)
@@ -25,7 +26,7 @@ class Sale(Base):
 
     def __init__(self,
                  issue_date=None,
-                 reservation_number=None,
+                 reservation_number=str(uuid.uuid4().hex[:6]).upper(),
                  passenger_data=None,
                  pay_method=None,
                  accumulated_miles=None,
@@ -49,7 +50,6 @@ class Sale(Base):
 
     def createSale(self, data):
         self.issue_date = data["issue_date"]
-        self.reservation_number = data["reservation_number"]
         self.passenger_data = data["passenger_data"]
         self.pay_method = data["pay_method"]
         self.accumulated_miles = data["accumulated_miles"]
