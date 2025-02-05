@@ -13,6 +13,7 @@ class Ticket(Base):
     seat = Column("seat", Integer, nullable=False)
     group = Column("group", Integer, nullable=False)
     flight = Column("flight", Integer, ForeignKey("flights.id"))
+    reservation_number = Column("reservation_number", Integer, nullable=False)
 
     flightDetail = relationship("Flight", back_populates="ticketDetail")
 
@@ -22,7 +23,8 @@ class Ticket(Base):
                  terminal=0,
                  seat=0,
                  group=0,
-                 flight=0
+                 flight=0,
+                 reservation_number=0
                  ):
         self.gate = gate
         self.airline = airline
@@ -30,6 +32,7 @@ class Ticket(Base):
         self.seat = seat
         self.group = group
         self.flight = flight
+        self.reservation_number = reservation_number
 
     def ticket_create(self, response):
         self.gate = response["gate"]
@@ -38,6 +41,7 @@ class Ticket(Base):
         self.seat = response["seat"]
         self.group = response["group"]
         self.flight = response["flight"]
+        self.reservation_number = response["reservation_number"]
         session = Session()
         session.add(self)
         session.commit()
@@ -45,12 +49,18 @@ class Ticket(Base):
         session.close()
 
     def to_dict(self):
-        return {
+        session = Session()
+        session.add(self)
+        res = {
             "id": self.id,
             "gate": self.gate,
             "airline": self.airline,
             "terminal": self.terminal,
             "seat": self.seat,
             "group": self.group,
-            "flight": self.flight
+            "flight": self.flight,
+            "reservation_number": self.reservation_number,
+            "flight_data": self.flightDetail.to_dict()
         }
+        session.close()
+        return res

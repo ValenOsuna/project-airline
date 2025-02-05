@@ -45,7 +45,6 @@ def delete(self):
 
 
 def create(data):
- 
     if data["visa_check"]:
         ticketList = []
         data = data_update(data)

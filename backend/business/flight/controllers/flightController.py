@@ -110,8 +110,7 @@ def search_flight_date(date):
     list = session.query(Flight).filter_by(date=date).all()
     results = []
     for item in list:
-        
-        results.append(item.to_dict())  
+        results.append(item.to_dict())
     return results
 
 
