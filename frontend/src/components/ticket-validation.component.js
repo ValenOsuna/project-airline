@@ -36,7 +36,8 @@ export default class TicketValidation extends Component{
             
         })
         .catch(e => {
-            console.log(e);
+            console.log(e)
+            alert(`Error en: ${e}`);
         });
     }
 
@@ -76,11 +77,11 @@ export default class TicketValidation extends Component{
                         <div className="col-md-6">
                             <div className="col">
                                 <label className="text-capitalize fw-bold">numero pasaporte:&nbsp;</label>
-                                <input className="fst-italic mt-1 form-control" id="passport_number" value={this.state.passport_number} onChange={this.onChangePasportNumber}></input>
+                                <input className="fst-italic mt-1 form-control" id="passport_number" value={this.state.passport_number} onChange={this.onChangePasportNumber} required></input>
                             </div>
                             <div className="col">
                                 <label className="text-capitalize fw-bold">numero de venta:&nbsp;</label>
-                                <input className="fst-italic mt-1 form-control" id="SaleNumber" value={this.state.airline} onChange={this.onChangeSaleNumber}></input>
+                                <input className="fst-italic mt-1 form-control" id="SaleNumber" value={this.state.airline} onChange={this.onChangeSaleNumber} maxlength="6" required></input>
                             </div>
                             <div class="col">
                             <label class="form-check-label" for="exampleCheck1">Check me out </label>
