@@ -1,6 +1,5 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from .TicketController import create, update, search_ticket_by_id, delete
-
 
 ticket = Blueprint("ticket", __name__)
 
@@ -10,8 +9,9 @@ def ticket_create():
     try:
         response = request.get_json().get("data")
         return create(response)
-    except:
-        raise
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 404
+        
 
 
 @ticket.route("/delete", methods=["DELETE"])
