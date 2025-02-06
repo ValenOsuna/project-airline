@@ -36,8 +36,8 @@ export default class TicketValidation extends Component{
             
         })
         .catch(e => {
-            console.log(e)
-            alert(`Error en: ${e}`);
+            console.log((e.response.data))
+            alert(`Error en: ${JSON.stringify(e.response.data.error)}`);
         });
     }
 

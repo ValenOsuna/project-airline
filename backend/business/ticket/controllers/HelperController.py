@@ -14,23 +14,31 @@ def search_ticket_by_resrvationNumber(data):
         session.close()
         return user
     except:
-        return {"msg": "The ID entered does not correspond to a current airport. I'm going to want to scam another bye, bye"}
+        return False
 
 
 def data_check(data):
     passenger = search_pasenger_by_passport(data["passport_number"])
     sale = search_sale_by_reservation(data["reservation_number"])
     reservation = search_ticket_by_resrvationNumber(data["reservation_number"])
+    print(reservation)
+        
+
     if passenger == None:
-        raise ValueError("passenger")
+        raise ValueError("passenger not found")
     if sale == None:
-        raise ValueError("sale")
+        raise ValueError("sale not found")
     if sale.passenger_data != passenger.id:
         raise ValueError("Sale not belong to this passenger")
     if reservation:
         raise ValueError("Ticket alredy exist")
-    return sale
+    
 
+    requiredVisa = sale.flightDetail.destinationDetail.requiered_visa
+    if (requiredVisa and not data["visa_check"]):
+        raise ValueError("destination requered visa")
+    
+    return sale
 
 def data_update(data):
     sale = data_check(data)

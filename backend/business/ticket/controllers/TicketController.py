@@ -45,17 +45,16 @@ def delete(self):
 
 
 def create(data):
-    if data["visa_check"]:
-        ticketList = []
-        data = data_update(data)
+    ticketList = []
+    data = data_update(data)
 
-        for individualSeat in data["seat"]:
-            ticket = Ticket()
-            print(individualSeat)
-            data["seat"] = individualSeat
-            ticket.ticket_create(data)
-            ticketList.append(ticket.to_dict())
+    for individualSeat in data["seat"]:
+        ticket = Ticket()
+        print(individualSeat)
+        data["seat"] = individualSeat
+        ticket.ticket_create(data)
+        ticketList.append(ticket.to_dict())
 
-        return ticketList
-    else:
-        raise ValueError("destination requered visa")
+    return ticketList
+    
+        
