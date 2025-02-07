@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TicketDataServices from "../services/tickets.services"; 
 import TicketView from "./ticket-view.component";
+import AlertMessage from "./alert-view.component";
 
 export default class TicketValidation extends Component{ 
 
@@ -16,28 +17,61 @@ export default class TicketValidation extends Component{
             passport_number:null,
             SaleNumber:null,
             TicketData:[],
-            step:1
-        };
+            step:1,
+            alertData: {
+                "visible": false,
+                "type": "",
+                "message": ""}
+    }
+
+    
     }
 
     PostTicket(){
-        const clientData = {"reservation_number": this.state.SaleNumber,
+        this.setState({
+            alertData: {
+                "visible": false,
+                "type": "",
+                "message": ""}
+        });
+
+        const clientData = {
+            "reservation_number": this.state.SaleNumber,
             "passport_number": this.state.passport_number,
             "visa_check": this.state.visaCheck
         };
         
-        console.log(clientData)
+       
         TicketDataServices.create(clientData)
         
         .then(response => {
-            console.log("Ticket creado:", response.data);
-            this.setState({TicketData : response.data, step: this.state.step + 1})
+            if (!response.data.error){
+                console.log("Ticket creado:", response.data);
+                this.setState({TicketData : response.data, step: this.state.step + 1})
+
+                
+            }
+            else{
+                this.setState({
+                    alertData: {
+                        "visible": true,
+                        "type": "danger",
+                        "message": response.data.error}
+                });
+            }
+            
            
             
         })
         .catch(e => {
-            console.log((e.response.data))
-            alert(`Error en: ${JSON.stringify(e.response.data.error)}`);
+            this.setState({
+                alertData: {
+                    "visible": true,
+                    "type": "danger",
+                    "message": "Error al comunicarse con el backend"}
+            });
+                
+            
         });
     }
 
@@ -66,29 +100,43 @@ export default class TicketValidation extends Component{
 
     }
 
+    
+
     render(){
         return (
             <div>
             {this.state.step === 1 && (
-            <div className="card mt-5 bg-light-subtle" id="viewEdit">
+                
+            <div className="card mt-5 bg-light-subtle">
+                <div className="col-3 end-0 z-0 position-absolute"> 
+                    <AlertMessage 
+                        message= {this.state.alertData.message}
+                        type= {this.state.alertData.type}
+                        visible= {this.state.alertData.visible}
+                    />
+                </div>
                 <div className="card-body">
                     <h4>Emision De Ticket:</h4>
                     <div className="row">
                         <div className="col-md-6">
-                            <div className="col">
+                        <div class="col mt-3">
                                 <label className="text-capitalize fw-bold">numero pasaporte:&nbsp;</label>
                                 <input className="fst-italic mt-1 form-control" id="passport_number" value={this.state.passport_number} onChange={this.onChangePasportNumber} required></input>
+
                             </div>
-                            <div className="col">
+                            <div class="col mt-3">
                                 <label className="text-capitalize fw-bold">numero de venta:&nbsp;</label>
                                 <input className="fst-italic mt-1 form-control" id="SaleNumber" value={this.state.airline} onChange={this.onChangeSaleNumber} maxlength="6" required></input>
                             </div>
-                            <div class="col">
-                            <label class="form-check-label" for="exampleCheck1">Check me out </label>
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" onClick={this.onChangeVisaCheck}></input>
+
+                            <div class="col mt-3">
+                                <label class="form-check-label text-capitalize fw-bold" > ¿Cuenta con Visa? </label>
+                                <input type="checkbox" class="form-check-input" onClick={this.onChangeVisaCheck}></input>
                             </div>
-                            <button type="button" className="btn btn-success" onClick={ this.PostTicket}>Crear</button>
+
+                            <button type="button" className="btn btn-success mt-3" onClick={ this.PostTicket}>Emitir boleto</button>
                            
+
                         </div>
                     </div>                           
                 </div>
