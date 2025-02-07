@@ -21,7 +21,7 @@ def data_check(data):
     passenger = search_pasenger_by_passport(data["passport_number"])
     sale = search_sale_by_reservation(data["reservation_number"])
     reservation = search_ticket_by_resrvationNumber(data["reservation_number"])
-    print(reservation)
+    
         
 
     if passenger == None:
@@ -42,16 +42,17 @@ def data_check(data):
 
 def data_update(data):
     sale = data_check(data)
-    print(sale.flightDetail)
     data["seat"] = []
-    for individualSeat in ast.literal_eval(sale.seat_data):
 
-        data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
-        data["airline"] = sale.flightDetail.airlineDetail[0].id
-        data["group"] = sale.flightDetail.group
+    for individualSeat in ast.literal_eval(sale.seat_data):
         data["seat"].append(search_seat_return_objet(int(individualSeat)).seat)
-        data["terminal"] = sale.flightDetail.terminal
-        data["flight"] = sale.flightDetail.id
-        data["flightDetail"] = sale.flightDetail
-        data["reservation_number"] = sale.reservation_number
+
+    data["gate"] = sale.flightDetail.destinationDetail.airportDetail.gates
+    data["airline"] = sale.flightDetail.airlineDetail[0].id
+    data["group"] = sale.flightDetail.group
+    data["terminal"] = sale.flightDetail.terminal
+    data["flight"] = sale.flightDetail.id
+    data["flightDetail"] = sale.flightDetail
+    data["reservation_number"] = sale.reservation_number
+
     return data

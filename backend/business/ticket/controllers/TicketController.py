@@ -50,7 +50,6 @@ def create(data):
 
     for individualSeat in data["seat"]:
         ticket = Ticket()
-        print(individualSeat)
         data["seat"] = individualSeat
         ticket.ticket_create(data)
         ticketList.append(ticket.to_dict())

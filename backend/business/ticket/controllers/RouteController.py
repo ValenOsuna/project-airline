@@ -9,8 +9,9 @@ def ticket_create():
     try:
         response = request.get_json().get("data")
         return create(response)
+    
     except ValueError as e:
-        return jsonify({"error": str(e)}), 404
+        return jsonify({"error": str(e)})
         
 
 
