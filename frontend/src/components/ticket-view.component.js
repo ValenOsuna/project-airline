@@ -6,7 +6,7 @@ const TicketView = ({listTickets}) => {
             <div className="row">
                 <div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewTicket">
-                        <div className="card-body">
+                        <div className="card-body" id="printable">
                             <h4>Datos del Ticket:</h4>
                             {listTickets.map((data) => (
                             <div className="row mb-4">
@@ -40,13 +40,23 @@ const TicketView = ({listTickets}) => {
                                     </div>
 
                                 </div>
+                                <div className="col-md-12">
+                                    <img src={`data:image/png;base64,${data.image}`}/>
+                                </div> 
                             </div>
                             ))}
                             </div>
+                            <button
+                            type="button"
+                            className="btn btn-success mt-1"
+                            onClick={() => window.print()}
+                            >
+                            Imprimir
+                            </button>
                             </div>
 
                         </div>
-                    </div>
+                    </div>                 
                         
     );
 };

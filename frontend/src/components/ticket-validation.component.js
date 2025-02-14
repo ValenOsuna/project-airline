@@ -145,6 +145,7 @@ export default class TicketValidation extends Component{
             <TicketView    listTickets={this.state.TicketData} />
             )}
             </div>
+            
             );
         }
     }

@@ -22,3 +22,15 @@
 .selected {
     background-color: #384F6B;
 }
+
+@media print {
+    body {
+        visibility: hidden;
+    }
+    #printable {
+        visibility: visible;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

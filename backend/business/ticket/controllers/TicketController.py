@@ -1,6 +1,9 @@
 from db import Session
 from ..models.TicketClass import Ticket
 from .HelperController import data_update
+from pdf417gen import encode, render_image, render_svg
+import json
+import io, base64
 
 
 def search_ticket_by_id(data):
@@ -52,8 +55,18 @@ def create(data):
         ticket = Ticket()
         data["seat"] = individualSeat
         ticket.ticket_create(data)
-        ticketList.append(ticket.to_dict())
-
+        data = pdf(ticket.to_dict())
+        ticketList.append(data)
+    print(ticketList)
     return ticketList
-    
-        
+
+
+def pdf(data):
+    dataPdf = json.dumps(data)
+    codes = encode(dataPdf, columns=10)
+    image = render_image(codes, ratio=1, fg_color="White", bg_color="#343a40")
+    blob = io.BytesIO()
+    image.save(blob, format="PNG")
+    blob.seek(0)
+    data["image"] = base64.b64encode(blob.getvalue()).decode("utf-8")
+    return data
