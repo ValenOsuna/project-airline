@@ -11,9 +11,7 @@ from business.passenger.controllers.passengerController import search_pasenger_b
 from business.airplane.controllers.airplaneControllers import search_airplane_by_id, checkAirplaneLuggageFare
 from business.flight.controllers.flightController import search_flight_by_id
 
-from .saleHelpController import verifyData
-
-
+from .saleHelpController import verifyData, createQR
 from datetime import datetime, timedelta
 import json
 
@@ -24,27 +22,12 @@ def createSale(data):
         sale = Sale()
         sale.createSale(dataUpdate)
         sale.save()
-        return sale.to_dict()
-    except:
-        raise
+        updateSale = sale.to_dict()
+        updateSale["image"] = createQR(updateSale["reservation_number"])
+        return updateSale
 
-    #except ValueError as exception:
+    except ValueError as exception:
         return jsonify({"msg": "sale could not be loaded", "keyError": str(exception)})
-
-    #except:
-        return jsonify({"msg": "destination could not be loaded",
-                        "DestinationAttributes": {
-                                                "issue_date": "--",
-                                                "reservation_number": "--",
-                                                "passenger_data": "--",
-                                                "pay_method": "--",
-                                                "accumulated_miles": "--",
-                                                "fare": "--",
-                                                "passenger_data": "--",
-                                                "price": "--",
-                                                "flight": "--",
-                                                "luggage": "--",
-                                                "seat": "--"}}), 400
 
 
 def updateSale(**kwargs):
@@ -117,15 +100,12 @@ def updateJson(data):
 
     passenger.accumulated_miles = (data["price"] * 0.1) + passenger.accumulated_miles
 
-    data.update({"accumulated_miles" : passenger.accumulated_miles,
-            "luggage" : luggage.id,
-             "flight" : flight.id,
-             "passenger_data" : passenger.id,
-             "seat_data" : json.dumps(listOfSeats),
-             "fare" : json.dumps(listOfFares)})
-             
-    
-
+    data.update({"accumulated_miles": passenger.accumulated_miles,
+                 "luggage": luggage.id,
+                 "flight": flight.id,
+                 "passenger_data": passenger.id,
+                 "seat_data": json.dumps(listOfSeats),
+                 "fare": json.dumps(listOfFares)})
     session.add(airplane)
     session.add(passenger)
     session.commit()
@@ -174,13 +154,12 @@ def search_list_sale(issueDate):
     return results
 
 
-
 def price_fare(wantedFare, flightID):
     price = {
-    "FC": 2,
-    "BC": 1.6,
-    "PC": 1.4,
-    "EC": 1}
+        "FC": 2,
+        "BC": 1.6,
+        "PC": 1.4,
+        "EC": 1}
 
     flight = search_flight_by_id(flightID)
     print("a", vars(flight))
