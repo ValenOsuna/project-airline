@@ -3,7 +3,7 @@ import React, {} from "react";
 const Resume = ({ formData }) => {
     return(
 <div className="card mt-5 bg-light-subtle" id="viewSale">
-<div className="card-body">
+<div className="card-body" id="printable">
     <h4>Datos de la Venta:</h4>
     <div className="row">
         <div className="col-md-6">
@@ -45,6 +45,11 @@ const Resume = ({ formData }) => {
                 <label className="text-capitalize fw-bold">Equipaje:&nbsp;</label>
                 <span className="fst-italic mt-1">{formData.luggage}</span>
             </div>
+        </div>
+    </div>
+    <div className="row">
+        <div className="col-md-9 d-flex justify-content-center">
+            <img className="img-fluid" src={`data:image/png;base64,${formData.image}`}/>
         </div>
     </div>
 </div>
