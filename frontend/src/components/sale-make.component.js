@@ -6,6 +6,7 @@ import SeatDataService from "../services/seat.services";
 import SaleDataService from "../services/sale.services";
 import Class from "./class.component";
 import { FixedButton } from "./schema-aux.component";
+import AlertMessage from "./alert-view.component";
 import Resume from "./sale-resume.component";
 import { Link } from "react-router-dom";
 
@@ -47,11 +48,17 @@ export default class SaleMake extends Component {
       selectedSeats: [],
       luggageType: null,
       numberOfSales: "",
-      price: 0
+      price: 0,
+      alertData: {
+        "visible": false,
+        "type": "",
+        "message": ""}
     };
   }
 
   handleNext() {
+   
+    console.log("aca", this.state.formData.reservation_number)
     this.setState(
       {
         step: this.state.step + 1,
@@ -60,6 +67,7 @@ export default class SaleMake extends Component {
         if (this.state.step === 3) {
           this.getFlight();
         }
+        
 
         if (this.state.step === 4) {
           FixedButton(this.state.selectedSeats
@@ -90,16 +98,22 @@ export default class SaleMake extends Component {
   }
 
   handleSubmit(event) { 
-    this.setState({step : this.state.step + 1 ,formData : {
-      "issue_date": new Date().toJSON().slice(0, 10),
-      "pay_method": true,
-      "accumulated_miles": this.state.accumulated_miles,
-      "fare": this.state.clientFare,
-      "passenger_data": this.state.passport_number,
-      "price": this.state.price,
-      "flight": this.state.flight,
-      "luggage":this.state.luggageType,
-      "seat": this.state.selectedSeats
+
+    this.setState({
+      alertData: {
+        "visible": false,
+        "type": "",
+        "message": ""},
+      formData : {
+        "issue_date": new Date().toJSON().slice(0, 10),
+        "pay_method": true,
+        "accumulated_miles": this.state.accumulated_miles,
+        "fare": this.state.clientFare,
+        "passenger_data": this.state.passport_number,
+        "price": this.state.price,
+        "flight": this.state.flight,
+        "luggage":this.state.luggageType,
+        "seat": this.state.selectedSeats
         
   }} , () => {
     this.makeSale()
@@ -110,12 +124,21 @@ export default class SaleMake extends Component {
 
   makeSale(){
     SaleDataService.create(this.state.formData)
-  .then((response) => {
-    console.log(response.data);
-    this.setState({
-      formData: response.data
-    })
-  })
+
+  .then(response => {
+    if (!response.data.error){
+      console.log(response.data);
+      this.setState({formData: response.data, step : this.state.step + 1 }) }
+
+    else{
+      this.setState({
+        alertData: {
+            "visible": true,
+            "type": "danger",
+            "message": response.data.error }
+    });
+    }})
+
   .catch((e) => {
     console.log(e);
   });
@@ -416,7 +439,15 @@ export default class SaleMake extends Component {
 {this.state.step === 5 && (
                   <div className="row">
                     <div className="mb-3">
+                    <div className="col-3 end-0 z-0 position-absolute"> 
+  <AlertMessage 
+      message= {this.state.alertData.message}
+      type= {this.state.alertData.type}
+      visible= {this.state.alertData.visible}
+  />
+</div>
                       <div className="col-10 mt-4">
+                      
                         <label className="form-label">
                           <h4>Equipaje</h4>
                         </label>
@@ -438,10 +469,12 @@ export default class SaleMake extends Component {
                     </div>
                   </div>
                 )}
-{this.state.step === 6 && (
+{this.state.step === 6 && this.state.formData.reservation_number &&(
   <Resume
   formData={this.state.formData}
   />)}
+
+
                 <div className="d-flex justify-content-between">
                 {this.state.step === 6 && ( 
                       <button
