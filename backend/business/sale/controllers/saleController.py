@@ -27,7 +27,7 @@ def createSale(data):
         return updateSale
 
     except ValueError as exception:
-        return jsonify({"msg": "sale could not be loaded", "keyError": str(exception)})
+        return jsonify({"error": f"sale could not be loaded, problem in :{str(exception)}"})
 
 
 def updateSale(**kwargs):
