@@ -4,3 +4,4 @@ pdf417gen==0.8.1
 qrcode==8.0
 SQLAlchemy==2.0.35
 PyMySQL==1.1.1 
+cryptography==44.0.1 
