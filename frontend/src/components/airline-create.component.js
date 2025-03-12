@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AirlinetDataService from "../services/airline.services"; 
+import AirlineDataService from "../services/airline.services"; 
 
 
 export default class AirlineCreate extends Component{ 
@@ -26,7 +26,7 @@ export default class AirlineCreate extends Component{
         };
         
         console.log(airlineData)
-        AirlinetDataService.create(airlineData)
+        AirlineDataService.create(airlineData)
         
         .then(response => {
             console.log("Aerolinea creada:", response.data);

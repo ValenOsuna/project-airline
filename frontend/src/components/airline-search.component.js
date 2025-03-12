@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import AirlinetDataService from "../services/airline.services"; 
+import AirlineDataService from "../services/airline.services"; 
 
 
 export default class AirlineSearch extends Component{ 
@@ -23,7 +23,7 @@ export default class AirlineSearch extends Component{
     }
     getAirline(){
         var id_airline = this.state.id
-        AirlinetDataService.get(id_airline)
+        AirlineDataService.get(id_airline)
             .then(response => {
                 console.log (response.data);
                 this.setState({
@@ -75,7 +75,7 @@ export default class AirlineSearch extends Component{
             flight_list: this.state.flight_list,
             acronym: this.state.acronym
         };
-        AirlinetDataService.update(data)
+        AirlineDataService.update(data)
     }
 
     handleCancel(){
@@ -83,7 +83,7 @@ export default class AirlineSearch extends Component{
         document.getElementById("viewAirline").classList.remove("d-none")
     }
     airlineDelete(){
-        AirlinetDataService.delete(this.state.id)}
+        AirlineDataService.delete(this.state.id)}
             
     render(){
         return (

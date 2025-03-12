@@ -18,4 +18,5 @@ class AirplaneDataService {
     }
 }
 
-export default new AirplaneDataService();
+var AuxVariable = new AirplaneDataService()
+export default AuxVariable;

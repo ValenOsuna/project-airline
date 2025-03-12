@@ -1,7 +1,8 @@
 import client_api from "../api-common";
 
 
-class AirlinetDataService{
+
+class AirlineDataService{
     get(id){
         return client_api.post(`/airline/search`,{id:id})
     }
@@ -24,4 +25,6 @@ class AirlinetDataService{
    
 }
 
-export default new AirlinetDataService();
+var AuxVariable  = new AirlineDataService()
+
+export default AuxVariable;

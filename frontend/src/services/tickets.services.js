@@ -13,4 +13,5 @@ class TicketsDataService{
     }
 }
 
-export default new TicketsDataService();
+var AuxVariable  = new TicketsDataService()
+export default AuxVariable;

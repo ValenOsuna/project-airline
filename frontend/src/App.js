@@ -47,9 +47,9 @@ function App() {
                   
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
                       Aerolinea
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={'/search-airline'} className="dropdown-item" >Buscar</Link> </li>
                       <li> <Link to={'/create-airline'} className="dropdown-item" >Crear</Link> </li>
@@ -58,9 +58,9 @@ function App() {
                   </li>
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
                       Aeropuerto
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-airport"} className="dropdown-item" >Buscar</Link> </li>
                       <li> <Link to={'/create-airport'} className="dropdown-item" >Crear</Link> </li>
@@ -69,9 +69,9 @@ function App() {
                   </li>
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       Avión
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-airplane"} className="dropdown-item" >Buscar</Link> </li>
                       <li> <Link to={'/create-airport'} className="dropdown-item" >Crear</Link> </li>
@@ -80,9 +80,9 @@ function App() {
                   </li>
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       Boleto
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-ticket"} className="dropdown-item" >Buscar</Link> </li>
                       <li> <Link to={"/create-ticket"} className="dropdown-item"> Crear </Link> </li>
@@ -92,9 +92,9 @@ function App() {
                   </li>
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       Cliente
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-client"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-client"} className="dropdown-item"> Crear </Link> </li>
@@ -103,9 +103,9 @@ function App() {
                   </li>
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       Destino
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-destination"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-destination"} className="dropdown-item"> Crear </Link> </li>
@@ -114,9 +114,9 @@ function App() {
                   </li>
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                       Venta
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-sale"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-sale"} className="dropdown-item"> Crear </Link> </li>
@@ -126,9 +126,9 @@ function App() {
                   </li>
 
                   <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="nav-link dropdown-toggle"  data-bs-toggle="dropdown" aria-expanded="false">
                       Vuelo
-                    </a>
+                    </button>
                     <ul className="dropdown-menu">
                       <li> <Link to={"/search-flight"} className="dropdown-item"> Buscar </Link> </li>
                       <li> <Link to={"/create-flight"} className="dropdown-item"> Crear </Link> </li>

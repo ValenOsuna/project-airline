@@ -20,4 +20,7 @@ class AirportDataService{
     }
 }
 
-export default new AirportDataService();
+
+var AuxVariable  = new AirportDataService()
+
+export default AuxVariable;

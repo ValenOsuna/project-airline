@@ -40,24 +40,18 @@ export default class RootView extends Component {
     render() {
         
         return (
-            <div className="row">
+            <div className="row mt-3">
 
-                <div className="float-end col-md-5 ">
-                    <div class="card" >
-                        <div class="card-body">
-                            <button type="button" className="btn mb-3 w-100 h-100"> <Link className="nav-link" to="/make-sale">Comprar boleto</Link></button>   
-                        </div>
-                    </div>  
+                <div className="float-end col-md-5 border rounded">                   
+                    <button type="button" className="btn btn-block mb-3 w-100 h-100"> <Link className="nav-link" to="/make-sale">Comprar boleto</Link></button>      
                 </div> 
 
+                <div className="col-md-2"> </div>
             
-                <div className="float-end col-md-5 ">
-                    <div class="card" >
-                        <div class="card-body">
-                            <button type="button" className="btn   mb-3 w-100 h-100"> <Link className="nav-link" to="/validation-ticket">Emitir boleto</Link></button>   
-                        </div>
-                    </div>  
+                <div className="float-end col-md-5 border rounded">   
+                    <button type="button" className="btn mb-3 w-100 h-100" > <Link className="nav-link" to="/validation-ticket">Emitir boleto</Link></button>              
                 </div> 
+
                 <div className="col-md-12">
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">

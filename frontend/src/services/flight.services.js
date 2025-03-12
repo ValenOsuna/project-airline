@@ -21,4 +21,6 @@ class FlightDataService{
         return client_api.get(`/flight/fare`,{params:{id}})
     }
 }
-    export default new FlightDataService();
+var AuxVariable  = new FlightDataService()
+
+export default AuxVariable;

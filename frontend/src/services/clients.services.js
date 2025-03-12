@@ -22,5 +22,7 @@ class ClientsDataService{
     }
 }
 
-export default new ClientsDataService();
+var AuxVariable  = new ClientsDataService()
+
+export default AuxVariable;
 

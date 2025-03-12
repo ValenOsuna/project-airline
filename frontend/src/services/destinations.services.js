@@ -17,4 +17,6 @@ class DestinationsDataService{
     
 }
 
-export default new DestinationsDataService();
+var AuxVariable  = new DestinationsDataService()
+
+export default AuxVariable;

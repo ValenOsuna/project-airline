@@ -22,4 +22,6 @@ class SaleDataService{
     }
 }
 
-export default new SaleDataService();
+var AuxVariable  = new SaleDataService()
+
+export default AuxVariable;
