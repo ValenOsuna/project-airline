@@ -22,21 +22,17 @@ export default class DestinationSearch extends Component{
     }
     getDestination(){
         var id_destination = this.state.id
-        //var content = " "
-        //const [content, setcontent ] = useState(' ');
+        
         DestinationDataServices.get(id_destination)
             .then(response => {
                 console.log (response.data);
                 this.setState({
-                //setcontent(response.data);
-                //document.getElementById('data').innerText = JSON.stringify(response.data);
-                //document.getElementById('name').innerText = response.data.name;
+                
                     id: response.data.id,
                     name: response.data.name,
                     requiered_visa: response.data.requiered_visa,
                     airports: response.data.airports
-                //document.getElementById('requiered_visa').innerText = response.data.requiered_visa;
-                //document.getElementById('airport').innerText = response.data.airports
+                
             });
             
         })
@@ -102,7 +98,7 @@ export default class DestinationSearch extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="col-md-9 mb-3">
+               {this.state.name !== null &&( <div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewDestination">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
@@ -154,7 +150,7 @@ export default class DestinationSearch extends Component{
 
                             </div>
                         </div>  
-                    </div>
+                    </div>)}
                 </div>
 
         );

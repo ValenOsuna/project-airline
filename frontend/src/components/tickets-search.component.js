@@ -28,13 +28,11 @@ export default class TicketSearch extends Component{
     }
     getTicket(){
         var id_tictek = this.state.id
-        //var content = " "
-        //const [content, setcontent ] = useState(' ');
+        
         TicketDataServices.get(id_tictek)
             .then(response => {
                 console.log (response.data);
-                //setcontent(response.data);
-                //document.getElementById('data').innerText = JSON.stringify(response.data);
+                
                 this.setState({
                     id: response.data.id,
                     gate: response.data.gate,
@@ -129,7 +127,7 @@ export default class TicketSearch extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="col-md-9 mb-3">
+               {this.state.flight !== null &&(<div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewTicket">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
@@ -211,7 +209,7 @@ export default class TicketSearch extends Component{
                             </div>                           
                         </div>
                     </div>
-                </div>
+                </div>)} 
             </div>
         );
     }

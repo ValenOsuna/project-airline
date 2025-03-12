@@ -41,7 +41,7 @@ const TicketView = ({listTickets}) => {
 
                                 </div>
                                 <div className="col-md-12">
-                                    <img src={`data:image/png;base64,${data.image}`}/>
+                                    <img src={`data:image/png;base64,${data.image}`} alt="img"/>
                                 </div> 
                             </div>
                             ))}

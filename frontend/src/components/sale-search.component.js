@@ -160,7 +160,7 @@ export default class SaleSearch extends Component {
                     </div>
                 </div>
 
-                <div className="col-md-9 mb-3">
+                {this.state.issue_date !== null &&(<div className="col-md-9 mb-3">
                     
                     <div className="card mt-5 bg-light-subtle" id="viewSale">
                         <div className="card-body">
@@ -299,7 +299,7 @@ export default class SaleSearch extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>)}
             </div>
         );
     }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AirportDataService from "../services/airport.services"; 
-import airportServices from "../services/airport.services";
+
 
 
 export default class AirportSearch extends Component{
@@ -28,8 +28,7 @@ export default class AirportSearch extends Component{
         var id_airport = this.state.id
         AirportDataService.get(id_airport)
         .then(response => {
-            console.log(response.data)
-            this.state.id = response.data.id;
+            
             this.setState({
                 id: response.data.id,
                 city: response.data.city,
@@ -115,7 +114,7 @@ export default class AirportSearch extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="col-md-9 mb-3">
+                {this.state.acronym !== null &&(<div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewAirport">
                         <div className="card-body">
                             <h4>Datos del Aeropuerto:</h4>
@@ -144,7 +143,6 @@ export default class AirportSearch extends Component{
                                      </div>
                                                                    
                                 </div>
-                                <button type="submit" class="btn btn-outline-danger" onClick={ this.AirportDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>
                             </div>                           
 
                         </div>
@@ -173,14 +171,17 @@ export default class AirportSearch extends Component{
                                         <label className="text-capitalize fw-bold">Puertas:&nbsp;</label>
                                         <input className="fst-italic mt-1 form-control" id="gates" value={this.state.gates} onChange={this.onChangeGates}></input>
                                     </div>
-                                    </div>                            
+                                    </div>
+                                    <div className="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-outline-danger" onClick={ this.AirportDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>                         
+                                    </div>                     
 
                                     <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }>Guardar&#160; <i class="fa-solid fa-save"></i></button>
                             </div>                           
 
                         </div>
                     </div>
-                </div>  
+                </div> )}
             </div>         
         );
     }

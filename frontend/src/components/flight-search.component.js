@@ -158,7 +158,7 @@ export default class FlightSearch extends Component {
                     </div>
                 </div>
 
-                <div className="col-md-9 mb-3">
+               {this.state.group !== '' &&( <div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewFlight">
                         <div className="card-body">
                             <h4>Datos del Vuelo:</h4>
@@ -261,7 +261,7 @@ export default class FlightSearch extends Component {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div>)}
             </div>
         );
     }

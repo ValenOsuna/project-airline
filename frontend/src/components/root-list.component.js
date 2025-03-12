@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FlightDataService from "../services/flight.services";
+import {Link } from "react-router-dom"
 
 
 
@@ -40,6 +41,23 @@ export default class RootView extends Component {
         
         return (
             <div className="row">
+
+                <div className="float-end col-md-5 ">
+                    <div class="card" >
+                        <div class="card-body">
+                            <button type="button" className="btn mb-3 w-100 h-100"> <Link className="nav-link" to="/make-sale">Comprar boleto</Link></button>   
+                        </div>
+                    </div>  
+                </div> 
+
+            
+                <div className="float-end col-md-5 ">
+                    <div class="card" >
+                        <div class="card-body">
+                            <button type="button" className="btn   mb-3 w-100 h-100"> <Link className="nav-link" to="/validation-ticket">Emitir boleto</Link></button>   
+                        </div>
+                    </div>  
+                </div> 
                 <div className="col-md-12">
                     <div className="card mt-5 bg-light-subtle">
                         <div className="card-body">
