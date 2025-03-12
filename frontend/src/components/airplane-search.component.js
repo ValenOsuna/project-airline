@@ -103,7 +103,7 @@ export default class AirplaneSearch extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="col-md-9 mb-3">
+                {this.state.model !== null &&(<div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewAirplane">
                         <div className="card-body">
                             <h4>Datos del Avión:</h4>
@@ -127,7 +127,7 @@ export default class AirplaneSearch extends Component{
                                         <span className="fst-italic mt-1" id="fare">{this.state.fare}</span>
                                     </div>                               
                                 </div>
-                                <button type="submit" class="btn btn-outline-danger" onClick={ this.AirplaneDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>
+                               
                             </div>
                         </div>
                     </div>
@@ -152,12 +152,14 @@ export default class AirplaneSearch extends Component{
                                         <input className="fst-italic mt-1 form-control" id="fare" value={this.state.fare} onChange={this.onChangeFare}></input>
                                     </div>
                                 </div>                            
-
+                                <div className="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-outline-danger" onClick={ this.AirplaneDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>                         
+                                    </div>
                                 <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={this.handlePutEdit}>Guardar&#160; <i className="fa-solid fa-save"></i></button>
                             </div>                           
                         </div>
                     </div>
-                </div>  
+                </div>)}
             </div>         
         );
     }

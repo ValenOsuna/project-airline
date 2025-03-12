@@ -147,7 +147,7 @@ export default class ClientSearch extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="col-md-9 mb-3">
+                {this.state.name !== null &&( <div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewClient">
                         <div className="card-body">
                             <h4>Datos del Usuario:</h4>
@@ -189,7 +189,7 @@ export default class ClientSearch extends Component{
                                     </div>
                          
                                 </div>
-                                <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }> Eliminar <i class="fa-solid fa-trash"></i></button>
+                                
                             </div>
                         </div>
                     </div>
@@ -233,11 +233,14 @@ export default class ClientSearch extends Component{
                                             <input className="fst-italic mt-1 form-control" id="accumulated_miles" value={this.state.accumulated_miles} onChange={ this.onChangeMiles }></input>
                                         </div>
                                     </div>
+                                    <div className="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-outline-danger" onClick={ this.clientDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>                         
+                                    </div>
                                         <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }> Guardar &#160; <i class="fa-solid fa-save"></i></button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>)}
             </div>
         );
     }

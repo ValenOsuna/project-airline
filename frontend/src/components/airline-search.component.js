@@ -101,7 +101,7 @@ export default class AirlineSearch extends Component{
                         </div>
                     </div>
                 </div>
-                <div className="col-md-9 mb-3">
+                {this.state.name !== null && (<div className="col-md-9 mb-3">
                     <div className="card mt-5 bg-light-subtle" id="viewAirline">
                         <div className="card-body">
                             <h4>Datos de la Aerolinea:</h4>
@@ -122,41 +122,42 @@ export default class AirlineSearch extends Component{
                                         <label className="text-capitalize fw-bold">Siglas:&nbsp;</label>
                                         <span className="fst-italic mt-1" id="acronym">{ this.state.acronym } </span>
                                     </div>
+                                    
                                     </div>
-                                    <button type="submit" class="btn btn-outline-danger" onClick={ this.airlineDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>                         
+                                   
                                     </div>
                                 </div>                           
 
                             </div>
-                        </div>
+                        </div>)}
                         <div className="card mt-5 bg-light-subtle d-none" id="viewEdit">
-                        <div className="card-body">
-                            <h4>Datos de la Aerolinea:</h4>
-                            <div className="row">
-                                <div className="col-md-12 text-end">
-                                    <button type="button" className="btn btn-danger" onClick={ this.handleCancel }>Cancelar <i class="fa-solid fa-pencil"></i></button>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="col">
-                                        <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
-                                        <input className="fst-italic mt-1 form-control" id="name" value={this.state.name} onChange={this.onChangeName}></input>
+                            <div className="card-body">
+                                <h4>Datos de la Aerolinea:</h4>
+                                <div className="row">
+                                    <div className="col-md-12 text-end">
+                                        <button type="button" className="btn btn-danger" onClick={ this.handleCancel }>Cancelar <i class="fa-solid fa-pencil"></i></button>
                                     </div>
-                                    <div className="col">
-                                        <label className="text-capitalize fw-bold">Lista vuelos:&nbsp;</label>
-                                        <input className="fst-italic mt-1 form-control" id="flight_list" value={this.state.flight_list} onChange={this.onChangeFlight_list}></input>
+                                    <div className="col-md-6">
+                                        <div className="col">
+                                            <label className="text-capitalize fw-bold">Nombre:&nbsp;</label>
+                                            <input className="fst-italic mt-1 form-control" id="name" value={this.state.name} onChange={this.onChangeName}></input>
+                                        </div>
+                                        <div className="col">
+                                            <label className="text-capitalize fw-bold">Lista vuelos:&nbsp;</label>
+                                            <input className="fst-italic mt-1 form-control" id="flight_list" value={this.state.flight_list} onChange={this.onChangeFlight_list}></input>
+                                        </div>
+                                        <div className="col">
+                                            <label className="text-capitalize fw-bold">Siglas:&nbsp;</label>
+                                            <input className="fst-italic mt-1 form-control" id="acronym" value={this.state.acronym} onChange={this.onChangeAcronym}></input>
+                                        </div>
+                                                                    
                                     </div>
-                                    <div className="col">
-                                        <label className="text-capitalize fw-bold">Siglas:&nbsp;</label>
-                                        <input className="fst-italic mt-1 form-control" id="acronym" value={this.state.acronym} onChange={this.onChangeAcronym}></input>
+                                    <div className="col-md-12 text-end">
+                                        <button type="submit" class="btn btn-outline-danger" onClick={ this.airlineDelete }>Eliminar <i class="fa-solid fa-trash"></i></button>                         
                                     </div>
-                                                                   
-                                </div>
-
-                                    <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }>Guardar&#160; <i class="fa-solid fa-save"></i></button>
-
-
-                            </div>                           
-
+                                    
+                                        <button type="button" id="saveButton" className="btn btn-success mt-3" onClick={ this.handlePutEdit }>Guardar&#160; <i class="fa-solid fa-save"></i></button>
+                                </div>                           
                         </div>
                     </div>
                 </div>  
